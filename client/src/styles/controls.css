@@ -1,0 +1,50 @@
+.btn-simple {
+    width: 168px;
+    height: 48px;
+    background-color: #FF678E;
+    border-radius: 20px;
+    color: #000000;
+    font-weight: 800;
+    font-size: 16px;
+    transition: 0.6s background-color;
+}
+
+.btn-simple:hover {
+    background-color: #E6FFC9;
+}
+
+.btn-submit {
+    width: 200px;
+    height: 64px;
+    border-radius: 1.25vh;
+    margin: auto;
+    font-size: 24px;
+}
+
+.btn-submit:hover {
+    background-color: #E6FFC4;
+}
+
+.common-input {
+    border-radius: 1.25vh;
+    border: none;
+    font-size: 1.5vh;
+    padding: 0 0.8em;
+}
+
+.form-field {
+    margin: 1vh auto;
+}
+
+.form-field > input {
+    width: 95%;
+    padding: 10px 8px;
+    border-radius: 20px;
+    font-size: 1.5em;
+    border: 1px solid #E6FFC4;
+}
+
+.btn {
+    border: none;
+    cursor: pointer;
+}

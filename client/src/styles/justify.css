@@ -1,0 +1,33 @@
+li {
+    list-style: none;
+}
+
+ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+div, ul, body, a, p, span {
+    margin: 0;
+    font-family: 'PTSans', Arial;
+}
+
+.owl-nav {
+    text-align: center;
+}
+
+.owl-nav > button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background-color: gray;
+    color: #ffffff;
+    margin: 0.2em;
+    font-size: 2vh;
+    cursor: pointer;
+}
