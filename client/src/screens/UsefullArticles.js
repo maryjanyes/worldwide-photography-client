@@ -2,13 +2,13 @@ import React from "react";
 
 import SignUpForm from 'components/modules/sign/SignUpForm';
 
-function UsefullArticles() {
+function UsefullArticlesScreen() {
     return (
         <div className="page page-usefull-articles">
-            <h1>Articles on PHOTO</h1>
-            <span>Page coming soon.</span>
+            <h1>Articles</h1>
+            <span>Page development at progress</span>
         </div>
     )
 }
 
-export default UsefullArticles;
+export default UsefullArticlesScreen;

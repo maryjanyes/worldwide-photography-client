@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import TopBarSignItems from './TopBarSignItems';
 import TopMenu from './TopMenu';
@@ -9,12 +9,14 @@ import { ApiService, apiService } from 'services/api.service';
 
 const TopBarComponent = () => {
     const [searchActive, setSearchActive] = useState(false);
-    const { isLoggedIn } = useSelector(({ users }) => users);
+    const { isLoggedIn } = useSelector(({ auth }) => auth);
     const toggleSearch = () => setSearchActive(!searchActive);
+
     return (
         <nav className="nav-header nav-header-top">
-            <div className="site-logo"></div>
+            <Link className="site-logo" to="/"></Link>
             <ul className="nav-header-base-menu">
+                <p>We are always waiting for your turn.</p>
                 {ApiService.getNavLinks().map(one => {
                     return (
                         <li key={one.link}>
@@ -33,11 +35,11 @@ const TopBarComponent = () => {
             </ul>
             <div className="nav-header-right-links">
                 <div className="top-search">
-                    {searchActive && <input type="text" placeholder="Search globally.." className="common-input" />}
+                    {searchActive && <input type="text" placeholder="Search globally" className="common-input" />}
                     <button className="search-icon icon-btn" onClick={toggleSearch} />
                 </div>
                 {!isLoggedIn && <TopBarSignItems />}
-                <TopMenu />
+                {isLoggedIn && <TopMenu />}
             </div>
         </nav>
     );

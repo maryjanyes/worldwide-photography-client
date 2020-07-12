@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 import { sortItems } from 'utils/items.util';
 
-const OwlSliderItem = ({ title, description, images, isSelected = false, selectItem }) => {
+const OwlSliderItem = ({ title, description, images, isSelected = false }) => {
     const text = description || title;
     return (
         <div key={text} className={`${isSelected ? 'selected ' : ''} owl-slider-item`}>
-            <button onClick={selectItem} className="owl-slider-item-frame">
+            <button className="owl-slider-item-frame">
                 <p className="owl-slider-item-text">{text}</p>
                 <div className="owl-slider-images">
                     {(images || []).map(one => <img src={one.src} key={one.src} />) /* todo Do SEO */ }
@@ -55,7 +55,7 @@ const OwlSlider = ({ items }) => {
                 {sliderItems && sortItems(
                     sliderItems,
                     'created_at'
-                ).map(one => <OwlSliderItem {...one} selected={one.isSelected} selectItem={selectItem} />)}
+                ).map(one => <OwlSliderItem {...one} selected={one.isSelected} />)}
             </div>
         );
     };
@@ -71,7 +71,7 @@ const OwlSlider = ({ items }) => {
     return (
         <div className="owl-slider">
             {displayItems()}
-            <OwlControls change={selectItem} active={activeItem} />
+            <OwlControls active={activeItem} change={selectItem} />
         </div>
     );
 };

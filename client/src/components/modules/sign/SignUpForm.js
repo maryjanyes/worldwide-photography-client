@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Formik } from 'formik';
 
-import { signUp } from 'reducers/actions/users-actions';
+import { signUp } from 'reducers/actions/users.actions';
 
-const SignUpForm = () => {
+const SignUpForm = ({ switchToSignInMode }) => {
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -14,38 +13,35 @@ const SignUpForm = () => {
     })
     const dispatch = useDispatch();
     const submitForm = (values, { setSubmitting }) => {
+        console.log(values)
         dispatch(signUp());
         // setSubmitting(false);
     };
     const validateForm = values => {
         const errors = {};
         if (!values.email) {
-        errors.email = 'Required';
+            errors.email = 'Required';
         } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         ) {
-        errors.email = 'Invalid email address';
+            errors.email = 'Invalid email address';
         }
         return errors;
     };
 
     return (
         <div className="sign-up-form-container">
-            <p>Create account</p>
+            <h1 className="sign-in-text">Create account</h1>
             <Formik
                 initialValues={values}
                 validate={validateForm}
                 onSubmit={submitForm}
-                >
+            >
                 {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
                     handleBlur,
                     handleSubmit,
                     isSubmitting,
-                    /* and other goodies */
+                    getFieldProps,
                 }) => (
                     <form onSubmit={handleSubmit} className="sign-up-form">
                         <div className="form-field">
@@ -53,9 +49,10 @@ const SignUpForm = () => {
                                 className="common-input"
                                 type="text"
                                 name="name"
-                                onChange={handleChange}
+                                id="name"
+                                placeholder={'Name'}
                                 onBlur={handleBlur}
-                                value={values.email}
+                                {...getFieldProps('name')}
                             />
                         </div>
                         <div className="form-field">
@@ -63,9 +60,10 @@ const SignUpForm = () => {
                                 className="common-input"
                                 type="email"
                                 name="email"
-                                onChange={handleChange}
+                                id="email"
+                                placeholder={'Email'}
                                 onBlur={handleBlur}
-                                value={values.password}
+                                {...getFieldProps('email')}
                             />
                         </div>
                         <div className="form-field">
@@ -73,13 +71,11 @@ const SignUpForm = () => {
                                 className="common-input"
                                 type="password"
                                 name="password"
-                                onChange={handleChange}
+                                id="password"
+                                placeholder={'Password'}
                                 onBlur={handleBlur}
-                                value={values.password}
+                                {...getFieldProps('password')}
                             />
-                        </div>
-                        <div className="form-errors-container">
-                            {errors.password && touched.password && errors.password}
                         </div>
                         <button
                             type="submit"
@@ -87,8 +83,10 @@ const SignUpForm = () => {
                             className="btn btn-submit"
                         >Submit</button>
                         <div className="sign-up-link">
-                            <span>If you already have account you probably want to</span>
-                            <Link to="/sign-in"> log in</Link>
+                            <span>
+                                If you already have account you probably want to
+                                <button className="btn-link" onClick={switchToSignInMode}>log in</button>.
+                            </span>
                         </div>
                     </form>
                 )}

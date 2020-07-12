@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const env = require('dotenv').config();
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -22,7 +24,8 @@ module.exports = {
         components: path.resolve(__dirname, './src/components'),
         services: path.resolve(__dirname, './src/services'),
         utils: path.resolve(__dirname, './src/utils'),
-        styles: path.resolve(__dirname, '/src/styles'),
+        styles: path.resolve(__dirname, './src/styles'),
+        types: path.resolve(__dirname, './src/types'),
       },
     },
     plugins: [
@@ -30,7 +33,11 @@ module.exports = {
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
-      })
+      }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+        'process.env.BACKEND_URL': JSON.stringify(env.BACKEND_URL),
+      }),
     ],
     module: {
       rules: [

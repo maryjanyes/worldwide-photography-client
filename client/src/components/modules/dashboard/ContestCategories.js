@@ -19,7 +19,7 @@ const ContestCategories = () => {
                         <li className="nav-link-container" key={one.action}>
                             {one.action ?
                                 <Link className="nav-link" to={one.action}>{one.en}</Link> :
-                                <button className="btn" onClick={toggleCategories}>{one.en}</button>
+                                <button className="btn-link nav-link" onClick={toggleCategories}>{one.en}</button>
                             }
                         </li>
                     );
@@ -29,7 +29,7 @@ const ContestCategories = () => {
                 {categories.map(one => {
                     return (
                         <li className="nav-link-container" key={one.name}>
-                            <Link className="nav-link" to={one.name}>{one.name}</Link>
+                            <Link className="nav-link" to={`/contest-categories/${one.name.toLowerCase()}`}>{one.name}</Link>
                         </li>
                     );
                 })}

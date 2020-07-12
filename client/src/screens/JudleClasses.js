@@ -1,12 +1,12 @@
 import React from "react";
 
-const JudleClasses = () => {
+const JudleClassesScreen = () => {
     return (
         <div className="page page-judle-classes">
             <h1>Judle classes</h1>
-            <span>Video streams coming soon</span>
+            <span>Page development at progress</span>
         </div>
     );
 };
 
-export default JudleClasses;
+export default JudleClassesScreen;

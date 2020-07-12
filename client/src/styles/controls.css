@@ -1,3 +1,8 @@
+.btn {
+    border: none;
+    cursor: pointer;
+}
+
 .btn-simple {
     width: 168px;
     height: 48px;
@@ -14,11 +19,15 @@
 }
 
 .btn-submit {
+    transition: 0.5s background;
     width: 200px;
     height: 64px;
-    border-radius: 1.25vh;
+    border-radius: 20px;
     margin: auto;
-    font-size: 24px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 800;
+    background-color: #FF678E;
 }
 
 .btn-submit:hover {
@@ -37,14 +46,17 @@
 }
 
 .form-field > input {
-    width: 95%;
-    padding: 10px 8px;
+    padding: 1vh 1.5vh;
+    width: 300px;
+    height: 48px;
     border-radius: 20px;
-    font-size: 1.5em;
-    border: 1px solid #E6FFC4;
+    font-size: 20px;
+    box-shadow: 1px 2px 1px #000000;
 }
 
-.btn {
+.btn-link {
+    background-color: transparent;
     border: none;
+    font-size: 16px;
     cursor: pointer;
 }

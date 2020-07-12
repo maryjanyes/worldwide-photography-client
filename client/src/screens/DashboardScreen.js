@@ -6,7 +6,7 @@ import ContestItems from 'components/modules/dashboard/ContestItems';
 import PrizesLine from 'components/modules/dashboard/PrizesLine';
 import ContestCategories from 'components/modules/dashboard/ContestCategories';
 
-import { requestContests } from 'reducers/actions/contests-actions';
+import { requestContests } from 'reducers/actions/contests.actions';
 
 function DashboardScreen(props) {
     const dispatch = useDispatch();

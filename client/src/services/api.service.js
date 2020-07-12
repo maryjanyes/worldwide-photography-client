@@ -1,11 +1,48 @@
 import ContestsData from '../mocks/contests.json';
-import PhotoCategoriesData from '../mocks/photo-categories.json';
 
 class ApiService {
+    sendData() {
+        const [path, method = 'POST', data = {}, headers = {}] = arguments;
+        fetch(`${this.endpoint}/${path}`, {
+            method,
+            body: JSON.stringify(data),
+            headers: { ...ApiService.getHeaders(), ...headers },
+        })
+        .then(ApiService.handleSuccess || this.handleSuccess)
+        .catch(ApiService.handleError || this.handleError);
+    }
 
-    static getData() {
-        const [endpoint, path, method, data] = arguments;
-        console.log(endpoint, path, method, data);
+    getData() {
+        const [path, method = 'GET', headers = {}] = arguments;
+        fetch(`${this.endpoint}/${path}`, {
+            method,
+            headers: { ...ApiService.getHeaders(), ...headers },
+        })
+        .then(ApiService.handleSuccess || this.handleSuccess)
+        .catch(ApiService.handleError || this.handleError);
+    }
+
+    static getPolicy(lang = 'en') {
+        if (lang === 'en') {
+            return fetch('/assets/text/privacy-en.txt');
+        } else {
+            return fetch('/assets/text/privacy-ru.txt');
+        }
+    }
+
+    static getHeaders() {
+        return {
+            'Content-Type': 'application/json',
+        };
+    }
+
+    static handleError(error) {
+        console.log(error, 'Error on request');
+        return Promise.resolve({ error });
+    }
+
+    static handleSuccess(response) {
+        return response.json();
     }
 
     static getNavLinks() {
@@ -17,7 +54,7 @@ class ApiService {
         {
             en: 'Gallery',
             ua: 'Галерея',
-            link: '/gallery',
+            link: '/photos',
         }, {
             en: 'Articles',
             ua: 'Статті',
@@ -43,18 +80,9 @@ class ApiService {
 
     static getMenuItems() {
         return [{
-            en: PhotoCategoriesData[0].name,
-            // ua: 'Вибір 1',
-            action: 'select1',
-        }, {
-            en: PhotoCategoriesData[1].name,
-            // ua: 'Вибір 2',
-            action: 'select2',
-        }, {
-            en: PhotoCategoriesData[2].name,
-            // ua: 'Вибір 2',
-            action: 'select3',
-        }]
+            en: 'Profile',
+            action: 'profile',
+        }];
     }
 
     static getContests() {
@@ -77,8 +105,13 @@ class ApiService {
         }];
     }
 
+    static defaultContestAvatar() {
+        return 'assets/images/pane1.png';
+    }
+
     constructor() {
-        this.active = 'ua';
+        this.active = 'ua-UA';
+        this.endpoint = 'http://localhost:5000/web/v1';
     }
 }
 

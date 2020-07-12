@@ -8,7 +8,7 @@
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "WorldwidePhotography <WorldwidePhotography@team.com>",
   "license": "MIT",
   "dependencies": {
     "formik": "^2.1.4",
@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "dotenv": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

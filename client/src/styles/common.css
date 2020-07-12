@@ -4,7 +4,7 @@
     top: 24px;
     width: 150px;
     height: 60px;
-    background-color: red;
+    background-color: khaki;
     background: url(/assets/images/logo.png) no-repeat center;
     background-size: 60%;
 }
@@ -12,6 +12,7 @@
 .top-search {
     display: flex;
     flex-direction: row-reverse;
+    margin-right: 8vh;
 }
 
 .top-search > input {
@@ -29,16 +30,17 @@
 .sign-top-menu {
     display: flex;
     width: 300px;
-    margin-left: 1em;
+    margin-left: 1.2vh;
+    margin-right: 3.8vh;
 }
 
 .top-menu-items {
     position: absolute;
     width: 300px;
-    z-index: 10;
+    z-index: 1;
     right: 0;
-    top: 16.5vh;
-    padding: 0.8vh;
+    top: 0;
+    min-height: 200px;
     background-color: #ffffff;
 }
 
@@ -61,12 +63,7 @@
     max-width: 80%;
 }
 
-.contest-item-card-body {
-    background-color: #E1E1E1;
-    padding: 0.4em 0;
-}
-
-.page-contest-details, .page-judle-classes {
+.page-contest-details, .page-judle-classes, .page-usefull-articles {
     margin: 1.6em 2.8em;
 }
 
@@ -74,7 +71,27 @@
     max-width: 600px;
 }
 
+.contest-item-card-body {
+    border-radius: 20px;
+    background-color: #E1E1E1;
+    padding: 0.4em 0;
+    box-shadow: 1px 2px 1px #fffff5;
+}
+
+.contest-item-card-body > .contest-name {
+    font-size: 20px;
+    color: #fffff0;
+    text-transform: uppercase;
+}
+
+.contest-item-card-body > .contest-description {
+    margin-top: 0.8vh;
+    margin-bottom: 0.8vh;
+    font-weight: 100;
+}
+
 .contest-item-card-header {
+    border-radius: 20px;
     padding: 3.8em 0;
     background-color: teal;
     color: #ffffff;
@@ -91,10 +108,12 @@
 
 .contest-status-coming {
     background-color: indianred;
+    box-shadow: 1px 2px 1px #000000;
 }
 
 .contest-status-active {
     background-color: khaki;
+    box-shadow: 1px 2px 1px #000000;
 }
 
 .owl-controls {
@@ -107,11 +126,12 @@
     width: 28px;
     height: 28px;
     border: none;
-    background-color: #E6FFC9;
-    color: #000000;
+    background-color: transparent;
+    color: khaki;
     margin: 0.2em;
-    font-size: 2vh;
+    font-size: 12px;
     cursor: pointer;
+    transition: 0.5s background-color;
 }
 
 .owl-control:hover {
@@ -121,6 +141,7 @@
 .owl-control.owl-control-prev::before {
     content: '<';
 }
+
 .owl-control.owl-control-next::before {
     content: '>';
 }
@@ -193,6 +214,16 @@
     color: #FF678E;
 }
 
+.top-menu-item {
+    padding: 1.4vh 1.8vh;
+    box-shadow: 0 2px 4px #000000;
+}
+
+.top-menu-item > a {
+    font-weight: 800;
+    color: #FF678E;
+}
+
 .nav-header {
     min-height: 80px;
     background-color: #FFC9C9;
@@ -213,22 +244,41 @@
 .sign-up-form, .sign-in-form {
     display: flex;
     flex-direction: column;
-    max-width: 34vh;
-    padding: 4vh;
+    width: auto;
     background-color: #FFEFD8;
     border-radius: 20px;
     margin: auto;
+    margin-top: 1.5vh;
 }
 
-.sign-up-form > input, .sign-in-form > input {
-    height: 60px;
-    margin: auto;
-    font-size: 20px;
-    padding-left: 10px;
+.sign-in-form {
+    padding: 8vh;
+    padding-top: 3.5vh;
+}
+
+.sign-up-form {
+    padding: 3.5vh;
+}
+
+.sign-up-form-container, .sign-in-form-container {
+    text-align: center;
 }
 
 .sign-up-form > button, .sign-in-form > button {
     margin-top: 2vh;
+}
+
+.sign-up-link, .sign-in-link {
+    max-width: 80%;
+    margin: auto;
+    margin-top: 1.5vh;
+}
+
+.sign-in-text {
+    font-size: 40px;
+    font-weight: 800;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
 }
 
 .prizes-line {
@@ -270,6 +320,14 @@
     font-style: italic;
 }
 
+.prize-contest-link {
+    color: #ffffff;
+    font-weight: 800;
+    text-transform: uppercase;
+    position: relative;
+    top: 0.5vh;
+}
+
 .contest-name {
     overflow: hidden;
 }
@@ -284,7 +342,7 @@
     position: relative;
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
-    background-color: #fffff0;
+    background-color: khaki;
     width: 100%;
 }
 
@@ -297,6 +355,11 @@
     margin-left: 1.5vh;
 }
 
+.contest-categories-nav-links > .nav-link-container:nth-child(4) {
+    position: relative;
+    top: 0.2vh;
+}
+
 .contest-categories-items {
     position: absolute;
     background-color: #fffff0;
@@ -304,7 +367,7 @@
     z-index: 10;
     top: 48px;
     display: flex;
-    padding: 1vh 0.5vh;
+    padding: 1vh;
     width: 50%;
     left: 25%;
     flex-wrap: wrap;
@@ -315,6 +378,101 @@
     width: 25%;
 }
 
+.contest-categories-items .nav-link {
+    color: #6EAABD;
+}
+
+.contest-categories-nav-links .nav-link {
+    color: indianred;
+}
+
+.nav-link {
+    font-weight: 800;
+    transition: 0.6s color;
+}
+
+.nav-link:hover {
+    color: #fffff0;
+}
+
 .page-dashboard {
-    background: url(/assets/images/pane2.jpg) top;
+    background: url(/assets/images/pane2.jpg);
+    padding-bottom: 0.8vh;
+}
+
+.page-sign {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: auto;
+    padding-top: 10vh;
+}
+
+.sign-in-selector {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.sign-in-selector.facebook {
+    color: #5970FF;
+}
+
+.sign-in-selector.google {
+    color: #FF0D4B;
+}
+
+.sign-in-judles-area {
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.8vh;
+}
+
+.sign-in-judles {
+    display: flex;
+}
+
+.sign-in-judle {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-judle > span {
+    margin-top: 0.8vh;
+}
+
+.sign-in-judle-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.contest-details-info-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.contest-details-info {
+    position: relative;
+}
+
+.contest-details-info-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contest-details-contest-avatar {
+    width: 100%;
+    margin: 0.2vh;
+    max-height: 280px;
+}
+
+.contest-details-info-card {
+    position: absolute;
+    z-index: 10;
+    background-color: #ffffff;
+    top: -10vh;
+    padding: 5vh;
+    width: 80%;
+    left: 10%;
 }

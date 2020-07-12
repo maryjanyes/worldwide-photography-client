@@ -1,78 +1,74 @@
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import { signIn } from 'reducers/actions/users-actions';
+import { signIn } from 'reducers/actions/users.actions';
 
-const SignInForm = () => {
-    const [values, setValues] = useState({
-        name: '',
-        email: '',
+const SignInForm = ({ backToSignUpMode }) => {
+    const { isLoggedIn } = useSelector(({ auth }) => auth || {});
+    const [submitting, handleSubmitting] = useState(false);
+    const [values] = useState({
+        username: '',
         password: '',
-        is_professional: false,
-    })
+    });
     const dispatch = useDispatch();
     const submitForm = (values, { setSubmitting }) => {
-        dispatch(signIn());
-        // setSubmitting(false);
+        dispatch(signIn(values));
+        setSubmitting(false);
+        handleSubmitting(setSubmitting);
     };
-    const validateForm = values => {
-        const errors = {};
-        if (!values.email) {
-        errors.email = 'Required';
-        } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-        errors.email = 'Invalid email address';
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            submitting(true);
         }
-        return errors;
-    };
+    }, [isLoggedIn]);
 
     return (
         <div className="sign-in-form-container">
-            <p>Log in into account</p>
+            <h1 className="sign-in-text">Log in into account</h1>
             <Formik
                 initialValues={values}
-                validate={validateForm}
                 onSubmit={submitForm}
                 >
                 {({
                     values,
-                    errors,
-                    touched,
-                    handleChange,
                     handleBlur,
                     handleSubmit,
+                    getFieldProps,
                     isSubmitting,
-                    /* and other goodies */
                 }) => (
                     <form onSubmit={handleSubmit} className="sign-in-form">
                         <div className="form-field">
                             <input
-                                type="email"
-                                name="email"
-                                onChange={handleChange}
+                                className="common-input"
+                                type="username"
+                                name="username"
+                                id="username"
+                                placeholder={'Username'}
                                 onBlur={handleBlur}
-                                value={values.password}
+                                {...getFieldProps('username')}
                             />
                         </div>
                         <div className="form-field">
                             <input
-                                type="password"
-                                name="password"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password}
+                               className="common-input"
+                               type="password"
+                               name="password"
+                               id="password"
+                               placeholder={'Password'}
+                               onBlur={handleBlur}
+                               {...getFieldProps('password')}
                             />
-                        </div>
-                        <div className="form-errors-container">
-                            {errors.password && touched.password && errors.password}
                         </div>
                         <button
                             type="submit"
                             disabled={isSubmitting}
                             className="btn btn-submit"
                         >Submit</button>
+                        <div className="sign-in-link">
+                            <span>If you want to <button className="btn-link" onClick={backToSignUpMode}>Sign Up</button>.</span>
+                        </div>
                     </form>
                 )}
             </Formik>
