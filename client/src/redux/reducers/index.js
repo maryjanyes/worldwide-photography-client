@@ -5,6 +5,7 @@ import contestsReducer from './contests.reducer';
 import prizesReducer from './prizes.reducer';
 import authReducer from './auth.reducer';
 import photoReducer from './photo.reducer';
+import articlesReducer from './articles.reducer';
 
 export default combineReducers({
     users: usersReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
     prizes: prizesReducer,
     auth: authReducer,
     photo: photoReducer, 
+    articles: articlesReducer,
 });

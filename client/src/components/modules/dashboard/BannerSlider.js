@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { sortItems } from 'utils/items.util';
 
-const OwlSliderItem = ({ title, description, images, isSelected = false }) => {
+const BannerSliderItem = ({ title, description, images, isSelected = false }) => {
     const text = description || title;
     return (
         <div key={text} className={`${isSelected ? 'selected ' : ''} owl-slider-item`}>
@@ -16,7 +17,7 @@ const OwlSliderItem = ({ title, description, images, isSelected = false }) => {
     );
 };
 
-const OwlControls = ({ change, active }) => {
+const BannerSliderControls = ({ change, active }) => {
     return (
         <div className="owl-controls">
             <button onClick={() => change(active - 1)} className="owl-control owl-control-prev"></button>
@@ -25,7 +26,9 @@ const OwlControls = ({ change, active }) => {
     );
 };
 
-const OwlSlider = ({ items }) => {
+const BannerSlider = () => {
+    const { contests } = useSelector(({ contests }) => contests);
+    const items = contests;
     const [sliderItems, setItems] = useState(null);
     const [activeItem, setActiveItem] = useState(0);
     const sliderImages = [{
@@ -55,7 +58,7 @@ const OwlSlider = ({ items }) => {
                 {sliderItems && sortItems(
                     sliderItems,
                     'created_at'
-                ).map(one => <OwlSliderItem {...one} selected={one.isSelected} />)}
+                ).map(one => <BannerSliderItem {...one} selected={one.isSelected} />)}
             </div>
         );
     };
@@ -71,9 +74,9 @@ const OwlSlider = ({ items }) => {
     return (
         <div className="owl-slider">
             {displayItems()}
-            <OwlControls active={activeItem} change={selectItem} />
+            <BannerSliderControls active={activeItem} change={selectItem} />
         </div>
     );
 };
 
-export default OwlSlider;
+export default BannerSlider;

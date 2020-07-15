@@ -82,7 +82,8 @@ CREATE TABLE `ContestsDetails` (
   `end_at` timestamp,
   `1_prize` integer (10),
   `2_prize` integer (10),
-  `3_prize` integer (10)
+  `3_prize` integer (10),
+  `avatar_url` varchar (256)
 );
 
 CREATE TABLE `Judles` (

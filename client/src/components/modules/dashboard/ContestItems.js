@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import OwlCarousel from 'react-owl-carousel';
-
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { ApiService } from 'services/api.service';
 
+import WithCarouselRef from 'components/common/wrappers/WithCarouselRef';
+
 const ContestItem = ({ name, description, contest_id, started_at, exploreContest, avatar_id }) => {
     const buildContestStatusLabel = () => {
-        const now = Date.now()
-        return started_at > now ? 
-            <div className="contest-status-label contest-status-coming">Starts soon</div> :
-            <div className="contest-status-label contest-status-active">Active</div>;
+        return started_at > Date.now() ? 
+            <div className="contest-status coming">Starts soon</div> :
+            <div className="contest-status active">Active</div>;
     };
+
     const contestAvatar = () => [].find(one => one.avatar_id === avatar_id);
+
     return (
         <div className="item contest-item" key={contest_id}>
             <h4 className="contest-item-card">
@@ -30,37 +30,33 @@ const ContestItem = ({ name, description, contest_id, started_at, exploreContest
                 <div className="contest-item-card-body">
                     <p className="contest-name">{name}</p>
                     <p className="contest-description">{description}</p>
-                    <button onClick={() => exploreContest(contest_id)} className="btn btn-simple">Explore</button>
+                    <button onClick={() => exploreContest(contest_id)} className="btn btn-simple btn-explore-contest">Explore</button>
                 </div>
             </h4>
         </div>
     );
 };
 
-const ContestItems = ({ history, items }) => {
-    const [carouselRef, setRef] = useState(null);
+const ContestItems = ({ history }) => {
+    const { contests } = useSelector(({ contests }) => contests);
+
     const exploreContest = contest_id => {
         history.push(`/contest/${contest_id}`);
     };
-    const setCarouselRef = ref => setRef(ref);
 
-    useEffect(() => {
-        if (carouselRef) {
-            carouselRef.play(5000, 1000);
-        }
-    }, [carouselRef]);
+    const canShow = contests.length > 0;
 
     return (
         <div className="contest-items">
-            {items.length > 0 && <OwlCarousel
-                className="contest-items-slider"
-                loop
-                nav
-                margin={10}
-                ref={ref => setCarouselRef(ref)}
-            >
-                {items && items.map(one => <ContestItem {...one} exploreContest={exploreContest} />)}
-            </OwlCarousel>}
+            {canShow && (
+                <WithCarouselRef speed={4000}>
+                    {contests
+                        .map(one =>
+                            <ContestItem {...one} exploreContest={exploreContest} />
+                        )
+                    }
+                </WithCarouselRef>  
+            )}
         </div>
     );
 };

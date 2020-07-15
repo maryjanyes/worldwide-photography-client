@@ -16,7 +16,7 @@ const TopBarComponent = () => {
         <nav className="nav-header nav-header-top">
             <Link className="site-logo" to="/"></Link>
             <ul className="nav-header-base-menu">
-                <p>We are always waiting for your turn.</p>
+                {/** <p>We are always waiting for your turn.</p> **/}
                 {ApiService.getNavLinks().map(one => {
                     return (
                         <li key={one.link}>

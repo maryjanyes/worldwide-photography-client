@@ -8,18 +8,23 @@
     height: 48px;
     background-color: #FF678E;
     border-radius: 20px;
-    color: #000000;
     font-weight: 800;
     font-size: 16px;
     transition: 0.6s background-color;
 }
 
+.btn-simple.btn-explore-contest {
+    text-transform: uppercase;
+    color: #6EAABD;
+}
+
 .btn-simple:hover {
-    background-color: #E6FFC9;
+    background-color: khaki;
+    color: indianred;
 }
 
 .btn-submit {
-    transition: 0.5s background;
+    transition: 0.5s background-color;
     width: 200px;
     height: 64px;
     border-radius: 20px;
@@ -31,7 +36,7 @@
 }
 
 .btn-submit:hover {
-    background-color: #E6FFC4;
+    background-color: khaki;
 }
 
 .common-input {

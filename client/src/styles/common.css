@@ -82,12 +82,15 @@
     font-size: 20px;
     color: #fffff0;
     text-transform: uppercase;
+    text-shadow: 1px 2px 3px #acacac;
 }
 
 .contest-item-card-body > .contest-description {
     margin-top: 0.8vh;
     margin-bottom: 0.8vh;
     font-weight: 100;
+    font-size: 12px;
+    color: #acaca0;
 }
 
 .contest-item-card-header {
@@ -98,22 +101,22 @@
     background-position: 0 10%;
 }
 
-.contest-status-label {
+.contest-status {
     position: absolute;
     top: 32px;
     left: 38px;
     padding: 0.4em 0.8em;
     border-radius: 20px;
+    box-shadow: 1px 2px 1px #000000;
 }
 
-.contest-status-coming {
+.contest-status.coming {
     background-color: indianred;
-    box-shadow: 1px 2px 1px #000000;
 }
 
-.contest-status-active {
+.contest-status.active {
     background-color: khaki;
-    box-shadow: 1px 2px 1px #000000;
+    color: #6EAABD;
 }
 
 .owl-controls {
@@ -194,6 +197,7 @@
     height: 50px;
     text-align: center;
     font-weight: 800;
+    font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -207,7 +211,7 @@
 }
 
 .sign-top-menu-link:hover, .nav-header-link:hover {
-    background-color: aquamarine;
+    background-color: #ffffff;
 }
 
 .sign-top-menu-link.active, .nav-header-link.active {
@@ -281,6 +285,24 @@
     margin-block-end: 0.67em;
 }
 
+.contest-details-preview {
+    position: relative;
+}
+
+.contest-details-preview .contest-info-block {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 80px;
+}
+
+.contest-info-block p {
+    font-size: 28px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
 .prizes-line {
     display: flex;
     flex-direction: row;
@@ -335,7 +357,6 @@
 .contest-name .original {
     text-transform: uppercase;
     font-size: 16px;
-    color: #ffffff;
 }
 
 .contest-categories-nav {
@@ -376,14 +397,17 @@
 
 .contest-categories-items > .nav-link-container {
     width: 25%;
+    margin-top: 0.2vh;
+    margin-bottom: 0.2vh;
 }
 
 .contest-categories-items .nav-link {
     color: #6EAABD;
+    margin-top: 0.5vh;
 }
 
 .contest-categories-nav-links .nav-link {
-    color: indianred;
+    color: #FF678E;
 }
 
 .nav-link {
@@ -475,4 +499,18 @@
     padding: 5vh;
     width: 80%;
     left: 10%;
+}
+
+.judle-videos-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.judle-videos-line > .judle-video {
+    width: 60%;
+    margin: auto;
+}
+
+.simple-border {
+    border-radius: 20px;
 }

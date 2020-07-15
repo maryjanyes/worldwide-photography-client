@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import TabItems from 'components/common/TabItems';
 import SocialSharing from 'components/common/SocialSharing';
@@ -19,27 +20,34 @@ function ContestScreen() {
                     alt={selectedContest.name}
                     className="contest-details-contest-avatar"
                 />
-                <p className="contest-details-preview-name">{selectedContest.name}</p>
-                <p className="contest-details-preview-description">{selectedContest.description}</p>
+                <div className="contest-info-block">
+                    <p className="contest-details-preview-name">{selectedContest.name}</p>
+                    <p className="contest-details-preview-description">{selectedContest.description}</p>
+                </div>
             </div>
             <div className="contest-details-info">
                 <div className="contest-details-info-card">
                     <div className="contest-details-info-top">
                         <div className="contest-details-info-body">
-                            <div className="">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <div className="">
+                            <div className="contest-tabs">
                                 <TabItems />
                             </div>
-                            <div className="">
+                            <div className="contest-social-sharing">
                                 <SocialSharing />
+                            </div>
+                            <div className="other-opended-contests">
+                                <Link to="/contests">Other opened contests</Link>
                             </div>
                         </div>
                         <div className="contest-details-info-additions">
-                            <p>Other info.</p>
+                            <div className="contest-sponsors">
+                                <p>Sponsors</p>
+                            </div>
+                            <div className="contest-stroke-info">
+                                <p>a</p>
+                                <p>g</p>
+                                <p>f</p>
+                            </div>
                         </div>
                     </div>
                     <div className="contest-details-info-all-contest-entries">

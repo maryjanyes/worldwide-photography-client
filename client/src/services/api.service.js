@@ -106,7 +106,7 @@ class ApiService {
     }
 
     static defaultContestAvatar() {
-        return 'assets/images/pane1.png';
+        return 'assets/images/pane2.jpg';
     }
 
     constructor() {
