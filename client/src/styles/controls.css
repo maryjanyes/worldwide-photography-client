@@ -6,11 +6,32 @@
 .btn-simple {
     width: 168px;
     height: 48px;
-    background-color: #FF678E;
+    background-color: #008DCB;
     border-radius: 20px;
     font-weight: 800;
     font-size: 16px;
+    color: #ffffff;
     transition: 0.6s background-color;
+}
+
+.btn-tab-item, .btn-submit-photo {
+    min-width: 100px;
+    padding: 1.5vh;
+    border-radius: 10px;
+    margin: 0.8vh;
+    border: #E1315B 0.2vh solid;
+    transition: 0.6s background-color;
+    margin-left: 0;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.btn-submit-photo {
+    margin-top: 2vh;
+}
+
+.btn-tab-item.active {
+    background-color: #FFEC5C;
 }
 
 .btn-simple.btn-explore-contest {
@@ -19,8 +40,8 @@
 }
 
 .btn-simple:hover {
-    background-color: khaki;
-    color: indianred;
+    background-color: #FFEC5C;
+    color: #E1315B;
 }
 
 .btn-submit {
@@ -32,11 +53,11 @@
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 800;
-    background-color: #FF678E;
+    background-color: #E1315B;
 }
 
 .btn-submit:hover {
-    background-color: khaki;
+    background-color: #FFEC5C;
 }
 
 .common-input {
@@ -57,6 +78,11 @@
     border-radius: 20px;
     font-size: 20px;
     box-shadow: 1px 2px 1px #000000;
+    transition: 0.5s background-color;
+}
+
+.form-field > input:hover {
+    background-color: whitesmoke;
 }
 
 .btn-link {
@@ -64,4 +90,8 @@
     border: none;
     font-size: 16px;
     cursor: pointer;
+}
+
+.btn-link:hover {
+    color: #008DCB;
 }

@@ -27,7 +27,6 @@ const PrizesLine = () => {
                                 <p className="prize-name"><span>{prize.name}</span></p>
                                 <img src={prize.avatar || "/assets/images/camera1.png"} alt={prize.name} className="prize-image" />
                                 <p className="prize-contest-name">
-                                    <span>Belong to contest</span>
                                     <Link to={`/contest/${contest.contest_id}`} className="prize-contest-link">`{contest ? contest.name : ''}`</Link>
                                 </p>
                             </div>

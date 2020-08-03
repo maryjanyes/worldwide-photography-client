@@ -4,23 +4,21 @@ import { Formik } from 'formik';
 
 import { signIn } from 'reducers/actions/users.actions';
 
-const SignInForm = ({ backToSignUpMode }) => {
+const SignInForm = ({ backToSignUpMode, history }) => {
     const { isLoggedIn } = useSelector(({ auth }) => auth || {});
-    const [submitting, handleSubmitting] = useState(false);
     const [values] = useState({
         username: '',
         password: '',
     });
     const dispatch = useDispatch();
     const submitForm = (values, { setSubmitting }) => {
-        dispatch(signIn(values));
-        setSubmitting(false);
-        handleSubmitting(setSubmitting);
+        dispatch(signIn(values, dispatch));
+        setSubmitting(true);
     };
 
     useEffect(() => {
         if (isLoggedIn) {
-            submitting(true);
+            history.push('/profile');
         }
     }, [isLoggedIn]);
 
@@ -67,7 +65,7 @@ const SignInForm = ({ backToSignUpMode }) => {
                             className="btn btn-submit"
                         >Submit</button>
                         <div className="sign-in-link">
-                            <span>If you want to <button className="btn-link" onClick={backToSignUpMode}>Sign Up</button>.</span>
+                            <span>If you want to<button className="btn-link" onClick={backToSignUpMode}>Sign up</button></span>
                         </div>
                     </form>
                 )}

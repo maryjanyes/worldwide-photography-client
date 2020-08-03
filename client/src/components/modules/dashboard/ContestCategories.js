@@ -29,7 +29,7 @@ const ContestCategories = () => {
                 {categories.map(one => {
                     return (
                         <li className="nav-link-container" key={one.name}>
-                            <Link className="nav-link" to={`/contest-categories/${one.name.toLowerCase()}`}>{one.name}</Link>
+                            <Link className="nav-link" to={`/contest-categories/${one.category_id}`}>{one.name}</Link>
                         </li>
                     );
                 })}

@@ -30,6 +30,7 @@ CREATE TABLE `Photos` (
   `link_to_instagram` varchar(100),
   `link_to_facebook` varchar(100),
   `camera_details_id` integer(10),
+  `impressions_count` integer (256),
   `created_at` timestamp DEFAULT (${now()})
 );
 
@@ -48,6 +49,7 @@ CREATE TABLE `PhotosCameraDetails` (
 CREATE TABLE `PhotosTags` (
   `photo_tag_id` integer(10) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(10),
+  `content` varchar (100),
   `color` varchar(10),
   `photo_id` integer(10)
 );
@@ -62,17 +64,31 @@ CREATE TABLE `ContestsSubmittions` (
   `contests_submittions_id` integer(10) PRIMARY KEY AUTO_INCREMENT,
   `author` integer(10),
   `photo_id` integer(10),
-  `payment_id` integer(10)
+  `payment_id` integer(10),
+  `contest_id` integer(10)
 );
+
+CREATE TABLE `ContestCategories` (
+  `contest_category_id` integer (10),
+  `name` varchar (256),
+  `description` varchar (256)
+)
 
 CREATE TABLE `Contests` (
   `contest_id` integer(10) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100),
   `participant_fee` integer(100),
   `participant_level` varchar(10),
-  `participant_fee_currency` varchar (100)
+  `participant_fee_currency` varchar (100),
+  `category_id` integer (10),
+  `winner` integer(10),
   `created_at` timestamp DEFAULT (${now()})
 );
+
+CREATE TABLE `ContestNews` (
+  `contest_news_id` integer (10),
+  `article_id` integer (10)
+)
 
 CREATE TABLE `ContestsDetails` (
   `contest_details_id` integer(10) PRIMARY KEY AUTO_INCREMENT,
@@ -83,13 +99,17 @@ CREATE TABLE `ContestsDetails` (
   `1_prize` integer (10),
   `2_prize` integer (10),
   `3_prize` integer (10),
-  `avatar_url` varchar (256)
+  `avatar` varchar (256),
+  `judle_id` integer (10)
 );
 
 CREATE TABLE `Judles` (
   `judle_id` integer(10) PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(100),
-  `city_of_live` varchar(100)
+  `locate_at` varchar(100),
+  `avatar` varchar (100),
+  `credo` varchar (100),
+  `level` varchar(100)
 );
 
 CREATE TABLE `ContestsJudles` (
@@ -97,6 +117,27 @@ CREATE TABLE `ContestsJudles` (
   `judle_id` integer(10),
   `contest_id` integer(10)
 );
+
+CREATE TABLE `Articles` (
+  `article_id` integer (10) PRIMARY KEY AUTO_INCREMENT,
+  `title` varchar (100),
+  `content` varchar (255),
+  `description` varchar (100),
+  `author` integer (10),
+  `is_contest_news` boolean,
+  `created_at` timestamp DEFAULT (${now()})
+)
+
+CREATE TABLE `ArticleTags` (
+  `article_tags_id` integer (10) PRIMARY KEY AUTO_INCREMENT,
+  `content` varchar (100)
+)
+
+CREATE TABLE `ArticleTag` (
+  `article_tag_id` integer (10) PRIMARY KEY AUTO_INCREMENT,
+  `article_tags_id` integer (10) REFERENCES `ArticleTags` (`article_tags_id`),
+  `article_id` integer (10) REFERENCES `Articles` (`article_id`)
+)
 
 ALTER TABLE `UsersDetails` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`);
 

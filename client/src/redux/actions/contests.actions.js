@@ -4,13 +4,19 @@ export const requestContests = dispatch => {
     ApiService.getContests()
         .then(data => {
             dispatch(setContests(data));  
-        })
-        .catch(err => console.log('Unable fetch contests%', err.message));
+        });
 };
 
 export const setContests = payload => {
     return {
         type: 'SET_CONTESTS',
+        payload,
+    };
+};
+
+export const updateLastPhotoForSubmit = payload => {
+    return {
+        type: 'UPDATE_SUBMITTION_PHOTO',
         payload,
     };
 };

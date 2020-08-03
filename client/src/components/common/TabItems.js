@@ -1,27 +1,39 @@
 import React, { useState, useEffect } from "react";
 
-function TabItemsHeader({ tabs, selectItem, key }) {
+function TabItemsHeader({ tabs, selectItem, key = 'name', ItemProto }) {
     return tabs.map(one => (
-        <button onClick={() => selectItem(one)} className="tab-items-header">
-            <p>{one[key]}</p>
+        <button onClick={() => selectItem(one)} className={`btn btn-tab-item${(ItemProto && ItemProto.name === one.name && ' active') || ''}`}>
+            <span>{one[key]}</span>
         </button>
     ));
 }
 
-const TabItems = ({ tabsData }) => {
+const TabItems = ({ tabsData, keyName, activeItemID }) => {
     const [tabs, setTabs] = useState([]);
-    const [selectedItem$, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItemProto, setSelectedItemProto] = useState(null);
     const selectItem = one => {
-        setSelectedItem(one.build(one));
+        setSelectedItem(<one.Comp {...one.props} />);
+        setSelectedItemProto(one);
     };
+
+    useEffect(() => {
+        if (activeItemID !== undefined) {
+            selectItem(tabsData.find((i, id) => id === activeItemID));
+        }
+    }, []);
+
     useEffect(() => {
         setTabs(tabsData);
     }, [tabsData]);
+
     return tabsData && (
-        <div className="tab-items">
-            <TabItemsHeader tabs={tabs} selectItem={selectItem} />
-            {selectedItem$}
-        </div>
+        <React.Fragment>
+            <div className="tab-items">
+                <TabItemsHeader tabs={tabs} selectItem={selectItem} key={keyName} ItemProto={selectedItemProto} />
+            </div>
+            {selectedItem}
+        </React.Fragment>
     ) || <p>No tabs data provided.</p>;
 };
 

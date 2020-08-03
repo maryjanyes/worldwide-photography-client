@@ -1,10 +1,21 @@
+/** WorldwidePhotography styles **/
+
+/** color template **/
+/** 
+    orange #F47D14AA
+    fucsia #E1315B
+    lime #FFEC5C
+    blue-jam #008DCB
+**/
+
+/** top styles **/
 .site-logo {
     position: absolute;
     left: 10px;
     top: 24px;
     width: 150px;
     height: 60px;
-    background-color: khaki;
+    background-color: #FFEC5C;
     background: url(/assets/images/logo.png) no-repeat center;
     background-size: 60%;
 }
@@ -53,6 +64,7 @@
     display: none;
 }
 
+/** contest items & slider **/
 .contest-items {
     display: flex;
 }
@@ -63,7 +75,7 @@
     max-width: 80%;
 }
 
-.page-contest-details, .page-judle-classes, .page-usefull-articles {
+.page-contest-details, .page-judle-classes, .page-articles {
     margin: 1.6em 2.8em;
 }
 
@@ -75,7 +87,6 @@
     border-radius: 20px;
     background-color: #E1E1E1;
     padding: 0.4em 0;
-    box-shadow: 1px 2px 1px #fffff5;
 }
 
 .contest-item-card-body > .contest-name {
@@ -111,12 +122,16 @@
 }
 
 .contest-status.coming {
-    background-color: indianred;
+    background-color: #FF0D4B;
 }
 
 .contest-status.active {
-    background-color: khaki;
-    color: #6EAABD;
+    background-color: #FFEC5C;
+    color:#008DCB;
+}
+
+.contest-details-avatar {
+    height: 140px;
 }
 
 .owl-controls {
@@ -130,7 +145,7 @@
     height: 28px;
     border: none;
     background-color: transparent;
-    color: khaki;
+    color: #FFEC5C;
     margin: 0.2em;
     font-size: 12px;
     cursor: pointer;
@@ -202,7 +217,7 @@
     align-items: center;
     justify-content: center;
     background-color: #FFF0F4;
-    color: #6EAABD;
+    color: #008DCB;
     margin-left: 0.8em;
     text-transform: uppercase;
     border-radius: 15px;
@@ -215,7 +230,7 @@
 }
 
 .sign-top-menu-link.active, .nav-header-link.active {
-    color: #FF678E;
+    color: #E1315B;
 }
 
 .top-menu-item {
@@ -225,12 +240,12 @@
 
 .top-menu-item > a {
     font-weight: 800;
-    color: #FF678E;
+    color: #E1315B;
 }
 
 .nav-header {
     min-height: 80px;
-    background-color: #FFC9C9;
+    background-color: #E1315B;
     width: 100%;
     padding-top: 1.6em;
     padding-bottom: 0.4em;
@@ -287,6 +302,8 @@
 
 .contest-details-preview {
     position: relative;
+    margin-top: 180px;
+    background-color: whitesmoke;
 }
 
 .contest-details-preview .contest-info-block {
@@ -295,6 +312,10 @@
     width: 100%;
     text-align: center;
     padding-top: 80px;
+}
+
+.contest-details-info-body {
+    width: 100%;
 }
 
 .contest-info-block p {
@@ -332,6 +353,52 @@
     font-weight: 800;
 }
 
+.gallery-picture {
+    transition: 0.5s filter;
+    cursor: pointer;
+}
+
+.articles {
+    display: flex;
+}
+
+.article-preview:first-child {
+    margin-left: 0;
+}
+
+.article-preview {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4vh;
+    padding: 2.5vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
+    background-color: whitesmoke;
+    width: 30%;
+    cursor: pointer;
+}
+
+.article-preview .description {
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    background-color: #FFEC5C;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    margin-top: 2vh;
+}
+
+.article-preview .addition-info {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.article-preview .title {
+    font-size: 18px;
+    font-weight: 800;
+}
+
 .prize-contest-name {
     display: flex;
     flex-direction: column;
@@ -363,7 +430,7 @@
     position: relative;
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
-    background-color: khaki;
+    background-color: #FFEC5C;
     width: 100%;
 }
 
@@ -407,7 +474,7 @@
 }
 
 .contest-categories-nav-links .nav-link {
-    color: #FF678E;
+    color: #E1315B;
 }
 
 .nav-link {
@@ -432,17 +499,27 @@
     padding-top: 10vh;
 }
 
+.page-sign .btn-link {
+    font-weight: 800;
+}
+
 .sign-in-selector {
     font-weight: 800;
     font-size: 18px;
 }
 
+.sign-in-selector.facebook:hover, .sign-in-selector.google:hover {
+    color: whitesmoke;
+}
+
 .sign-in-selector.facebook {
     color: #5970FF;
+    transition: 0.5s color;
 }
 
 .sign-in-selector.google {
     color: #FF0D4B;
+    transition: 0.5s color;
 }
 
 .sign-in-judles-area {
@@ -471,6 +548,7 @@
     border-radius: 50%;
 }
 
+/** contest details **/
 .contest-details-info-card {
     display: flex;
     flex-direction: column;
@@ -501,9 +579,12 @@
     left: 10%;
 }
 
+/** judle videos **/
 .judle-videos-line {
     display: flex;
     justify-content: space-between;
+    margin-top: 50px;
+    flex-wrap: wrap;
 }
 
 .judle-videos-line > .judle-video {
@@ -511,6 +592,185 @@
     margin: auto;
 }
 
+.judle-videos-text, .articles-text, .gallery-text {
+    font-size: 32px;
+}
+
+.class-video-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.class-video-tags {
+    display: flex;
+    margin-top: 10px;
+}
+
+.class-video-name {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.class-video-tags > .video-tag {
+    margin: 4px;
+}
+
+.class-video {
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.video-tags {
+    margin-top: 50px;
+}
+
+.video-tags .class-video-tags {
+    margin-left: -2.5px;
+}
+
 .simple-border {
     border-radius: 20px;
+}
+
+.expander-tab {
+    width: 100%;
+}
+
+.expander-content {
+    text-align: left;
+}
+
+/** privacy **/
+.privacy-and-conditions-page {
+    font-size: 20px;
+    text-align: justify;
+    padding: 2.8vh;
+    color: #616161;
+}
+
+/** gallery **/
+.gallery-pictures {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery-pictures > .gallery-picture {
+    margin: 1vh;
+}
+
+.gallery-pictures > .gallery-picture > img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.gallery-picture {
+    position: relative;
+}
+
+.gallery-picture:hover {
+    filter: opacity(0.9);
+    box-shadow: 0.05vh 0.05vh 0.05vh #000000;
+}
+
+.gallery-photo-impressions {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    margin-left: 1vh;
+    position: absolute;
+    bottom: 2.5vh;
+    left: 2.5vh;
+}
+
+.gallery-photo-impressions .impressions-count {
+    margin-top: 0.25vh;
+    margin-left: 0.5vh;
+}
+
+.contest-details-info-additions {
+    width: 50%;
+}
+
+.top-line {
+    padding: 2vh 0;
+    margin-bottom: 0.5vh;
+    background-color: #FFEC5C;
+}
+
+.page-contest-category > h1 {
+    margin: 2.5vh;
+}
+
+.info-all-contest-entries {
+    margin-top: 5vh;
+}
+
+.info-all-contest-entries > span {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.other-opended-contests, .contest-social-sharing {
+    margin-top: 5vh;
+    font-size: 18px;
+}
+
+.other-opended-contests > a {
+    color: #E1315B;
+}
+
+.other-opended-contests > a:hover {
+    color: #008DCB;
+}
+
+.social-sharing-buttons span {
+    color: #5970FF;
+}
+
+.contest-social-sharing span {
+    margin: 0.5vh;
+    margin-left: 0;
+}
+
+.contest-announcements {
+    display: flex;
+}
+
+.contest-announcements .contest-announcement {
+    margin-left: 1.5vh;
+}
+
+.contest-news h4 {
+    font-size: 16px;
+}
+
+.submit-contest-modal {
+    width: 100%;
+    height: 72%;
+    background: #000000;
+    text-align: center;
+    padding-top: 28%;
+}
+
+.submit-contest-modal .submit-photo-form {
+    width: 40%;
+    margin: auto;
+}
+
+.page-contest-details .social-sharing-buttons {
+    margin-top: 2.5vh;
+    font-size: 12px;
+}
+
+.page-contest-details .social-sharing-buttons > span {
+    margin: 1vh;
+}
+
+.submit-photo-btn {
+    margin-top: 1vh;
 }

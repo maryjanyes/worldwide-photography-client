@@ -3,23 +3,27 @@ import ContestsData from '../mocks/contests.json';
 class ApiService {
     sendData() {
         const [path, method = 'POST', data = {}, headers = {}] = arguments;
-        fetch(`${this.endpoint}/${path}`, {
+        fetch(`/${path}`, {
             method,
             body: JSON.stringify(data),
             headers: { ...ApiService.getHeaders(), ...headers },
         })
-        .then(ApiService.handleSuccess || this.handleSuccess)
-        .catch(ApiService.handleError || this.handleError);
+        .then(this.handleSuccess || ApiService.handleSuccess)
+        .catch(this.handleError || ApiService.handleError);
     }
 
     getData() {
         const [path, method = 'GET', headers = {}] = arguments;
-        fetch(`${this.endpoint}/${path}`, {
+        fetch(`/${path}`, {
             method,
             headers: { ...ApiService.getHeaders(), ...headers },
         })
-        .then(ApiService.handleSuccess || this.handleSuccess)
-        .catch(ApiService.handleError || this.handleError);
+        .then(Athis.handleSuccess || ApiService.handleSuccess)
+        .catch(this.handleError || ApiService.handleError);
+    }
+
+    static uploadPhoto(url, binary) {
+        return http.post(url, binary);
     }
 
     static getPolicy(lang = 'en') {
@@ -37,7 +41,6 @@ class ApiService {
     }
 
     static handleError(error) {
-        console.log(error, 'Error on request');
         return Promise.resolve({ error });
     }
 
@@ -59,11 +62,11 @@ class ApiService {
             en: 'Articles',
             ua: 'Статті',
             link: '/articles',
-        }, {
+        }/*, {
             en: 'Judle classes',
             ua: 'Майстер-класи від суддів',
             link: '/judle-classes',
-        }];
+        }*/];
     }
 
     static getSignItems() {
@@ -109,9 +112,9 @@ class ApiService {
         return 'assets/images/pane2.jpg';
     }
 
-    constructor() {
+    constructor(endpoint) {
         this.active = 'ua-UA';
-        this.endpoint = 'http://localhost:5000/web/v1';
+        this.endpoint = 'http://localhost:5000/web/v1' || endpoint;
     }
 }
 

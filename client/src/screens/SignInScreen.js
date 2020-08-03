@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SignInForm from 'components/modules/sign/SignInForm';
 import SignUpForm from 'components/modules/sign/SignUpForm';
 
 import signInVariant from 'types/signInVariant';
 
-function SignInScreen() {
+function SignInScreen({ history }) {
     const [ isSignUpMode, setIsSignUpMode ] = useState(true);
+
+    useEffect(() => {
+        history.listen((change) => {
+            if (change.pathname === '/sign-in') {
+                setIsSignUpMode(false);
+            } else setIsSignUpMode(true);
+        })
+    }, [history.pathname]);
+
     return (
         <div className="page page-sign">
             {isSignUpMode ?
-                <SignUpForm switchToSignInMode={() => setIsSignUpMode(false)} /> :
-                <SignInForm backToSignUpMode={() => setIsSignUpMode(true)} />
+                <SignUpForm switchToSignInMode={() => setIsSignUpMode(false)} history={history} /> :
+                <SignInForm backToSignUpMode={() => setIsSignUpMode(true)} history={history} />
             }
             <SignInUsing signIn={() => console.log('Sign in using social.')} />
         </div>

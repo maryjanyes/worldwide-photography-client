@@ -1,18 +1,12 @@
+import ContestsData from '../../mocks/contests.json';
+import CategoriesMock from '../../mocks/photo-categories.json';
+
 const initialState = {
-    contests: [],
-    categories: [{
-        name: 'Movies',
-    }, {
-        name: 'Blogs'
-    }, {
-        name: 'Animals',
-    }, {
-        name: 'Peoples'
-    }, {
-        name: 'Art&Culture',
-    }, {
-        name: 'Music'
-    }],
+    contests: ContestsData,
+    categories: CategoriesMock,
+    contestAvatars: [],
+    judles: [],
+    lastSelectedPhotoForSubmit: null,
 };
 
 export default function ContestsReducer(state = initialState, { type, payload }) {
@@ -21,6 +15,11 @@ export default function ContestsReducer(state = initialState, { type, payload })
             return {
                 ...state,
                 contests: payload,
+            };
+        case 'UPDATE_SUBMITTION_PHOTO':
+            return {
+                ...state,
+                lastSelectedPhotoForSubmit: payload,
             };
         default: {
             return state;

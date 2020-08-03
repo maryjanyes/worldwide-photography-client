@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 
 import { sortItems } from 'utils/items.util';
 
-const BannerSliderItem = ({ title, description, images, isSelected = false }) => {
+const BannerSliderItem = ({ title, description, images = [], isSelected = false }) => {
     const text = description || title;
     return (
         <div key={text} className={`${isSelected ? 'selected ' : ''} owl-slider-item`}>
             <button className="owl-slider-item-frame">
                 <p className="owl-slider-item-text">{text}</p>
                 <div className="owl-slider-images">
-                    {(images || []).map(one => <img src={one.src} key={one.src} />) /* todo Do SEO */ }
+                    {images.map(({ src }) => <img src={src} key={src} />)}
                 </div>
             </button>
         </div>

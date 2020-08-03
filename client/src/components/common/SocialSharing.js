@@ -2,7 +2,7 @@ import React from 'react';
 
 const SocialSharing = () => {
     return (
-        <div className="social-buttons">
+        <div className="social-sharing-buttons">
             <span>facebook</span>
             <span>google</span>
             <span>twitter</span>

@@ -17,3 +17,5 @@ README.html
 .idea
 *.iml
 client/node_modules
+client/package-lock.json
+package-lock.json

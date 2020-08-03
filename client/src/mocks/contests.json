@@ -11,7 +11,8 @@
     "3_prize": 5,
     "created_at": 1593423321854,
     "contest_id": "455464",
-    "avatar_id": null
+    "avatar_id": null,
+    "category_id": "455464"
 }, {
     "name": "Music Inside you",
     "participant_fee": 200,
@@ -25,7 +26,8 @@
     "3_prize": 5,
     "created_at": 1593423321880,
     "contest_id": "455657",
-    "avatar_id": null
+    "avatar_id": null,
+    "category_id": "455653"
 }, {
     "name": "The Great Cinema epoch",
     "participant_fee": 200,
@@ -38,7 +40,8 @@
     "2_prize": 4,
     "3_prize": 5,
     "created_at": 1593423321900,
-    "contest_id": "455674"
+    "contest_id": "455674",
+    "category_id": "455653"
 }, {
     "name": "The Wall of the ever",
     "participant_fee": 200,
@@ -52,5 +55,6 @@
     "3_prize": 5,
     "created_at": 1593423321450,
     "contest_id": "455679",
-    "avatar_id": null
+    "avatar_id": null,
+    "category_id": "455653"
 }]

@@ -34,7 +34,7 @@ div, ul, body, a, p, span {
 
 .owl-prev, .owl-next {
     transition: 0.5s background-color;
-    color: khaki !important;
+    color: #FFEC5C !important;
 }
 
 .owl-prev:hover, .owl-next:hover {

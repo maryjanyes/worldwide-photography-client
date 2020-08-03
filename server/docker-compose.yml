@@ -4,9 +4,3 @@ services:
         build: .
         ports:
             - "5000:5000"
-        volumes:
-            - .:/site
-        # depends_on:
-            # - redis
-     # redis:
-        # image: redis
