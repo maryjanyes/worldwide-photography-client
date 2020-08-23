@@ -1,11 +1,12 @@
 {
   "name": "worldwide-photography-client",
-  "version": "0.0.1 beta",
+  "version": "0.0.1",
   "description": "Client.",
   "main": "./src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "build": "webpack"
+    "build": "webpack",
+    "start": "node ./server.js"
   },
   "author": "WorldwidePhotography <worldwide_photography@gmail.com>",
   "license": "MIT",
@@ -22,7 +23,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "use-react-modal": "0.0.9"
+    "use-react-modal": "0.0.9",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
