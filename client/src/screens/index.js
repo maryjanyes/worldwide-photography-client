@@ -1,9 +1,0 @@
-export { default as DashboardScreen } from './DashboardScreen';
-export { default as ApplyContestScreen } from './ApplyContestScreen';
-export { default as ContestScreen } from './ContestScreen';
-export { default as SignInScreen } from './SignInScreen';
-export { default as JudleClassesScreen } from './JudleClasses';
-export { default as ArticlesScreen } from './UsefullArticles';
-export { default as ContestCategoryScreen } from './ContestCategoryScreen';
-export { default as GalleryScreen } from './GalleryScreen';
-export { default as PrivacyAndConditionsScreen } from './PrivacyAndConditions';
