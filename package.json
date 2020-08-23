@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack"
   },
-  "author": "WorldwidePhotography <WorldwidePhotography@team.com>",
+  "author": "WorldwidePhotography <worldwide_photography@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
