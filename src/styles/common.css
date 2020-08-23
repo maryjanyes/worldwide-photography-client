@@ -15,7 +15,7 @@
   width: 150px;
   height: 60px;
   background-color: #ffec5c;
-  background: url(/assets/images/logo.png) no-repeat center;
+  background: url(http://localhost:3000/assets/images/logo.png) no-repeat center;
   background-size: 60%;
 }
 
@@ -497,7 +497,7 @@
 }
 
 .page-dashboard {
-  background: url(/assets/images/pane2.jpg);
+  background: url(http://localhost:3000/assets/images/pane2.jpg);
   padding-bottom: 0.8vh;
 }
 
@@ -770,7 +770,8 @@
   height: 28px;
   border: none;
   outline: none;
-  background: url(/assets/images/baseline_close_black_18dp.png) no-repeat center;
+  background: url(/http://localhost:3000/assets/images/baseline_close_black_18dp.png)
+    no-repeat center;
   background-size: 80%;
   position: absolute;
   top: 40px;

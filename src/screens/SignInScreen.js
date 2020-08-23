@@ -60,7 +60,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="assets/images/judle-NastyaTelikova.png"
+              src="http://localhost:3000/assets/images/judle-NastyaTelikova.png"
             />
             <span>
               (с) могу уместить всю свою жизньв рюкзаки уехать в неизвестность
@@ -69,7 +69,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="assets/images/judle-Valentina.png"
+              src="http://localhost:3000/assets/images/judle-Valentina.png"
             />
             <span>(с) тут слоган Насті</span>
           </div>

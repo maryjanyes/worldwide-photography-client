@@ -42,13 +42,16 @@ const BannerSlider = () => {
   const [activeItem, setActiveItem] = useState(0);
   const sliderImages = [
     {
-      src: "assets/images/dc38547395a3908bd67642926a16ecc2.png",
+      src:
+        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc2.png",
     },
     {
-      src: "assets/images/dc38547395a3908bd67642926a16ecc3.png",
+      src:
+        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc3.png",
     },
     {
-      src: "assets/images/dc38547395a3908bd67642926a16ecc4.png",
+      src:
+        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc4.png",
     },
   ];
   const selectItem = (index) => {

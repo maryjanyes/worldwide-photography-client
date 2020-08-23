@@ -147,7 +147,8 @@
   opacity: 1;
   width: 28px;
   height: 28px;
-  background: url(/assets/images/baseline_check_black_18dp.png) no-repeat center;
+  background: url(/http://localhost:3000/assets/images/baseline_check_black_18dp.png)
+    no-repeat center;
   background-size: 80%;
   content: "";
   position: absolute;

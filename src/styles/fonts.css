@@ -1,38 +1,39 @@
 @font-face {
-    font-family: 'PTSans';
-    src: url(../../assets/fonts/PT_Sans/PTSans-Regular.ttf);
+  font-family: "PTSans";
+  src: url(../../assets/fonts/PT_Sans/PTSans-Regular.ttf);
 }
 
 @font-face {
-    font-family: 'PTSansBold';
-    src: url(../../assets/fonts/PT_Sans/PTSans-Bold.ttf);
+  font-family: "PTSansBold";
+  src: url(../../assets/fonts/PT_Sans/PTSans-Bold.ttf);
 }
 
 .search-icon {
-    width: 60px;
-    height: 60px;
-    background: url(/assets/images/search-icon.png) no-repeat;
-    background-size: 100%;
-    border: none;
+  width: 60px;
+  height: 60px;
+  background: url(http://localhost:3000/assets/images/search-icon.png) no-repeat;
+  background-size: 100%;
+  border: none;
 }
 
 .menu-icon {
-    width: 60px;
-    height: 60px;
-    background: url(/assets/images/menu-icon.png) no-repeat center;
-    background-size: 100%;
-    margin-top: -5px;
-    right: 1vh;
-    border: none;
-    z-index: 100;
-    position: absolute;
+  width: 60px;
+  height: 60px;
+  background: url(http://localhost:3000/assets/images/menu-icon.png) no-repeat
+    center;
+  background-size: 100%;
+  margin-top: -5px;
+  right: 1vh;
+  border: none;
+  z-index: 100;
+  position: absolute;
 }
 
 .icon-btn {
-    cursor: pointer;
-    transition: 0.6s opacity;
+  cursor: pointer;
+  transition: 0.6s opacity;
 }
 
 .icon-btn:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }

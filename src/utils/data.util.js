@@ -14,4 +14,4 @@ export const getSubmittionsByContestID = (submittions, contestID) =>
 
 export const getContestImage = (images, imageID) =>
   images.find(({ avatar_id }) => avatar_id === imageID) ||
-  "assets/images/pane2.jpg";
+  "http://localhost:3000/assets/images/pane2.jpg";

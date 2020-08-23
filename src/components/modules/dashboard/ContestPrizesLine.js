@@ -26,7 +26,10 @@ const PrizesLine = () => {
                     <span>{prize.name}</span>
                   </p>
                   <img
-                    src={prize.avatar || "/assets/images/camera1.png"}
+                    src={
+                      prize.avatar ||
+                      "http://localhost:3000/assets/images/camera1.png"
+                    }
                     alt={prize.name}
                     className="prize-image"
                   />
