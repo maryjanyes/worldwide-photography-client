@@ -6,13 +6,15 @@ import { getContestImage } from "utils/data.util";
 import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
 
 const ContestItem = ({
-  name,
-  description,
+  en_name,
+  en_description,
   contest_id,
   started_at,
-  exploreContest,
+  explore,
   avatar_id,
 }) => {
+  const name = en_name;
+  const description = en_description;
   const { contestImages } = useSelector(({ contests }) => contests);
 
   const buildContestStatusLabel = () => {
@@ -42,7 +44,7 @@ const ContestItem = ({
           <p className="contest-name">{name}</p>
           <p className="contest-description">{description}</p>
           <button
-            onClick={() => exploreContest(contest_id)}
+            onClick={() => explore(contest_id)}
             className="btn btn-simple btn-explore-contest"
           >
             Explore
@@ -70,7 +72,7 @@ const ContestItems = ({ history, contestItems = null }) => {
           {data.map((one, contestItemID) => (
             <ContestItem
               {...one}
-              exploreContest={exploreContest}
+              explore={exploreContest}
               key={contestItemID}
             />
           ))}

@@ -7,11 +7,13 @@ const ContestDetails = ({ selectedContest }) => {
     <div className="contest-details-preview">
       <img
         src={selectedContest.avatar}
-        alt={selectedContest.name}
+        alt={selectedContest.en_name}
         className="contest-details-avatar"
       />
       <div className="contest-info-block">
-        <p className="contest-details-preview-name">{selectedContest.name}</p>
+        <p className="contest-details-preview-name">
+          {selectedContest.en_name}
+        </p>
         <p className="contest-details-preview-description">
           {selectedContest.description}
         </p>

@@ -5,21 +5,17 @@ class AuthService extends ApiService {
     super();
   }
 
-  auth(data) {
-    console.log(data);
-    return this.insertData(data, "/authenticate")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
+  async auth(data) {
+    data.email = data.emailOrUsername;
+    const response = await this.insertData(data, "authenticate");
+    const responsePayload = response.json();
+    return responsePayload;
   }
 
-  register(data) {
-    return this.insertData(data, "/register")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
+  async register(data) {
+    const response = await this.insertData(data, "register");
+    const responsePayload = response.json();
+    return responsePayload;
   }
 }
 

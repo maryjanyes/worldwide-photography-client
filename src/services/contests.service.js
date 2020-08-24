@@ -29,21 +29,24 @@ export class ContestsService extends ApiService {
     ];
   }
 
-  submitContestImage(userData, image, imageDescription) {
-    const data = new FormData();
-    data.append("image", image);
-    data.append("imageDescription", imageDescription);
-    data.append("email", userData.email);
-
-    console.log(data.getAll());
-  }
-
   async getContets() {
     return await this.fetchJSONData("contests");
   }
 
-  async getContetsSubmittions() {
+  async getContetsDetails() {
     return await this.fetchJSONData("contests/details");
+  }
+
+  async getContestsPrizes() {
+    return await this.fetchJSONData("contests/prizes");
+  }
+
+  async getContestsCategories() {
+    return await this.fetchJSONData("contests/categories");
+  }
+
+  async getSubmittionsForContest(contestID) {
+    return await this.fetchJSONData(`contests/submittions/${contestID}`);
   }
 }
 

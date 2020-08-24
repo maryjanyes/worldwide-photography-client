@@ -1,7 +1,7 @@
 export const submitContestModalStyle = {
   padding: "1vh",
   margin: "0.5vh",
-  "background-color": "#fffff0",
+  backgroundColor: "#fffff0",
 };
 
 export const inputStyle = {

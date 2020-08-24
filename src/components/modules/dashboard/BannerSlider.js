@@ -3,7 +3,10 @@ import { useSelector } from "react-redux";
 
 import { sortItems } from "utils/items.util";
 
-const BannerSliderItem = ({ name, images = [], isSelected = false }) => {
+import dashboardSliderImages from "mocks/dashboard-slider-images";
+
+const BannerSliderItem = ({ en_name, images = [], isSelected = false }) => {
+  const name = en_name;
   return (
     <div
       key={name}
@@ -40,20 +43,7 @@ const BannerSlider = () => {
   const { contests } = useSelector(({ contests }) => contests);
   const [sliderItems, setItems] = useState(null);
   const [activeItem, setActiveItem] = useState(0);
-  const sliderImages = [
-    {
-      src:
-        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc2.png",
-    },
-    {
-      src:
-        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc3.png",
-    },
-    {
-      src:
-        "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc4.png",
-    },
-  ];
+  const sliderImages = dashboardSliderImages;
   const selectItem = (index) => {
     if (index > sliderImages.length - 1 || index < 0) {
       return;

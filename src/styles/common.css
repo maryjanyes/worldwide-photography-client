@@ -77,7 +77,6 @@
 .page-contest-details,
 .page-judle-classes,
 .page-articles {
-  margin: 1.6em 2.8em;
 }
 
 .page-contest-details h1,
@@ -770,7 +769,7 @@
   height: 28px;
   border: none;
   outline: none;
-  background: url(/http://localhost:3000/assets/images/baseline_close_black_18dp.png)
+  background: url(http://localhost:3000/assets/images/baseline_close_black_18dp.png)
     no-repeat center;
   background-size: 80%;
   position: absolute;

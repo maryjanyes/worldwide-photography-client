@@ -2,12 +2,14 @@ import React, { useState } from "react";
 
 import IconComponent from "components/common/IconComponent";
 
+import { apiService } from "services/api.service";
+
 const GalleryPhoto = ({
   link_to_file,
-  impressions_count = 0,
+  impressions_count,
   name,
-  adjustedWidth,
   author,
+  adjustedWidth,
 }) => {
   const [cursorActive, setCursorActive] = useState(false);
   const toggleActive = (state) => {
@@ -20,7 +22,11 @@ const GalleryPhoto = ({
       onMouseOver={() => toggleActive(true)}
       onMouseOut={() => toggleActive(false)}
     >
-      <img src={link_to_file} alt={name} className="gallery-picture-photo" />
+      <img
+        src={`${apiService.BACKEND_ENDPOINT}/photos/${link_to_file}`}
+        alt={name}
+        className="gallery-picture-photo"
+      />
       <div className="gallery-picture-details">
         <span>{author}</span>
         {cursorActive && (

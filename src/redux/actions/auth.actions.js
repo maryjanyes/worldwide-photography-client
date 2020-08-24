@@ -1,33 +1,37 @@
 import AuthService from "services/auth.service";
 
-const signSuccess = (payload, is_auth) => {
+const handleAuthToken = (token) => ({
+  type: "[AUTH] SET_AUTH_TOKEN",
+  payload: token,
+});
+
+const signSuccess = (is_auth, response) => ({
+  type: (is_auth && "[AUTH] AUTH_SUCCESS") || "[AUTH] REGISTER_SUCCESS",
+  payload: response,
+});
+
+const sign = async (data, dispatch, is_auth) => {
+  const response = await AuthService[(is_auth && "auth") || "register"](data);
+  if (response.code !== 400) {
+    if (is_auth) {
+      dispatch(handleAuthToken(response.token));
+    }
+    dispatch(signSuccess(is_auth, response.data || response.user));
+  }
+};
+
+export const signIn = (payload, dispatch) => {
+  sign(payload, dispatch, true);
   return {
-    type: is_auth ? "LOG_IN_SUCCESS" : "REGISTER_SUCCESS",
+    type: "[AUTH] TRY_SIGN_IN",
     payload,
   };
 };
 
-const signError = (error, is_auth) => {
+export const signUp = (payload, dispatch) => {
+  sign(payload, dispatch);
   return {
-    type: is_auth ? "LOG_IN_ERROR" : "REGISTER_ERROR",
-    payload: error,
+    type: "[AUTH] TRY_SIGN_UP",
+    payload,
   };
-};
-
-export const sign = (data, dispatch, is_auth) => {
-  const handleSuccess = (response) => {
-    if (response.status === 200) {
-      dispatch(signSuccess(response, is_auth));
-    } else {
-      handleError(response);
-    }
-  };
-  const handleError = (errPayload) => {
-    dispatch(signError(errPayload, is_auth));
-  };
-  const reqContext = {
-    handleError,
-    handleSuccess,
-  };
-  AuthService.auth(data, reqContext);
 };

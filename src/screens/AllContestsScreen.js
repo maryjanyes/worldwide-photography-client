@@ -1,9 +1,9 @@
 import React from "react";
 
-function AllContestScreen(props) {
+function AllContestScreen() {
   return (
-    <div className="page page-dashboard">
-      <p>App Contests</p>
+    <div className="page page-all-contests">
+      <div className="top-line"></div>
     </div>
   );
 }

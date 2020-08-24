@@ -1,8 +1,9 @@
-class PhotosService {
+import { ApiService } from "./api.service";
 
-    readFile = fileURL => {
-        const reader = new FileReader();
-        reader.readAsText(fileURL);
-        reader.onload = () => { /* magic happens here */ };
-    }
+export class PhotosService extends ApiService {
+  async getPhotos() {
+    return await this.fetchJSONData("photos");
+  }
 }
+
+export default new PhotosService();

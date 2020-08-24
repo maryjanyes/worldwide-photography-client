@@ -7,15 +7,11 @@ import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
 const PrizesLine = () => {
   const { contestPrizes, contests } = useSelector(({ contests }) => contests);
 
-  const getContest = ({ contest_id }) => {
-    return contests.find((one) => one.contest_id === contest_id);
-  };
-
-  const canShow = contestPrizes.length > 0 && contests.length > 0;
+  const canDisplayPrizesLine = contestPrizes.length > 0 && contests.length > 0;
 
   return (
     <div className="prizes-line">
-      {canShow && (
+      {canDisplayPrizesLine && (
         <WithCarouselRef speed={2000}>
           {contestPrizes.map((prize) => {
             const contest = {};
@@ -38,7 +34,7 @@ const PrizesLine = () => {
                       to={`/contest/${contest.contest_id}`}
                       className="prize-contest-link"
                     >
-                      `{contest ? contest.name : ""}`
+                      `{contest ? contest.en_name : ""}`
                     </Link>
                   </p>
                 </div>

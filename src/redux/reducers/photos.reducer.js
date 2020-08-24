@@ -1,12 +1,15 @@
 const initialState = {
   photoCategories: [],
-  allImages: undefined,
+  allPhotos: [],
 };
 
 export default function PhotosReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case "[IMAGES] SET_ALL_IMAGES": {
-      return { ...state, allImages: payload };
+    case "[PHOTOS] SET_PHOTOS": {
+      return {
+        ...state,
+        allPhotos: payload,
+      };
     }
     default: {
       return state;

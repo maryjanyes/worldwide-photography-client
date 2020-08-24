@@ -3,11 +3,7 @@ const initialState = {
   contestCategories: [],
   contestImages: [],
   contestJudles: [],
-  contestPrizes: [
-    {
-      name: "ok1",
-    },
-  ],
+  contestPrizes: [],
   contestCategories: [],
   contestSubmittions: [],
   lastUploadedImage: null,
@@ -26,12 +22,12 @@ export default function ContestsReducer(
     case "[CONTESTS] UPDATE_SUBMITTION_PHOTO":
       return {
         ...state,
-        // uploadedImage: payload.name,
+        lastUploadedImage: payload,
       };
-    case "[CONTESTS] SET_PRIZES": {
+    case "[CONTESTS] SET_CONTESTS_PRIZES": {
       return {
         ...state,
-        prizes: payload,
+        contestPrizes: payload,
       };
     }
     default: {

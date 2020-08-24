@@ -111,7 +111,7 @@ function ContestDetailsInfo({ selectedContest }) {
           <div className="contest-details-info-additions">
             <img
               src={selectedContest.avatar}
-              alt={selectedContest.name}
+              alt={selectedContest.en_name}
               className="contest-details-avatar"
             />
             <div className="contest-stroke-info">

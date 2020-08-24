@@ -1,10 +1,16 @@
 import navLinks from "mocks/nav-links";
 import signItems from "mocks/sign-items";
+import categoriesLinks from "mocks/contest-categories-links";
 
 export class ApiService {
   constructor() {
-    const { BACKEND_URL } = process.env;
+    const { BACKEND_URL, BACKEND_FILES_URL } = process?.env;
     this.BACKEND_ENDPOINT = BACKEND_URL || "http://localhost:3000";
+    this.BACKEND_FILES_ENDPOINT = BACKEND_FILES_URL || "http://localhost:3002";
+    // this.blobHeaders = new Headers();
+    this.postHeaders = new Headers({
+      "Content-Type": "application/json",
+    });
   }
 
   async fetchJSONData(entryPath) {
@@ -18,15 +24,30 @@ export class ApiService {
     return response.text();
   }
 
-  insertData(payload, entryPath, headers) {
+  insertData(payload, entryPath, headers = this.postHeaders) {
     return fetch(`${this.BACKEND_ENDPOINT}/${entryPath}`, {
       body: JSON.stringify(payload),
       headers,
+      method: "POST",
+      mode: "cors",
     });
   }
 
+  insertBlob(formData) {
+    return fetch(`${this.BACKEND_FILES_ENDPOINT}/uploadPhoto`, {
+      body: formData,
+      method: "POST",
+      mode: "cors",
+    });
+  }
+
+  async getAppTranslations() {
+    const response = await fetch(`${this.BACKEND_ENDPOINT}/translations`);
+    return await response.json();
+  }
+
   static getContestItemLinks() {
-    return [];
+    return categoriesLinks;
   }
 
   static getNavLinks() {
@@ -35,6 +56,10 @@ export class ApiService {
 
   static getSignItems() {
     return signItems;
+  }
+
+  static getMenuItems() {
+    return [];
   }
 }
 
