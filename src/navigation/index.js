@@ -7,7 +7,7 @@ import {
   ApplyContestScreen,
   SignInScreen,
   JudleClassesScreen,
-  ArticlesScreen,
+  AllArticlesScreen,
   ContestCategoryScreen,
   GalleryScreen,
   PrivacyAndConditionsScreen,
@@ -34,8 +34,8 @@ function AppNavigation() {
           <Route path="/sign-in" component={SignInScreen} />
           <Route path="/sign-up" component={SignInScreen} />
           <Route path="/judle-classes" component={JudleClassesScreen} />
-          <Route path="/articles" component={ArticlesScreen} />
-          <Route path="/photos" component={GalleryScreen} />
+          <Route path="/articles" component={AllArticlesScreen} />
+          <Route path="/gallery" component={GalleryScreen} />
           <Route path="/privacy" component={PrivacyAndConditionsScreen} />
           <Route
             path="/contest-categories/:category_id"

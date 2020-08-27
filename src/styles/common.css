@@ -131,7 +131,7 @@
   color: #008dcb;
 }
 
-.contest-details-avatar {
+.contest-details > img {
   height: 140px;
 }
 
@@ -309,13 +309,13 @@
   margin-block-end: 0.67em;
 }
 
-.contest-details-preview {
+.contest-details {
   position: relative;
   margin-top: 180px;
   background-color: whitesmoke;
 }
 
-.contest-details-preview .contest-info-block {
+.contest-details .contest-info-block {
   position: absolute;
   top: 0;
   width: 100%;
@@ -820,4 +820,45 @@
 
 .page-not-found p {
   font-size: 38px;
+}
+
+.language-switcher {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.language-switcher > button {
+  /* border: 0.5vh solid #008dcb; */
+  background-color: transparent;
+  margin: 0.2vh;
+  cursor: pointer;
+  text-align: center;
+}
+
+.common-select-dropdown-options {
+  margin-top: 0.5vh;
+  /* box-shadow: 1px 1px 2px #008dcb; */
+  max-width: 50%;
+  margin: auto;
+}
+
+.submit-photo-container {
+  display: flex;
+  width: 50%;
+  margin: auto;
+}
+
+.submit-photo-container > span {
+  font-size: 12px;
+}
+
+.contest-photos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contest-photos .contest-photo > img {
+  width: 40%;
+  margin-top: 0.5vh;
 }

@@ -1,6 +1,6 @@
 const navlinks = [
   {
-    link: "/photos",
+    link: "/gallery",
     name: "Gallery",
   },
   {

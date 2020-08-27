@@ -4,7 +4,6 @@ const initialState = {
   contestImages: [],
   contestJudles: [],
   contestPrizes: [],
-  contestCategories: [],
   contestSubmittions: [],
   lastUploadedImage: null,
 };
@@ -24,10 +23,28 @@ export default function ContestsReducer(
         ...state,
         lastUploadedImage: payload,
       };
-    case "[CONTESTS] SET_CONTESTS_PRIZES": {
+    case "[CONTESTS] SET_CONTESTS_PRIZES_SUCCESS": {
       return {
         ...state,
         contestPrizes: payload,
+      };
+    }
+    case "[CONTESTS] SET_CONTESTS_CATEGORIES_SUCCESS": {
+      return {
+        ...state,
+        contestCategories: payload,
+      };
+    }
+    case "[CONTESTS] SET_CONTESTS_JUDLES_SUCCESS": {
+      return {
+        ...state,
+        contestJudles: payload,
+      };
+    }
+    case "[CONTESTS] SET_RECENT_SUBMITTION_SUCCESS": {
+      return {
+        ...state,
+        recentSubitttionSuccess: true,
       };
     }
     default: {

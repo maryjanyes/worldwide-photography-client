@@ -9,13 +9,13 @@ function UsefullArticlesScreen({ history }) {
   return (
     <div className="page page-articles">
       <div className="top-line"></div>
-      {canDisplayArticles && (
+      {(canDisplayArticles && (
         <div className="articles-line">
           {allArticles.map((one) => (
             <ArticlePreview {...one} key={one.name} history={history} />
           ))}
         </div>
-      )}
+      )) || <p>No available articles.</p>}
     </div>
   );
 }

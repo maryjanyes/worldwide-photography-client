@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { ApiService } from "services/api.service";
 
 const ContestCategories = () => {
-  const { categories } = useSelector(({ contests }) => contests);
+  const { contestCategories } = useSelector(({ contests }) => contests);
   const [categoriesActive, setCategories] = useState(false);
-  const needToDisplayCategories = categoriesActive && categories.length > 0;
+  const needToDisplayCategories =
+    categoriesActive && contestCategories.length > 0;
 
   const toggleCategories = () => setCategories(!categoriesActive);
 
@@ -35,14 +36,14 @@ const ContestCategories = () => {
       </ul>
       {needToDisplayCategories && (
         <ul className="contest-categories-items">
-          {categories.map((one) => {
+          {contestCategories.map((c) => {
             return (
-              <li className="nav-link-container" key={one.name}>
+              <li className="nav-link-container" key={c.name}>
                 <Link
                   className="nav-link"
-                  to={`/contest-categories/${one.category_id}`}
+                  to={`/contest-categories/${c.category_id}`}
                 >
-                  {one.name}
+                  {c.name}
                 </Link>
               </li>
             );

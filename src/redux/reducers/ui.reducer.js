@@ -1,7 +1,7 @@
 const initialState = {
   submissionModalState: false,
-  activeNavItem: "/dashboard",
   translations: {},
+  activeLanguage: localStorage.getItem("appLang") || "EN",
 };
 
 export default function UIReducer(state = initialState, { payload, type }) {
@@ -16,6 +16,12 @@ export default function UIReducer(state = initialState, { payload, type }) {
       return {
         ...state,
         translations: payload,
+      };
+    }
+    case "[UI] SET_APP_LANGUAGE": {
+      return {
+        ...state,
+        activeLanguage: payload,
       };
     }
     default:

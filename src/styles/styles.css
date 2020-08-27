@@ -1,0 +1,5 @@
+.contest-info-block {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5vh;
+}

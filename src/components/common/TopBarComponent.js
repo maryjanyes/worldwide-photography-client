@@ -4,6 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 
 import TopBarSignItems from "./TopBarSignItems";
 import TopMenu from "./TopMenu";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 import { ApiService } from "services/api.service";
 
@@ -15,6 +16,7 @@ const TopBarComponent = () => {
   return (
     <nav className="nav-header nav-header-top">
       <Link className="site-logo" to="/"></Link>
+      <LanguageSwitcher />
       <ul className="nav-header-base-menu">
         {ApiService.getNavLinks().map((one) => {
           return (

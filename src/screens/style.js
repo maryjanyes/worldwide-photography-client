@@ -11,3 +11,7 @@ export const inputStyle = {
   backgrounColor: "#5970FF",
   marginBottom: "1vh",
 };
+
+export const containerStyle = {
+  width: "50%",
+};

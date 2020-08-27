@@ -6,7 +6,6 @@ import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
 
 const PrizesLine = () => {
   const { contestPrizes, contests } = useSelector(({ contests }) => contests);
-
   const canDisplayPrizesLine = contestPrizes.length > 0 && contests.length > 0;
 
   return (
@@ -17,7 +16,10 @@ const PrizesLine = () => {
             const contest = {};
             return (
               contest && (
-                <div className="prize-item item" key={prize.name}>
+                <div
+                  className="prize-item item"
+                  key={prize.name || Math.random()}
+                >
                   <p className="prize-name">
                     <span>{prize.name}</span>
                   </p>

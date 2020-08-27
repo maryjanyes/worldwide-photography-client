@@ -4,7 +4,7 @@ import { Formik } from "formik";
 
 import { signUp } from "reducers/actions/auth.actions";
 
-import FeaturedCheckbox from "components/common/FeaturedCheckbox";
+import CommonCheckbox from "components/common/CommonCheckbox";
 
 const SignUpForm = ({ switchToSignInMode, history }) => {
   const { isLoggedIn } = useSelector(({ auth }) => auth || {});
@@ -100,7 +100,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 {...getFieldProps("repeatPassword")}
               />
             </div>
-            <FeaturedCheckbox
+            <CommonCheckbox
               name="isPro"
               label="You are Pro?"
               onChange={(value) => setFieldValue("isPro", value)}

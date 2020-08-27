@@ -11,16 +11,12 @@ export class ContestsService extends ApiService {
       {
         name: "General info",
         Comp: GeneralInfoComponent,
-        props: {
-          selectedContest,
-        },
+        props: selectedContest,
       },
       {
         name: "Results",
         Comp: ResultsComponent,
-        props: {
-          selectedContest,
-        },
+        props: selectedContest,
       },
       {
         name: "News",
@@ -47,6 +43,10 @@ export class ContestsService extends ApiService {
 
   async getSubmittionsForContest(contestID) {
     return await this.fetchJSONData(`contests/submittions/${contestID}`);
+  }
+
+  async getContestsJudles() {
+    return await this.fetchJSONData("contests/judles");
   }
 }
 

@@ -1,11 +1,11 @@
 @font-face {
   font-family: "PTSans";
-  src: url(../../assets/fonts/PT_Sans/PTSans-Regular.ttf);
+  /* src: url(../../assets/fonts/PT_Sans/PTSans-Regular.ttf); */
 }
 
 @font-face {
   font-family: "PTSansBold";
-  src: url(../../assets/fonts/PT_Sans/PTSans-Bold.ttf);
+  /* src: url(../../assets/fonts/PT_Sans/PTSans-Bold.ttf); */
 }
 
 .search-icon {

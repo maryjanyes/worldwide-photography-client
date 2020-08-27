@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function TabItemsHeader({ tabs, selectItem, key = "name", ItemProto }) {
-  return tabs.map((one) => (
+  return tabs.map((one, oneID) => (
     <button
       onClick={() => selectItem(one)}
       className={`btn btn-tab-item${

@@ -1,43 +1,52 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import useModal from "use-react-modal";
 import { Link } from "react-router-dom";
 
-import TabItems from "components/common/TabItems";
-import SocialSharing from "components/common/SocialSharing";
+import useModal from "use-react-modal";
+
 import ContestAnnouncements from "components/modules/contest/ContestAnnouncements";
-import AllContestPhotos from "components/modules/contest/AllContestPhotos";
+import ContestSubmittions from "components/modules/contest/ContestSubmittions";
+import ContestDetails from "components/modules/contest/ContestDetails";
+import ApplyContestForm from "components/modules/apply-contest/ApplyContestForm";
 import IconComponent from "components/common/IconComponent";
 import UploadInput from "components/common/UploadInput";
 import ModalComponent from "components/common/ModalComponent";
-import ContestDetails from "components/modules/contest/ContestDetails";
+import TabItems from "components/common/TabItems";
+import SocialSharing from "components/common/SocialSharing";
+import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
-import ApplyContestForm from "components/modules/apply-contest/ApplyContestForm";
-
-import { ContestsService } from "services/contests.service";
-import { getContestJudle } from "utils/data.util";
+import contestsService, { ContestsService } from "services/contests.service";
 import { setUploadedImage } from "reducers/actions/contests.actions";
+import { getTimeToContestEnd } from "utils/data.util";
 
-import { inputStyle, submitContestModalStyle } from "./style";
+import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
 
 function ContestScreen() {
+  const [contestSubmittions, setContestSubmittions] = useState([]);
   const { contest_id } = useParams();
   const { contests } = useSelector(({ contests }) => contests);
   const selectedContest = useMemo(() =>
-    contests.find((one) => one.contest_id == contest_id)
+    contests.find((c) => c.contest_id == contest_id)
   );
-  const contestAvatar = "";
+  const requestSubmittions = async () => {
+    const submittionsData = await contestsService.getSubmittionsForContest(
+      contest_id
+    );
+    setContestSubmittions(submittionsData);
+  };
+
+  useEffect(() => {
+    requestSubmittions();
+  }, []);
 
   return (
     (selectedContest && (
       <div className="page page-contest-details">
-        <ContestDetails selectedContest={selectedContest} />
+        <ContestDetails {...selectedContest} />
         <ContestDetailsInfo
-          selectedContest={{
-            ...selectedContest,
-            avatar: contestAvatar,
-          }}
+          selectedContest={selectedContest}
+          contestSubmittions={contestSubmittions}
         />
         <SocialSharing />
       </div>
@@ -47,53 +56,66 @@ function ContestScreen() {
 
 function AnnouncementsComponent(props) {
   return (
-    <div className="contest-news" key="a">
-      <h3>News about Contest</h3>
+    <div className="contest-news">
+      <h2>Contest recent news</h2>
       <ContestAnnouncements contestID={props.contest_id} />
     </div>
   );
 }
 
-function GeneralInfoComponent({ selectedContest }) {
+function GeneralInfoComponent({ description, name }) {
   return (
-    <div className="contest-general-info" key="g">
-      <h3>General info of Contest</h3>
-      <div className="general-info-description">
-        {selectedContest.description}
+    <div className="contest-info">
+      <h2>General info of Contest</h2>
+      <div className="contest-info-container">
+        <div className="contest-info-block">
+          <span>Name</span>
+          <span>{name}</span>
+        </div>
+        <div className="contest-info-block">
+          <span>Description</span>
+          <span>{description}</span>
+        </div>
       </div>
     </div>
   );
 }
 
-function ResultsComponent({ winner }) {
+function ResultsComponent({ winner_id, name }) {
   const showContestResults = () => {
     return (
       <div className="contest-results">
-        <span>Winner of Contest {winner.name}.</span>
+        <span>
+          Winner of Contest {name} {winner.name}.
+        </span>
       </div>
     );
   };
   return (
-    <div className="results-info-block" key="r">
-      <h3>Results of Contest</h3>
-      {(winner && showContestResults()) || "Contest at progress."}
+    <div className="results-info">
+      <h2>Results of Contest '{name}'</h2>
+      {(winner_id !== null && showContestResults()) || (
+        <p>Contest at progress.</p>
+      )}
     </div>
   );
 }
 
-function ContestDetailsInfo({ selectedContest }) {
-  const {
-    allSubmittions,
-    contestJudles,
-  } = useSelector(({ contests, photos }) => ({ ...contests, ...photos }));
-  const timeToEntry = useMemo(() => selectedContest.started_at, []);
-  const submittions = []; // getSubmittionsByContestID(allSubmittions, selectedContest.contest_id);
-  const judle = getContestJudle(contestJudles, selectedContest.contest_id);
+function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
+  const { contestJudles } = useSelector(({ contests }) => contests);
+  // todo
+  const daysToEntry = getTimeToContestEnd(
+    new Date(Date.now()).getDate(),
+    selectedContest.ended_at
+  ).getDate();
   const tabsData = ContestsService.getContestDetailsTemplate(
-    GeneralInfoComponent,
-    ResultsComponent,
+    WithLanguageProps(GeneralInfoComponent),
+    WithLanguageProps(ResultsComponent),
     AnnouncementsComponent,
     selectedContest
+  );
+  const contestJudle = contestJudles.find(
+    (j) => j.judle_id === selectedContest.judle_id
   );
 
   return (
@@ -117,25 +139,25 @@ function ContestDetailsInfo({ selectedContest }) {
             <div className="contest-stroke-info">
               <div>
                 <IconComponent />
-                <p>{timeToEntry} time left to enter.</p>
+                <p>{daysToEntry} days left to enter contest.</p>
               </div>
               <div>
                 <IconComponent />
-                <p>{submittions.length} photos entered.</p>
+                <p>{contestSubmittions.length} photos entered.</p>
               </div>
               <div>
                 <IconComponent />
-                <p>Judle {judle && judle.name}.</p>
+                <p>Judle {contestJudle?.judle_id}.</p>
                 <SubmitPhotoArea />
               </div>
             </div>
           </div>
         </div>
-        <div className="contest-details info-all-contest-entries">
-          <span className="all-entries-text">
+        <div className="contest-details-bottom info-all-contest-entries">
+          <h2 className="all-entries-text">
             All contest entries of Contest on WorldwidePhotography.com
-          </span>
-          <AllContestPhotos contestID={selectedContest.contest_id} />
+          </h2>
+          <ContestSubmittions submittions={contestSubmittions} />
         </div>
       </div>
     </div>
@@ -143,8 +165,8 @@ function ContestDetailsInfo({ selectedContest }) {
 }
 
 function SubmitPhotoArea() {
-  const { uploadedImage } = useSelector(({ contests }) => contests);
   const dispatch = useDispatch();
+  const { uploadedImage } = useSelector(({ contests }) => contests);
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
   const [contestImage, setContestImage] = useState(null);
 
@@ -169,11 +191,12 @@ function SubmitPhotoArea() {
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
             >
-              <div className="select-photo-area">
-                <span>Choose photo to enter</span>
+              <div className="submit-photo-container">
+                <span>Choose photo</span>
                 <UploadInput
                   onChangePhotoUrl={onChangePhotoUrl}
                   inputStyle={inputStyle}
+                  containerStyle={containerStyle}
                 />
               </div>
             </ApplyContestForm>

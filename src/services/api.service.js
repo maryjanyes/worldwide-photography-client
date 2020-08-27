@@ -2,6 +2,8 @@ import navLinks from "mocks/nav-links";
 import signItems from "mocks/sign-items";
 import categoriesLinks from "mocks/contest-categories-links";
 
+import { appLangs } from "services/app-configs.service";
+
 export class ApiService {
   constructor() {
     const { BACKEND_URL, BACKEND_FILES_URL } = process?.env;
@@ -38,6 +40,14 @@ export class ApiService {
       body: formData,
       method: "POST",
       mode: "cors",
+    });
+  }
+
+  async getPrivacy(lang) {
+    return new Promise((resolve) => {
+      return fetch(
+        `assets/text/privacy-${(lang === appLangs.EN && "en.txt") || "ua.txt"}`
+      ).then((data) => data.text().then((text) => resolve(text)));
     });
   }
 

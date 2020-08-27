@@ -1,9 +1,9 @@
 import React from "react";
 
-const FeaturedCheckbox = ({ name, label, onChange }) => {
+const CommonCheckbox = ({ name, label, onChange }) => {
   return (
-    <div className="form-field-checkbox">
-      <div className="box">
+    <div className="common-checkbox-form-field">
+      <div className="common-checkbox-box">
         <input
           className="common-checkbox"
           type="checkbox"
@@ -17,4 +17,4 @@ const FeaturedCheckbox = ({ name, label, onChange }) => {
   );
 };
 
-export default FeaturedCheckbox;
+export default CommonCheckbox;

@@ -3,9 +3,14 @@ import PhotosService from "services/photos.service";
 
 import { apiService } from "services/api.service";
 
-import { setContests, setContestsPrizes } from "./contests.actions";
+import {
+  setContests,
+  setContestsPrizesSuccess,
+  setContestsCategoriesSuccess,
+  setContestsJudlesSuccess,
+} from "./contests.actions";
 import { setTranslations } from "./ui.actions";
-import { setPhotos } from "./photos.actions";
+import { setPhotosSuccess } from "./photos.actions";
 
 export const initAppData = (dispatch) => {
   ContestsService.getContets().then((contestsResponse) => {
@@ -21,10 +26,16 @@ export const initAppData = (dispatch) => {
     });
   });
   ContestsService.getContestsPrizes().then((contestsPrizes) => {
-    dispatch(setContestsPrizes(contestsPrizes));
+    dispatch(setContestsPrizesSuccess(contestsPrizes));
+  });
+  ContestsService.getContestsCategories().then((contestsCategories) => {
+    dispatch(setContestsCategoriesSuccess(contestsCategories));
+  });
+  ContestsService.getContestsJudles().then((contestsJudles) => {
+    dispatch(setContestsJudlesSuccess(contestsJudles));
   });
   PhotosService.getPhotos().then((photosData) => {
-    dispatch(setPhotos(photosData));
+    dispatch(setPhotosSuccess(photosData));
   });
   apiService.getAppTranslations().then((translationsData) => {
     dispatch(
