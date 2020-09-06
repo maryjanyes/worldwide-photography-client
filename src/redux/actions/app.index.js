@@ -1,5 +1,6 @@
 import ContestsService from "services/contests.service";
 import PhotosService from "services/photos.service";
+import UsersService from "services/users.service";
 
 import { apiService } from "services/api.service";
 
@@ -7,10 +8,11 @@ import {
   setContests,
   setContestsPrizesSuccess,
   setContestsCategoriesSuccess,
-  setContestsJudlesSuccess,
 } from "./contests.actions";
 import { setTranslations } from "./ui.actions";
 import { setPhotosSuccess } from "./photos.actions";
+import { setJudlesSuccess } from "./users.actions";
+import { checkExistedAccountAndSignIn } from "./auth.actions";
 
 export const initAppData = (dispatch) => {
   ContestsService.getContets().then((contestsResponse) => {
@@ -31,11 +33,11 @@ export const initAppData = (dispatch) => {
   ContestsService.getContestsCategories().then((contestsCategories) => {
     dispatch(setContestsCategoriesSuccess(contestsCategories));
   });
-  ContestsService.getContestsJudles().then((contestsJudles) => {
-    dispatch(setContestsJudlesSuccess(contestsJudles));
-  });
   PhotosService.getPhotos().then((photosData) => {
     dispatch(setPhotosSuccess(photosData));
+  });
+  UsersService.getJudles().then((judlesData) => {
+    dispatch(setJudlesSuccess(judlesData));
   });
   apiService.getAppTranslations().then((translationsData) => {
     dispatch(
@@ -48,6 +50,7 @@ export const initAppData = (dispatch) => {
     );
   });
   const type = "[APP] INIT_DATA";
+  dispatch(checkExistedAccountAndSignIn());
   return {
     type,
   };

@@ -17,9 +17,9 @@
 .btn-tab-item,
 .btn-submit-photo,
 .btn-apply-photo {
-  min-width: 100px;
+  min-width: 140px;
   padding: 1.5vh;
-  border-radius: 10px;
+  border-radius: 20px;
   margin: 0.8vh;
   border: #e1315b 0.4vh solid;
   transition: 0.6s background-color;
@@ -44,7 +44,7 @@
 
 .btn-simple.btn-explore-contest {
   text-transform: uppercase;
-  color: #6eaabd;
+  color: #ffffff;
 }
 
 .btn-simple:hover {
@@ -54,13 +54,13 @@
 
 .btn-submit {
   transition: 0.5s background-color;
-  width: 200px;
-  height: 64px;
-  border-radius: 20px;
+  min-width: 140px;
+  height: 48px;
+  border-radius: 16px;
   margin: auto;
   font-size: 20px;
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 600;
   background-color: #e1315b;
 }
 
@@ -115,7 +115,12 @@
 .common-select-dropdown-box > button > label {
   font-size: 18px;
   margin-bottom: 0.2vh;
+  transition: 0.6s color;
   cursor: pointer;
+}
+
+.common-select-dropdown-box > button:hover > label {
+  color: #e1315b;
 }
 
 .btn-link {
@@ -137,6 +142,7 @@
 
 .common-checkbox {
   opacity: 0;
+  left: 0;
   position: absolute;
   width: 100%;
   cursor: pointer;
@@ -164,18 +170,10 @@
   right: 0;
 }
 
-.common-select-dropdown-box > button {
+.common-select-dropdown-box > .common-select-btn {
   background-color: transparent;
   padding: 0.2vh;
   border: none;
-}
-
-.common-select-dropdown-options > input {
-  background-color: transparent;
-  padding: 0.8vh;
-  /* border-radius: 10px; */
-  border-top: 1.5px solid #008dcb;
-  border-bottom: 1.5px solid #008dcb;
-  width: 100%;
+  outline: none;
   cursor: pointer;
 }

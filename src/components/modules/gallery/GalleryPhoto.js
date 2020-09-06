@@ -7,7 +7,6 @@ import { apiService } from "services/api.service";
 const GalleryPhoto = ({
   link_to_file,
   impressions_count,
-  name,
   author,
   adjustedWidth,
 }) => {
@@ -24,7 +23,6 @@ const GalleryPhoto = ({
     >
       <img
         src={`${apiService.BACKEND_ENDPOINT}/photos/${link_to_file}`}
-        alt={name}
         className="gallery-picture-photo"
       />
       <div className="gallery-picture-details">

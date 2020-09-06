@@ -12,7 +12,7 @@ const signSuccess = (is_auth, response) => ({
 
 const sign = async (data, dispatch, is_auth) => {
   const response = await AuthService[(is_auth && "auth") || "register"](data);
-  if (response.code !== 400) {
+  if (response.code !== 400 && !response.message === "Password do not match.") {
     if (is_auth) {
       dispatch(handleAuthToken(response.token));
     }
@@ -34,4 +34,20 @@ export const signUp = (payload, dispatch) => {
     type: "[AUTH] TRY_SIGN_UP",
     payload,
   };
+};
+
+export const checkExistedAccountAndSignIn = () => {
+  const userData = localStorage.getItem("UserData");
+  return {
+    type: "[AUTH] TRY_FIND_ACCOUNT",
+    payload: (userData && JSON.parse(userData)) || null,
+  };
+};
+
+export const logOut = () => ({
+  type: "[AUTH] LOG_OUT",
+});
+
+export default {
+  logOut,
 };

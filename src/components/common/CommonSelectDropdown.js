@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import ArrowDownBtn from "components/common/ArrowDownBtn";
+
+import { apiService } from "services/api.service";
+
 const CommonSelectDropdown = ({
   label,
   values,
@@ -8,6 +12,7 @@ const CommonSelectDropdown = ({
   containerStyle = {},
 }) => {
   const [isOpen, toggle] = useState(false);
+  const [value, setValue] = useState(null);
   const dropdownOption = ({ valueText, valueID }) => {
     return (
       <input
@@ -17,6 +22,7 @@ const CommonSelectDropdown = ({
         id={valueID}
         onChange={() => {}}
         onMouseDown={() => {
+          setValue(valueText);
           onSelect(valueID, dropdownID);
           toggle(false);
         }}
@@ -27,9 +33,12 @@ const CommonSelectDropdown = ({
   return (
     <div className="common-select-dropdown-form-field" style={containerStyle}>
       <div className="common-select-dropdown-box">
-        <button onClick={() => toggle(!isOpen)} type="button">
-          <label className="common-select-dropdown-label">{label}</label>
-        </button>
+        <ArrowDownBtn
+          onPress={() => toggle(!isOpen)}
+          iconSrc={`${apiService.CLIENT_ENDPOINT}/assets/images/baseline_keyboard_arrow_up_black_18dp.png`}
+          label={value || label}
+          opened={isOpen}
+        />
         {isOpen && (
           <div className="common-select-dropdown-options">
             {values.map((f) => dropdownOption(f))}

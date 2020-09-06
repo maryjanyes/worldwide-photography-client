@@ -20,19 +20,19 @@ const TopBarComponent = () => {
       <ul className="nav-header-base-menu">
         {ApiService.getNavLinks().map((one) => {
           return (
-            <li key={one.link}>
-              <NavLink
-                isActive={(match) => {
-                  return !!match;
-                }}
-                key={one.name}
-                to={one.link}
-                className="nav-header-link"
-                activeClassName="active"
-              >
-                {one.name}
-              </NavLink>
-            </li>
+            !one.disabled && (
+              <li key={one.link}>
+                <NavLink
+                  isActive={(match) => !!match}
+                  key={one.name}
+                  to={one.link}
+                  className="nav-header-link"
+                  activeClassName="active"
+                >
+                  {one.name}
+                </NavLink>
+              </li>
+            )
           );
         })}
       </ul>

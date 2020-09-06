@@ -44,10 +44,6 @@ export class ContestsService extends ApiService {
   async getSubmittionsForContest(contestID) {
     return await this.fetchJSONData(`contests/submittions/${contestID}`);
   }
-
-  async getContestsJudles() {
-    return await this.fetchJSONData("contests/judles");
-  }
 }
 
 export default new ContestsService();

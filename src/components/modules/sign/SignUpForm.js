@@ -110,7 +110,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
               disabled={isSubmitting}
               className="btn btn-submit"
             >
-              Submit
+              Sign Up
             </button>
             <div className="sign-up-link">
               <span>

@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
+import { CategoryItemLink } from "components/modules/dashboard/ContestCategories";
 
 const PrizesLine = () => {
   const { contestPrizes, contests } = useSelector(({ contests }) => contests);
@@ -13,9 +13,11 @@ const PrizesLine = () => {
       {canDisplayPrizesLine && (
         <WithCarouselRef speed={2000}>
           {contestPrizes.map((prize) => {
-            const contest = {};
+            const contestData = contests.find(
+              (c) => c.contest_id === prize.contest_id
+            );
             return (
-              contest && (
+              !!contestData && (
                 <div
                   className="prize-item item"
                   key={prize.name || Math.random()}
@@ -31,14 +33,7 @@ const PrizesLine = () => {
                     alt={prize.name}
                     className="prize-image"
                   />
-                  <p className="prize-contest-name">
-                    <Link
-                      to={`/contest/${contest.contest_id}`}
-                      className="prize-contest-link"
-                    >
-                      `{contest ? contest.en_name : ""}`
-                    </Link>
-                  </p>
+                  <CategoryItemLink {...contestData} />
                 </div>
               )
             );

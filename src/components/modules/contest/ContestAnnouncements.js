@@ -1,6 +1,6 @@
 import React from "react";
-
 import { useSelector } from "react-redux";
+
 import { getAnnouncements } from "utils/data.util";
 
 const ContestAnnouncements = ({ contestID }) => {

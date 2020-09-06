@@ -4,21 +4,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { apiService } from "services/api.service";
 import { setRecentSubmittionSuccess } from "reducers/actions/contests.actions";
 import { buildDropdownOptions } from "utils/data.util";
+import { signUp } from "reducers/actions/auth.actions";
 
 import CommonSelectDropdown from "components/common/CommonSelectDropdown";
 
-const ApplyContestForm = ({ children, image }) => {
+const ApplyContestForm = ({ children, image, contestID }) => {
   const dispatch = useDispatch();
   const {
     isLoggedIn,
     userData,
     lastUploadedImage,
     contestCategories,
-  } = useSelector(({ users, contests }) => ({
-    ...users,
+  } = useSelector(({ auth, contests }) => ({
+    ...auth,
     ...contests,
   }));
   const [contestFormFields, setContestFormFields] = useState({});
+  // const [error, setError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const categoriesOptions = useMemo(() => {
     const categoriesData = buildDropdownOptions(contestCategories);
@@ -28,31 +31,33 @@ const ApplyContestForm = ({ children, image }) => {
   const submitContestForm = async () => {
     const fileData = new FormData();
     fileData.append("file", image);
-    fileData.append("userName", userData.userName);
     const insertContestPhotoResponse = await apiService.insertBlob(fileData);
-    if (insertContestPhotoResponse.code !== 400) {
+    if (insertContestPhotoResponse.success) {
       const photoData = {
-        author_id: userData.userID,
+        author_id: userData.user_id,
         cetegory_id: contestFormFields.categoryID,
+        description: contestFormFields.imageDesc,
         link_to_file: insertContestPhotoResponse.fileName,
-        // camera_details_id: 0,
+        camera_details_id: 0,
       };
-      const insertPhotoResponse = await apiService.insertData(
+      const photoResponse = await apiService.insertData(
         photoData,
         "photos/submitPhoto"
       );
-      if (insertPhotoResponse.code !== 400) {
+      const photoResponseBody = await photoResponse.json();
+      if (photoResponseBody.code !== 400) {
         const contestData = {
-          photo_id: insertPhotoResponse.photo_id,
-          // todo
-          // add fields to it
+          contest_id: contestID,
+          photo_id: photoResponseBody.response.generatedMaps[0].photo_id,
         };
-        const insertContestSubmittionResponse = await apiService.insertData(
+        const contestSubmittionResponse = await apiService.insertData(
           contestData,
           "contests/submittions"
         );
-        if (insertContestSubmittionResponse.code !== 400) {
+        const contestSubmittionsResponseBody = await contestSubmittionResponse.json();
+        if (contestSubmittionsResponseBody.code !== 400) {
           dispatch(setRecentSubmittionSuccess());
+          setIsSuccess(true);
         }
       }
     }
@@ -73,9 +78,16 @@ const ApplyContestForm = ({ children, image }) => {
     });
   };
 
+  const trySignUp = () => {
+    const { email, password, passwordRepeat } = contestFormFields;
+    if (password && passwordRepeat && email) {
+      dispatch(signUp({ email, password }, dispatch));
+    }
+  };
+
   const formDefaultPart = () => {
     return (
-      <React.Fragment>
+      <div className="photo-details">
         <div className="submit-photo-form-field">
           <label>Describe photo from your words</label>
           <input
@@ -85,14 +97,77 @@ const ApplyContestForm = ({ children, image }) => {
             placeholder="Describe photo from your words"
           />
         </div>
+        <div className="submit-photo-form-field">
+          <input
+            name="linkToFacebook"
+            placeholder="Link to Facebook"
+            onChange={onChange}
+          />
+        </div>
+        <div className="submit-photo-form-field">
+          <input
+            name="linkToInstagram"
+            placeholder="Link to Instagram"
+            onChange={onChange}
+          />
+        </div>
         <CommonSelectDropdown
           values={categoriesOptions}
           onSelect={onPhotoCategorySelected}
           dropdownID="selectPhotoCategory"
-          label="Select photo category"
+          label="Photo category"
         />
-      </React.Fragment>
+      </div>
     );
+  };
+
+  const needAuthPart = () => {
+    return (
+      <div className="sign-up-details">
+        <span className="no-logged-in-message">
+          You must be logged in before start to submit photos.
+        </span>
+        <div className="submit-photo-form-field">
+          <label>Email</label>
+          <input
+            id="email"
+            name="email"
+            placeholder="Enter your Email"
+            onChange={onChange}
+          />
+        </div>
+        <div className="submit-photo-form-field">
+          <label>Password</label>
+          <input
+            id="password"
+            name="password"
+            placeholder="Enter your Password"
+            onChange={onChange}
+            type="password"
+          />
+        </div>
+        <div className="submit-photo-form-field">
+          <label>Repeat password</label>
+          <input
+            id="password-repeat"
+            name="passwordRepeat"
+            placeholder="Repeat your password"
+            onChange={onChange}
+            type="password"
+          />
+        </div>
+        {isSuccess && <p className="">Photo submitted.</p>}
+        <div className="complete-sign-up">
+          <button onClick={trySignUp} className="btn-apply-photo" type="button">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const isFormValid = () => {
+    return contestFormFields.imageDesc && contestFormFields.categoryID;
   };
 
   return (
@@ -100,44 +175,19 @@ const ApplyContestForm = ({ children, image }) => {
       {isLoggedIn ? (
         formDefaultPart()
       ) : (
-        <div>
-          <div className="submit-photo-form-field">
-            <label>Email</label>
-            <input
-              id="email"
-              name="email"
-              placeholder="Enter your Email"
-              onChange={onChange}
-            />
-          </div>
-          <div className="submit-photo-form-field">
-            <label>Password</label>
-            <input
-              id="password"
-              name="password"
-              placeholder="Enter your Password"
-              onChange={onChange}
-            />
-          </div>
-          <div className="submit-photo-form-field">
-            <label>Repeat password</label>
-            <input
-              id="password-repeat"
-              name="passwordRepeat"
-              placeholder="Repeat your password"
-              onChange={onChange}
-            />
-          </div>
+        <React.Fragment>
+          {needAuthPart()}
           {formDefaultPart()}
-        </div>
+        </React.Fragment>
       )}
       <div className="upload-photo-input">{children}</div>
-      <div className="last-uploaded-image">{lastUploadedImage?.name}</div>
+      <span className="last-uploaded-image">{lastUploadedImage?.name}</span>
       <div className="complete-photo-upload">
         <button
           onClick={submitContestForm}
           className="btn-apply-photo"
           type="button"
+          disabled={!isLoggedIn && !isFormValid()}
         >
           Submit
         </button>

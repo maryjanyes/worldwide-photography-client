@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { ApiService } from "services/api.service";
+import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
 const ContestCategories = () => {
   const { contestCategories } = useSelector(({ contests }) => contests);
@@ -37,21 +38,25 @@ const ContestCategories = () => {
       {needToDisplayCategories && (
         <ul className="contest-categories-items">
           {contestCategories.map((c) => {
-            return (
-              <li className="nav-link-container" key={c.name}>
-                <Link
-                  className="nav-link"
-                  to={`/contest-categories/${c.category_id}`}
-                >
-                  {c.name}
-                </Link>
-              </li>
-            );
+            return <CategoryItemLink {...c} />;
           })}
         </ul>
       )}
     </div>
   );
 };
+
+export const CategoryItemLink = WithLanguageProps((props) => {
+  return (
+    <li className="nav-link-container" key={props.name}>
+      <Link
+        className="nav-link"
+        to={`/contest-categories/${props.category_id}`}
+      >
+        {props.name}
+      </Link>
+    </li>
+  );
+});
 
 export default ContestCategories;

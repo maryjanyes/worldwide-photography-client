@@ -37,6 +37,13 @@
   margin-left: 200px;
 }
 
+.top-menu {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+}
+
 .sign-top-menu {
   display: flex;
   width: 300px;
@@ -45,6 +52,9 @@
 }
 
 .top-menu-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   position: absolute;
   width: 300px;
   z-index: 1;
@@ -85,7 +95,7 @@
 }
 
 .contest-item-card-body {
-  border-radius: 20px;
+  /* border-radius: 20px; */
   background-color: #e1e1e1;
   padding: 0.4em 0.8em;
 }
@@ -100,13 +110,12 @@
 .contest-item-card-body > .contest-description {
   margin-top: 0.8vh;
   margin-bottom: 0.8vh;
-  font-weight: 100;
-  font-size: 13.5px;
-  color: #000000;
+  font-weight: 800;
+  font-size: 15px;
+  color: #fffff0;
 }
 
 .contest-item-card-header {
-  border-radius: 20px;
   padding: 3.8em 0;
   background-color: teal;
   color: #ffffff;
@@ -285,6 +294,10 @@
   padding: 3.5vh;
 }
 
+.sign-up-form .common-checkbox-box {
+  margin-top: 0.5vh;
+}
+
 .sign-up-form-container,
 .sign-in-form-container {
   text-align: center;
@@ -338,6 +351,10 @@
   flex-direction: row;
   margin: 10px 18px;
   justify-content: space-between;
+}
+
+.prizes-line .prize-item a {
+  color: #e1315b;
 }
 
 .prizes-line .prize-item {
@@ -484,6 +501,7 @@
 
 .contest-categories-nav-links .nav-link {
   color: #e1315b;
+  margin-top: -0.5vh;
 }
 
 .nav-link {
@@ -785,15 +803,16 @@
 
 .submit-contest-modal {
   width: 99%;
-  height: 80%;
+  height: 99%;
   text-align: center;
-  padding-top: 10%;
+  padding-top: 2%;
   background-color: #fffff0;
 }
 
 .submit-contest-modal .submit-photo-form {
   width: 40%;
   margin: auto;
+  position: relative;
 }
 
 .select-photo-area {
@@ -825,40 +844,162 @@
 .language-switcher {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 80px;
 }
 
 .language-switcher > button {
-  /* border: 0.5vh solid #008dcb; */
+  border: 0.2vh solid #ffffff;
   background-color: transparent;
   margin: 0.2vh;
+  padding: 0.5vh;
   cursor: pointer;
   text-align: center;
 }
 
+.language-switcher > button:hover {
+  background-color: #ffffff;
+}
+
 .common-select-dropdown-options {
   margin-top: 0.5vh;
-  /* box-shadow: 1px 1px 2px #008dcb; */
-  max-width: 50%;
+  width: 100%;
   margin: auto;
+  position: absolute;
+  top: 48px;
+  z-index: 10;
+}
+
+.common-select-dropdown-options > input {
+  padding: 1vh 1.5vh;
+  width: 280px;
+  height: 42px;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 1px 2px 1px #6eaabd;
+  transition: 0.5s background-color;
 }
 
 .submit-photo-container {
   display: flex;
-  width: 50%;
+  width: 80%;
+  justify-content: space-around;
   margin: auto;
 }
 
 .submit-photo-container > span {
+  font-size: 18px;
+  align-self: center;
+  margin-top: -0.6vh;
+}
+
+.contest-submittions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.contest-submittions .contest-photo > img {
+  width: 40%;
+  margin-top: 0.5vh;
+}
+
+.contest-submittions .contest-submittion {
+  width: 33%;
+  margin-top: 0.5vh;
+  display: flex;
+  cursor: pointer;
+}
+
+.contest-submittions .contest-submittion > img {
+  width: 100%;
+  margin: auto;
+}
+
+.contest-submittions .contest-submittion > img:hover {
+  transform: rotateY(-20deg);
+  width: 90%;
+  -webkit-transition: transform 2s;
+  transition: transform 2s;
+}
+
+.contest-submittion-resize > img {
+  position: absolute;
+  bottom: 0;
+}
+
+.contest-stroke-info-piece {
+  display: flex;
+}
+
+.contest-stroke-info-piece > p {
+  margin: 0.5vh 2vh;
+}
+
+.gallery-pictures .gallery-picture > img:hover {
+  transform: rotateY(-20deg);
+  -webkit-transition: transform 2s;
+  transition: transform 2s;
+}
+
+.last-uploaded-image {
+  position: absolute;
+  text-transform: uppercase;
+  font-style: italic;
   font-size: 12px;
 }
 
-.contest-photos {
-  display: flex;
-  justify-content: space-between;
+.common-select-dropdown-box > .common-select-btn > img {
+  position: relative;
+  top: 12px;
+  transform: rotateZ(180deg);
 }
 
-.contest-photos .contest-photo > img {
-  width: 40%;
-  margin-top: 0.5vh;
+.common-select-dropdown-box > .common-select-btn.active > img {
+  transform: rotateZ(0);
+}
+
+.common-select-dropdown-box {
+  position: relative;
+}
+
+.input-upload-container {
+  width: 20vh;
+  position: relative;
+  margin: 1.5vh 0;
+  border: 0.3vh solid #008dcb;
+  border-radius: 20px;
+  transition: 0.6s background-color;
+  min-height: 56px;
+}
+
+.input-upload-container:hover {
+  background-color: #e1315b;
+}
+
+.input-upload-container > img {
+  position: relative;
+  top: 12px;
+}
+
+.input-upload-container > input {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.no-logged-in-message {
+  color: #e1315b;
+  position: relative;
+  top: -10px;
+}
+
+.photo-details {
+  margin-top: 5vh;
+}
+
+.complete-photo-upload {
+  margin-top: 2vh;
 }

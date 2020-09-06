@@ -17,8 +17,13 @@ import SocialSharing from "components/common/SocialSharing";
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
 import contestsService, { ContestsService } from "services/contests.service";
+import { apiService } from "services/api.service";
 import { setUploadedImage } from "reducers/actions/contests.actions";
-import { getTimeToContestEnd } from "utils/data.util";
+import {
+  getTimeToContestEnd,
+  getJudleFromID,
+  concatNameParts,
+} from "utils/data.util";
 
 import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
 
@@ -81,20 +86,20 @@ function GeneralInfoComponent({ description, name }) {
   );
 }
 
-function ResultsComponent({ winner_id, name }) {
+function ResultsComponent(props) {
   const showContestResults = () => {
     return (
       <div className="contest-results">
         <span>
-          Winner of Contest {name} {winner.name}.
+          Winner of Contest {props.name} {props.winner && props.winner.name}.
         </span>
       </div>
     );
   };
   return (
     <div className="results-info">
-      <h2>Results of Contest '{name}'</h2>
-      {(winner_id !== null && showContestResults()) || (
+      <h2>Results of Contest {props.name}</h2>
+      {(props.winner_id !== null && showContestResults()) || (
         <p>Contest at progress.</p>
       )}
     </div>
@@ -102,21 +107,15 @@ function ResultsComponent({ winner_id, name }) {
 }
 
 function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
-  const { contestJudles } = useSelector(({ contests }) => contests);
-  // todo
-  const daysToEntry = getTimeToContestEnd(
-    new Date(Date.now()).getDate(),
-    selectedContest.ended_at
-  ).getDate();
+  const { siteJudles } = useSelector(({ users }) => users);
+  const daysToEntry = getTimeToContestEnd(selectedContest.ended_at);
   const tabsData = ContestsService.getContestDetailsTemplate(
     WithLanguageProps(GeneralInfoComponent),
     WithLanguageProps(ResultsComponent),
     AnnouncementsComponent,
     selectedContest
   );
-  const contestJudle = contestJudles.find(
-    (j) => j.judle_id === selectedContest.judle_id
-  );
+  const contestJudle = getJudleFromID(siteJudles, selectedContest.judle_id);
 
   return (
     <div className="contest-details-info">
@@ -131,25 +130,37 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
             </div>
           </div>
           <div className="contest-details-info-additions">
-            <img
+            {/** <img
               src={selectedContest.avatar}
               alt={selectedContest.en_name}
               className="contest-details-avatar"
-            />
+            /> **/}
             <div className="contest-stroke-info">
-              <div>
-                <IconComponent />
+              <div className="contest-stroke-info-piece">
+                <IconComponent
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_query_builder_black_18dp.png`}
+                  size={25}
+                />
                 <p>{daysToEntry} days left to enter contest.</p>
               </div>
-              <div>
-                <IconComponent />
+              <div className="contest-stroke-info-piece">
+                <IconComponent
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_insert_photo_black_18dp.png`}
+                  size={25}
+                />
                 <p>{contestSubmittions.length} photos entered.</p>
               </div>
-              <div>
-                <IconComponent />
-                <p>Judle {contestJudle?.judle_id}.</p>
-                <SubmitPhotoArea />
+              <div className="contest-stroke-info-piece">
+                <IconComponent
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_face_black_18dp.png`}
+                  size={25}
+                />
+                <p>
+                  <code>Judle</code>
+                  {concatNameParts(contestJudle)}.
+                </p>
               </div>
+              <SubmitPhotoArea contestID={selectedContest.contest_id} />
             </div>
           </div>
         </div>
@@ -164,7 +175,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
   );
 }
 
-function SubmitPhotoArea() {
+function SubmitPhotoArea({ contestID }) {
   const dispatch = useDispatch();
   const { uploadedImage } = useSelector(({ contests }) => contests);
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
@@ -190,6 +201,7 @@ function SubmitPhotoArea() {
             <ApplyContestForm
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
+              contestID={contestID}
             >
               <div className="submit-photo-container">
                 <span>Choose photo</span>

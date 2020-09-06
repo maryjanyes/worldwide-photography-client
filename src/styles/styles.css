@@ -3,3 +3,7 @@
   flex-direction: column;
   margin-top: 1.5vh;
 }
+
+.contest-info-block > span:nth-child(1) {
+  font-weight: 800;
+}

@@ -10,7 +10,7 @@ const WithCarouselRef = ({ children, containerClass = "", speed }) => {
 
   useEffect(() => {
     if (ref) {
-      ref.current.play(speed, 1000);
+      // ref.current.play(speed, 1000);
     }
   }, [ref]);
 

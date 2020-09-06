@@ -1,6 +1,7 @@
 import navLinks from "mocks/nav-links";
 import signItems from "mocks/sign-items";
 import categoriesLinks from "mocks/contest-categories-links";
+import rightMenuItems from "mocks/right-menu-items";
 
 import { appLangs } from "services/app-configs.service";
 
@@ -9,7 +10,7 @@ export class ApiService {
     const { BACKEND_URL, BACKEND_FILES_URL } = process?.env;
     this.BACKEND_ENDPOINT = BACKEND_URL || "http://localhost:3000";
     this.BACKEND_FILES_ENDPOINT = BACKEND_FILES_URL || "http://localhost:3002";
-    // this.blobHeaders = new Headers();
+    this.CLIENT_ENDPOINT = "http://localhost:3000";
     this.postHeaders = new Headers({
       "Content-Type": "application/json",
     });
@@ -17,7 +18,12 @@ export class ApiService {
 
   async fetchJSONData(entryPath) {
     const url = `${this.BACKEND_ENDPOINT}/${entryPath}`;
-    const response = await fetch(url, { mode: "cors" });
+    const response = await fetch(url, {
+      mode: "cors",
+      /* headers: {
+        "Set-Cookie": "authToken=bla bla",
+      }, */
+    });
     return response.json();
   }
 
@@ -36,10 +42,16 @@ export class ApiService {
   }
 
   insertBlob(formData) {
-    return fetch(`${this.BACKEND_FILES_ENDPOINT}/uploadPhoto`, {
-      body: formData,
-      method: "POST",
-      mode: "cors",
+    return new Promise((res) => {
+      return fetch(`${this.BACKEND_FILES_ENDPOINT}/uploadPhoto`, {
+        body: formData,
+        method: "POST",
+        mode: "cors",
+      })
+        .then((response) => {
+          response.json().then((data) => res(data));
+        })
+        .catch((err) => res(err));
     });
   }
 
@@ -69,7 +81,7 @@ export class ApiService {
   }
 
   static getMenuItems() {
-    return [];
+    return rightMenuItems;
   }
 }
 

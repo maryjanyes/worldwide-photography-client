@@ -1,5 +1,6 @@
 const initialState = {
-  users: [],
+  siteUsers: [],
+  siteJudles: [],
 };
 
 export default function UsersReducer(state = initialState, { type, payload }) {
@@ -7,7 +8,13 @@ export default function UsersReducer(state = initialState, { type, payload }) {
     case "[USERS] SET_USERS": {
       return {
         ...state,
-        users: payload,
+        siteUsers: payload,
+      };
+    }
+    case "[USERS] SET_JUDLES": {
+      return {
+        ...state,
+        siteJudles: payload,
       };
     }
     default: {

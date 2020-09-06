@@ -16,11 +16,34 @@ export const buildDropdownOptions = (items) => {
   }));
 };
 
-export const getTimeToContestEnd = (current, endedAt) => {
-  return new Date(endedAt - current);
+export const getJudleFromID = (judles, judleID) =>
+  !!judles && judles.find((j) => j.judle_id === judleID);
+
+function msToTime(duration) {
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  return hours + ":" + minutes + ":" + seconds;
+}
+
+export const getTimeToContestEnd = (endedAt) => {
+  const now = new Date();
+  const isoDateOfEnd = new Date(endedAt);
+  let daysCount = 0;
+  while (now < isoDateOfEnd) {
+    daysCount++;
+    now.setDate(now.getDate() + 1);
+  }
+  return daysCount;
 };
 
-export const getPhotoUrlFromPhotoObject = (photoObject) =>
+export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
   photoObject.link_to_file ||
   photoObject.link_to_instagram ||
   photoObject.link_to_facebook;
@@ -28,3 +51,6 @@ export const getPhotoUrlFromPhotoObject = (photoObject) =>
 export const pathToPhoto = (path) => {
   return `${apiService.BACKEND_ENDPOINT}/photos/${path}`;
 };
+
+export const concatNameParts = ({ first_name, last_name }) =>
+  `${first_name} ${last_name}`;
