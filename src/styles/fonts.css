@@ -1,17 +1,15 @@
 @font-face {
   font-family: "PTSans";
-  /* src: url(../../assets/fonts/PT_Sans/PTSans-Regular.ttf); */
 }
 
 @font-face {
   font-family: "PTSansBold";
-  /* src: url(../../assets/fonts/PT_Sans/PTSans-Bold.ttf); */
 }
 
 .search-icon {
   width: 60px;
   height: 60px;
-  background: url(http://localhost:3000/assets/images/search-icon.png) no-repeat;
+  background: url(http://localhost:3000/assets/icons/search-icon.png) no-repeat;
   background-size: 100%;
   border: none;
 }
@@ -19,7 +17,7 @@
 .menu-icon {
   width: 60px;
   height: 60px;
-  background: url(http://localhost:3000/assets/images/menu-icon.png) no-repeat
+  background: url(http://localhost:3000/assets/icons/menu-icon.png) no-repeat
     center;
   background-size: 100%;
   margin-top: -5px;

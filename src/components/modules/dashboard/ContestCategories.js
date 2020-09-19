@@ -6,7 +6,11 @@ import { ApiService } from "services/api.service";
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
 const ContestCategories = () => {
-  const { contestCategories } = useSelector(({ contests }) => contests);
+  const {
+    contestCategories,
+    translations,
+    activeLanguage,
+  } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const [categoriesActive, setCategories] = useState(false);
   const needToDisplayCategories =
     categoriesActive && contestCategories.length > 0;
@@ -18,10 +22,10 @@ const ContestCategories = () => {
       <ul className="contest-categories-nav-links">
         {ApiService.getContestItemLinks().map((one) => {
           return (
-            <li className="nav-link-container" key={one.name}>
+            <li className="nav-link-container" key={one.link}>
               {one.link ? (
                 <Link className="nav-link" to={one.link}>
-                  {one.name}
+                  {translations[`${one.i18n}.${activeLanguage.toLowerCase()}`]}
                 </Link>
               ) : (
                 <button

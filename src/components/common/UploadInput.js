@@ -17,7 +17,7 @@ const UploadInput = ({
         onChange={onChangePhotoUrl}
       />
       <img
-        src={`${apiService.CLIENT_ENDPOINT}/assets/images/baseline_get_app_black_18dp.png`}
+        src={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_get_app_black_18dp.png`}
       />
     </div>
   );

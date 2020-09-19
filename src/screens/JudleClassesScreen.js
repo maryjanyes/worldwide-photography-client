@@ -10,17 +10,17 @@ const JudleClassesScreen = () => {
         classVideos: [
           {
             source: "https://www.youtube.com/watch?v=64fB-2-sUaA",
-            poster: "http://localhost:3000/assets/images/logo.png",
+            poster: "http://localhost:3000/assets/icons/logo.png",
             name: "Juice lesson",
           },
           {
             source: "https://www.youtube.com/watch?v=64fB-2-sUaA",
-            poster: "http://localhost:3000/assets/images/logo.png",
+            poster: "http://localhost:3000/assets/icons/logo.png",
             name: "Juice lesson",
           },
           {
             source: "https://www.youtube.com/watch?v=64fB-2-sUaA",
-            poster: "http://localhost:3000/assets/images/logo.png",
+            poster: "http://localhost:3000/assets/icons/logo.png",
             name: "Juice lesson",
           },
         ],

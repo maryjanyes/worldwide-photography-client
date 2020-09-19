@@ -29,3 +29,12 @@ export const setContestsCategoriesSuccess = (payload) => ({
   type: "[CONTESTS] SET_CONTESTS_CATEGORIES_SUCCESS",
   payload,
 });
+
+export const setSubmittionSuccess = (payload) => ({
+  type: "[CONTESTS] SET_SUBMITTION_SUCCESS",
+  payload,
+});
+
+export const resetSubmittionSuccess = () => ({
+  type: "[CONTESTS] RESET_SUBMITTION_SUCCESS",
+});

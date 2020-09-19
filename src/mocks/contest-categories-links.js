@@ -1,18 +1,15 @@
 const navlinks = [
   {
     link: "/community-contests",
-    name: "Community Contests",
+    i18n: "contest_categories_links.community_contests",
   },
   {
     link: "/art-contests",
-    name: "Art Contests",
+    i18n: "contest_categories_links.art_contests",
   },
   {
     link: "/privacy",
-    name: "Privacy",
-  },
-  {
-    name: "All Contests",
+    i18n: "contest_categories_links.privacy",
   },
 ];
 

@@ -1,5 +1,10 @@
 import { setAppLanguage } from "reducers/actions/ui.actions";
 
+export const appLangs = {
+  UA: "UA",
+  EN: "EN",
+};
+
 class AppConfigsService {
   constructor() {
     this.activeLang = localStorage.getItem("appLang") || appLangs.EN;
@@ -15,10 +20,5 @@ class AppConfigsService {
     return this.activeLang || localStorage.getItem("appLang");
   }
 }
-
-export const appLangs = {
-  UA: "UA",
-  EN: "EN",
-};
 
 export default new AppConfigsService();

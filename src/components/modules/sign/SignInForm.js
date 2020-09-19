@@ -6,10 +6,12 @@ import { signIn } from "reducers/actions/auth.actions";
 
 const SignInForm = ({ backToSignUpMode, history }) => {
   const dispatch = useDispatch();
-  const { isLoggedIn, translations } = useSelector(({ auth, ui }) => ({
-    ...auth,
-    ...ui,
-  }));
+  const { isLoggedIn, translations, activeLanguage } = useSelector(
+    ({ auth, ui }) => ({
+      ...auth,
+      ...ui,
+    })
+  );
   const [values] = useState({
     emailOrUsername: "",
     password: "",
@@ -37,7 +39,11 @@ const SignInForm = ({ backToSignUpMode, history }) => {
                 type="username"
                 name="username"
                 id="username"
-                placeholder={translations["sign_in_form.emailOrUsername.en"]}
+                placeholder={
+                  translations[
+                    `sign_in_form.email_or_username.${activeLanguage}`
+                  ]
+                }
                 onBlur={handleBlur}
                 {...getFieldProps("emailOrUsername")}
               />

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { apiService } from "services/api.service";
@@ -7,21 +7,32 @@ import { buildDropdownOptions } from "utils/data.util";
 import { signUp } from "reducers/actions/auth.actions";
 
 import CommonSelectDropdown from "components/common/CommonSelectDropdown";
+import Message from "components/common/Message";
 
-const ApplyContestForm = ({ children, image, contestID }) => {
+const ApplyContestForm = ({ children, image, contestID, close }) => {
   const dispatch = useDispatch();
   const {
     isLoggedIn,
     userData,
     lastUploadedImage,
     contestCategories,
+    recentSubmittionSuccess,
   } = useSelector(({ auth, contests }) => ({
     ...auth,
     ...contests,
   }));
   const [contestFormFields, setContestFormFields] = useState({});
-  // const [error, setError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLogIsSuccess, setIsLogInSuccess] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setIsLogInSuccess(true);
+    }
+    if (recentSubmittionSuccess) {
+      setIsSuccess(true);
+    }
+  }, [isLoggedIn, recentSubmittionSuccess]);
 
   const categoriesOptions = useMemo(() => {
     const categoriesData = buildDropdownOptions(contestCategories);
@@ -58,6 +69,7 @@ const ApplyContestForm = ({ children, image, contestID }) => {
         if (contestSubmittionsResponseBody.code !== 400) {
           dispatch(setRecentSubmittionSuccess());
           setIsSuccess(true);
+          setTimeout(() => close(), 5000);
         }
       }
     }
@@ -172,6 +184,8 @@ const ApplyContestForm = ({ children, image, contestID }) => {
 
   return (
     <form className="submit-photo-form">
+      {isLogIsSuccess && <Message text="You are logged in." />}
+      {isSuccess && <Message text="New submittion sended." />}
       {isLoggedIn ? (
         formDefaultPart()
       ) : (

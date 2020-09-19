@@ -1,41 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import ContestsItems from "components/modules/dashboard/ContestItems";
 
-const CategoryContest = WithLanguageProps(({ name }) => {
+const CategoryContests = WithLanguageProps(({ name, contests }) => {
   return (
-    <div className="contest-category">
+    <div className="contest-category" key={name}>
       <span className="contest-category-name">{name}</span>
+      <div className="contest-category-contests">
+        <ContestsItems contestsData={contests} />
+      </div>
     </div>
   );
 });
 
 function AllContestScreen() {
+  const [contestsByCategories, setContestsByCategories] = useState([]);
   const { contests, contestCategories } = useSelector(
     ({ contests }) => contests
   );
-  const canDisplayContests = contests.length > 0;
 
   const getContestsByCategories = () => {
-    return contestCategories.map((c) => {
-      const contestsByCategory = contests.filter(
-        (co) => co.category_id === c.contest_category_id
+    return contestCategories.map((category) => {
+      category.contests = contests.filter(
+        (contest) => contest.category_id === category.contest_category_id
       );
-      c.contests = contestsByCategory;
-      return c;
+      return category;
     });
   };
 
-  const categories = getContestsByCategories();
+  useEffect(() => {
+    setContestsByCategories(getContestsByCategories());
+  }, []);
+
+  const canDisplayContests = contests.length > 0;
 
   return (
     <div className="page page-all-contests">
       <div className="top-line"></div>
       {canDisplayContests &&
-        categories.map((category) => {
-          return category.contests.map((c) => <CategoryContest {...c} />);
-        })}
+        contestsByCategories.map((category) => (
+          <div key={category.category_id}>
+            <CategoryContests {...category} />
+          </div>
+        ))}
     </div>
   );
 }

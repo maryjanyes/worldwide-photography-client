@@ -35,7 +35,7 @@ const CommonSelectDropdown = ({
       <div className="common-select-dropdown-box">
         <ArrowDownBtn
           onPress={() => toggle(!isOpen)}
-          iconSrc={`${apiService.CLIENT_ENDPOINT}/assets/images/baseline_keyboard_arrow_up_black_18dp.png`}
+          iconSrc={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_keyboard_arrow_up_black_18dp.png`}
           label={value || label}
           opened={isOpen}
         />

@@ -32,7 +32,7 @@ const GalleryPhoto = ({
             <span className="impressions-count">{impressions_count}</span>
             <IconComponent
               size={22}
-              source="http://localhost:3000/assets/images/favorite-icon.png"
+              source="http://localhost:3000/assets/icons/favorite-icon.png"
             />
           </div>
         )}

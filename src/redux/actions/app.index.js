@@ -1,7 +1,6 @@
 import ContestsService from "services/contests.service";
 import PhotosService from "services/photos.service";
 import UsersService from "services/users.service";
-
 import { apiService } from "services/api.service";
 
 import {
@@ -9,10 +8,11 @@ import {
   setContestsPrizesSuccess,
   setContestsCategoriesSuccess,
 } from "./contests.actions";
-import { setTranslations } from "./ui.actions";
+import { setTranslations, setAppLanguage } from "./ui.actions";
 import { setPhotosSuccess } from "./photos.actions";
 import { setJudlesSuccess } from "./users.actions";
 import { checkExistedAccountAndSignIn } from "./auth.actions";
+import appConfigsService from "services/app-configs.service";
 
 export const initAppData = (dispatch) => {
   ContestsService.getContets().then((contestsResponse) => {
@@ -51,6 +51,7 @@ export const initAppData = (dispatch) => {
   });
   const type = "[APP] INIT_DATA";
   dispatch(checkExistedAccountAndSignIn());
+  dispatch(setAppLanguage(appConfigsService.activeLang));
   return {
     type,
   };

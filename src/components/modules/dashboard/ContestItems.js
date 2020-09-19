@@ -1,80 +1,79 @@
-import React, { useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { getContestImage } from "utils/data.util";
+import { isContestStarted, pathToPhoto } from "utils/data.util";
 
 import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
+import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
-const ContestItem = ({
-  en_name,
-  en_description,
-  contest_id,
-  started_at,
-  explore,
-  avatar_id,
-}) => {
-  const name = en_name;
-  const description = en_description;
-  const { contestImages } = useSelector(({ contests }) => contests);
+const ContestItem = WithLanguageProps(
+  ({ name, description, contest_id, started_at, explore, photo_path }) => {
+    const contestStatusLabel = () => {
+      const isStarted = isContestStarted(started_at);
+      return (
+        (isStarted && (
+          <div className="contest-status coming">At Progress</div>
+        )) || <div className="contest-status active">Starts Soon</div>
+      );
+    };
 
-  const buildContestStatusLabel = () => {
-    return started_at > Date.now() ? (
-      <div className="contest-status coming">Starts soon</div>
-    ) : (
-      <div className="contest-status active">Active</div>
-    );
-  };
+    const contestAvatar = pathToPhoto(photo_path);
 
-  const contestAvatar = () => {
-    return getContestImage(contestImages, avatar_id);
-  };
-
-  return (
-    <div className="item contest-item" key={contest_id}>
-      <h4 className="contest-item-card">
-        <div
-          className="contest-item-card-header"
-          style={{
-            backgroundImage: `url(${contestAvatar()}`,
-          }}
-        >
-          {buildContestStatusLabel()}
-        </div>
-        <div className="contest-item-card-body">
-          <p className="contest-name">{name}</p>
-          <p className="contest-description">{description}</p>
-          <button
-            onClick={() => explore(contest_id)}
-            className="btn btn-simple btn-explore-contest"
+    return (
+      <div className="item contest-item" key={contest_id}>
+        <h4 className="contest-item-card">
+          <div
+            className="contest-item-card-header"
+            style={{
+              backgroundImage: `url(${contestAvatar}`,
+            }}
           >
-            Explore
-          </button>
-        </div>
-      </h4>
-    </div>
-  );
-};
+            {contestStatusLabel()}
+          </div>
+          <div className="contest-item-card-body">
+            <p className="contest-name">{name}</p>
+            <p className="contest-description">{description}</p>
+            <button
+              onClick={() => explore(contest_id)}
+              className="btn btn-simple btn-explore-contest"
+            >
+              Explore
+            </button>
+          </div>
+        </h4>
+      </div>
+    );
+  }
+);
 
-const ContestItems = ({ history, contestItems = null }) => {
+const ContestItems = ({ history, contestsData }) => {
+  const [contestItems, setContestItems] = useState([]);
   const { contests } = useSelector(({ contests }) => contests);
-  const data = useMemo(() => contestItems || contests, [contests]);
 
   const exploreContest = (contest_id) => {
     history.push(`/contest/${contest_id}`);
   };
 
-  const canShow = data.length > 0;
+  useEffect(() => {
+    if (contestsData) {
+      setContestItems(contestsData);
+    } else setContestItems(contests);
+  }, [contestsData, contests]);
+
+  const canDisplayContests = contestItems.length > 0;
 
   return (
     <div className="contest-items">
-      {canShow && (
+      {canDisplayContests && (
         <WithCarouselRef speed={4000}>
-          {data.map((one, contestItemID) => (
-            <ContestItem
-              {...one}
-              explore={exploreContest}
-              key={contestItemID}
-            />
+          {contestItems.map((one, contestItemID) => (
+            <div key={contestItemID}>
+              <ContestItem
+                {...one}
+                explore={exploreContest}
+                key={contestItemID}
+              />
+            </div>
           ))}
         </WithCarouselRef>
       )}

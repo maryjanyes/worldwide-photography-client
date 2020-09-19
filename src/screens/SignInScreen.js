@@ -6,15 +6,23 @@ import SignUpForm from "components/modules/sign/SignUpForm";
 import signInVariant from "types/signInVariant";
 
 function SignInScreen({ history }) {
-  const [isSignUpMode, setIsSignUpMode] = useState(true);
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   useEffect(() => {
     history.listen((change) => {
       if (change.pathname === "/sign-in") {
         setIsSignUpMode(false);
-      } else setIsSignUpMode(true);
+      } else {
+        setIsSignUpMode(true);
+      }
     });
   }, [history.pathname]);
+
+  useEffect(() => {
+    if (history.location.pathname === "/sign-up") {
+      setIsSignUpMode(true);
+    }
+  }, []);
 
   return (
     <div className="page page-sign">
@@ -60,7 +68,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="http://localhost:3000/assets/images/judle-NastyaTelikova.png"
+              src="http://localhost:3000/assets/icons/judle-NastyaTelikova.png"
             />
             <span>
               (с) могу уместить всю свою жизньв рюкзаки уехать в неизвестность
@@ -69,7 +77,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="http://localhost:3000/assets/images/judle-Valentina.png"
+              src="http://localhost:3000/assets/icons/judle-Valentina.png"
             />
             <span>(с) тут слоган Насті</span>
           </div>

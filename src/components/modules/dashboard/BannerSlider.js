@@ -4,25 +4,27 @@ import { useSelector } from "react-redux";
 import { sortItems } from "utils/items.util";
 
 import dashboardSliderImages from "mocks/dashboard-slider-images";
+import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
-const BannerSliderItem = ({ en_name, images = [], isSelected = false }) => {
-  const name = en_name;
-  return (
-    <div
-      key={name}
-      className={`${isSelected ? "selected " : ""} owl-slider-item`}
-    >
-      <button className="owl-slider-item-frame">
-        <p className="owl-slider-item-text">{name}</p>
-        <div className="owl-slider-images">
-          {images.map(({ src }) => (
-            <img src={src} key={src} />
-          ))}
-        </div>
-      </button>
-    </div>
-  );
-};
+const BannerSliderItem = WithLanguageProps(
+  ({ name, images = [], isSelected }) => {
+    return (
+      <div
+        key={name}
+        className={`${(isSelected && "selected ") || ""} owl-slider-item`}
+      >
+        <button className="owl-slider-item-frame">
+          <p className="owl-slider-item-text">{name}</p>
+          <div className="owl-slider-images">
+            {images.map(({ src }) => (
+              <img src={src} key={src} />
+            ))}
+          </div>
+        </button>
+      </div>
+    );
+  }
+);
 
 const BannerSliderControls = ({ change, active }) => {
   return (
@@ -44,30 +46,28 @@ const BannerSlider = () => {
   const [sliderItems, setItems] = useState(null);
   const [activeItem, setActiveItem] = useState(0);
   const sliderImages = dashboardSliderImages;
-  const selectItem = (index) => {
-    if (index > sliderImages.length - 1 || index < 0) {
+
+  const selectItem = (itemID) => {
+    if (itemID >= sliderImages.length - 1 || itemID < 0) {
       return;
     }
     setItems(
-      (sliderItems || []).map((one, id) => {
-        one.isSelected = index === id;
-        if (one.isSelected) {
-          setActiveItem(id);
+      (sliderItems || []).map((item, id) => {
+        item.isSelected = itemID === id;
+        if (item.isSelected) {
+          setActiveItem(itemID);
         }
-        return one;
+        return item;
       })
     );
   };
+
   const displayItems = () => {
     return (
       <div className="owl-slider-items-container">
         {sliderItems &&
           sortItems(sliderItems, "created_at").map((one, slideID) => (
-            <BannerSliderItem
-              {...one}
-              selected={one.isSelected}
-              key={slideID}
-            />
+            <BannerSliderItem {...one} key={slideID} />
           ))}
       </div>
     );

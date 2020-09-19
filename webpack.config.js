@@ -15,9 +15,7 @@ module.exports = {
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
-    // https: true,
-    // hot: true,
-    // lazy: true,
+    open: true,
   },
   resolve: {
     alias: {

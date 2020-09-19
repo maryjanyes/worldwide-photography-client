@@ -6,12 +6,12 @@ const navlinks = [
   {
     link: "/all-contests",
     name: "All Contests",
-    disabled: true,
+    // disabled: true,
   },
   {
     link: "/articles",
     name: "Articles",
-    disabled: true,
+    // disabled: true,
   },
 ];
 

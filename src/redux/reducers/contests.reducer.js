@@ -44,7 +44,7 @@ export default function ContestsReducer(
     case "[CONTESTS] SET_RECENT_SUBMITTION_SUCCESS": {
       return {
         ...state,
-        recentSubitttionSuccess: true,
+        recentSubmittionSuccess: true,
       };
     }
     default: {

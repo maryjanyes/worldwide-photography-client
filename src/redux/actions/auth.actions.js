@@ -12,7 +12,7 @@ const signSuccess = (is_auth, response) => ({
 
 const sign = async (data, dispatch, is_auth) => {
   const response = await AuthService[(is_auth && "auth") || "register"](data);
-  if (response.code !== 400 && !response.message === "Password do not match.") {
+  if (response.code !== 400 && response.message !== "Password do not match.") {
     if (is_auth) {
       dispatch(handleAuthToken(response.token));
     }

@@ -6,7 +6,7 @@ export const getAnnouncements = (announcements, contestID) =>
 
 export const getContestImage = (images, imageID) =>
   images.find(({ avatar_id }) => avatar_id === imageID) ||
-  "http://localhost:3000/assets/images/pane2.jpg";
+  "http://localhost:3000/assets/icons/pane2.jpg";
 
 export const buildDropdownOptions = (items) => {
   return items.map((i, iIndex) => ({
@@ -43,13 +43,31 @@ export const getTimeToContestEnd = (endedAt) => {
   return daysCount;
 };
 
+export const isContestStarted = (started_at) => {
+  const now = new Date(Date.now());
+  const isoDateOfStart = new Date(started_at);
+  return isoDateOfStart < now;
+};
+
 export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
   photoObject.link_to_file ||
   photoObject.link_to_instagram ||
   photoObject.link_to_facebook;
 
-export const pathToPhoto = (path) => {
+export const pathToPhoto = (path, defaultPath = "simple.png") => {
+  if (!path || path === "photo_path") {
+    return `${apiService.BACKEND_ENDPOINT}/photos/${defaultPath}`;
+  }
   return `${apiService.BACKEND_ENDPOINT}/photos/${path}`;
+};
+
+export const pathToAsset = (path = "simple.png") =>
+  `${apiService.BACKEND_ENDPOINT}/assets/icons/${path}`;
+
+export const getOneFromData = (itemCollection, itemID, itemKey) => {
+  if (itemCollection) {
+    return itemCollection.find((c) => c[itemKey] === itemID);
+  }
 };
 
 export const concatNameParts = ({ first_name, last_name }) =>

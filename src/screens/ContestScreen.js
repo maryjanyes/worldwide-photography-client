@@ -130,29 +130,24 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
             </div>
           </div>
           <div className="contest-details-info-additions">
-            {/** <img
-              src={selectedContest.avatar}
-              alt={selectedContest.en_name}
-              className="contest-details-avatar"
-            /> **/}
             <div className="contest-stroke-info">
               <div className="contest-stroke-info-piece">
                 <IconComponent
-                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_query_builder_black_18dp.png`}
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/icons/baseline_query_builder_black_18dp.png`}
                   size={25}
                 />
                 <p>{daysToEntry} days left to enter contest.</p>
               </div>
               <div className="contest-stroke-info-piece">
                 <IconComponent
-                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_insert_photo_black_18dp.png`}
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/icons/baseline_insert_photo_black_18dp.png`}
                   size={25}
                 />
                 <p>{contestSubmittions.length} photos entered.</p>
               </div>
               <div className="contest-stroke-info-piece">
                 <IconComponent
-                  source={`${apiService.BACKEND_ENDPOINT}/assets/images/baseline_face_black_18dp.png`}
+                  source={`${apiService.BACKEND_ENDPOINT}/assets/icons/baseline_face_black_18dp.png`}
                   size={25}
                 />
                 <p>
@@ -202,6 +197,7 @@ function SubmitPhotoArea({ contestID }) {
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
               contestID={contestID}
+              close={closeModal}
             >
               <div className="submit-photo-container">
                 <span>Choose photo</span>

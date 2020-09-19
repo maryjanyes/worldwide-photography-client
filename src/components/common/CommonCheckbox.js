@@ -11,7 +11,9 @@ const CommonCheckbox = ({ name, label, onChange }) => {
           id={name}
           onChange={(change) => onChange(change.target.checked)}
         />
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name} className="common-checkbox-label">
+          {label}
+        </label>
       </div>
     </div>
   );
