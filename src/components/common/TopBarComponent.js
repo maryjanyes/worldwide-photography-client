@@ -41,8 +41,8 @@ const TopBarComponent = () => {
           {searchActive && (
             <input
               type="text"
-              placeholder="Search globally"
-              className="common-input"
+              placeholder="Search Globally"
+              className="common-input common-input-search"
             />
           )}
           <button className="search-icon icon-btn" onClick={toggleSearch} />

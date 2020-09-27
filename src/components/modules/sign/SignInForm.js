@@ -70,7 +70,7 @@ const SignInForm = ({ backToSignUpMode, history }) => {
               <span>
                 If you want to
                 <button className="btn-link" onClick={backToSignUpMode}>
-                  Sign up
+                  Sign Up
                 </button>
               </span>
             </div>

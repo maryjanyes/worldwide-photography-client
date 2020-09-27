@@ -14,11 +14,21 @@
   transition: 0.6s background-color;
 }
 
+button.btn-submit-photo {
+  padding-top: 4%;
+  padding-bottom: 4%;
+  color: #ffffff;
+}
+
+.btn-apply-photo {
+  border: none;
+}
+
 .btn-tab-item,
 .btn-submit-photo,
 .btn-apply-photo {
   min-width: 120px;
-  padding: 2% 1%;
+  padding: 2.5%;
   border-radius: 15px;
   margin: 1%;
   transition: 0.6s background-color;
@@ -55,8 +65,8 @@
 .btn-submit {
   transition: 0.5s background-color;
   min-width: 140px;
-  height: 48px;
   margin: auto;
+  padding: 2%;
   border-radius: 16px;
   font-size: 18px;
   text-transform: uppercase;
@@ -68,11 +78,23 @@
   background-color: #ffec5c;
 }
 
+.contest-category-name,
+.page-gallery > .page-title,
+.page-articles > .page-title {
+  font-size: 32px;
+  font-weight: 800;
+  padding: 18px;
+}
+
 .common-input {
   border-radius: 1.25vh;
   border: none;
   font-size: 1.5vh;
   padding: 0 0.8em;
+}
+
+.common-input.common-input-search {
+  text-transform: uppercase;
 }
 
 .common-checkbox-form-field {
@@ -171,9 +193,9 @@
   right: 0;
 }
 
-.common-select-dropdown-box > .common-select-btn {
+.common-select-btn {
   background-color: transparent;
-  padding: 0.2vh;
+  padding: 0.5%;
   border: none;
   outline: none;
   cursor: pointer;
@@ -181,7 +203,18 @@
   margin: auto;
 }
 
+.common-select-btn .common-icon {
+  transform: rotateZ(180deg);
+  position: relative;
+  top: -2px;
+}
+
+.common-select-btn.active .common-icon {
+  transform: none;
+  top: 0;
+}
+
 .common-select-btn .common-select-dropdown-label {
   position: relative;
-  top: 0.6vh;
+  top: 6px;
 }

@@ -116,7 +116,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
               <span>
                 If you already have account you probably want to
                 <button className="btn-link" onClick={switchToSignInMode}>
-                  Sign in
+                  Sign In
                 </button>
               </span>
             </div>

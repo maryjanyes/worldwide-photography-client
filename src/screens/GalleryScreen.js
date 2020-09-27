@@ -11,6 +11,7 @@ const GalleryScreen = () => {
   return (
     <div className="page page-gallery">
       <div className="top-line"></div>
+      <span className="page-title">Gallery Photos</span>
       {(canDisplayPhotos && (
         <div className="gallery-pictures">
           {allPhotos.map((photo) => (
@@ -18,6 +19,7 @@ const GalleryScreen = () => {
               {...photo}
               adjustedWidth="32%"
               impressions={photoImpressions}
+              key={photo.link_to_file}
             />
           ))}
         </div>

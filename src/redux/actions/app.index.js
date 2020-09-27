@@ -1,6 +1,7 @@
 import ContestsService from "services/contests.service";
 import PhotosService from "services/photos.service";
 import UsersService from "services/users.service";
+import ArticlesService from "services/articles.service";
 import { apiService } from "services/api.service";
 
 import {
@@ -12,6 +13,7 @@ import { setTranslations, setAppLanguage } from "./ui.actions";
 import { setPhotosSuccess } from "./photos.actions";
 import { setJudlesSuccess } from "./users.actions";
 import { checkExistedAccountAndSignIn } from "./auth.actions";
+import { setArticlesSuccess } from "./articles.actions";
 import appConfigsService from "services/app-configs.service";
 
 export const initAppData = (dispatch) => {
@@ -39,6 +41,10 @@ export const initAppData = (dispatch) => {
   UsersService.getJudles().then((judlesData) => {
     dispatch(setJudlesSuccess(judlesData));
   });
+  ArticlesService.getArticles().then((articlesData) => {
+    dispatch(setArticlesSuccess(articlesData));
+  });
+
   apiService.getAppTranslations().then((translationsData) => {
     dispatch(
       setTranslations(

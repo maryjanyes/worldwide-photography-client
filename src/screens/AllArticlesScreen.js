@@ -9,6 +9,7 @@ function UsefullArticlesScreen({ history }) {
   return (
     <div className="page page-articles">
       <div className="top-line"></div>
+      <span className="page-title">All Articles</span>
       {(canDisplayArticles && (
         <div className="articles-line">
           {allArticles.map((one) => (

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 function TabItemsHeader({ tabs, selectItem, key = "name", ItemProto }) {
-  return tabs.map((one, oneID) => (
+  return tabs.map((one) => (
     <button
       onClick={() => selectItem(one)}
       className={`btn btn-tab-item${
         (ItemProto && ItemProto.name === one.name && " active") || ""
       }`}
+      key={one.name}
     >
       <span>{one[key]}</span>
     </button>
@@ -39,7 +40,6 @@ const TabItems = ({ tabsData, keyName, activeItemID }) => {
           <TabItemsHeader
             tabs={tabs}
             selectItem={selectItem}
-            key={keyName}
             ItemProto={selectedItemProto}
           />
         </div>

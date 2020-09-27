@@ -4,18 +4,18 @@ import { useSelector } from "react-redux";
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 import ContestsItems from "components/modules/dashboard/ContestItems";
 
-const CategoryContests = WithLanguageProps(({ name, contests }) => {
+const CategoryContests = WithLanguageProps(({ name, contests, history }) => {
   return (
     <div className="contest-category" key={name}>
       <span className="contest-category-name">{name}</span>
       <div className="contest-category-contests">
-        <ContestsItems contestsData={contests} />
+        <ContestsItems contestsData={contests} history={history} key={name} />
       </div>
     </div>
   );
 });
 
-function AllContestScreen() {
+function AllContestScreen({ history }) {
   const [contestsByCategories, setContestsByCategories] = useState([]);
   const { contests, contestCategories } = useSelector(
     ({ contests }) => contests
@@ -42,7 +42,7 @@ function AllContestScreen() {
       {canDisplayContests &&
         contestsByCategories.map((category) => (
           <div key={category.category_id}>
-            <CategoryContests {...category} />
+            <CategoryContests {...category} history={history} />
           </div>
         ))}
     </div>
