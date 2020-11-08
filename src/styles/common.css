@@ -91,9 +91,8 @@ button {
 }
 
 .page-contest-details,
-.page-judle-classes,
-.page-articles {
-  padding-bottom: 5vh;
+.page-judle-classes {
+  padding: 2%;
 }
 
 .page-contest-details h1,
@@ -102,7 +101,6 @@ button {
 }
 
 .contest-item-card-body {
-  /* border-radius: 20px; */
   background-color: #ffec5c;
   padding: 0.4em 0.8em;
 }
@@ -111,7 +109,6 @@ button {
   font-size: 20px;
   color: #fffff0;
   text-transform: uppercase;
-  /* text-shadow: 1px 2px 3px #acacac; */
   min-height: 40px;
 }
 
@@ -256,12 +253,12 @@ button {
   color: #e1315b;
 }
 
-.top-menu-item {
+.top-menu-items__item {
   padding: 1.4vh 1.8vh;
   box-shadow: 0 2px 4px #0000002b;
 }
 
-.top-menu-item > a {
+.top-menu-items__item > a {
   font-weight: 800;
   color: #e1315b;
 }
@@ -423,8 +420,9 @@ button {
   background-size: 100%;
 }
 
-.articles {
-  display: flex;
+.articles-line {
+  position: relative;
+  margin: 0.5em 2em;
 }
 
 .article-preview:first-child {
@@ -434,17 +432,21 @@ button {
 .article-preview {
   display: flex;
   flex-direction: column;
-  margin-left: 4vh;
-  padding: 2.5vh;
-  padding-top: 4vh;
-  padding-bottom: 4vh;
-  background-color: whitesmoke;
+  margin-left: 5em;
+  padding: 2.8em;
   width: 30%;
   cursor: pointer;
 }
 
-.article-preview .description {
-  padding: 20px 10px 10px;
+.article-preview:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 400px;
+  height: 100%;
+  opacity: 0.2;
+  background-image: url(http://localhost:3000/assets/images/pane1.png);
 }
 
 .article-preview .addition-info {
@@ -455,14 +457,14 @@ button {
 }
 
 .article-preview .title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
 }
 
 .prize-contest-name {
   display: flex;
   flex-direction: column;
-  margin-top: 1vh;
+  margin-top: 0.5em;
 }
 
 .prize-contest-name > span:nth-child(2) {
@@ -799,7 +801,7 @@ button {
 }
 
 .contest-social-sharing span {
-  margin: 0.5vh;
+  margin: 1em;
   margin-left: 0;
 }
 
@@ -809,8 +811,15 @@ button {
 }
 
 .contest-announcements .contest-announcement {
-  /* margin-left: 1.5vh; */
-  margin-top: 1vh;
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.contest-announcement__title {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .contest-news h4 {
@@ -896,10 +905,10 @@ button {
 }
 
 .common-select-dropdown-options {
-  width: 100%;
-  margin: auto;
+  max-width: 50%;
   position: absolute;
   top: 45px;
+  right: 0;
   z-index: 10;
 }
 
@@ -907,7 +916,6 @@ button {
   padding: 2% 4%;
   width: 100%;
   height: 42px;
-  border-radius: 20px;
   font-size: 16px;
   box-shadow: 1px 2px 1px #6eaabd;
   transition: 0.5s background-color;
@@ -930,19 +938,19 @@ button {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 5vh;
+  margin-top: 2.5em;
 }
 
 .contest-submittions .contest-photo > img {
   width: 40%;
-  margin-top: 0.5vh;
+  margin-bottom: 1em;
 }
 
 .contest-submittions .contest-submittion {
   position: relative;
   width: 33%;
   max-height: 300px;
-  margin-top: 0.5vh;
+  padding-bottom: 2em;
   display: flex;
   cursor: pointer;
 }
@@ -952,12 +960,6 @@ button {
   max-height: 100%;
   margin: auto;
 }
-
-/* .contest-submittions .contest-submittion > img:hover {
-  transform: rotateY(-20deg);
-  width: 90%;
-  -webkit-transition: transform 2s;
-  */
 
 .contest-submittions .contest-submittion .common-icon {
   right: 0;
@@ -969,14 +971,19 @@ button {
   bottom: 0;
 }
 
-.photo-detail-popup {
+.photo-details-frame {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: gray;
+  text-align: center;
+  background-color: #ffe9e9;
   height: 100%;
-  /* z-index: 1; */
+  z-index: 10;
+}
+
+.photo-details-frame img {
+  height: 80%;
 }
 
 .contest-stroke-info-piece {
@@ -1012,6 +1019,13 @@ button {
 
 .common-select-dropdown-box {
   position: relative;
+}
+
+.submit-photo-form .notification-message {
+  padding: 20px;
+  background-color: #ffff90;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .input-upload-container {

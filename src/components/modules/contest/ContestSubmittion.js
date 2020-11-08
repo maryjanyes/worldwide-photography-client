@@ -10,16 +10,40 @@ import {
   getOneFromData,
 } from "utils/data.util";
 
-const ContestSubmittion = ({ photo_id, author_id, updateVisibility }) => {
+const commonStyle = {
+    position: "absolute",
+    top: 0,
+    zIndex: 0,
+  },
+  activeStyle = {
+    zIndex: 20,
+    backgroundColor: "transparent",
+    position: "fixed",
+    top: "20%",
+    left: "10%",
+  };
+
+const ContestSubmittion = ({
+  contests_submittion_id,
+  photo_id,
+  author_id,
+  updateVisibility,
+  activeVisibleSub,
+  isVisible,
+}) => {
   const { allPhotos, siteUsers } = useSelector(({ photos, users }) => ({
     ...photos,
     ...users,
   }));
   const [photo] = useState(getOneFromData(allPhotos, photo_id, "photo_id"));
-  const [author] = useState(
-    getOneFromData(siteUsers, author_id, "author_id") || { name: "Murply" }
-  );
+  const [author] = useState(getOneFromData(siteUsers, author_id, "author_id"));
   const photoPath = pathToPhoto(getPhotoUrlFromPhotoObject(photo));
+  const getIconStyle = () => ({
+    ...commonStyle,
+    ...(isVisible &&
+      activeVisibleSub === contests_submittion_id &&
+      activeStyle),
+  });
 
   return (
     <div className="contest-submittion" key={photo_id}>
@@ -27,28 +51,17 @@ const ContestSubmittion = ({ photo_id, author_id, updateVisibility }) => {
       <IconComponent
         source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}
         size={26}
-        onMouseMove={() =>
+        onClick={() =>
           updateVisibility({
-            isVisible: true,
+            isVisible: !isVisible,
             sub: {
               author,
               photo,
             },
+            subID: contests_submittion_id,
           })
         }
-        onMouseOut={() =>
-          updateVisibility({
-            isVisible: false,
-            sub: {
-              author,
-              photo,
-            },
-          })
-        }
-        containerStyle={{
-          position: "absolute",
-          top: 0,
-        }}
+        containerStyle={getIconStyle()}
       />
     </div>
   );

@@ -1,20 +1,25 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { appLangs } from "services/app-configs.service";
+import { getTranslationStr } from "../../../utils/data.util";
 
 const WithLanguageProps = (Component) => {
   return (props) => {
-    const { activeLanguage } = useSelector(({ ui }) => ui);
+    const { translations, activeLanguage } = useSelector(({ ui }) => ui);
 
     const originProps = {
       description:
-        activeLanguage === appLangs.EN
-          ? props.en_description
-          : props.ua_description,
-      name: activeLanguage === appLangs.EN ? props.en_name : props.ua_name,
+        translations[getTranslationStr(props.description, activeLanguage)],
+      name: translations[getTranslationStr(props.name, activeLanguage)],
     };
-    return <Component {...{ ...props, ...originProps }} />;
+    return (
+      <Component
+        {...{
+          ...props,
+          ...originProps,
+        }}
+      />
+    );
   };
 };
 

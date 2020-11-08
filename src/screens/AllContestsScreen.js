@@ -39,12 +39,20 @@ function AllContestScreen({ history }) {
   return (
     <div className="page page-all-contests">
       <div className="top-line"></div>
-      {canDisplayContests &&
-        contestsByCategories.map((category) => (
-          <div key={category.category_id}>
-            <CategoryContests {...category} history={history} />
-          </div>
-        ))}
+      <span className="page-title">All Contests</span>
+      {canDisplayContests && (
+        <div className="all-contests">
+          {contestsByCategories.map((category) => (
+            <div key={category.category_id} className="all-contests__category">
+              <CategoryContests
+                {...category}
+                history={history}
+                key={category.category_id}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

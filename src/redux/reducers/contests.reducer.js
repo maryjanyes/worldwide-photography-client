@@ -13,7 +13,7 @@ export default function ContestsReducer(
   { type, payload }
 ) {
   switch (type) {
-    case "[CONTESTS] SET_CONTESTS":
+    case "[CONTESTS] SET_CONTESTS_SUCCESS":
       return {
         ...state,
         contests: payload,

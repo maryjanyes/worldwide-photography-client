@@ -11,10 +11,16 @@ export default function UsersReducer(state = initialState, { type, payload }) {
         siteUsers: payload,
       };
     }
-    case "[USERS] SET_JUDLES": {
+    case "[USERS] SET_JUDLES_SUCCESS": {
       return {
         ...state,
         siteJudles: payload,
+      };
+    }
+    case "[USERS] SET_USERS_SUCCESS": {
+      return {
+        ...state,
+        siteUsers: payload,
       };
     }
     default: {

@@ -28,14 +28,15 @@ button.btn-submit-photo {
 .btn-submit-photo,
 .btn-apply-photo {
   min-width: 120px;
-  padding: 2.5%;
-  border-radius: 15px;
+  padding: 2%;
   margin: 1%;
+  border-radius: 15px;
   transition: 0.6s background-color;
   margin-left: 0;
   margin-top: 0;
   text-transform: uppercase;
   background-color: #e1315b;
+  font-weight: 600;
 }
 
 .btn-tab-item:hover,
@@ -78,9 +79,9 @@ button.btn-submit-photo {
   background-color: #ffec5c;
 }
 
-.contest-category-name,
 .page-gallery > .page-title,
-.page-articles > .page-title {
+.page-articles > .page-title,
+.page-all-contests > .page-title {
   font-size: 32px;
   font-weight: 800;
   padding: 18px;

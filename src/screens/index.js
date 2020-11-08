@@ -9,3 +9,4 @@ export { default as GalleryScreen } from "./GalleryScreen";
 export { default as PrivacyAndConditionsScreen } from "./PrivacyAndConditionsScreen";
 export { default as AllContestsScreen } from "./AllContestsScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
+export { default as ArticleDetails } from "./ArticleDetailsScreen";

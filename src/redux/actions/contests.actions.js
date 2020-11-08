@@ -1,6 +1,6 @@
 export const setContests = (payload) => {
   return {
-    type: "[CONTESTS] SET_CONTESTS",
+    type: "[CONTESTS] SET_CONTESTS_SUCCESS",
     payload,
   };
 };

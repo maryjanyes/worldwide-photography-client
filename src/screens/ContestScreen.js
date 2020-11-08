@@ -126,7 +126,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
               <TabItems tabsData={tabsData} keyName="name" activeItemID={0} />
             </div>
             <div className="other-opended-contests">
-              <Link to="/contests">Other opened contests</Link>
+              <Link to="/all-contests">Other opened contests</Link>
             </div>
           </div>
           <div className="contest-details-info-additions">
@@ -155,7 +155,10 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
                   {concatNameParts(contestJudle)}.
                 </p>
               </div>
-              <SubmitPhotoArea contestID={selectedContest.contest_id} />
+              <SubmitPhotoArea
+                contestID={selectedContest.contest_id}
+                contestName={selectedContest.name}
+              />
             </div>
           </div>
         </div>
@@ -170,7 +173,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
   );
 }
 
-function SubmitPhotoArea({ contestID }) {
+function SubmitPhotoArea({ contestID, contestName }) {
   const dispatch = useDispatch();
   const { uploadedImage } = useSelector(({ contests }) => contests);
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
@@ -197,6 +200,7 @@ function SubmitPhotoArea({ contestID }) {
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
               contestID={contestID}
+              contestName={contestName}
               close={closeModal}
             >
               <div className="submit-photo-container">

@@ -1,5 +1,5 @@
 export const setTranslations = (payload) => ({
-  type: "[UI] SET_TRANSLATIONS_DATA",
+  type: "[UI] SET_TRANSLATIONS_DATA_SUCCESS",
   payload,
 });
 

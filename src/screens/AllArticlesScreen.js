@@ -2,9 +2,18 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function UsefullArticlesScreen({ history }) {
-  const { allArticles } = useSelector(({ articles }) => articles);
+  const { allArticles, siteUsers } = useSelector(({ users, articles }) => ({
+    ...articles,
+    ...users,
+  }));
 
   const canDisplayArticles = allArticles.length > 0;
+  const withAuthors = (article) => {
+    article.author = siteUsers.find(
+      (user) => user.user_id === article.author_id
+    );
+    return article;
+  };
 
   return (
     <div className="page page-articles">
@@ -12,7 +21,7 @@ function UsefullArticlesScreen({ history }) {
       <span className="page-title">All Articles</span>
       {(canDisplayArticles && (
         <div className="articles-line">
-          {allArticles.map((one) => (
+          {allArticles.map(withAuthors).map((one) => (
             <ArticlePreview {...one} key={one.name} history={history} />
           ))}
         </div>
@@ -32,13 +41,14 @@ function ArticlePreview({
   const goToArticle = () => {
     history.push(`/articles/${article_id}`);
   };
+
   return (
-    <div className="article-preview" onMouseDown={goToArticle}>
+    <div className="article-preview" onClick={goToArticle}>
       <span className="title">{title}</span>
       <span className="description">{description}</span>
       <div className="addition-info">
         <span className="datetime">Posted at {created_at}</span>
-        <abbr className="author">Author {author}</abbr>
+        <abbr className="author">Author {author && author.email}</abbr>
       </div>
     </div>
   );

@@ -6,7 +6,11 @@ export class UsersService extends ApiService {
   }
 
   async getJudles() {
-    return await this.fetchJSONData("judles");
+    return await this.fetchJSONData("users/judles");
+  }
+
+  async getUsers() {
+    return await this.fetchJSONData("users");
   }
 }
 

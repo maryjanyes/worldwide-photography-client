@@ -6,16 +6,16 @@ const initialState = {
 
 export default function UIReducer(state = initialState, { payload, type }) {
   switch (type) {
+    case "[UI] SET_TRANSLATIONS_DATA_SUCCESS": {
+      return {
+        ...state,
+        translations: payload,
+      };
+    }
     case "[UI] TOGGLE_SUBMISSION_MODAL": {
       return {
         ...state,
         submissionModalState: payload,
-      };
-    }
-    case "[UI] SET_TRANSLATIONS_DATA": {
-      return {
-        ...state,
-        translations: payload,
       };
     }
     case "[UI] SET_APP_LANGUAGE": {

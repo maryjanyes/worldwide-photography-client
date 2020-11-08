@@ -13,6 +13,7 @@ import {
   PrivacyAndConditionsScreen,
   AllContestsScreen,
   ProfileScreen,
+  ArticleDetailsScreen,
 } from "screens";
 
 import TopBarNavigation from "components/common/TopBarComponent";
@@ -28,10 +29,14 @@ function AppNavigation() {
             path="/apply-contest/:contest_id"
             component={ApplyContestScreen}
           />
-          {/** <Route path="explore-photos" component={} /> **/}
-          {/** <Route path="/community-contests" render={() => <div></div>}></Route> **/}
+          {/** <Route path="/art-contests" /> **/}
+          {/** <Route path="/community-contests" render={() => <div></div>} /> **/}
           <Route path="/contest/:contest_id" component={ContestScreen} />
           <Route path="/all-contests" component={AllContestsScreen}></Route>
+          <Route
+            path="/articles/:article_id"
+            component={ArticleDetailsScreen}
+          />
           <Route path="/sign-in" component={SignInScreen} />
           <Route path="/sign-up" component={SignInScreen} />
           <Route path="/judle-classes" component={JudleClassesScreen} />
@@ -42,7 +47,7 @@ function AppNavigation() {
           <Route
             path="/contest-categories/:category_id"
             component={ContestCategoryScreen}
-          ></Route>
+          />
           <Route
             path="*"
             render={() => (

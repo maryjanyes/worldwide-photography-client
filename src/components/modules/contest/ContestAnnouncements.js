@@ -11,11 +11,18 @@ const ContestAnnouncements = ({ contestID }) => {
   return (
     <div className="contest-announcements">
       {(canDisplayAnnouncements &&
-        announcements.map((one) => (
-          <div className="contest-announcement">
-            <span>{one.title}</span>
-          </div>
+        announcements.map((announcement) => (
+          <ContestAnnouncement {...announcement} key={announcement.title} />
         ))) || <p>No Announcements finded for this Contest.</p>}
+    </div>
+  );
+};
+
+const ContestAnnouncement = ({ title, text }) => {
+  return (
+    <div className="contest-announcement">
+      <span className="contest-announcement__title">{title}</span>
+      <span className="contest-announcement__content">{text}</span>
     </div>
   );
 };

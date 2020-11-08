@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 
 import ContestSubmittion from "./ContestSubmittion";
-import ContestPhotoDetailFrame from "components/modules/contest/ContestPhotoDetailFrame";
+import ContestPhotoDetailsFrame from "components/modules/contest/ContestPhotoDetailsFrame";
 
 const ContestSubmittions = ({ submittions }) => {
   const [photoDetailsVisible, setPhotoDetailsVisible] = useState(false);
+  const [activeDetailsVisible, setActiveDetailsVisible] = useState(0);
 
   const canDisplaySubmittions = submittions.length > 0;
 
-  const handleSubmittionVisibilityChange = ({ sub, isVisible }) => {
+  const handleSubmittionVisibilityChange = ({ sub, isVisible, subID }) => {
     setPhotoDetailsVisible({
       sub,
       isVisible,
     });
+    setActiveDetailsVisible(subID);
   };
 
   return (
     <React.Fragment>
       {photoDetailsVisible.isVisible && (
-        <ContestPhotoDetailFrame
+        <ContestPhotoDetailsFrame
           author={photoDetailsVisible.sub.author}
-          photoSrc={photoDetailsVisible.sub.photo}
+          photo={photoDetailsVisible.sub.photo}
         />
       )}
       <div className="contest-submittions">
@@ -30,6 +32,8 @@ const ContestSubmittions = ({ submittions }) => {
               {...s}
               key={s.photo_id}
               updateVisibility={handleSubmittionVisibilityChange}
+              isVisible={photoDetailsVisible.isVisible}
+              activeVisibleSub={activeDetailsVisible}
             />
           ))) || <p>No Submittions for Contest.</p>}
       </div>

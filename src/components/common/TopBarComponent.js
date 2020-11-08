@@ -41,7 +41,7 @@ const TopBarComponent = () => {
           {searchActive && (
             <input
               type="text"
-              placeholder="Search Globally"
+              placeholder="Search.."
               className="common-input common-input-search"
             />
           )}

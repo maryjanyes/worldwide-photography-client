@@ -20,9 +20,6 @@ export class ApiService {
     const url = `${this.BACKEND_ENDPOINT}/${entryPath}`;
     const response = await fetch(url, {
       mode: "cors",
-      /* headers: {
-        "Set-Cookie": "authToken=bla bla",
-      }, */
     });
     return response.json();
   }
@@ -41,13 +38,16 @@ export class ApiService {
     });
   }
 
-  insertBlob(formData) {
+  insertBlob(formData, contestName) {
     return new Promise((res) => {
-      return fetch(`${this.BACKEND_FILES_ENDPOINT}/uploadPhoto`, {
-        body: formData,
-        method: "POST",
-        mode: "cors",
-      })
+      return fetch(
+        `${this.BACKEND_FILES_ENDPOINT}/uploadPhoto/${contestName}`,
+        {
+          body: formData,
+          method: "POST",
+          mode: "cors",
+        }
+      )
         .then((response) => {
           response.json().then((data) => res(data));
         })

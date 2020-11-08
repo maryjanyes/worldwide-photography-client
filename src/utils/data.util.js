@@ -72,3 +72,9 @@ export const getOneFromData = (itemCollection, itemID, itemKey) => {
 
 export const concatNameParts = ({ first_name, last_name }) =>
   `${first_name} ${last_name}`;
+
+export const isDataValid = (response) => response.statusCode !== 404;
+
+export const getTranslationStr = (prefix, code) => {
+  return `${prefix}.${code.toLowerCase()}`;
+};

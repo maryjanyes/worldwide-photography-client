@@ -5,6 +5,7 @@ const IconComponent = ({
   size,
   onMouseMove,
   onMouseOut,
+  onClick,
   containerStyle,
 }) => {
   return (
@@ -14,6 +15,7 @@ const IconComponent = ({
         style={{ width: size, height: size }}
         onMouseMove={onMouseMove}
         onMouseOut={onMouseOut}
+        onClick={onClick}
       />
     </div>
   );

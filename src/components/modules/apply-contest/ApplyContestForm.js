@@ -9,7 +9,13 @@ import { signUp } from "reducers/actions/auth.actions";
 import CommonSelectDropdown from "components/common/CommonSelectDropdown";
 import Message from "components/common/Message";
 
-const ApplyContestForm = ({ children, image, contestID, close }) => {
+const ApplyContestForm = ({
+  children,
+  image,
+  contestID,
+  contestName,
+  close,
+}) => {
   const dispatch = useDispatch();
   const {
     isLoggedIn,
@@ -42,7 +48,10 @@ const ApplyContestForm = ({ children, image, contestID, close }) => {
   const submitContestForm = async () => {
     const fileData = new FormData();
     fileData.append("file", image);
-    const insertContestPhotoResponse = await apiService.insertBlob(fileData);
+    const insertContestPhotoResponse = await apiService.insertBlob(
+      fileData,
+      contestName
+    );
     if (insertContestPhotoResponse.success) {
       const photoData = {
         author_id: userData.user_id,

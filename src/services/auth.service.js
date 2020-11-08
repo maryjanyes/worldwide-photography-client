@@ -7,13 +7,13 @@ class AuthService extends ApiService {
 
   async auth(data) {
     data.email = data.emailOrUsername;
-    const response = await this.insertData(data, "authenticate");
+    const response = await this.insertData(data, "users/auth");
     const responsePayload = response.json();
     return responsePayload;
   }
 
   async register(data) {
-    const response = await this.insertData(data, "register");
+    const response = await this.insertData(data, "users/register");
     const responsePayload = response.json();
     return responsePayload;
   }

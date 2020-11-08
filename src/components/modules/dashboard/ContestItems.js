@@ -66,12 +66,12 @@ const ContestItems = ({ history, contestsData }) => {
     <div className="contest-items">
       {canDisplayContests && (
         <WithCarouselRef speed={4000}>
-          {contestItems.map((one, contestItemID) => (
-            <div key={contestItemID}>
+          {contestItems.map((contest) => (
+            <div key={contest.contest_id}>
               <ContestItem
-                {...one}
+                {...contest}
                 explore={exploreContest}
-                key={contestItemID}
+                key={contest.contest_id}
               />
             </div>
           ))}

@@ -7,7 +7,7 @@ export default function ArticlesReducer(
   { payload, type }
 ) {
   switch (type) {
-    case "[ARTICLES] SET_ARTICLES": {
+    case "[ARTICLES] SET_ARTICLES_SUCCESS": {
       return {
         ...state,
         allArticles: payload,

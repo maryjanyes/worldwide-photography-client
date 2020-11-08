@@ -19,7 +19,7 @@ const GalleryScreen = () => {
               {...photo}
               adjustedWidth="32%"
               impressions={photoImpressions}
-              key={photo.link_to_file}
+              key={photo.photo_id}
             />
           ))}
         </div>
