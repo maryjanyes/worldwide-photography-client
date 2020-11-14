@@ -6,9 +6,12 @@ import { CategoryItemLink } from "components/modules/dashboard/ContestCategories
 
 import { getOneFromData, pathToAsset } from "utils/data.util";
 
-const PrizesLine = () => {
+const ContestPrizesLine = ({ history }) => {
   const { contestPrizes, contests } = useSelector(({ contests }) => contests);
   const canDisplayPrizesLine = contestPrizes.length > 0 && contests.length > 0;
+  const navigateToContest = contest_id => {
+    history.push(`/contest/${contest_id}`);
+  }
 
   return (
     <div className="prizes-items">
@@ -22,7 +25,7 @@ const PrizesLine = () => {
             );
             return (
               <div key={prize.contest_prize_id}>
-                <PrizeItem {...prize} />
+                <PrizeItem {...prize} navigate={navigateToContest} />
                 {!!contestData && <CategoryItemLink {...contestData} />}
               </div>
             );
@@ -33,7 +36,7 @@ const PrizesLine = () => {
   );
 };
 
-const PrizeItem = ({ title, amount, is_money, photo_path }) => {
+const PrizeItem = ({ title, amount, is_money, photo_path, navigate, contest_id }) => {
   return (
     <div className="prize-item">
       <div className="prize-item-heading">
@@ -43,10 +46,11 @@ const PrizeItem = ({ title, amount, is_money, photo_path }) => {
       <img
         className="prize-item-image"
         src={pathToAsset(photo_path, "baseline_emoji_events_black_18dp.png")}
+        onClick={() => navigate(contest_id)}
       />
       {is_money && <span className="prize-item-amount">{amount}</span>}
     </div>
   );
 };
 
-export default PrizesLine;
+export default ContestPrizesLine;

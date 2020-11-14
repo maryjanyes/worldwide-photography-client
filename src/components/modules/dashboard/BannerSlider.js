@@ -76,7 +76,7 @@ const BannerSlider = () => {
   useEffect(() => {
     setItems(
       contests
-        .filter((one, id) => id <= 2)
+        // .filter((one, id) => id <= 2)
         .map((one, id) => {
           one.images = sliderImages;
           one.isSelected = id === 0;
@@ -85,12 +85,12 @@ const BannerSlider = () => {
     );
   }, [contests]);
 
-  return (
+  return contests.length > 0 && (
     <div className="owl-slider">
       {displayItems()}
       <BannerSliderControls active={activeItem} change={selectItem} />
     </div>
-  );
+  ) || <React.Fragment/>;
 };
 
 export default BannerSlider;

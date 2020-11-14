@@ -1,12 +1,11 @@
 export { default as DashboardScreen } from "./DashboardScreen";
-export { default as ApplyContestScreen } from "./ApplyContestScreen";
 export { default as ContestScreen } from "./ContestScreen";
 export { default as SignInScreen } from "./SignInScreen";
 export { default as JudleClassesScreen } from "./JudleClassesScreen";
 export { default as AllArticlesScreen } from "./AllArticlesScreen";
+export { default as AllContestsScreen } from "./AllContestsScreen";
 export { default as ContestCategoryScreen } from "./ContestCategoryScreen";
 export { default as GalleryScreen } from "./GalleryScreen";
 export { default as PrivacyAndConditionsScreen } from "./PrivacyAndConditionsScreen";
-export { default as AllContestsScreen } from "./AllContestsScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
-export { default as ArticleDetails } from "./ArticleDetailsScreen";
+export { default as ArticleDetailsScreen } from "./ArticleDetailsScreen";

@@ -8,10 +8,9 @@ export const getContestImage = (images, imageID) =>
   images.find(({ avatar_id }) => avatar_id === imageID) ||
   "http://localhost:3000/assets/icons/pane2.jpg";
 
-export const buildDropdownOptions = (items) => {
+export const buildDropdownOptions = (items, language, translations) => {
   return items.map((i, iIndex) => ({
-    valueText:
-      appConfigsService.getActiveLang() === appLangs.EN ? i.en_name : i.ua_name,
+    value: translations[`${i.name}.${language.toLowerCase()}`],
     valueID: iIndex,
   }));
 };
@@ -56,9 +55,9 @@ export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
 
 export const pathToPhoto = (path, defaultPath = "simple.png") => {
   if (!path || path === "photo_path") {
-    return `${apiService.BACKEND_ENDPOINT}/photos/${defaultPath}`;
+    return `${apiService.BACKEND_ENDPOINT}/images/${defaultPath}`;
   }
-  return `${apiService.BACKEND_ENDPOINT}/photos/${path}`;
+  return `${apiService.BACKEND_ENDPOINT}/images/${path}`;
 };
 
 export const pathToAsset = (path = "simple.png") =>
@@ -73,7 +72,7 @@ export const getOneFromData = (itemCollection, itemID, itemKey) => {
 export const concatNameParts = ({ first_name, last_name }) =>
   `${first_name} ${last_name}`;
 
-export const isDataValid = (response) => response.statusCode !== 404;
+export const isDataValid = (response) => response.isSuccess;
 
 export const getTranslationStr = (prefix, code) => {
   return `${prefix}.${code.toLowerCase()}`;

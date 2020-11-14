@@ -68,18 +68,22 @@ function AnnouncementsComponent(props) {
   );
 }
 
-function GeneralInfoComponent({ description, name }) {
+function GeneralInfoComponent({ description, name, enter_fee }) {
   return (
     <div className="contest-info">
       <h2>General info of Contest</h2>
       <div className="contest-info-container">
-        <div className="contest-info-block">
+        <div className="contest-details-preview">
           <span>Name</span>
           <span>{name}</span>
         </div>
-        <div className="contest-info-block">
+        <div className="contest-details-preview">
           <span>Description</span>
           <span>{description}</span>
+        </div>
+        <div className="contest-details-preview">
+          <span>Price to enter the contest</span>
+          <span>{enter_fee}$</span>
         </div>
       </div>
     </div>
@@ -125,7 +129,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
             <div className="contest-tabs">
               <TabItems tabsData={tabsData} keyName="name" activeItemID={0} />
             </div>
-            <div className="other-opended-contests">
+            <div className="link-to-other-contests">
               <Link to="/all-contests">Other opened contests</Link>
             </div>
           </div>

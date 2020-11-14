@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
-import ContestsItems from "components/modules/dashboard/ContestItems";
+import ContestDetails from "components/modules/contest/ContestDetails";
 
-const CategoryContests = WithLanguageProps(({ name, contests, history }) => {
+const CategoryContests = WithLanguageProps(({ name, contests }) => {
   return (
     <div className="contest-category" key={name}>
       <span className="contest-category-name">{name}</span>
       <div className="contest-category-contests">
-        <ContestsItems contestsData={contests} history={history} key={name} />
+        {contests.map(contest => <ContestDetails {...contest} />)}
       </div>
     </div>
   );
@@ -22,25 +22,23 @@ function AllContestScreen({ history }) {
   );
 
   const getContestsByCategories = () => {
-    return contestCategories.map((category) => {
+    return contestCategories && contestCategories.map((category) => {
       category.contests = contests.filter(
         (contest) => contest.category_id === category.contest_category_id
       );
       return category;
-    });
+    }) || [];
   };
 
   useEffect(() => {
     setContestsByCategories(getContestsByCategories());
-  }, []);
-
-  const canDisplayContests = contests.length > 0;
+  }, [contests, contestCategories]);
 
   return (
     <div className="page page-all-contests">
       <div className="top-line"></div>
       <span className="page-title">All Contests</span>
-      {canDisplayContests && (
+      {contests.length > 0 && (
         <div className="all-contests">
           {contestsByCategories.map((category) => (
             <div key={category.category_id} className="all-contests__category">
@@ -52,7 +50,7 @@ function AllContestScreen({ history }) {
             </div>
           ))}
         </div>
-      )}
+      ) || <p className="no-section-content">No contests in categories.</p>}
     </div>
   );
 }

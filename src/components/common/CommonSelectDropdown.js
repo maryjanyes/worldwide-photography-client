@@ -13,16 +13,16 @@ const CommonSelectDropdown = ({
 }) => {
   const [isOpen, toggle] = useState(false);
   const [value, setValue] = useState(null);
-  const dropdownOption = ({ valueText, valueID }) => {
+  const dropdownOption = ({ value, valueID }) => {
     return (
       <input
         key={valueID}
         type="text"
-        value={valueText}
+        value={value}
         id={valueID}
         onChange={() => {}}
         onMouseDown={() => {
-          setValue(valueText);
+          setValue(value);
           onSelect(valueID, dropdownID);
           toggle(false);
         }}

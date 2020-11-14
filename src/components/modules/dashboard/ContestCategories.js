@@ -25,7 +25,7 @@ const ContestCategories = () => {
             <li className="nav-link-container" key={one.link}>
               {one.link ? (
                 <Link className="nav-link" to={one.link}>
-                  {translations[`${one.i18n}.${activeLanguage.toLowerCase()}`]}
+                  {translations && translations[`${one.i18n}.${activeLanguage.toLowerCase()}`]}
                 </Link>
               ) : (
                 <button

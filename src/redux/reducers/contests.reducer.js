@@ -2,7 +2,7 @@ const initialState = {
   contests: [],
   contestCategories: [],
   contestImages: [],
-  // contestJudles: [],
+  contestJudles: [],
   contestPrizes: [],
   contestSubmittions: [],
   lastUploadedImage: null,

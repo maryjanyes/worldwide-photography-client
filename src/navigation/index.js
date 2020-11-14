@@ -25,12 +25,6 @@ function AppNavigation() {
         <TopBarNavigation />
         <Switch>
           <Route path="/" component={DashboardScreen} exact />
-          <Route
-            path="/apply-contest/:contest_id"
-            component={ApplyContestScreen}
-          />
-          {/** <Route path="/art-contests" /> **/}
-          {/** <Route path="/community-contests" render={() => <div></div>} /> **/}
           <Route path="/contest/:contest_id" component={ContestScreen} />
           <Route path="/all-contests" component={AllContestsScreen}></Route>
           <Route
@@ -41,13 +35,14 @@ function AppNavigation() {
           <Route path="/sign-up" component={SignInScreen} />
           <Route path="/judle-classes" component={JudleClassesScreen} />
           <Route path="/articles" component={AllArticlesScreen} />
+          <Route path="/articles/:article_id" component={ArticleDetailsScreen} />
           <Route path="/gallery" component={GalleryScreen} />
-          <Route path="/privacy" component={PrivacyAndConditionsScreen} />
-          <Route path="/profile" component={ProfileScreen} />
-          <Route
+          <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
+          <Route path="/profile-settings" component={ProfileScreen} />
+          {/** <Route
             path="/contest-categories/:category_id"
             component={ContestCategoryScreen}
-          />
+          /> **/}
           <Route
             path="*"
             render={() => (

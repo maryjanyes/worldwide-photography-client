@@ -23,8 +23,7 @@ const GalleryScreen = () => {
             />
           ))}
         </div>
-      )) ||
-        "No available photos."}
+      )) || <p className="no-section-content">No available photos.</p>}
     </div>
   );
 };

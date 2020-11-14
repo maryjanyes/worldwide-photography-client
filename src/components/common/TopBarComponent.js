@@ -10,7 +10,7 @@ import { ApiService } from "services/api.service";
 
 const TopBarComponent = () => {
   const [searchActive, setSearchActive] = useState(false);
-  const { isLoggedIn } = useSelector(({ auth }) => auth);
+  const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
   const toggleSearch = () => setSearchActive(!searchActive);
 
   return (
@@ -41,7 +41,7 @@ const TopBarComponent = () => {
           {searchActive && (
             <input
               type="text"
-              placeholder="Search.."
+              placeholder={translations['topMenu.search.' + activeLanguage.toLowerCase()]}
               className="common-input common-input-search"
             />
           )}

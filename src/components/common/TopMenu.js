@@ -10,7 +10,7 @@ import authActions from "reducers/actions/auth.actions";
 const TopMenu = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { isLoggedIn } = useSelector(({ auth }) => auth);
+  const { isLoggedIn, translations } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
   const [opened, setOpened] = useState(false);
 
   const toggleMenu = () => setOpened(!opened);
@@ -39,7 +39,7 @@ const TopMenu = () => {
                 }
                 className="btn btn-link"
               >
-                {item.name}
+                {translations[`${item.name}.${appConfigs.activeLang.toLowerCase()}`]}
               </button>
             </li>
           ))}

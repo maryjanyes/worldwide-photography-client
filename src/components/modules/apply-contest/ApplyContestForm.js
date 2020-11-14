@@ -23,9 +23,12 @@ const ApplyContestForm = ({
     lastUploadedImage,
     contestCategories,
     recentSubmittionSuccess,
-  } = useSelector(({ auth, contests }) => ({
+    activeLanguage,
+    translations
+  } = useSelector(({ auth, contests, ui }) => ({
     ...auth,
     ...contests,
+    ...ui
   }));
   const [contestFormFields, setContestFormFields] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
@@ -41,7 +44,7 @@ const ApplyContestForm = ({
   }, [isLoggedIn, recentSubmittionSuccess]);
 
   const categoriesOptions = useMemo(() => {
-    const categoriesData = buildDropdownOptions(contestCategories);
+    const categoriesData = buildDropdownOptions(contestCategories, activeLanguage, translations);
     return categoriesData;
   }, [contestCategories]);
 
@@ -119,6 +122,7 @@ const ApplyContestForm = ({
           />
         </div>
         <div className="submit-photo-form-field">
+          <label>Link to Facebook</label>
           <input
             name="linkToFacebook"
             placeholder="Link to Facebook"
@@ -126,6 +130,7 @@ const ApplyContestForm = ({
           />
         </div>
         <div className="submit-photo-form-field">
+          <label>Link to Instagram</label>
           <input
             name="linkToInstagram"
             placeholder="Link to Instagram"
@@ -136,7 +141,7 @@ const ApplyContestForm = ({
           values={categoriesOptions}
           onSelect={onPhotoCategorySelected}
           dropdownID="selectPhotoCategory"
-          label="Photo category"
+          label="Select photo category"
         />
       </div>
     );
@@ -209,7 +214,7 @@ const ApplyContestForm = ({
         <button
           onClick={submitContestForm}
           className="btn-apply-photo"
-          type="button"
+          type="button"xf
           disabled={!isLoggedIn && !isFormValid()}
         >
           Submit

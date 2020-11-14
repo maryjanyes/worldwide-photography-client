@@ -8,7 +8,7 @@ const navlinks = [
     i18n: "contest_categories_links.art_contests",
   },
   {
-    link: "/privacy",
+    link: "/privacy-and-conditions",
     i18n: "contest_categories_links.privacy",
   },
 ];

@@ -23,7 +23,7 @@ const SignInForm = ({ backToSignUpMode, history }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/profile");
+      history.push("/profile-settings");
     }
   }, [isLoggedIn]);
 

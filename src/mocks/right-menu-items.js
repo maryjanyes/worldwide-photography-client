@@ -5,7 +5,7 @@ const rightMenuItems = [
     onlyLoggedIn: true,
   },
   {
-    to: "/profile",
+    to: "/profile-settings",
     name: "nav_links.profile",
     onlyLoggedIn: true,
   },

@@ -11,7 +11,7 @@ function DashboardScreen(props) {
       <ContestCategories />
       <BannerSlider />
       <ContestItems history={props.history} />
-      <ContestPrizesLine />
+      <ContestPrizesLine history={props.history} />
     </div>
   );
 }

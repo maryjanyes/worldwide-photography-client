@@ -20,7 +20,7 @@ button {
   width: 150px;
   height: 60px;
   background-color: #ffec5c;
-  background: url(http://localhost:3000/assets/images/logo.png) no-repeat center;
+  background: url(../../assets/images/logo.png) no-repeat center;
   background-size: 60%;
 }
 
@@ -65,7 +65,8 @@ button {
   z-index: 1;
   right: 0;
   top: 0;
-  min-height: 200px;
+  padding-top: 2.5vh;
+  /* min-height: 200px; */
   background-color: #ffffff;
 }
 
@@ -95,9 +96,52 @@ button {
   padding: 2%;
 }
 
+.page-contest-details {
+  background-color: whitesmoke;
+}
+
 .page-contest-details h1,
 .page-judle-classes h1 {
   max-width: 600px;
+}
+
+.all-contests {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px;
+}
+
+.all-contests .all-contests__category {
+  width: 48.5%;
+}
+
+.all-contests .all-contests__category div.contest-details {
+  margin-top: 0;
+  padding: 5vh 2vh;
+}
+
+.all-contests .contest-details-preview > p {
+  color: #505050;
+}
+
+.all-contests .contest-details-preview > p:nth-child(2) {
+  font-weight: 100;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.page-gallery > .page-title,
+.page-articles > .page-title,
+.page-all-contests > .page-title {
+  font-size: 36px;
+  font-weight: 800;
+  padding: 18px;
+}
+
+.contest-category-name {
+  font-size: 18px;
+  padding: 2rem 0;
+  letter-spacing: 1px;
 }
 
 .contest-item-card-body {
@@ -151,8 +195,9 @@ button {
 
 .owl-controls {
   text-align: center;
-  position: relative;
-  top: 0.8vh;
+  position: absolute;
+  bottom: 5vh;
+  width: 100%;
 }
 
 .owl-control {
@@ -256,6 +301,20 @@ button {
 .top-menu-items__item {
   padding: 1.4vh 1.8vh;
   box-shadow: 0 2px 4px #0000002b;
+  cursor: pointer;
+  transition: 0.5s background-color;
+}
+
+.top-menu-items__item:hover {
+  background-color: #e1315b;
+}
+
+.top-menu-items__item:hover > .btn {
+  color: #ffffff;
+}
+
+.top-menu-items__item > .btn {
+  font-weight: 600;
 }
 
 .top-menu-items__item > a {
@@ -342,7 +401,7 @@ button {
   background-color: whitesmoke;
 }
 
-.contest-details .contest-info-block {
+.contest-details .contest-details-preview {
   position: absolute;
   top: 0;
   width: 100%;
@@ -354,7 +413,7 @@ button {
   width: 100%;
 }
 
-.contest-info-block p {
+.contest-details-preview p {
   font-size: 28px;
   color: #ffffff;
   font-weight: 600;
@@ -422,7 +481,16 @@ button {
 
 .articles-line {
   position: relative;
-  margin: 0.5em 2em;
+  margin: 1vh 2vh;
+}
+
+.no-section-content {
+  margin: 1vh 2vh;
+}
+
+.page-profile_profile-info__section {
+  display: flex;
+  margin: 10px 0;
 }
 
 .article-preview:first-child {
@@ -713,7 +781,7 @@ button {
 .privacy-and-conditions-page {
   font-size: 20px;
   text-align: justify;
-  padding: 2.8vh;
+  padding: 2vh 1.5vh 8vh 1.5vh;
   color: #616161;
 }
 
@@ -782,17 +850,21 @@ button {
   font-weight: 600;
 }
 
-.other-opended-contests,
+.link-to-other-contests,
 .contest-social-sharing {
   margin-top: 5vh;
   font-size: 18px;
 }
 
-.other-opended-contests > a {
+.link-to-other-contests {
+  font-size: 24px;
+}
+
+.link-to-other-contests > a {
   color: #e1315b;
 }
 
-.other-opended-contests > a:hover {
+.link-to-other-contests > a:hover {
   color: #008dcb;
 }
 
@@ -892,11 +964,13 @@ button {
 }
 
 .language-switcher > button {
-  border: 0.2vh solid #ffffff;
+  border: 0.2rem solid #ffffff;
   background-color: transparent;
-  margin: 0.2vh;
-  padding: 0.5vh;
+  margin: 0.2rem;
+  padding: 0.2rem;
   cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -923,7 +997,7 @@ button {
 
 .submit-photo-container {
   display: flex;
-  width: 80%;
+  width: 60%;
   justify-content: space-around;
   margin: auto;
 }
@@ -963,7 +1037,6 @@ button {
 
 .contest-submittions .contest-submittion .common-icon {
   right: 0;
-  background-color: whitesmoke;
 }
 
 .contest-submittion-resize > img {
@@ -977,7 +1050,7 @@ button {
   left: 0;
   width: 100%;
   text-align: center;
-  background-color: #ffe9e9;
+  background-color: #ffffff;
   height: 100%;
   z-index: 10;
 }
@@ -1068,6 +1141,11 @@ button {
 
 .complete-photo-upload {
   margin-top: 2vh;
+}
+
+.complete-photo-upload > .btn-apply-photo,
+.complete-sign-up > .btn-apply-photo {
+  padding: 18px 0;
 }
 
 .footer {

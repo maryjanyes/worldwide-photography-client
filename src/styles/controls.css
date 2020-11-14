@@ -27,7 +27,7 @@ button.btn-submit-photo {
 .btn-tab-item,
 .btn-submit-photo,
 .btn-apply-photo {
-  min-width: 120px;
+  min-width: 160px;
   padding: 2%;
   margin: 1%;
   border-radius: 15px;
@@ -77,14 +77,6 @@ button.btn-submit-photo {
 
 .btn-submit:hover {
   background-color: #ffec5c;
-}
-
-.page-gallery > .page-title,
-.page-articles > .page-title,
-.page-all-contests > .page-title {
-  font-size: 32px;
-  font-weight: 800;
-  padding: 18px;
 }
 
 .common-input {
@@ -207,7 +199,7 @@ button.btn-submit-photo {
 .common-select-btn .common-icon {
   transform: rotateZ(180deg);
   position: relative;
-  top: -2px;
+  bottom: 5px;
 }
 
 .common-select-btn.active .common-icon {
@@ -218,4 +210,8 @@ button.btn-submit-photo {
 .common-select-btn .common-select-dropdown-label {
   position: relative;
   top: 6px;
+}
+
+.page-profile {
+  padding: 1vh 2vh;
 }

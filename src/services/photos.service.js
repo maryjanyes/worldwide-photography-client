@@ -2,11 +2,11 @@ import { ApiService } from "./api.service";
 
 export class PhotosService extends ApiService {
   async getPhotos() {
-    return await this.fetchJSONData("photos");
+    return await this.fetchJSONData("images");
   }
 
   async getPhotoCategories() {
-    return await thid.fetchJSONData("photos/categories");
+    return await thid.fetchJSONData("images/categories");
   }
 }
 

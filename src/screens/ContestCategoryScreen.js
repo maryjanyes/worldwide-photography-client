@@ -11,11 +11,12 @@ const ContestCategoryScreen = ({ history }) => {
     const canShow = contestsByCategory.length > 0;
 
     return (
-        <div className="page page-contest-category">
+        <p>Page not found.</p>
+    );
+            {/** <div className="page page-contest-category">
             <h1>All items in category {category_id}</h1>
             {canShow && <ContestItems contestItems={contestsByCategory} history={history} />}
-        </div>
-    );
+    </div> **/}
 };
 
 export default ContestCategoryScreen;

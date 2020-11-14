@@ -4,12 +4,12 @@ const navlinks = [
     name: "Gallery",
   },
   {
-    link: "/all-contests",
-    name: "All Contests",
-  },
-  {
     link: "/articles",
     name: "Articles",
+  },
+  {
+    link: "/all-contests",
+    name: "All Contests",
   },
 ];
 
