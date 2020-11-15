@@ -1,15 +1,15 @@
 {
   "name": "worldwide-photography-client",
   "version": "0.0.1",
-  "description": "Client.",
+  "author": "WorldwidePhotography <worldwide_photography@gmail.com>",
+  "description": "Client side of Worldwide Photography site.",
   "main": "./src/index.js",
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "node ./server.js"
   },
-  "author": "WorldwidePhotography <worldwide_photography@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
     "formik": "^2.1.4",
@@ -32,8 +32,10 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.3.1",
     "css-loader": "latest",
     "file-loader": "latest",
+    "html-webpack-plugin": "^4.5.0",
     "style-loader": "latest",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",

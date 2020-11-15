@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 
 const env = require("dotenv").config();
@@ -15,9 +16,6 @@ module.exports = {
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
-    https: true,
-    // hot: true,
-    // lazy: true,
   },
   resolve: {
     alias: {
@@ -43,6 +41,11 @@ module.exports = {
       "process.env.BACKEND_URL": JSON.stringify(env.BACKEND_URL),
       'process.env.BACKEND_FILES_URL': JSON.stringify(env.BACKEND_FILES_URL),
       "process.env.BACKEND_VERSION": JSON.stringify(env.BACKEND_VERSION),
+    }),
+    new HtmlWebpackPlugin({
+      title: 'WorldwidePhotography',
+      templateContent: '<div id="root"></div>',
+      favicon: 'assets/images/logo.png',
     }),
   ],
   module: {
