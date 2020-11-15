@@ -61,6 +61,6 @@ export const CategoryItemLink = WithLanguageProps((props) => {
       </Link>
     </li>
   );
-});
+}, ['name', 'description']);
 
 export default ContestCategories;

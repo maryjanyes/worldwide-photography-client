@@ -15,13 +15,12 @@ button {
 
 .site-logo {
   position: absolute;
-  left: 10px;
-  top: 24px;
   width: 150px;
   height: 60px;
   background-color: #ffec5c;
-  background: url(../../assets/images/logo.png) no-repeat center;
+  background: url(/assets/images/logo.png) no-repeat center;
   background-size: 60%;
+  top: 2.5vh;
 }
 
 .top-search {
@@ -64,15 +63,13 @@ button {
   width: 300px;
   z-index: 1;
   right: 0;
-  top: 0;
+  top: 112px;
   padding-top: 2.5vh;
-  /* min-height: 200px; */
   background-color: #ffffff;
 }
 
 .page-dashboard .owl-slider {
   position: relative;
-  top: 10px;
 }
 
 .owl-slider-item {
@@ -108,11 +105,10 @@ button {
 .all-contests {
   display: flex;
   justify-content: space-between;
-  padding: 18px;
 }
 
 .all-contests .all-contests__category {
-  width: 48.5%;
+  width: 48%;
 }
 
 .all-contests .all-contests__category div.contest-details {
@@ -136,6 +132,26 @@ button {
   font-size: 36px;
   font-weight: 800;
   padding: 18px;
+}
+
+.all-contests .contest-category {
+  margin: 0 2vh;
+}
+
+.all-contests .contest-details {
+  margin: 2.5vh 0;
+}
+
+.all-contests .contest-details {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.contest-details > .contest-details-image {
+  width: 100%;
+  max-height: 40vh;
+  object-fit: cover;
 }
 
 .contest-category-name {
@@ -180,17 +196,13 @@ button {
   box-shadow: 1px 2px 1px #000000;
 }
 
-.contest-status.coming {
+.contest-status.starts-soon {
   background-color: #ff0d4b;
 }
 
-.contest-status.active {
+.contest-status.happens-now {
   background-color: #ffec5c;
   color: #008dcb;
-}
-
-.contest-details > img {
-  height: 140px;
 }
 
 .owl-controls {
@@ -201,27 +213,27 @@ button {
 }
 
 .owl-control {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   border: none;
-  background-color: transparent;
-  color: #ffec5c;
-  margin: 0.2em;
-  font-size: 12px;
+  margin: 0.2vh;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: transparent;
   transition: 0.5s background-color;
 }
 
 .owl-control:hover {
-  background-color: #fffff7;
+  background-color: #e1315b;
 }
 
-.owl-control.owl-control-prev::before {
-  content: "<";
+.owl-control.owl-control-prev {
+  background-image: url(/assets/images/arrow-left.svg);
 }
 
-.owl-control.owl-control-next::before {
-  content: ">";
+.owl-control.owl-control-next {
+  background-image: url(/assets/images/arrow-right.svg);
 }
 
 .owl-slider-images {
@@ -271,8 +283,9 @@ button {
 
 .sign-top-menu-link,
 .nav-header-link {
-  width: 120px;
-  height: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  min-height: 44px;
   text-align: center;
   font-weight: 800;
   font-size: 12px;
@@ -343,22 +356,14 @@ button {
 .sign-in-form {
   display: flex;
   flex-direction: column;
-  width: auto;
   background-color: #ffefd8;
   border-radius: 20px;
-  margin: auto;
-  margin-top: 1.5vh;
+  padding: 2.5vh;
 }
 
-/* .sign-up-form .common-checkbox { } */
-
-.sign-in-form {
-  padding: 8vh;
-  padding-top: 3.5vh;
-}
-
-.sign-up-form {
-  padding: 3.5vh;
+.sign-in-form > .form-field,
+.sign-up-form > .form-field {
+  width: 80%;
 }
 
 .sign-in-form .common-checkbox-label {
@@ -369,11 +374,7 @@ button {
 .sign-up-form-container,
 .sign-in-form-container {
   text-align: center;
-}
-
-.sign-up-form-container {
-  position: relative;
-  left: -10px;
+  width: 45%;
 }
 
 .sign-up-form > button,
@@ -388,7 +389,8 @@ button {
   margin-top: 1.5vh;
 }
 
-.sign-in-text {
+.sign-in-text,
+.sign-up-text {
   font-size: 40px;
   font-weight: 800;
   margin-block-start: 0.67em;
@@ -397,26 +399,34 @@ button {
 
 .contest-details {
   position: relative;
-  margin-top: 180px;
-  background-color: whitesmoke;
 }
 
 .contest-details .contest-details-preview {
   position: absolute;
-  top: 0;
+  top: 10vh;
   width: 100%;
   text-align: center;
-  padding-top: 80px;
+  padding: 2.5vh 0;
 }
 
-.contest-details-info-body {
+.contest-info-container .contest-details-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.contest-info-container .contest-details-section > span:nth-child(1) {
+  font-weight: 800;
+}
+
+.contest-details-info-top-body {
   width: 100%;
 }
 
 .contest-details-preview p {
-  font-size: 28px;
+  font-size: 34px;
+  font-weight: 800;
   color: #ffffff;
-  font-weight: 600;
+  text-shadow: 1px 1px 2px #000000;
 }
 
 .nav-link-container {
@@ -472,7 +482,7 @@ button {
 }
 
 .prize-item-icon {
-  background-image: url(http://localhost:3000/assets/icons/camera-black-icon.png);
+  background-image: url(/assets/icons/camera-black-icon.png);
   background-repeat: no-repeat;
   width: 68px;
   height: 68px;
@@ -488,9 +498,25 @@ button {
   margin: 1vh 2vh;
 }
 
-.page-profile_profile-info__section {
+.page-profile {
+  padding: 1vh 2vh;
+}
+
+.page-profile-update-form {
+  max-width: 50%;
+}
+
+.page-profile-update-form .btn-submit {
+  padding: 1.2vh 0;
+}
+
+.form-field.update-profile-form-field {
   display: flex;
-  margin: 10px 0;
+  flex-direction: column;
+}
+
+.form-field.update-profile-form-field .common-input {
+  padding: 1vh 2vh;
 }
 
 .article-preview:first-child {
@@ -514,7 +540,7 @@ button {
   width: 400px;
   height: 100%;
   opacity: 0.2;
-  background-image: url(http://localhost:3000/assets/images/pane1.png);
+  background-image: url(/assets/images/pane1.png);
 }
 
 .article-preview .addition-info {
@@ -680,11 +706,6 @@ button {
 }
 
 /** contest details **/
-.contest-details-info-card {
-  display: flex;
-  flex-direction: column;
-}
-
 .contest-details-info {
   position: relative;
 }
@@ -701,13 +722,15 @@ button {
 }
 
 .contest-details-info-card {
-  position: absolute;
-  z-index: 10;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
-  top: -10vh;
-  padding: 5vh;
+  top: -5vh;
+  padding: 2%;
   width: 80%;
-  left: 10%;
+  left: 8%;
+  min-height: 45vh;
 }
 
 /** judle videos **/
@@ -857,7 +880,7 @@ button {
 }
 
 .link-to-other-contests {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .link-to-other-contests > a {
@@ -903,8 +926,7 @@ button {
   height: 28px;
   border: none;
   outline: none;
-  background: url(http://localhost:3000/assets/icons/baseline_close_black_18dp.png)
-    no-repeat center;
+  background: url(/assets/icons/baseline_close_black_18dp.png) no-repeat center;
   background-size: 80%;
   position: absolute;
   top: 40px;
@@ -986,13 +1008,18 @@ button {
   z-index: 10;
 }
 
+.common-select-dropdown-options > input:hover {
+  background-color: #008dcb;
+}
+
 .common-select-dropdown-options > input {
   padding: 2% 4%;
   width: 100%;
   height: 42px;
   font-size: 16px;
-  box-shadow: 1px 2px 1px #6eaabd;
+  box-shadow: 2px 1px 1px 1px #6eaabd;
   transition: 0.5s background-color;
+  border: none;
 }
 
 .submit-photo-container {
@@ -1073,32 +1100,40 @@ button {
   transition: transform 2s;
 }
 
-.last-uploaded-image {
+.uploaded-image-name {
   position: absolute;
   text-transform: uppercase;
   font-style: italic;
   font-size: 12px;
 }
 
-.common-select-dropdown-box > .common-select-btn > img {
+.upload-input-container {
+  background-color: #ffffff;
+}
+
+.common-select-dropdown-container {
   position: relative;
-  top: 12px;
+  background-color: #ffffff;
+  padding: 1vh 0;
+}
+
+.common-select-dropdown-container > .common-select-btn > img {
+  position: relative;
+  top: 1.2vh;
   transform: rotateZ(180deg);
 }
 
-.common-select-dropdown-box > .common-select-btn.active > img {
+.common-select-dropdown-container > .common-select-btn.active > img {
   transform: rotateZ(0);
 }
 
-.common-select-dropdown-box {
+.common-select-dropdown-container .common-label {
   position: relative;
+  top: 1vh;
 }
 
-.submit-photo-form .notification-message {
-  padding: 20px;
-  background-color: #ffff90;
-  font-weight: 600;
-  font-size: 18px;
+.apply-contest-submittion-data {
+  margin-top: 5vh;
 }
 
 .input-upload-container {
@@ -1139,13 +1174,29 @@ button {
   margin-top: 5vh;
 }
 
-.complete-photo-upload {
+.submit-photo-container {
   margin-top: 2vh;
 }
 
-.complete-photo-upload > .btn-apply-photo,
-.complete-sign-up > .btn-apply-photo {
+.submit-photo-container > .btn-apply-photo,
+.apply-contest-sign-in-container > .btn-apply-photo {
   padding: 18px 0;
+}
+
+.apply-contest-get-sign-up {
+  padding: 1vh 0 2vh;
+}
+
+.apply-contest-get-sign-up a {
+  font-weight: 600;
+  font-size: 18px;
+  color: #008dcb;
+  margin-left: 5px;
+}
+
+.form-field.apply-contest-form-field {
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {
@@ -1167,4 +1218,18 @@ button {
   color: #ffffff;
   font-size: 12px;
   text-transform: uppercase;
+}
+
+.notification-message {
+  font-weight: 600;
+  font-size: 18px;
+  padding: 2vh;
+}
+
+.notification-message.warning-message {
+  background-color: #ffff90;
+}
+
+.notification-message.success-message {
+  background-color: #79d325;
 }

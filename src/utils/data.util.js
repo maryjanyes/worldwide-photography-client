@@ -1,5 +1,4 @@
 import { apiService } from "services/api.service";
-import appConfigsService, { appLangs } from "services/app-configs.service";
 
 export const getAnnouncements = (announcements, contestID) =>
   announcements.filter(({ contest_id }) => contest_id === contestID);
@@ -15,8 +14,12 @@ export const buildDropdownOptions = (items, language, translations) => {
   }));
 };
 
-export const getJudleFromID = (judles, judleID) =>
-  !!judles && judles.find((j) => j.judle_id === judleID);
+export const getUserByID = (users, userID) => {
+  !!users && users.find(({ user_id }) => user_id === userID)
+}
+
+export const getJudleByID = (judles, judleID) =>
+  !!judles && judles.find(({ judle_id }) => judle_id === judleID);
 
 function msToTime(duration) {
   var milliseconds = parseInt((duration % 1000) / 100),
@@ -55,13 +58,13 @@ export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
 
 export const pathToPhoto = (path, defaultPath = "simple.png") => {
   if (!path || path === "photo_path") {
-    return `${apiService.BACKEND_ENDPOINT}/images/${defaultPath}`;
+    return `${apiService.CLIENT_ENDPOINT}/assets/images/${defaultPath}`;
   }
   return `${apiService.BACKEND_ENDPOINT}/images/${path}`;
 };
 
 export const pathToAsset = (path = "simple.png") =>
-  `${apiService.BACKEND_ENDPOINT}/assets/icons/${path}`;
+  `${apiService.CLIENT_ENDPOINT}/assets/icons/${path}`;
 
 export const getOneFromData = (itemCollection, itemID, itemKey) => {
   if (itemCollection) {
@@ -69,8 +72,11 @@ export const getOneFromData = (itemCollection, itemID, itemKey) => {
   }
 };
 
-export const concatNameParts = ({ first_name, last_name }) =>
-  `${first_name} ${last_name}`;
+export const getPhotosByUser = (photos, userID) =>
+   photos && photos.length > 0 && photos.filter(photo => photo.user_id === userID);
+
+export const concatNameParts = (judleData) =>
+  `${judleData?.first_name} ${judleData?.last_name}`;
 
 export const isDataValid = (response) => response.isSuccess;
 

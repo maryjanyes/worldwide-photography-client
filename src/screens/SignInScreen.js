@@ -5,6 +5,9 @@ import SignUpForm from "components/modules/sign/SignUpForm";
 
 import signInVariant from "types/signInVariant";
 
+import Judle1 from '../../assets/images/NastyaTelikova_judle.png';
+import Judle2 from '../../assets/images/Valentina_judle.png';
+
 function SignInScreen({ history }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
@@ -68,7 +71,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="http://localhost:3000/assets/icons/judle-NastyaTelikova.png"
+              src={Judle1}
             />
             <span>
               (с) могу уместить всю свою жизньв рюкзаки уехать в неизвестность
@@ -77,7 +80,7 @@ function SignInUsing({ signIn }) {
           <div className="sign-in-judle">
             <img
               className="sign-in-judle-avatar"
-              src="http://localhost:3000/assets/icons/judle-Valentina.png"
+              src={Judle2}
             />
             <span>(с) тут слоган Насті</span>
           </div>

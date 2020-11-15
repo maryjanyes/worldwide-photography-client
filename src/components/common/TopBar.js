@@ -7,6 +7,7 @@ import TopMenu from "./TopMenu";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 import { ApiService } from "services/api.service";
+import { getTranslationStr } from "utils/data.util";
 
 const TopBarComponent = () => {
   const [searchActive, setSearchActive] = useState(false);
@@ -15,7 +16,7 @@ const TopBarComponent = () => {
 
   return (
     <nav className="nav-header nav-header-top">
-      <Link className="site-logo" to="/"></Link>
+      <Link className="site-logo" to="/" />
       <LanguageSwitcher />
       <ul className="nav-header-base-menu">
         {ApiService.getNavLinks().map((one) => {
@@ -29,7 +30,7 @@ const TopBarComponent = () => {
                   className="nav-header-link"
                   activeClassName="active"
                 >
-                  {one.name}
+                  {translations[getTranslationStr(one.i18n, activeLanguage)]}
                 </NavLink>
               </li>
             )
@@ -41,7 +42,7 @@ const TopBarComponent = () => {
           {searchActive && (
             <input
               type="text"
-              placeholder={translations['topMenu.search.' + activeLanguage.toLowerCase()]}
+              placeholder={translations[getTranslationStr("common.placeholders.top_search", activeLanguage)]}
               className="common-input common-input-search"
             />
           )}

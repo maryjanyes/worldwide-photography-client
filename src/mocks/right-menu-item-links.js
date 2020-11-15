@@ -1,7 +1,7 @@
 const rightMenuItems = [
   {
     action: "logOut",
-    name: "nav_links.logOut",
+    name: "nav_links.log_out",
     onlyLoggedIn: true,
   },
   {

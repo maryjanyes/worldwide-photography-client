@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { isContestStarted, pathToPhoto } from "utils/data.util";
-
 import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
+import { isContestStarted, pathToPhoto, getTranslationStr } from "utils/data.util";
+
 const ContestItem = WithLanguageProps(
   ({ name, description, contest_id, started_at, explore, photo_path }) => {
+    const { translations, activeLanguage } = useSelector(({ ui }) => ui);
+    const contestAvatar = pathToPhoto(photo_path);
+  
     const contestStatusLabel = () => {
-      const isStarted = isContestStarted(started_at);
+      const isHappensNow = isContestStarted(started_at);
       return (
-        (isStarted && (
-          <div className="contest-status coming">At Progress</div>
-        )) || <div className="contest-status active">Starts Soon</div>
+        (isHappensNow && (
+        <div className="contest-status happens-now">
+          {translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)]}
+        </div>
+        )) ||
+        <div className="contest-status starts-soon">
+          {translations[getTranslationStr('contest_statuses.starts_soon', activeLanguage)]}
+        </div>
       );
     };
-
-    const contestAvatar = pathToPhoto(photo_path);
 
     return (
       <div className="item contest-item" key={contest_id}>
@@ -43,8 +49,7 @@ const ContestItem = WithLanguageProps(
         </h4>
       </div>
     );
-  }
-);
+  }, ['name', 'description']);
 
 const ContestItems = ({ history, contestsData }) => {
   const [contestItems, setContestItems] = useState([]);

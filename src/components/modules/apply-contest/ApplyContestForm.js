@@ -1,13 +1,14 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { apiService } from "services/api.service";
 import { setRecentSubmittionSuccess } from "reducers/actions/contests.actions";
-import { buildDropdownOptions } from "utils/data.util";
-import { signUp } from "reducers/actions/auth.actions";
+import { buildDropdownOptions, getTranslationStr } from "utils/data.util";
+import { signIn } from "reducers/actions/auth.actions";
 
 import CommonSelectDropdown from "components/common/CommonSelectDropdown";
-import Message from "components/common/Message";
+import CommonMessage from "components/common/CommonMessage";
 
 const ApplyContestForm = ({
   children,
@@ -31,7 +32,8 @@ const ApplyContestForm = ({
     ...ui
   }));
   const [contestFormFields, setContestFormFields] = useState({});
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmittionSuccess, setSubmittionIsSuccess] = useState(false);
+  const [isSubmittionPending, setIsSubmittionPending] = useState(false)
   const [isLogIsSuccess, setIsLogInSuccess] = useState(false);
 
   useEffect(() => {
@@ -78,10 +80,10 @@ const ApplyContestForm = ({
           "contests/submittions"
         );
         const contestSubmittionsResponseBody = await contestSubmittionResponse.json();
-        if (contestSubmittionsResponseBody.code !== 400) {
+        if (contestSubmittionsResponseBody.isSuccess) {
           dispatch(setRecentSubmittionSuccess());
-          setIsSuccess(true);
-          setTimeout(() => close(), 5000);
+          setIsSubmittionPending(true);
+          close();
         }
       }
     }
@@ -102,47 +104,77 @@ const ApplyContestForm = ({
     });
   };
 
-  const trySignUp = () => {
-    const { email, password, passwordRepeat } = contestFormFields;
-    if (password && passwordRepeat && email) {
-      dispatch(signUp({ email, password }, dispatch));
+  const trySignIn = () => {
+    const { email, password } = contestFormFields;
+    if (password && email) {
+      dispatch(signIn({ email, password }, dispatch));
     }
   };
 
-  const formDefaultPart = () => {
+  const isFormValid = () => {
+    return contestFormFields.imageDesc && contestFormFields.categoryID;
+  };
+
+  const submittionPart = () => {
     return (
-      <div className="photo-details">
-        <div className="submit-photo-form-field">
+      <div className="apply-contest-submittion-data">
+        <div className="form-field apply-contest-form-field">
           <label>Describe photo from your words</label>
           <input
+            className="common-input"
             id="photo-description"
             name="imageDesc"
             onChange={onChange}
             placeholder="Describe photo from your words"
           />
         </div>
-        <div className="submit-photo-form-field">
+        <div className="form-field apply-contest-form-field">
           <label>Link to Facebook</label>
           <input
+            className="common-input"
             name="linkToFacebook"
             placeholder="Link to Facebook"
             onChange={onChange}
           />
         </div>
-        <div className="submit-photo-form-field">
+        <div className="form-field apply-contest-form-field">
           <label>Link to Instagram</label>
           <input
+            className="common-input"
             name="linkToInstagram"
             placeholder="Link to Instagram"
             onChange={onChange}
           />
         </div>
-        <CommonSelectDropdown
-          values={categoriesOptions}
-          onSelect={onPhotoCategorySelected}
-          dropdownID="selectPhotoCategory"
-          label="Select photo category"
-        />
+        <div className="form-field apply-contest-form-field">
+          <CommonSelectDropdown
+            values={categoriesOptions}
+            onSelect={onPhotoCategorySelected}
+            dropdownID="selectPhotoCategory"
+            label="Select photo category"
+          />
+        </div>
+        <div className="form-field apply-contest-form-field">
+          <label>Message for peoples who like your photo</label>
+          <input
+            className="common-input"
+            placeholder="Message for followers"
+            onChange={onChange}
+            name="singature_for_followers"
+          />
+        </div>
+        <div className="upload-input-container">{children}</div>
+        <span className="uploaded-image-name">{lastUploadedImage?.name}</span>
+        <div className="submit-photo-container">
+          <button
+            onClick={submitContestForm}
+            className="btn-apply-photo"
+            type="button"
+            disabled={!isLoggedIn && !isFormValid()}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     );
   };
@@ -150,76 +182,52 @@ const ApplyContestForm = ({
   const needAuthPart = () => {
     return (
       <div className="sign-up-details">
-        <span className="no-logged-in-message">
-          You must be logged in before start to submit photos.
-        </span>
-        <div className="submit-photo-form-field">
-          <label>Email</label>
+        <CommonMessage
+          text="You must be logged in before start to submit photos."
+          theme="warning-message"
+        />
+        <div className="form-field apply-contest-form-field">
+          <label>{translations[getTranslationStr("forms.common.email", activeLanguage)]}</label>
           <input
             id="email"
             name="email"
-            placeholder="Enter your Email"
+            className="common-input"
+            placeholder={translations[getTranslationStr("forms.common.email", activeLanguage)]}
             onChange={onChange}
           />
         </div>
-        <div className="submit-photo-form-field">
-          <label>Password</label>
+        <div className="form-field apply-contest-form-field">
+          <label>{translations[getTranslationStr("forms.common.password", activeLanguage)]}</label>
           <input
             id="password"
             name="password"
-            placeholder="Enter your Password"
+            className="common-input"
+            placeholder={translations[getTranslationStr("forms.common.password", activeLanguage)]}
             onChange={onChange}
             type="password"
           />
         </div>
-        <div className="submit-photo-form-field">
-          <label>Repeat password</label>
-          <input
-            id="password-repeat"
-            name="passwordRepeat"
-            placeholder="Repeat your password"
-            onChange={onChange}
-            type="password"
-          />
-        </div>
-        {isSuccess && <p className="">Photo submitted.</p>}
-        <div className="complete-sign-up">
-          <button onClick={trySignUp} className="btn-apply-photo" type="button">
-            Sign Up
+        <p className="apply-contest-get-sign-up">
+          {translations[getTranslationStr("common.forms.sign_in.get_sign_up", activeLanguage)]}
+          <Link to="/sign-up">
+            {translations[getTranslationStr("common.button_actions.sign_up", activeLanguage)]}
+          </Link>
+      </p>
+        <div className="apply-contest-sign-in-container">
+          <button onClick={trySignIn} className="btn-apply-photo" type="button">
+            {translations[getTranslationStr("common.button_actions.sign_in", activeLanguage)]}
           </button>
         </div>
       </div>
     );
   };
 
-  const isFormValid = () => {
-    return contestFormFields.imageDesc && contestFormFields.categoryID;
-  };
-
   return (
     <form className="submit-photo-form">
-      {isLogIsSuccess && <Message text="You are logged in." />}
-      {isSuccess && <Message text="New submittion sended." />}
-      {isLoggedIn ? (
-        formDefaultPart()
-      ) : (
-        <React.Fragment>
-          {needAuthPart()}
-          {formDefaultPart()}
-        </React.Fragment>
-      )}
-      <div className="upload-photo-input">{children}</div>
-      <span className="last-uploaded-image">{lastUploadedImage?.name}</span>
-      <div className="complete-photo-upload">
-        <button
-          onClick={submitContestForm}
-          className="btn-apply-photo"
-          type="button"xf
-          disabled={!isLoggedIn && !isFormValid()}
-        >
-          Submit
-        </button>
-      </div>
+      {isLogIsSuccess && <CommonMessage text="You are logged in." theme="success-message" />}
+      {isSubmittionPending && <CommonMessage text="You are redirecting to pay for submittion.. Waiting." theme="seccess-message" />}
+      {isSubmittionSuccess && <CommonMessage text="New submittion sended." theme="seccess-message" />}
+      {isLoggedIn ? submittionPart() : needAuthPart()}
     </form>
   );
 };

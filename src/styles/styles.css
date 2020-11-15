@@ -1,9 +1,0 @@
-.contest-details-preview {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1.5vh;
-}
-
-.contest-details-preview > span:nth-child(1) {
-  font-weight: 800;
-}

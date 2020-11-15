@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
 import { signUp } from "reducers/actions/auth.actions";
+import { getTranslationStr } from 'utils/data.util';
 
 import CommonCheckbox from "components/common/CommonCheckbox";
 
 const SignUpForm = ({ switchToSignInMode, history }) => {
-  const { isLoggedIn } = useSelector(({ auth }) => auth || {});
+  const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
   const [values] = useState({
     name: "",
     email: "",
@@ -36,13 +37,13 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      history.push("/profile");
+      history.push("/profile-settings");
     }
   }, [isLoggedIn]);
 
   return (
     <div className="sign-up-form-container">
-      <h1 className="sign-in-text">Create account</h1>
+      <h1 className="sign-up-text">Create account</h1>
       <Formik
         initialValues={values}
         validate={validateForm}
@@ -54,17 +55,18 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
           isSubmitting,
           getFieldProps,
           setFieldValue,
+          values,
         }) => (
           <form onSubmit={handleSubmit} className="sign-up-form">
             <div className="form-field">
               <input
                 className="common-input"
                 type="text"
-                name="name"
-                id="name"
-                placeholder={"Name"}
+                name="first_name"
+                id="first_name"
+                placeholder={translations[getTranslationStr("forms.common.first_name", activeLanguage)]}
                 onBlur={handleBlur}
-                {...getFieldProps("name")}
+                {...getFieldProps("first_name")}
               />
             </div>
             <div className="form-field">
@@ -73,7 +75,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 type="email"
                 name="email"
                 id="email"
-                placeholder={"Email"}
+                placeholder={translations[getTranslationStr("forms.common.email", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("email")}
               />
@@ -84,7 +86,8 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder={"Password"}
+                autoComplete="password"
+                placeholder={translations[getTranslationStr("forms.common.password", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("password")}
               />
@@ -95,7 +98,8 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 type="password"
                 name="repeatPassword"
                 id="repeatPassword"
-                placeholder={"Repeat Password"}
+                autoComplete="repeatPassword"
+                placeholder={translations[getTranslationStr("forms.common.repeat_password", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("repeatPassword")}
               />
@@ -103,6 +107,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
             <CommonCheckbox
               name="isPro"
               label="You are Pro?"
+              isChecked={values.isPro}
               onChange={(value) => setFieldValue("isPro", value)}
             />
             <button
@@ -110,13 +115,13 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
               disabled={isSubmitting}
               className="btn btn-submit"
             >
-              Sign Up
+              {translations[getTranslationStr("common.button_actions.submit", activeLanguage)]}
             </button>
             <div className="sign-up-link">
               <span>
-                If you already have account you probably want to
+                {translations[getTranslationStr("common.forms.sign_up.get_sign_in", activeLanguage)]}
                 <button className="btn-link" onClick={switchToSignInMode}>
-                  Sign In
+                  {translations[getTranslationStr('common.button_actions.sign_in', activeLanguage)]}
                 </button>
               </span>
             </div>

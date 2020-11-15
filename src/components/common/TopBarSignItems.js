@@ -3,19 +3,21 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { ApiService } from "services/api.service";
+import { getTranslationStr } from "utils/data.util";
 
 const TopBarSignItems = () => {
-  const { activeNavItem } = useSelector(({ ui }) => ui);
+  const { translations, activeLanguage } = useSelector(({ ui }) => ui);
+
   return (
     <ul className="sign-top-menu">
-      {ApiService.getSignItems().map((one) => {
+      {ApiService.getSignItems().map(item => {
         return (
-          <li key={one.action}>
+          <li key={item.action}>
             <Link
-              to={one.action}
-              className={`${one.action} sign-top-menu-link`}
+              to={item.action}
+              className={`${item.action} sign-top-menu-link`}
             >
-              {one.name}
+              {translations[getTranslationStr(item.i18n, activeLanguage)]}
             </Link>
           </li>
         );

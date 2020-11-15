@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import IconComponent from "components/common/IconComponent";
+import IconComponent from "components/common/CommonIcon";
 
 const ArrowDownBtn = ({ onPress, iconSrc, label, opened }) => {
   return (
@@ -9,7 +9,7 @@ const ArrowDownBtn = ({ onPress, iconSrc, label, opened }) => {
       type="button"
       className={`${(opened && "active") || ""} common-select-btn`}
     >
-      <label className="common-select-dropdown-label">{label}</label>
+      <label className="common-label">{label}</label>
       <IconComponent source={iconSrc} />
     </button>
   );

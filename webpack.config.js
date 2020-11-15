@@ -15,7 +15,9 @@ module.exports = {
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
-    open: true,
+    https: true,
+    // hot: true,
+    // lazy: true,
   },
   resolve: {
     alias: {
@@ -39,6 +41,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(env.MODE),
       "process.env.BACKEND_URL": JSON.stringify(env.BACKEND_URL),
+      'process.env.BACKEND_FILES_URL': JSON.stringify(env.BACKEND_FILES_URL),
       "process.env.BACKEND_VERSION": JSON.stringify(env.BACKEND_VERSION),
     }),
   ],
@@ -54,12 +57,27 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg|png|jpg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(png|jpg|gif|ttf)$/i,
+        use: [
+            {
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                },
+            },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: "file-loader",
-          },
-        ],
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
       },
     ],
   },

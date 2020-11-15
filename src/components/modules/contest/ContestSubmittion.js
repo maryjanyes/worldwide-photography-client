@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import IconComponent from "components/common/IconComponent";
+import IconComponent from "components/common/CommonIcon";
 
 import { apiService } from "services/api.service";
 import {

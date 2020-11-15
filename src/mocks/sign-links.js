@@ -1,11 +1,11 @@
 const signItems = [
   {
     action: "/sign-in",
-    name: "Sign In",
+    i18n: "nav_links.sign_in",
   },
   {
     action: "/sign-up",
-    name: "Sign Up",
+    i18n: "nav_links.sign_up",
   },
 ];
 

@@ -1,14 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import {
   DashboardScreen,
   ContestScreen,
-  ApplyContestScreen,
   SignInScreen,
   JudleClassesScreen,
   AllArticlesScreen,
-  ContestCategoryScreen,
   GalleryScreen,
   PrivacyAndConditionsScreen,
   AllContestsScreen,
@@ -16,9 +15,10 @@ import {
   ArticleDetailsScreen,
 } from "screens";
 
-import TopBarNavigation from "components/common/TopBarComponent";
+import TopBarNavigation from "components/common/TopBar";
 
 function AppNavigation() {
+  const { isLoggedIn } = useSelector(({ auth }) => auth);
   return (
     <React.Fragment>
       <Router>
@@ -38,7 +38,7 @@ function AppNavigation() {
           <Route path="/articles/:article_id" component={ArticleDetailsScreen} />
           <Route path="/gallery" component={GalleryScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
-          <Route path="/profile-settings" component={ProfileScreen} />
+          {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
           {/** <Route
             path="/contest-categories/:category_id"
             component={ContestCategoryScreen}

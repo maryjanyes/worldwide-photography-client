@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { pathToPhoto } from "../../../utils/data.util";
+import { pathToPhoto } from "utils/data.util";
 
 const ContestPhotoDetailsFrame = ({ photo, author }) => {
   const photoSrc = useMemo(() => {

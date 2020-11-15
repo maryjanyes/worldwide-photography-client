@@ -13,7 +13,7 @@ const CategoryContests = WithLanguageProps(({ name, contests }) => {
       </div>
     </div>
   );
-});
+}, ['name']);
 
 function AllContestScreen({ history }) {
   const [contestsByCategories, setContestsByCategories] = useState([]);
@@ -40,15 +40,17 @@ function AllContestScreen({ history }) {
       <span className="page-title">All Contests</span>
       {contests.length > 0 && (
         <div className="all-contests">
-          {contestsByCategories.map((category) => (
-            <div key={category.category_id} className="all-contests__category">
-              <CategoryContests
-                {...category}
-                history={history}
-                key={category.category_id}
-              />
-            </div>
-          ))}
+          {contestsByCategories.length > 0 && (
+            contestsByCategories.map((category) => (
+              <div key={category.category_id} className="all-contests__category">
+                <CategoryContests
+                  {...category}
+                  history={history}
+                  key={category.category_id}
+                />
+              </div>
+            ))
+          ) || <p className="no-section-content">No contest categories.</p>}
         </div>
       ) || <p className="no-section-content">No contests in categories.</p>}
     </div>

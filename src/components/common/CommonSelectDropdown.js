@@ -31,8 +31,7 @@ const CommonSelectDropdown = ({
   };
 
   return (
-    <div className="common-select-dropdown-form-field" style={containerStyle}>
-      <div className="common-select-dropdown-box">
+      <div className="common-select-dropdown-container" style={containerStyle}>
         <ArrowDownBtn
           onPress={() => toggle(!isOpen)}
           iconSrc={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_keyboard_arrow_up_black_18dp.png`}
@@ -45,7 +44,6 @@ const CommonSelectDropdown = ({
           </div>
         )}
       </div>
-    </div>
   );
 };
 

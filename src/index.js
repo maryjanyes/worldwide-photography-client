@@ -9,7 +9,6 @@ import "./styles/common.css";
 import "./styles/fonts.css";
 import "./styles/controls.css";
 import "./styles/justify.css";
-import "./styles/styles.css";
 
 class App extends React.Component {
   constructor(props) {

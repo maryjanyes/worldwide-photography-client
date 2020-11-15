@@ -1,15 +1,15 @@
 const navlinks = [
   {
     link: "/gallery",
-    name: "Gallery",
+    i18n: "nav_links.gallery",
   },
   {
     link: "/articles",
-    name: "Articles",
+    i18n: "nav_links.articles",
   },
   {
     link: "/all-contests",
-    name: "All Contests",
+    i18n: "nav_links.contests",
   },
 ];
 

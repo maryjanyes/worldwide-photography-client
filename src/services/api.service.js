@@ -1,16 +1,16 @@
 import navLinks from "mocks/nav-links";
-import signItems from "mocks/sign-items";
+import signLinks from "mocks/sign-links";
 import categoriesLinks from "mocks/contest-categories-links";
-import rightMenuItems from "mocks/right-menu-items";
+import rightMenuItemLinks from "mocks/right-menu-item-links";
 
 import { appLangs } from "services/app-configs.service";
 
 export class ApiService {
   constructor() {
-    const { BACKEND_URL, BACKEND_FILES_URL } = process?.env;
+    const { BACKEND_URL, BACKEND_FILES_URL } = process.env || {};
     this.BACKEND_ENDPOINT = BACKEND_URL || "http://localhost:3000";
     this.BACKEND_FILES_ENDPOINT = BACKEND_FILES_URL || "http://localhost:3002";
-    this.CLIENT_ENDPOINT = "http://localhost:3000";
+    this.CLIENT_ENDPOINT = `${location.protocol}//${location.host}`;
     this.postHeaders = new Headers({
       "Content-Type": "application/json",
     });
@@ -39,9 +39,9 @@ export class ApiService {
   }
 
   insertBlob(formData, contestName) {
-    return new Promise((res) => {
+    return new Promise(res => {
       return fetch(
-        `${this.BACKEND_FILES_ENDPOINT}/uploadPhoto/${contestName}`,
+        `${this.BACKEND_FILES_ENDPOINT}/uploadContestPhoto/${contestName}`,
         {
           body: formData,
           method: "POST",
@@ -77,11 +77,11 @@ export class ApiService {
   }
 
   static getSignItems() {
-    return signItems;
+    return signLinks;
   }
 
   static getMenuItems() {
-    return rightMenuItems;
+    return rightMenuItemLinks;
   }
 }
 

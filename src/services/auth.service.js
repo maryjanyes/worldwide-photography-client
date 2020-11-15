@@ -6,7 +6,7 @@ class AuthService extends ApiService {
   }
 
   async auth(data) {
-    data.email = data.emailOrUsername;
+    data.email = data.emailOrUsername || data.email;
     const response = await this.insertData(data, "users/auth");
     const responsePayload = response.json();
     return responsePayload;

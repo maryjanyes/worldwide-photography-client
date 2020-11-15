@@ -1,15 +1,15 @@
 const dashboardSliderImages = [
   {
     src:
-      "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc2.png",
+      "/assets/images/slider_background_1.png",
   },
   {
     src:
-      "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc3.png",
+      "/assets/images/slider_background_2.png",
   },
   {
     src:
-      "http://localhost:3000/assets/images/dc38547395a3908bd67642926a16ecc4.png",
+      "/assets/images/slider_background_3.png",
   },
 ];
 

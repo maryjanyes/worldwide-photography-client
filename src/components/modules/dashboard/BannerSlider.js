@@ -6,24 +6,20 @@ import { sortItems } from "utils/items.util";
 import dashboardSliderImages from "mocks/dashboard-slider-images";
 import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
 
-const BannerSliderItem = WithLanguageProps(
-  ({ name, images = [], isSelected }) => {
+const BannerSliderItem = WithLanguageProps(({ name, images = [], isSelected }) => {
     return (
-      <div
-        key={name}
-        className={`${(isSelected && "selected ") || ""} owl-slider-item`}
-      >
+      <div key={name} className={`${(isSelected && "selected ") || ""} owl-slider-item`}>
         <button className="owl-slider-item-frame">
           <p className="owl-slider-item-text">{name}</p>
           <div className="owl-slider-images">
-            {images.map(({ src }) => (
-              <img src={src} key={src} />
+            {images.map(({ src }, imageID) => (
+              <img src={src} key={imageID} />
             ))}
           </div>
         </button>
       </div>
     );
-  }
+  }, ['name', 'description']
 );
 
 const BannerSliderControls = ({ change, active }) => {
@@ -48,7 +44,7 @@ const BannerSlider = () => {
   const sliderImages = dashboardSliderImages;
 
   const selectItem = (itemID) => {
-    if (itemID >= sliderImages.length - 1 || itemID < 0) {
+    if (itemID > sliderImages.length - 1 || itemID < 0) {
       return;
     }
     setItems(
@@ -76,11 +72,10 @@ const BannerSlider = () => {
   useEffect(() => {
     setItems(
       contests
-        // .filter((one, id) => id <= 2)
-        .map((one, id) => {
-          one.images = sliderImages;
-          one.isSelected = id === 0;
-          return one;
+        .map((item, itemID) => {
+          item.images = sliderImages;
+          item.isSelected = itemID === 0;
+          return item;
         })
     );
   }, [contests]);

@@ -10,13 +10,20 @@ const signSuccess = (is_auth, response) => ({
   payload: response,
 });
 
+const signError = payload => ({
+  type: "[AUTH] AUTH_ERROR",
+  payload,
+})
+
 const sign = async (data, dispatch, is_auth) => {
   const response = await AuthService[(is_auth && "auth") || "register"](data);
-  if (response.code !== 400 && response.message !== "Password do not match.") {
+  if (response.isSuccess && response.data?.message !== "Password do not match.") {
     if (is_auth) {
-      dispatch(handleAuthToken(response.token));
+      dispatch(handleAuthToken(response.data?.token));
     }
-    dispatch(signSuccess(is_auth, response.data || response.user));
+    dispatch(signSuccess(is_auth, response.data?.user));
+  } else {
+    dispatch(signError(response.data?.message));
   }
 };
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
 import { signIn } from "reducers/actions/auth.actions";
+import { getTranslationStr } from 'utils/data.util';
 
 const SignInForm = ({ backToSignUpMode, history }) => {
   const dispatch = useDispatch();
@@ -36,14 +37,10 @@ const SignInForm = ({ backToSignUpMode, history }) => {
             <div className="form-field">
               <input
                 className="common-input"
-                type="username"
-                name="username"
-                id="username"
-                placeholder={
-                  translations[
-                    `sign_in_form.email_or_username.${activeLanguage}`
-                  ]
-                }
+                type="text"
+                name="email"
+                id="email"
+                placeholder={translations[getTranslationStr("forms.common.email", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("emailOrUsername")}
               />
@@ -54,7 +51,8 @@ const SignInForm = ({ backToSignUpMode, history }) => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder={translations["sign_in_form.password.en"]}
+                autoComplete="password"
+                placeholder={translations[getTranslationStr("forms.common.password", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("password")}
               />
@@ -64,13 +62,13 @@ const SignInForm = ({ backToSignUpMode, history }) => {
               disabled={isSubmitting}
               className="btn btn-submit"
             >
-              Submit
+              {translations[getTranslationStr("common.button_actions.submit", activeLanguage)]}
             </button>
             <div className="sign-in-link">
               <span>
-                If you want to
+                {translations[getTranslationStr("common.forms.sign_in.get_sign_up", activeLanguage)]}
                 <button className="btn-link" onClick={backToSignUpMode}>
-                  Sign Up
+                  {translations[getTranslationStr("common.button_actions.sign_up", activeLanguage)]}
                 </button>
               </span>
             </div>

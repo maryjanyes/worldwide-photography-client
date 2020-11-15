@@ -4,6 +4,7 @@ import UsersService from "services/users.service";
 import ArticlesService from "services/articles.service";
 import { apiService } from "services/api.service";
 import appConfigsService from "services/app-configs.service";
+import { isDataValid } from "utils/data.util";
 
 import {
   setContests,
@@ -16,7 +17,6 @@ import { setPhotosSuccess } from "./photos.actions";
 import { setJudlesSuccess, setUsersSuccess } from "./users.actions";
 import { checkExistedAccountAndSignIn } from "./auth.actions";
 import { setArticlesSuccess } from "./articles.actions";
-import { isDataValid } from "../../utils/data.util";
 
 export const initAppData = (dispatch) => {
   ContestsService.getContets().then((contestsResponse) => {
@@ -55,14 +55,13 @@ export const initAppData = (dispatch) => {
     }
   });
   apiService.getAppTranslations().then((translationsData) => {
-    dispatch(
-      setTranslations(
-        translationsData.data?.reduce((acc, tr) => {
-          acc[`${tr.key}.${tr.lang}`] = tr.value;
-          return acc;
-        }, {})
-      )
-    );
+    const newTranslationData = translationsData.data?.reduce((acc, tr) => {
+      acc[`${tr.key}.${tr.lang}`] = tr.value;
+      return acc;
+    }, {})
+    if (newTranslationData) {
+      dispatch(setTranslations(newTranslationData));
+    }
   });
   const type = "[APP] INIT_DATA";
   dispatch(checkExistedAccountAndSignIn());

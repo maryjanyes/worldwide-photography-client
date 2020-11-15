@@ -7,7 +7,7 @@ import { pathToPhoto } from "utils/data.util";
 const ContestDetails = ({ photo_path, name, description }) => {
   return (
     <div className="contest-details">
-      <img src={pathToPhoto(photo_path)} />
+      <img className="contest-details-image" src={pathToPhoto(photo_path)} />
       <div className="contest-details-preview">
         <p className="contest-details-preview-name">{name}</p>
         <p className="contest-details-preview-description">{description}</p>
@@ -16,4 +16,4 @@ const ContestDetails = ({ photo_path, name, description }) => {
   );
 };
 
-export default WithLanguageProps(ContestDetails);
+export default WithLanguageProps(ContestDetails, ['name', 'description']);
