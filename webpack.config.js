@@ -16,6 +16,7 @@ module.exports = {
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
+    https: true,
   },
   resolve: {
     alias: {

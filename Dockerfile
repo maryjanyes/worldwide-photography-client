@@ -8,5 +8,5 @@ RUN npm install --silent
 COPY . /photo_client
 RUN npm run build
 COPY . /photo_client
-EXPOSE 3000
+EXPOSE 3001
 CMD ["npm", "start"]
