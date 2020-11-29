@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { ApiService } from "services/api.service";
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 const ContestCategories = () => {
   const {

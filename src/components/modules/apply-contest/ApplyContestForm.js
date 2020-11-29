@@ -41,7 +41,7 @@ const ApplyContestForm = ({
       setIsLogInSuccess(true);
     }
     if (recentSubmittionSuccess) {
-      setIsSuccess(true);
+      setSubmittionIsSuccess(true);
     }
   }, [isLoggedIn, recentSubmittionSuccess]);
 
@@ -51,39 +51,41 @@ const ApplyContestForm = ({
   }, [contestCategories]);
 
   const submitContestForm = async () => {
-    const fileData = new FormData();
-    fileData.append("file", image);
-    const insertContestPhotoResponse = await apiService.insertBlob(
-      fileData,
-      contestName
-    );
-    if (insertContestPhotoResponse.success) {
-      const photoData = {
-        author_id: userData.user_id,
-        cetegory_id: contestFormFields.categoryID,
-        description: contestFormFields.imageDesc,
-        link_to_file: insertContestPhotoResponse.fileName,
-        camera_details_id: 0,
-      };
-      const photoResponse = await apiService.insertData(
-        photoData,
-        "photos/submitPhoto"
+    if (image) {
+      const fileData = new FormData();
+      fileData.append("file", image);
+      const insertContestPhotoResponse = await apiService.insertBlob(
+        fileData,
+        contestName
       );
-      const photoResponseBody = await photoResponse.json();
-      if (photoResponseBody.code !== 400) {
-        const contestData = {
-          contest_id: contestID,
-          photo_id: photoResponseBody.response.generatedMaps[0].photo_id,
+      if (insertContestPhotoResponse.success) {
+        const photoData = {
+          author_id: userData.user_id,
+          cetegory_id: contestFormFields.categoryID,
+          description: contestFormFields.imageDesc,
+          link_to_file: insertContestPhotoResponse.fileName,
+          camera_details_id: 0,
         };
-        const contestSubmittionResponse = await apiService.insertData(
-          contestData,
-          "contests/submittions"
+        let photoResponse = await apiService.insertData(
+          photoData,
+          "images/submittion"
         );
-        const contestSubmittionsResponseBody = await contestSubmittionResponse.json();
-        if (contestSubmittionsResponseBody.isSuccess) {
-          dispatch(setRecentSubmittionSuccess());
-          setIsSubmittionPending(true);
-          close();
+        photoResponse = await photoResponse.json();
+        if (photoResponse.generatedMaps[0]?.photo_submittion_details_id) {
+          const contestData = {
+            contest_id: contestID,
+            photo_id: photoResponse.generatedMaps[0].photo_submittion_details_id,
+          };
+          let contestSubmittionResponse = await apiService.insertData(
+            contestData,
+            "contests/submittions"
+          );
+          contestSubmittionResponse = await contestSubmittionResponse.json();
+          if (contestSubmittionResponse.isSuccess) {
+            dispatch(setRecentSubmittionSuccess());
+            setIsSubmittionPending(true);
+            close();
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 import { pathToPhoto } from "utils/data.util";
 

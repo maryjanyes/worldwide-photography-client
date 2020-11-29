@@ -23,7 +23,6 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     const userPhotos = getPhotosByUser(allPhotos, userData?.user_id);
-    console.log(userPhotos, 'User photos');
     if (userPhotos) {
       setMyPhotos(userPhotos);
     }
@@ -33,7 +32,7 @@ const ProfileScreen = () => {
     <div className="page-profile">
       <h1>Manage Profile</h1>
       <Formik initialValues={values}>
-      {({ handleSubmit, getFieldProps, isSubmitting }) => (
+      {({ handleSubmit, getFieldProps, handleChange, isSubmitting }) => (
         <form className="page-profile-update-form">
           <div className="form-field update-profile-form-field">
             <label>{translations[getTranslationStr("forms.common.username", activeLanguage)]}</label>
@@ -43,24 +42,26 @@ const ProfileScreen = () => {
               name="username"
               id="username"
               placeholder={translations["sign_in_form.password.en"]}
+              onChange={handleChange}
               {...getFieldProps("username")}
             />
           </div>
           <div className="form-field update-profile-form-field">
-            <label>{/**translations[getTranslationStr("forms.common.alias", activeLanguage)]**/}Alias</label>
+            <label>{translations[getTranslationStr("forms.common.alias", activeLanguage)]}</label>
             <input
               className="common-input"
               type="text"
               name="alias"
               id="alias"
               placeholder={translations["sign_in_form.password.en"]}
+              onChange={handleChange}
               {...getFieldProps("alias")}
             />
           </div>
-          {/** <div className="form-field">
-            <label>{translations[getTranslationStr("forms.common.avatar_path", activeLanguage)]}</label>
-            <UploadInput onChangePhotoUrl={newPath => setMyPhotoUrl(newPath)} containerStyle={{}} />
-          </div> **/}
+          <div className="form-field">
+            <label>{translations[getTranslationStr("forms.common.profile_photo", activeLanguage)]}</label>
+            <UploadInput onChangePhotoUrl={newPath => setMyPhotoUrl(newPath)} photoUrl={myPhotoUrl} />
+          </div>
           <div className="form-field update-profile-form-field">
             <label>{translations[getTranslationStr("forms.common.password", activeLanguage)]}</label>
             <input
@@ -69,6 +70,7 @@ const ProfileScreen = () => {
               name="password"
               id="password"
               placeholder={translations["sign_in_form.password.en"]}
+              onChange={handleChange}
               {...getFieldProps("password")}
             />
           </div>

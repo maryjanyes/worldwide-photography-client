@@ -29,7 +29,7 @@ const TopMenu = () => {
           {activeItems.map((item) => (
             <li
               className="top-menu-items__item"
-              key={item[`${appConfigs.activeLang}_name`]}
+              key={item.to || item.action}
             >
               <button
                 onClick={

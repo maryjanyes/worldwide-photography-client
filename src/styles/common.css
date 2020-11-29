@@ -13,6 +13,10 @@ button {
   outline: none;
 }
 
+.sign-up-details .notification-message {
+  margin-bottom: 5vh;
+}
+
 .site-logo {
   position: absolute;
   width: 150px;

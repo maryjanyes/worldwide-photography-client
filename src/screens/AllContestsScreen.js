@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 import ContestDetails from "components/modules/contest/ContestDetails";
 
 const CategoryContests = WithLanguageProps(({ name, contests }) => {
@@ -9,7 +9,7 @@ const CategoryContests = WithLanguageProps(({ name, contests }) => {
     <div className="contest-category" key={name}>
       <span className="contest-category-name">{name}</span>
       <div className="contest-category-contests">
-        {contests.map(contest => <ContestDetails {...contest} />)}
+        {contests.map(contest => <ContestDetails {...contest} key={name} />)}
       </div>
     </div>
   );

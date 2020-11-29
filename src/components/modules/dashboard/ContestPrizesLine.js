@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
-import WithLanguageProps from 'components/common/wrappers/WithLanguageProps';
+import WithCarouselRef from "components/wrappers/WithCarouselRef";
+import WithLanguageProps from 'components/wrappers/WithLanguageProps';
 
 import { CategoryItemLink } from "components/modules/dashboard/ContestCategories";
 

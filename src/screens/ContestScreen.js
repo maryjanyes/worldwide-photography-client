@@ -14,7 +14,7 @@ import UploadInput from "components/common/CommonUploadInput";
 import ModalComponent from "components/common/CommonModal";
 import TabItems from "components/common/TabItems";
 import SocialSharing from "components/common/SocialSharing";
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 import contestsService, { ContestsService } from "services/contests.service";
 import { setUploadedImage } from "reducers/actions/contests.actions";

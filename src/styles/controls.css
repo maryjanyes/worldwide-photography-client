@@ -177,11 +177,12 @@ button.btn-submit-photo {
 .common-select-btn .common-icon {
   transform: rotateZ(180deg);
   position: relative;
+  bottom: 0.15vh;
 }
 
 .common-select-btn.active .common-icon {
   transform: none;
-  top: 0;
+  bottom: 0;
 }
 
 .common-select-btn .common-label {

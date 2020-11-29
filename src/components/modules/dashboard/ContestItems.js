@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import WithCarouselRef from "components/common/wrappers/WithCarouselRef";
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithCarouselRef from "components/wrappers/WithCarouselRef";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 import { isContestStarted, pathToPhoto, getTranslationStr } from "utils/data.util";
 

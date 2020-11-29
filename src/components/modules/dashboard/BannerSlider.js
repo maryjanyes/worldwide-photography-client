@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { sortItems } from "utils/items.util";
 
 import dashboardSliderImages from "mocks/dashboard-slider-images";
-import WithLanguageProps from "components/common/wrappers/WithLanguageProps";
+import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 const BannerSliderItem = WithLanguageProps(({ name, images = [], isSelected }) => {
     return (
