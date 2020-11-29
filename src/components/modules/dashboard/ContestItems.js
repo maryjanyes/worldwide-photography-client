@@ -4,24 +4,28 @@ import { useSelector } from "react-redux";
 import WithCarouselRef from "components/wrappers/WithCarouselRef";
 import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
-import { isContestStarted, pathToPhoto, getTranslationStr } from "utils/data.util";
+import { isTimePassed, pathToPhoto, getTranslationStr } from "utils/data.util";
 
 const ContestItem = WithLanguageProps(
   ({ name, description, contest_id, started_at, explore, photo_path }) => {
     const { translations, activeLanguage } = useSelector(({ ui }) => ui);
-    const contestAvatar = pathToPhoto(photo_path);
+    const contestAvatarStyle = {
+      backgroundImage: `url(${pathToPhoto(photo_path)}`,
+    };
   
-    const contestStatusLabel = () => {
-      const isHappensNow = isContestStarted(started_at);
+    const getContestStatus = () => {
+      const atProgress = isTimePassed(started_at);
       return (
-        (isHappensNow && (
-        <div className="contest-status happens-now">
-          {translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)]}
-        </div>
+        (atProgress && (
+          <div className="contest-status happens-now">
+            {translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)]}
+          </div>
         )) ||
-        <div className="contest-status starts-soon">
-          {translations[getTranslationStr('contest_statuses.starts_soon', activeLanguage)]}
-        </div>
+        (
+          <div className="contest-status starts-soon">
+            {translations[getTranslationStr('contest_statuses.starts_soon', activeLanguage)]}
+          </div>
+        )
       );
     };
 
@@ -30,11 +34,9 @@ const ContestItem = WithLanguageProps(
         <h4 className="contest-item-card">
           <div
             className="contest-item-card-header"
-            style={{
-              backgroundImage: `url(${contestAvatar}`,
-            }}
+            style={contestAvatarStyle}
           >
-            {contestStatusLabel()}
+            {getContestStatus()}
           </div>
           <div className="contest-item-card-body">
             <p className="contest-name">{name}</p>
@@ -43,7 +45,7 @@ const ContestItem = WithLanguageProps(
               onClick={() => explore(contest_id)}
               className="btn btn-simple btn-explore-contest"
             >
-              Explore
+              {translations[getTranslationStr('common.actions.explore', activeLanguage)]}
             </button>
           </div>
         </h4>
@@ -71,7 +73,7 @@ const ContestItems = ({ history, contestsData }) => {
     <div className="contest-items">
       {canDisplayContests && (
         <WithCarouselRef speed={4000}>
-          {contestItems.map((contest) => (
+          {contestItems.map((contest) => contest.name && (
             <div key={contest.contest_id}>
               <ContestItem
                 {...contest}

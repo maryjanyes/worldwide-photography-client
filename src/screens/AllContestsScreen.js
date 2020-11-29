@@ -7,8 +7,8 @@ import ContestDetails from "components/modules/contest/ContestDetails";
 const CategoryContests = WithLanguageProps(({ name, contests }) => {
   return (
     <div className="contest-category" key={name}>
-      <span className="contest-category-name">{name}</span>
-      <div className="contest-category-contests">
+      <span className="contest-category__name">{name}</span>
+      <div className="contest-category__contests">
         {contests.map(contest => <ContestDetails {...contest} key={name} />)}
       </div>
     </div>
@@ -17,15 +17,11 @@ const CategoryContests = WithLanguageProps(({ name, contests }) => {
 
 function AllContestScreen({ history }) {
   const [contestsByCategories, setContestsByCategories] = useState([]);
-  const { contests, contestCategories } = useSelector(
-    ({ contests }) => contests
-  );
+  const { contests, contestCategories } = useSelector(({ contests }) => contests);
 
   const getContestsByCategories = () => {
-    return contestCategories && contestCategories.map((category) => {
-      category.contests = contests.filter(
-        (contest) => contest.category_id === category.contest_category_id
-      );
+    return contestCategories && contestCategories.map(category => {
+      category.contests = (contests || []).filter(contest => contest.category_id === category.contest_category_id);
       return category;
     }) || [];
   };

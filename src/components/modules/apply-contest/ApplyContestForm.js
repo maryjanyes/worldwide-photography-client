@@ -58,12 +58,14 @@ const ApplyContestForm = ({
         fileData,
         contestName
       );
-      if (insertContestPhotoResponse.success) {
+      if (insertContestPhotoResponse.isSuccess) {
         const photoData = {
           author_id: userData.user_id,
           cetegory_id: contestFormFields.categoryID,
           description: contestFormFields.imageDesc,
-          link_to_file: insertContestPhotoResponse.fileName,
+          link_to_file: `ContestSubmittionImage/${insertContestPhotoResponse.fileName}`,
+          link_to_facebook: contestFormFields.linkToFacebook,
+          link_to_instagram: contestFormFields.linkToInstagram,
           camera_details_id: 0,
         };
         let photoResponse = await apiService.insertData(
@@ -71,10 +73,11 @@ const ApplyContestForm = ({
           "images/submittion"
         );
         photoResponse = await photoResponse.json();
-        if (photoResponse.generatedMaps[0]?.photo_submittion_details_id) {
+        const submittionID = photoResponse.generatedMaps[0]?.photo_submittion_details_id;
+        if (submittionID) {
           const contestData = {
             contest_id: contestID,
-            photo_id: photoResponse.generatedMaps[0].photo_submittion_details_id,
+            photo_id: submittionID,
           };
           let contestSubmittionResponse = await apiService.insertData(
             contestData,
@@ -172,7 +175,7 @@ const ApplyContestForm = ({
             onClick={submitContestForm}
             className="btn-apply-photo"
             type="button"
-            disabled={!isLoggedIn && !isFormValid()}
+            disabled={!isLoggedIn || !isFormValid()}
           >
             Submit
           </button>

@@ -21,22 +21,28 @@ const TopMenu = () => {
     item.onlyLoggedIn ? isLoggedIn : true
   );
 
+  const doAction = item => {
+    dispatch(authActions[item.action]())
+    toggleMenu()
+  }
+
+  const doNavigate = item => {
+    navigate(item.to)
+    toggleMenu()
+  }
+
   return (
     <div className="top-menu">
       <button className="menu-icon icon-btn" onClick={toggleMenu} />
       {opened && (
         <ul className="top-menu-items">
-          {activeItems.map((item) => (
+          {activeItems.map(item => (
             <li
               className="top-menu-items__item"
               key={item.to || item.action}
             >
               <button
-                onClick={
-                  (item.action &&
-                    (() => dispatch(authActions[item.action]()))) ||
-                  (() => navigate(item.to))
-                }
+                onClick={(item.action && (() => doAction(item))) || (() => doNavigate(item))}
                 className="btn btn-link"
               >
                 {translations[`${item.name}.${appConfigs.activeLang.toLowerCase()}`]}

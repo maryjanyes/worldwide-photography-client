@@ -65,7 +65,7 @@ button.btn-submit-photo {
   transition: 0.5s background-color;
   min-width: 140px;
   margin: auto;
-  padding: 2%;
+  padding: 1.5vh 1vh;
   border-radius: 16px;
   font-size: 18px;
   text-transform: uppercase;
@@ -177,16 +177,16 @@ button.btn-submit-photo {
 .common-select-btn .common-icon {
   transform: rotateZ(180deg);
   position: relative;
-  bottom: 0.15vh;
+  bottom: 0.45vh;
 }
 
 .common-select-btn.active .common-icon {
   transform: none;
-  bottom: 0;
+  bottom: -0.05vh;
 }
 
 .common-select-btn .common-label {
   position: relative;
-  top: 0.5h;
+  top: 0.5vh;
   font-size: 18px;
 }

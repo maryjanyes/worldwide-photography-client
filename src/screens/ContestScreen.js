@@ -172,10 +172,8 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
             </div>
           </div>
         </div>
-        <div className="contest-details-bottom info-all-contest-entries">
-          <h2 className="all-entries-text">
-            All contest entries of Contest on WorldwidePhotography.com
-          </h2>
+        <div className="contest-details-bottom all-contest-entries">
+          <h3 className="all-contest-entries__title">All contest entries of Contest on WorldwidePhotography.com</h3>
           <ContestSubmittions submittions={contestSubmittions} />
         </div>
       </div>

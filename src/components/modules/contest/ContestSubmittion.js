@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import IconComponent from "components/common/CommonIcon";
@@ -35,9 +35,15 @@ const ContestSubmittion = ({
     ...photos,
     ...users,
   }));
-  const [photo] = useState(getOneFromData(allPhotos, photo_id, "photo_id"));
   const [author] = useState(getOneFromData(siteUsers, author_id, "author_id"));
-  const photoPath = pathToPhoto(getPhotoUrlFromPhotoObject(photo));
+  const photoPath = useMemo(() => {
+    let path = getOneFromData(allPhotos, photo_id, "photo_submittion_id");
+    if (path) {
+      path = pathToPhoto(getPhotoUrlFromPhotoObject(path))
+    }
+    return path;
+  }, [allPhotos]);
+
   const getIconStyle = () => ({
     ...commonStyle,
     ...(isVisible &&
@@ -48,7 +54,7 @@ const ContestSubmittion = ({
   return (
     <div className="contest-submittion" key={photo_id}>
       <img src={photoPath} className="contest-submittion-photo" />
-      <IconComponent
+      {/** <IconComponent
         source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}
         size={26}
         onClick={() =>
@@ -62,7 +68,7 @@ const ContestSubmittion = ({
           })
         }
         containerStyle={getIconStyle()}
-      />
+      /> **/}
     </div>
   );
 };

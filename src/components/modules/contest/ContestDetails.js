@@ -6,12 +6,12 @@ import { pathToPhoto } from "utils/data.util";
 
 const ContestDetails = ({ photo_path, name, description }) => {
   return (
-    <div className="contest-details">
-      <img className="contest-details-image" src={pathToPhoto(photo_path)} />
-      <div className="contest-details-preview">
-        <p className="contest-details-preview-name">{name}</p>
-        <p className="contest-details-preview-description">{description}</p>
-      </div>
+    <div className="all-contests__contest-details">
+      <img className="all-contests__contest-details__info__image" src={pathToPhoto(photo_path)} />
+      {/** <div className="all-contests__contest-details__info">
+        <p className="all-contests__contest-details__info__name">{name}</p>
+        <p className="all-contests__contest-details__info__description">{description}</p>
+      </div> **/}
     </div>
   );
 };

@@ -5,14 +5,14 @@ import { Formik } from "formik";
 import UploadInput from 'components/common/CommonUploadInput';
 import GalleryPhoto from 'components/modules/gallery/GalleryPhoto';
 
-import { getTranslationStr, getPhotosByUser } from 'utils/data.util';
+import { getTranslationStr, getPhotosForAccount, pathToPhoto } from 'utils/data.util';
 
 const ProfileScreen = () => {
   const { userData, isLoggedIn, translations, activeLanguage, allPhotos } = useSelector((
     { auth, ui, photos }) => ({ ...auth, ...ui, ...photos }));
 
   const [myPhotos, setMyPhotos] = useState([]);
-  const [myPhotoUrl, setMyPhotoUrl] = useState(userData?.avatar_path);
+  const [myPhotoUrl, setMyPhotoUrl] = useState(pathToPhoto(userData?.avatar_path, null, true));
   const [values] = useState({
     alias: "",
     username: "",
@@ -22,19 +22,22 @@ const ProfileScreen = () => {
   });
 
   useEffect(() => {
-    const userPhotos = getPhotosByUser(allPhotos, userData?.user_id);
-    if (userPhotos) {
+    const userPhotos = getPhotosForAccount(allPhotos, userData?.user_id);
+    if (userPhotos && userPhotos.length > 0) {
       setMyPhotos(userPhotos);
     }
   }, [allPhotos, userData]);
 
+  console.log(myPhotoUrl)
+
   return isLoggedIn && (
     <div className="page-profile">
-      <h1>Manage Profile</h1>
+      <h1>Manage profile</h1>
+      <div className="page-profile__form">
       <Formik initialValues={values}>
       {({ handleSubmit, getFieldProps, handleChange, isSubmitting }) => (
-        <form className="page-profile-update-form">
-          <div className="form-field update-profile-form-field">
+        <form>
+          <div className="form-field page-profile__form-field">
             <label>{translations[getTranslationStr("forms.common.username", activeLanguage)]}</label>
             <input
               className="common-input"
@@ -46,7 +49,7 @@ const ProfileScreen = () => {
               {...getFieldProps("username")}
             />
           </div>
-          <div className="form-field update-profile-form-field">
+          <div className="form-field page-profile__form-field">
             <label>{translations[getTranslationStr("forms.common.alias", activeLanguage)]}</label>
             <input
               className="common-input"
@@ -58,11 +61,11 @@ const ProfileScreen = () => {
               {...getFieldProps("alias")}
             />
           </div>
-          <div className="form-field">
+          <div className="form-field page-profile__form-field">
             <label>{translations[getTranslationStr("forms.common.profile_photo", activeLanguage)]}</label>
-            <UploadInput onChangePhotoUrl={newPath => setMyPhotoUrl(newPath)} photoUrl={myPhotoUrl} />
+            <UploadInput onChangePhotoUrl={event => setMyPhotoUrl(event.target?.value)} photoUrl={myPhotoUrl} />
           </div>
-          <div className="form-field update-profile-form-field">
+          <div className="form-field page-profile__form-field">
             <label>{translations[getTranslationStr("forms.common.password", activeLanguage)]}</label>
             <input
               className="common-input"
@@ -85,7 +88,8 @@ const ProfileScreen = () => {
         </form>
       )}
       </Formik>
-      <div className="page-profile-photos">
+      </div>
+      <div className="page-profile__photos">
         {myPhotos.map(photo => <GalleryPhoto {...photo} />)}
       </div>
     </div>

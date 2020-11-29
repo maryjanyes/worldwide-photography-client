@@ -1,0 +1,37 @@
+.all-contests {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.all-contests__category {
+  flex: 1 50%;
+  margin: 1vh 0;
+}
+
+.all-contests__contest-details__info__image {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+}
+
+.all-contests__contest-details {
+  text-align: center;
+  margin: 2vh;
+}
+
+.contest-category__name {
+  font-size: 2.5vh;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.page-profile > .page-profile__form > form {
+  max-width: 72%;
+  margin: auto;
+  padding-bottom: 3.5vh;
+}
+
+.page-profile > .page-profile__form .form-field > .common-input {
+  padding: 1vh 3% 1vh 7%;
+}

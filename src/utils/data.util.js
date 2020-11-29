@@ -45,9 +45,9 @@ export const getTimeToContestEnd = (endedAt) => {
   return daysCount;
 };
 
-export const isContestStarted = (started_at) => {
+export const isTimePassed = timestamp => {
   const now = new Date(Date.now());
-  const isoDateOfStart = new Date(started_at);
+  const isoDateOfStart = new Date(timestamp);
   return isoDateOfStart < now;
 };
 
@@ -56,11 +56,11 @@ export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
   photoObject.link_to_instagram ||
   photoObject.link_to_facebook;
 
-export const pathToPhoto = (path, defaultPath = "simple.png") => {
+export const pathToPhoto = (path, defaultPath = "simple.png", excludePrefix = false) => {
   if (!path || path === "photo_path") {
     return `${apiService.CLIENT_ENDPOINT}/assets/images/${defaultPath}`;
   }
-  return `${apiService.BACKEND_ENDPOINT}/images/${path}`;
+  return `${apiService.BACKEND_ENDPOINT}/images/${excludePrefix ? path.replace('/', '') : path}`;
 };
 
 export const pathToAsset = (path = "simple.png") =>
@@ -68,12 +68,12 @@ export const pathToAsset = (path = "simple.png") =>
 
 export const getOneFromData = (itemCollection, itemID, itemKey) => {
   if (itemCollection) {
-    return itemCollection.find((c) => c[itemKey] === itemID);
+    return itemCollection.find(c => c[itemKey] === itemID);
   }
 };
 
-export const getPhotosByUser = (photos, userID) =>
-   photos && photos.length > 0 && photos.filter(photo => photo.user_id === userID);
+export const getPhotosForAccount = (photos, userID) =>
+  photos && photos.length > 0 && photos.filter(photo => photo.user_id === userID);
 
 export const concatNameParts = (judleData) =>
   `${judleData?.first_name} ${judleData?.last_name}`;

@@ -27,7 +27,7 @@ const ContestSubmittions = ({ submittions }) => {
       )}
       <div className="contest-submittions">
         {(canDisplaySubmittions &&
-          submittions.map((s) => (
+          submittions.map(s => (
             <ContestSubmittion
               {...s}
               key={s.photo_id}

@@ -106,30 +106,6 @@ button {
   max-width: 600px;
 }
 
-.all-contests {
-  display: flex;
-  justify-content: space-between;
-}
-
-.all-contests .all-contests__category {
-  width: 48%;
-}
-
-.all-contests .all-contests__category div.contest-details {
-  margin-top: 0;
-  padding: 5vh 2vh;
-}
-
-.all-contests .contest-details-preview > p {
-  color: #505050;
-}
-
-.all-contests .contest-details-preview > p:nth-child(2) {
-  font-weight: 100;
-  font-size: 20px;
-  margin-top: 10px;
-}
-
 .page-gallery > .page-title,
 .page-articles > .page-title,
 .page-all-contests > .page-title {
@@ -868,11 +844,11 @@ button {
   margin: 2.5vh;
 }
 
-.info-all-contest-entries {
+.all-contest-entries {
   margin-top: 5vh;
 }
 
-.info-all-contest-entries > span {
+.all-contest-entries > span {
   font-size: 22px;
   font-weight: 600;
 }
@@ -1236,4 +1212,24 @@ button {
 
 .notification-message.success-message {
   background-color: #79d325;
+}
+
+.input-uploader {
+  display: flex;
+}
+
+.input-uploader .input-uploader__file {
+  max-width: 80px;
+}
+
+.input-uploader .input-uploader__field {
+  margin-left: 5vh;
+  position: relative;
+}
+
+.input-uploader .input-uploader__field > img {
+  position: absolute;
+  top: -0.5vh;
+  right: 2vh;
+  z-index: -1;
 }
