@@ -31,14 +31,9 @@ const ContestItem = WithLanguageProps(
 
     return (
       <div className="item contest-item" key={contest_id}>
-        <h4 className="contest-item-card">
-          <div
-            className="contest-item-card-header"
-            style={contestAvatarStyle}
-          >
-            {getContestStatus()}
-          </div>
-          <div className="contest-item-card-body">
+        <h4 className="contest-item__card">
+          <div className="contest-item__card_header" style={contestAvatarStyle}>{getContestStatus()}</div>
+          <div className="contest-item__card_body">
             <p className="contest-name">{name}</p>
             <p className="contest-description">{description}</p>
             <button

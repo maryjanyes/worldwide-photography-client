@@ -33,5 +33,66 @@
 }
 
 .page-profile > .page-profile__form .form-field > .common-input {
-  padding: 1vh 3% 1vh 7%;
+  padding: 1vh 5vh 1vh 10vh;
+}
+
+.page-dashboard__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2vh;
+}
+
+.page-dashboard__container_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 75vh;
+  padding-left: 28vh;
+  padding-right: 10vh;
+}
+
+.page-dashboard__container_top > div:nth-child(1) > p:nth-child(1) {
+  font-size: 44px;
+  font-weight: 800;
+  color: #ff6600;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
+
+.page-dashboard__container_top > div:nth-child(1) > p:nth-child(2) {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffb87c;
+  margin-bottom: 4vh;
+}
+
+.page-dashboard__container_top .join-btn {
+  max-width: 370px;
+  height: 80px;
+  border-radius: 28px;
+  background-color: transparent;
+  text-align: left;
+  padding: 5px 20px;
+  box-shadow: 5px 5px 5px #ffbb83;
+  border: none;
+  color: #ff6600;
+  font-size: 20px;
+  font-weight: 800;
+  transition: 0.8s background-color;
+}
+
+.page-dashboard__container_top .join-btn:hover {
+  background-color: #ff7c0f;
+  color: white;
+}
+
+.page-dashboard__image {
+  min-height: 400px;
+  width: 50vh;
+  transform: rotateZ(-15deg);
+  background-repeat: no-repeat;
+  background-image: url(/assets/images/kisspng-mount.png);
+  background-size: 100%;
+  background-color: white;
 }

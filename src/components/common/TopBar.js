@@ -1,55 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import TopBarSignItems from "./TopBarSignItems";
-import TopMenu from "./TopMenu";
+import TopBarUserItems from "./TopBarUserItems";
 import LanguageSwitcher from "./LanguageSwitcher";
+import TopBarSearch from "./TopBarSearch";
 
 import { ApiService } from "services/api.service";
 import { getTranslationStr } from "utils/data.util";
 
 const TopBarComponent = () => {
-  const [searchActive, setSearchActive] = useState(false);
   const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
-  const toggleSearch = () => setSearchActive(!searchActive);
 
   return (
-    <nav className="nav-header nav-header-top">
-      <Link className="site-logo" to="/" />
-      <LanguageSwitcher />
-      <ul className="nav-header-base-menu">
-        {ApiService.getNavLinks().map((one) => {
-          return (
-            !one.disabled && (
-              <li key={one.link}>
+    <nav className="nav-header__links">
+      <div className="nav-header-left__links">
+        <ul className="nav-header__base_menu">
+          {ApiService.getNavLinks().map(link =>
+            !link.disabled && (
+              <li key={link.link}>
                 <NavLink
-                  isActive={(match) => !!match}
-                  key={one.name}
-                  to={one.link}
-                  className="nav-header-link"
+                  isActive={match => !!match}
+                  key={link.name}
+                  to={link.link}
+                  className="nav-header__base_menu__item"
                   activeClassName="active"
-                >
-                  {translations[getTranslationStr(one.i18n, activeLanguage)]}
-                </NavLink>
+                >{translations[getTranslationStr(link.i18n, activeLanguage)]}</NavLink>
               </li>
             )
-          );
-        })}
-      </ul>
-      <div className="nav-header-right-links">
-        <div className="top-search">
-          {searchActive && (
-            <input
-              type="text"
-              placeholder={translations[getTranslationStr("common.placeholders.top_search", activeLanguage)]}
-              className="common-input common-input-search"
-            />
           )}
-          <button className="search-icon icon-btn" onClick={toggleSearch} />
-        </div>
-        {!isLoggedIn && <TopBarSignItems />}
-        {isLoggedIn && <TopMenu />}
+          <LanguageSwitcher active={activeLanguage} />
+        </ul>
+      </div>
+      <div className="nav-header-right__links">
+        <TopBarSearch />
+        {isLoggedIn ? <TopBarUserItems /> : <TopBarSignItems />}
       </div>
     </nav>
   );
