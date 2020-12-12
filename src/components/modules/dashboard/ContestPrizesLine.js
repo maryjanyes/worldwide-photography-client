@@ -18,13 +18,7 @@ const ContestPrizesLine = ({ history }) => {
     <div className="prizes-items">
       {canDisplayPrizesLine && (
         <WithCarouselRef speed={2000}>
-          {contestPrizes.map(prize => {
-            return (
-              <div key={prize.contest_prize_id}>
-                <PrizeItem {...prize} navigate={navigateToContest} />
-              </div>
-            );
-          })}
+          {contestPrizes.map(prize => <PrizeItem {...prize} navigate={navigateToContest} />)}
         </WithCarouselRef>
       )}
     </div>

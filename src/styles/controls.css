@@ -6,11 +6,11 @@
 .btn-simple {
   width: 168px;
   height: 48px;
-  background-color: #008dcb;
+  background-color: #833c00;
   border-radius: 20px;
   font-weight: 800;
   font-size: 16px;
-  color: #ffffff;
+  color: #ff7c0f;
   transition: 0.6s background-color;
 }
 
@@ -31,7 +31,7 @@ button.btn-submit-photo {
   margin-left: 0;
   margin-top: 0;
   text-transform: uppercase;
-  background-color: #e1315b;
+  background-color: #ff7c0f;
   font-weight: 600;
   cursor: pointer;
   border: none;
@@ -40,7 +40,7 @@ button.btn-submit-photo {
 .btn-tab-item:hover,
 .btn-submit-photo:hover,
 .btn-apply-photo:hover {
-  background-color: #008dcb;
+  background-color: #833c00;
 }
 
 .btn-submit-photo {
@@ -48,7 +48,8 @@ button.btn-submit-photo {
 }
 
 .btn-tab-item.active {
-  background-color: #ffec5c;
+  background-color: #833c00;
+  color: #ffffff;
 }
 
 .btn-simple.btn-explore-contest {
@@ -57,8 +58,8 @@ button.btn-submit-photo {
 }
 
 .btn-simple:hover {
-  background-color: #ffec5c;
-  color: #e1315b;
+  background-color: #833c00;
+  color: #ff7c0f;
 }
 
 .btn-submit {
@@ -70,11 +71,11 @@ button.btn-submit-photo {
   font-size: 18px;
   text-transform: uppercase;
   color: #ffffff;
-  background-color: #e1315b;
+  background-color: #ff7c0f;
 }
 
 .btn-submit:hover {
-  background-color: #ffec5c;
+  background-color: #833c00;
 }
 
 .common-input {
@@ -86,7 +87,7 @@ button.btn-submit-photo {
   text-transform: uppercase;
 }
 
-.form-field.common-checkbox-field {
+.form-field.common-checkbox__field {
   position: relative;
   max-width: 80%;
   margin: 1vh auto;
@@ -120,7 +121,7 @@ button.btn-submit-photo {
 }
 
 .common-select-dropdown-container > button:hover > label {
-  color: #e1315b;
+  color: #ff7c0f;
 }
 
 .btn-link {
@@ -131,19 +132,22 @@ button.btn-submit-photo {
 }
 
 .btn-link:hover {
-  color: #008dcb;
+  color: #833c00;
 }
 
-.common-checkbox {
+.common-checkbox__input {
   opacity: 0;
-  left: 0;
+  right: 0;
   position: absolute;
-  width: 100%;
+  z-index: 10;
+  margin-bottom: 5px;
+  max-width: 28px;
+  max-height: 28px;
   cursor: pointer;
 }
 
-.common-checkbox + label::after {
-  border: 0.2vh solid #e1315b;
+.common-checkbox__input + label::after {
+  border: 0.2vh solid #ff7c0f;
   width: 28px;
   height: 28px;
   content: "";
@@ -153,7 +157,7 @@ button.btn-submit-photo {
   cursor: pointer;
 }
 
-.common-checkbox:checked + label::after {
+.common-checkbox__input:checked + label::after {
   opacity: 1;
   width: 28px;
   height: 28px;

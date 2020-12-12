@@ -1,6 +1,7 @@
 const initialState = {
   isLoggedIn: false,
   userData: null,
+  errorOnAuth: null,
 };
 
 export default function AuthReducer(state = initialState, { type, payload }) {
@@ -13,6 +14,9 @@ export default function AuthReducer(state = initialState, { type, payload }) {
         isLoggedIn: true,
       };
     }
+    case "[AUTH] RESET_AUTH_ERROR": {
+      return { ...state, errorOnAuth: null } 
+    }
     case "[AUTH] REGISTER_SUCCESS": {
       localStorage.setItem("UserData", JSON.stringify(payload));
       return {
@@ -24,13 +28,13 @@ export default function AuthReducer(state = initialState, { type, payload }) {
     case "[AUTH] AUTH_ERROR": {
       return {
         ...state,
-        error: payload,
+        errorOnAuth: payload,
       };
     }
     case "[AUTH] REGISTER_ERROR": {
       return {
         ...state,
-        error: payload,
+        errorOnAuth: payload,
       };
     }
     case "[AUTH] TRY_FIND_ACCOUNT": {

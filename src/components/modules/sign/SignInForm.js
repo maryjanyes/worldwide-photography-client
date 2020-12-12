@@ -5,9 +5,11 @@ import { Formik } from "formik";
 import { signIn } from "reducers/actions/auth.actions";
 import { getTranslationStr } from 'utils/data.util';
 
+import CommonMessage from "components/common/CommonMessage";
+
 const SignInForm = ({ backToSignUpMode, history }) => {
   const dispatch = useDispatch();
-  const { isLoggedIn, translations, activeLanguage } = useSelector(
+  const { isLoggedIn, translations, activeLanguage, errorOnAuth } = useSelector(
     ({ auth, ui }) => ({
       ...auth,
       ...ui,
@@ -29,8 +31,8 @@ const SignInForm = ({ backToSignUpMode, history }) => {
   }, [isLoggedIn]);
 
   return (
-    <div className="sign-in-form-container">
-      <h1 className="sign-in-text">Log in into account</h1>
+    <div className="sign-in-form__container">
+      <h1 className="sign-in__title">{translations[getTranslationStr('sign_items.sign_in.title', activeLanguage)]}</h1>
       <Formik initialValues={values} onSubmit={submitForm}>
         {({ handleBlur, handleSubmit, getFieldProps, isSubmitting }) => (
           <form onSubmit={handleSubmit} className="sign-in-form">
@@ -72,6 +74,7 @@ const SignInForm = ({ backToSignUpMode, history }) => {
                 </button>
               </span>
             </div>
+            {errorOnAuth && <CommonMessage text={errorOnAuth} theme="error-message" />}
           </form>
         )}
       </Formik>

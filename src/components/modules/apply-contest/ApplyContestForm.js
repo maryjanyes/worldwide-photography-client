@@ -21,7 +21,6 @@ const ApplyContestForm = ({
   const {
     isLoggedIn,
     userData,
-    lastUploadedImage,
     contestCategories,
     recentSubmittionSuccess,
     activeLanguage,
@@ -54,47 +53,43 @@ const ApplyContestForm = ({
     if (image) {
       const fileData = new FormData();
       fileData.append("file", image);
-      const insertContestPhotoResponse = await apiService.insertBlob(
+      const submittionImageResponse = await apiService.insertContestImage(
         fileData,
         contestName
       );
-      if (insertContestPhotoResponse.isSuccess) {
+      if (submittionImageResponse.isSuccess) {
         const photoData = {
           author_id: userData.user_id,
-          cetegory_id: contestFormFields.categoryID,
+          category_id: contestFormFields.categoryID,
           description: contestFormFields.imageDesc,
-          link_to_file: `ContestSubmittionImage/${insertContestPhotoResponse.fileName}`,
+          link_to_file: `ContestSubmittionImage/${contestName}/${submittionImageResponse.fileName}`,
           link_to_facebook: contestFormFields.linkToFacebook,
           link_to_instagram: contestFormFields.linkToInstagram,
           camera_details_id: 0,
         };
-        let photoResponse = await apiService.insertData(
+        const photoResponse = await(await apiService.insertData(
           photoData,
           "images/submittion"
-        );
-        photoResponse = await photoResponse.json();
+        )).json();
         const submittionID = photoResponse.generatedMaps[0]?.photo_submittion_details_id;
-        if (submittionID) {
-          const contestData = {
-            contest_id: contestID,
-            photo_id: submittionID,
-          };
-          let contestSubmittionResponse = await apiService.insertData(
-            contestData,
-            "contests/submittions"
-          );
-          contestSubmittionResponse = await contestSubmittionResponse.json();
-          if (contestSubmittionResponse.isSuccess) {
-            dispatch(setRecentSubmittionSuccess());
-            setIsSubmittionPending(true);
-            close();
-          }
+        const contestData = {
+          contest_id: contestID,
+          photo_id: submittionID,
+        };
+        const contestSubmittionResponse = await(await apiService.insertData(
+          contestData,
+          "contests/submittions"
+        )).json();
+        if (contestSubmittionResponse.isSuccess) {
+          dispatch(setRecentSubmittionSuccess());
+          setIsSubmittionPending(true);
+          close();
         }
       }
     }
   };
 
-  const onChange = (change) => {
+  const onChange = change => {
     setContestFormFields({
       ...contestFormFields,
       [change.target.name]: change.target.value,
@@ -169,8 +164,7 @@ const ApplyContestForm = ({
           />
         </div>
         <div className="upload-input-container">{children}</div>
-        <span className="uploaded-image-name">{lastUploadedImage?.name}</span>
-        <div className="submit-photo-container">
+        <div className="upload-input-container__next">
           <button
             onClick={submitContestForm}
             className="btn-apply-photo"

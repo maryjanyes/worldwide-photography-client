@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import IconComponent from "components/common/CommonIcon";
@@ -10,7 +10,8 @@ import {
   getOneFromData,
 } from "utils/data.util";
 
-const commonStyle = {
+/**
+ *   const commonStyle = {
     position: "absolute",
     top: 0,
     zIndex: 0,
@@ -23,19 +24,31 @@ const commonStyle = {
     left: "10%",
   };
 
+  const getIconStyle = () => ({
+    ...commonStyle,
+    ...(isVisible &&
+      activeVisibleSub === contests_submittion_id &&
+      activeStyle),
+  });
+ */
+
 const ContestSubmittion = ({
   contests_submittion_id,
   photo_id,
   author_id,
+  votes,
   updateVisibility,
-  activeVisibleSub,
   isVisible,
+  // activeVisibleSub,
 }) => {
   const { allPhotos, siteUsers } = useSelector(({ photos, users }) => ({
     ...photos,
     ...users,
   }));
-  const [author] = useState(getOneFromData(siteUsers, author_id, "author_id"));
+
+  const author = useMemo(() => {
+    return getOneFromData(siteUsers, author_id+1, "user_id")
+  }, [siteUsers]);
   const photoPath = useMemo(() => {
     let path = getOneFromData(allPhotos, photo_id, "photo_submittion_id");
     if (path) {
@@ -44,31 +57,38 @@ const ContestSubmittion = ({
     return path;
   }, [allPhotos]);
 
-  const getIconStyle = () => ({
-    ...commonStyle,
-    ...(isVisible &&
-      activeVisibleSub === contests_submittion_id &&
-      activeStyle),
+  const toggleVisibility = (_) => updateVisibility({
+    isVisible: !isVisible,
+    sub: {
+      author,
+      photo,
+    },
+    subID: contests_submittion_id,
   });
+
+  const likePhoto = async () => {
+    const thumbResult = await apiService.thumbUpPhoto(photo_id);
+    console.log(thumbResult)
+  };
 
   return (
     <div className="contest-submittion" key={photo_id}>
-      <img src={photoPath} className="contest-submittion-photo" />
-      {/** <IconComponent
-        source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}
-        size={26}
-        onClick={() =>
-          updateVisibility({
-            isVisible: !isVisible,
-            sub: {
-              author,
-              photo,
-            },
-            subID: contests_submittion_id,
-          })
-        }
-        containerStyle={getIconStyle()}
-      /> **/}
+      <img src={photoPath} className="contest-submittion__photo" />
+      {author && <p className="contest-submittion__author-name">
+        Photo author {author?.first_name || author?.email}
+      </p>}
+      <p>Votes count {votes}</p>
+      <div className="contest-submittion__actions">
+        <IconComponent
+          source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}
+          size={26}
+        />
+        <IconComponent
+          source={`${apiService.CLIENT_ENDPOINT}/assets/icons/favorite-icon.png`}
+          size={26}
+          onClick={() => likePhoto}
+        />
+      </div>
     </div>
   );
 };

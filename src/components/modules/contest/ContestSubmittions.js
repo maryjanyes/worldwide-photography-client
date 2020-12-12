@@ -35,7 +35,7 @@ const ContestSubmittions = ({ submittions }) => {
               isVisible={photoDetailsVisible.isVisible}
               activeVisibleSub={activeDetailsVisible}
             />
-          ))) || <p>No Submittions for contest.</p>}
+          ))) || <p className="contest-submittions__no-items">No Submittions for contest.</p>}
       </div>
     </React.Fragment>
   );

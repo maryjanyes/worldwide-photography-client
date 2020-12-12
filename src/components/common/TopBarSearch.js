@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { getTranslationStr } from "utils/data.util";
 
 const TopBarSearch = () => {
-    const [isActive, setIsActive] = useState(false)
+    const [isActive, setIsActive] = useState(false);
+  
     const toggleSearch = () => setIsActive(!isActive);
 
     const { translations, activeLanguage } = useSelector(({ ui }) => ui);

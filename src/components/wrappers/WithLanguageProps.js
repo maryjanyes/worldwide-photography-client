@@ -10,7 +10,7 @@ const WithLanguageProps = (Component, trPropKeys = []) => {
     const getTrProps = () => {
       const trProps = {};
       trPropKeys.forEach(key => {
-        trProps[key] = translations[getTranslationStr(props[key], activeLanguage)];
+        trProps[key] = translations[getTranslationStr(props.selectedContest && props.selectedContest[key] || props[key], activeLanguage)];
       });
       return trProps;
     };

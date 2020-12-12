@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import { getTranslationStr } from "utils/data.util";
 
 function TabItemsHeader({ tabs, selectItem, key = "name", ItemProto }) {
+  const { translations, activeLanguage } = useSelector(({ ui }) => ui);
+
   return tabs.map((one) => (
     <button
       onClick={() => selectItem(one)}
@@ -9,7 +14,7 @@ function TabItemsHeader({ tabs, selectItem, key = "name", ItemProto }) {
       }`}
       key={one.name}
     >
-      <span>{one[key]}</span>
+      <span>{translations[getTranslationStr(one[key], activeLanguage)]}</span>
     </button>
   ));
 }

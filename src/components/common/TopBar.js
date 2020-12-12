@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import TopBarSignItems from "./TopBarSignItems";
 import TopBarUserItems from "./TopBarUserItems";
@@ -10,21 +10,26 @@ import TopBarSearch from "./TopBarSearch";
 import { ApiService } from "services/api.service";
 import { getTranslationStr } from "utils/data.util";
 
+import Logo from '../../../assets/images/logo.png';
+
 const TopBarComponent = () => {
   const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
 
   return (
-    <nav className="nav-header__links">
+    <React.Fragment>
+      {/** <Link to='/'>
+        <img src={Logo} className="site-logo" />
+      </Link> **/}
+      <nav className="nav-header__links">
       <div className="nav-header-left__links">
         <ul className="nav-header__base_menu">
           {ApiService.getNavLinks().map(link =>
             !link.disabled && (
-              <li key={link.link}>
+              <li key={link.link} className="nav-header__base_menu__item">
                 <NavLink
                   isActive={match => !!match}
                   key={link.name}
                   to={link.link}
-                  className="nav-header__base_menu__item"
                   activeClassName="active"
                 >{translations[getTranslationStr(link.i18n, activeLanguage)]}</NavLink>
               </li>
@@ -38,6 +43,7 @@ const TopBarComponent = () => {
         {isLoggedIn ? <TopBarUserItems /> : <TopBarSignItems />}
       </div>
     </nav>
+    </React.Fragment>
   );
 };
 

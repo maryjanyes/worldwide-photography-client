@@ -4,12 +4,21 @@ import { useSelector } from "react-redux";
 import WithLanguageProps from "components/wrappers/WithLanguageProps";
 import ContestDetails from "components/modules/contest/ContestDetails";
 
-const CategoryContests = WithLanguageProps(({ name, contests }) => {
+import { getTranslationStr } from 'utils/data.util';
+
+const CategoryContests = WithLanguageProps(({ name, contest_category_id, contests, selectContest }) => {
   return (
-    <div className="contest-category" key={name}>
-      <span className="contest-category__name">{name}</span>
-      <div className="contest-category__contests">
-        {contests.map(contest => <ContestDetails {...contest} key={name} />)}
+    <div className="all-contests__category" key={name}>
+      <span className="all-contests__category-name">{name}</span>
+      <div className="all-contests__category-contests">
+        {contests.map(contest => (
+          <ContestDetails
+            {...contest}
+            key={contest_category_id}
+            pressItem={selectContest}
+            hideContestName={true} />
+          )
+        )}
       </div>
     </div>
   );
@@ -17,7 +26,7 @@ const CategoryContests = WithLanguageProps(({ name, contests }) => {
 
 function AllContestScreen({ history }) {
   const [contestsByCategories, setContestsByCategories] = useState([]);
-  const { contests, contestCategories } = useSelector(({ contests }) => contests);
+  const { contests, contestCategories, translations, activeLanguage } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
 
   const getContestsByCategories = () => {
     return contestCategories && contestCategories.map(category => {
@@ -33,22 +42,21 @@ function AllContestScreen({ history }) {
   return (
     <div className="page page-all-contests">
       <div className="top-line"></div>
-      <span className="page-title">All Contests</span>
+      <span className="page-title">{translations[getTranslationStr('pages.contests_page.title', activeLanguage)]}</span>
       {contests.length > 0 && (
         <div className="all-contests">
           {contestsByCategories.length > 0 && (
-            contestsByCategories.map((category) => (
-              <div key={category.category_id} className="all-contests__category">
-                <CategoryContests
+            contestsByCategories.map(category => (
+              <CategoryContests
                   {...category}
                   history={history}
                   key={category.category_id}
+                  selectContest={(contest_id) => history.push(`/contest/${contest_id}`)}
                 />
-              </div>
-            ))
-          ) || <p className="no-section-content">No contest categories.</p>}
+              )
+            )) || <p className="no-section-content">{translations[getTranslationStr('pages.common.no_items', activeLanguage)]}</p>}
         </div>
-      ) || <p className="no-section-content">No contests in categories.</p>}
+      ) || <p className="no-section-content">No contests at all.</p>}
     </div>
   );
 }

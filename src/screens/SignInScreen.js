@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
+import { getTranslationStr } from 'utils/data.util';
 import SignInForm from "components/modules/sign/SignInForm";
 import SignUpForm from "components/modules/sign/SignUpForm";
 
 import signInVariant from "types/signInVariant";
 
-import Judle1 from '../../assets/images/NastyaTelikova_judle.png';
-import Judle2 from '../../assets/images/Valentina_judle.png';
+import Judle1_avatar from '../../assets/images/NastyaTelikova_judle.png';
+import Judle2_avatar from '../../assets/images/Valentina_judle.png';
 
 function SignInScreen({ history }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -46,11 +48,12 @@ function SignInScreen({ history }) {
 }
 
 function SignInUsing({ signIn }) {
+  const { translations, activeLanguage } = useSelector(({ ui }) => ui);
   return (
-    <div>
-      <div className="sign-in-selectors">
-        <p className="sign-in-text">Sign in using</p>
-        <div className="sign-in-using-selectors">
+    <div className="sign-in-using">
+      <div className="sign-in-using__container">
+        <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.sign_in_using', activeLanguage)]}</p>
+        <div className="sign-in-using__selectors">
           <button
             onClick={() => signIn(signInVariant.facebook)}
             className="btn-link sign-in-selector facebook"
@@ -65,22 +68,22 @@ function SignInUsing({ signIn }) {
           </button>
         </div>
       </div>
-      <div className="sign-in-judles-area">
-        <p className="sign-in-text">Project judles</p>
-        <div className="sign-in-judles">
-          <div className="sign-in-judle">
+      <div className="sign-in__judles">
+        <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.project_judles', activeLanguage)]}</p>
+        <div className="sign-in__judles-container">
+          <div className="sign-in__judles-judle">
             <img
-              className="sign-in-judle-avatar"
-              src={Judle1}
+              className="judle-avatar judle-1"
+              // src={Judle1_avatar}
             />
             <span>
               (с) могу уместить всю свою жизньв рюкзаки уехать в неизвестность
             </span>
           </div>
-          <div className="sign-in-judle">
+          <div className="sign-in__judles-judle">
             <img
-              className="sign-in-judle-avatar"
-              src={Judle2}
+              className="judle-avatar judle-2"
+              // src={Judle2_avatar}
             />
             <span>(с) тут слоган Насті</span>
           </div>

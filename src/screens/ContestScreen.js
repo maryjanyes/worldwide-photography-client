@@ -24,18 +24,19 @@ import {
   getUserByID,
   concatNameParts,
   isDataValid,
+  getTranslationStr,
 } from "utils/data.util";
-
 import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
 
 import daysIconSource from '../../assets/icons/baseline_query_builder_black_18dp.png';
 import insertPhotoIconSource from '../../assets/icons/baseline_insert_photo_black_18dp.png';
 import baselineFaceIconSource from '../../assets/icons/baseline_face_black_18dp.png';
+import baselineCurrencyIconSource from '../../assets/icons/baseline_local_offer_black_18dp.png';
 
 function ContestScreen() {
   const [contestSubmittions, setContestSubmittions] = useState([]);
   const { contest_id } = useParams();
-  const { contests } = useSelector(({ contests }) => contests);
+  const { contests, activeLanguage, translations } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const selectedContest = useMemo(() => contests.find((c) => c.contest_id == contest_id));
   const requestSubmittions = async () => {
     const submittionsData = await contestsService.getSubmittionsForContest(
@@ -57,6 +58,9 @@ function ContestScreen() {
         <ContestDetailsInfo
           selectedContest={selectedContest}
           contestSubmittions={contestSubmittions}
+          generalBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.general_info', activeLanguage)]}
+          resultsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.results_info', activeLanguage)]}
+          newsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.news_info', activeLanguage)]}
         />
         <SocialSharing />
       </div>
@@ -64,38 +68,38 @@ function ContestScreen() {
   );
 }
 
-function AnnouncementsComponent(props) {
+function AnnouncementsComponent({ selectedContest, title }) {
   return (
     <div className="contest-news">
-      <h2>Contest recent news</h2>
-      <ContestAnnouncements contestID={props.contest_id} />
+      <h2>{title}</h2>
+      <ContestAnnouncements contestID={selectedContest.contest_id} />
     </div>
   );
 }
 
-function GeneralInfoComponent({ description, name, enter_fee }) {
+function GeneralInfoComponent({ title, name, description }) {
+  const { activeLanguage, translations } = useSelector(({ ui }) => ui);
+
   return (
     <div className="contest-info-container">
-      <h2>General info of Contest</h2>
-      <div className="contest-info-details-container">
-        <div className="contest-details-section">
-          <span>Name</span>
+      <h2>{title}</h2>
+      <div className="contest-info-container__items">
+        <div className="contest-info-container__items-item">
+          <span>{translations[getTranslationStr('pages.contest_details.tabs.general.name', activeLanguage)]}</span>
           <span>{name}</span>
         </div>
-        <div className="contest-details-section">
-          <span>Description</span>
+        <div className="contest-info-container__items-item">
+          <span>{translations[getTranslationStr('pages.contest_details.tabs.general.description', activeLanguage)]}</span>
           <span>{description}</span>
-        </div>
-        <div className="contest-details-section">
-          <span>Price to enter the contest</span>
-          <span>{enter_fee}$</span>
         </div>
       </div>
     </div>
   );
 }
 
-function ResultsComponent({ name, is_ended, winner_id }) {
+function ResultsComponent({ selectedContest, title }) {
+  const { name, is_ended, winner_id } = selectedContest;
+
   const displayContestResults = () => {
     const winner = getUserByID(winner_id);
     return (
@@ -106,9 +110,10 @@ function ResultsComponent({ name, is_ended, winner_id }) {
       </div>
     );
   };
+
   return (
     <div className="results-info">
-      <h2>Results of Contest</h2>
+      <h2>{title}</h2>
       {(is_ended && displayContestResults()) || (
         <p>Contest at progress.</p>
       )}
@@ -116,53 +121,69 @@ function ResultsComponent({ name, is_ended, winner_id }) {
   );
 }
 
-function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
-  const { siteJudles } = useSelector(({ users }) => users);
+function ContestDetailsInfo({
+  selectedContest,
+  contestSubmittions,
+  generalBlockTitle,
+  resultsBlockTitle,
+  newsBlockTitle,
+}) {
+  const { siteJudles, translations, activeLanguage } = useSelector(({ users, ui }) => ({ ...users, ...ui }));
   const daysToEntry = getTimeToContestEnd(selectedContest.ended_at);
   const tabsData = ContestsService.getContestDetailsTemplate(
     WithLanguageProps(GeneralInfoComponent, ['name', 'description']),
     WithLanguageProps(ResultsComponent, ['name', 'description']),
     AnnouncementsComponent,
-    selectedContest
+    { selectedContest, generalBlockTitle, resultsBlockTitle, newsBlockTitle }
   );
   const contestJudle = getJudleByID(siteJudles, selectedContest.judle_id);
 
   return (
     <div className="contest-details-info">
-      <div className="contest-details-info-card">
-        <div className="contest-details-info-top">
-          <div className="contest-details-info-top-body">
+      <div className="contest-details-info__card">
+        <div className="contest-details-info__card-top">
+          <div className="contest-details-info__card-top__body">
             <div className="contest-tabs">
               <TabItems tabsData={tabsData} keyName="name" activeItemID={0} />
             </div>
             <div className="link-to-other-contests">
-              <Link to="/all-contests">Other opened contests</Link>
+              <Link to="/all-contests">{translations[getTranslationStr('common.other_contests', activeLanguage)]}</Link>
             </div>
           </div>
-          <div className="contest-details-info-additions">
+          <div className="contest-details-info__additions">
             <div className="contest-stroke-info">
-              <div className="contest-stroke-info-piece">
+              <div className="contest-stroke-info__item">
                 <IconComponent
                   source={daysIconSource}
                   size={25}
                 />
                 <p>{daysToEntry} days left to enter contest</p>
               </div>
-              <div className="contest-stroke-info-piece">
+              <div className="contest-stroke-info__item">
                 <IconComponent
                   source={insertPhotoIconSource}
                   size={25}
                 />
                 <p>{contestSubmittions.length?.toString()} photos entered</p>
               </div>
-              <div className="contest-stroke-info-piece">
+              <div className="contest-stroke-info__item">
                 <IconComponent
                   source={baselineFaceIconSource}
                   size={25}
                 />
                 <p>
-                  {'Contest judle \n'}
+                  Contest judle <br />
                   <b>{concatNameParts(contestJudle)}</b>
+                </p>
+              </div>
+              <div className="contest-stroke-info__item">
+              <IconComponent
+                  source={baselineCurrencyIconSource}
+                  size={25}
+                />
+                <p>
+                  {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)]} <br />
+                  {selectedContest.enter_fee}$
                 </p>
               </div>
               <SubmitPhotoArea
@@ -173,7 +194,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
           </div>
         </div>
         <div className="contest-details-bottom all-contest-entries">
-          <h3 className="all-contest-entries__title">All contest entries of Contest on WorldwidePhotography.com</h3>
+          <h3 className="all-contest-entries__title">{translations[getTranslationStr('common.all_contest_entries', activeLanguage)]}</h3>
           <ContestSubmittions submittions={contestSubmittions} />
         </div>
       </div>
@@ -183,7 +204,7 @@ function ContestDetailsInfo({ selectedContest, contestSubmittions }) {
 
 function SubmitPhotoArea({ contestID, contestName }) {
   const dispatch = useDispatch();
-  const { uploadedImage } = useSelector(({ contests }) => contests);
+  const { uploadedImage, activeLanguage, translations, lastUploadedImage } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
   const [contestImage, setContestImage] = useState(null);
 
@@ -206,7 +227,7 @@ function SubmitPhotoArea({ contestID, contestName }) {
   return (
     <React.Fragment>
       <button ref={ref} className="btn btn-submit-photo" onClick={openSubmittionModal}>
-        Apply photo
+        {translations[getTranslationStr('common.apply_photo', activeLanguage)]}
       </button>
       {isOpen && (
         <Modal className="submit-contest-modal">
@@ -221,12 +242,13 @@ function SubmitPhotoArea({ contestID, contestName }) {
               contestName={contestName}
               close={closeSubmittionModal}
             >
-              <div className="submit-photo-container">
+              <div className="upload-input-container__next">
                 <span>Choose photo</span>
                 <UploadInput
                   onChangePhotoUrl={onChangePhotoUrl}
                   inputStyle={inputStyle}
                   containerStyle={containerStyle}
+                  fileName={lastUploadedImage?.name}
                 />
               </div>
             </ApplyContestForm>

@@ -5,22 +5,23 @@ export class ContestsService extends ApiService {
     GeneralInfoComponent,
     ResultsComponent,
     AnnouncementsComponent,
-    selectedContest
+    { selectedContest, generalBlockTitle, resultsBlockTitle, newsBlockTitle }
   ) {
     return [
       {
-        name: "General info",
+        name: 'pages.contest_details.tabs.general',
         Comp: GeneralInfoComponent,
-        props: selectedContest,
+        props: { selectedContest, title: generalBlockTitle },
       },
       {
-        name: "Results",
+        name: 'pages.contest_details.tabs.results',
         Comp: ResultsComponent,
-        props: selectedContest,
+        props: { selectedContest, title: resultsBlockTitle },
       },
       {
-        name: "News",
+        name: 'pages.contest_details.tabs.news',
         Comp: AnnouncementsComponent,
+        props: { selectedContest, title: newsBlockTitle },
       },
     ];
   }

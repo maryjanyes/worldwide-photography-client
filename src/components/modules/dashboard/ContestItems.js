@@ -34,7 +34,7 @@ const ContestItem = WithLanguageProps(
         <h4 className="contest-item__card">
           <div className="contest-item__card_header" style={contestAvatarStyle}>{getContestStatus()}</div>
           <div className="contest-item__card_body">
-            <p className="contest-name">{name}</p>
+            <p className="contest-name">{name} -</p>
             <p className="contest-description">{description}</p>
             <button
               onClick={() => explore(contest_id)}

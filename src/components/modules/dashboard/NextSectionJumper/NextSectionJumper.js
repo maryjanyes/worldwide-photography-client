@@ -9,7 +9,6 @@ const NextSectionJumper = ({ history, selectHash }) => {
 
     return (
         <div className="next-section-jumper" onClick={press}>
-            <p>Scroll down</p>
             <img src={IconDownBlack} className="next-section-jumper__image" />
         </div>
     );

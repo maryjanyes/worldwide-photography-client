@@ -13,7 +13,7 @@ const ContestAnnouncements = ({ contestID }) => {
       {(canDisplayAnnouncements &&
         announcements.map((announcement) => (
           <ContestAnnouncement {...announcement} key={announcement.title} />
-        ))) || <p>No Announcements finded for this Contest.</p>}
+        ))) || <p>No announcements for this contest.</p>}
     </div>
   );
 };

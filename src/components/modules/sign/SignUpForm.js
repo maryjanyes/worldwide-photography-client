@@ -2,30 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 
-import { signUp } from "reducers/actions/auth.actions";
+import { signUp, resetSignError } from "reducers/actions/auth.actions";
 import { getTranslationStr } from 'utils/data.util';
 
 import CommonCheckbox from "components/common/CommonCheckbox";
+import CommonMessage from "components/common/CommonMessage";
+
+import signUpFormInitialState from './constants/sign-up-initial-state';
 
 const SignUpForm = ({ switchToSignInMode, history }) => {
-  const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
-  const [values] = useState({
-    name: "",
-    email: "",
-    password: "",
-    isPro: false,
-    repeatPassword: "",
-  });
+  const { isLoggedIn, translations, activeLanguage, errorOnAuth } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
+  const [values] = useState(signUpFormInitialState);
   const dispatch = useDispatch();
+
   const submitForm = (values, { setSubmitting }) => {
     if (values.password === values.repeatPassword) {
       values.photographer_level = (values.isPro && "Pro") || "Beginner";
       delete values.repeatPassword;
+      delete values.isPro
+      dispatch(resetSignError());
       dispatch(signUp(values, dispatch));
     }
     setSubmitting(false);
   };
-  const validateForm = (values) => {
+
+  const validateForm = values => {
     const errors = {};
     if (!values.email) {
       errors.email = "Required";
@@ -42,8 +43,8 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
   }, [isLoggedIn]);
 
   return (
-    <div className="sign-up-form-container">
-      <h1 className="sign-up-text">Create account</h1>
+    <div className="sign-up-form__container">
+      <h1 className="sign-up__title">{translations[getTranslationStr('sign_items.sign_up.title', activeLanguage)]}</h1>
       <Formik
         initialValues={values}
         validate={validateForm}
@@ -86,7 +87,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 type="password"
                 name="password"
                 id="password"
-                autoComplete="password"
+                // autoComplete="password"
                 placeholder={translations[getTranslationStr("forms.common.password", activeLanguage)]}
                 onBlur={handleBlur}
                 {...getFieldProps("password")}
@@ -106,9 +107,9 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
             </div>
             <CommonCheckbox
               name="isPro"
-              label="You are Pro?"
+              label={translations[getTranslationStr('sign_items.sign_up.is_pro', activeLanguage)]}
               isChecked={values.isPro}
-              onChange={(value) => setFieldValue("isPro", value)}
+              onChange={value => setFieldValue("isPro", value)}
             />
             <button
               type="submit"
@@ -125,6 +126,7 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 </button>
               </span>
             </div>
+            {errorOnAuth && <CommonMessage text={errorOnAuth} theme="error-message" />}
           </form>
         )}
       </Formik>

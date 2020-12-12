@@ -3,15 +3,17 @@ import { useSelector } from "react-redux";
 
 import GalleryPhoto from "components/modules/gallery/GalleryPhoto";
 
+import { getTranslationStr } from 'utils/data.util';
+
 const GalleryScreen = () => {
-  const { allPhotos, photoImpressions } = useSelector(({ photos }) => photos);
+  const { allPhotos, photoImpressions, translations, activeLanguage } = useSelector(({ photos, ui }) => ({ ...photos, ...ui }));
 
   const canDisplayPhotos = allPhotos.length > 0;
 
   return (
     <div className="page page-gallery">
       <div className="top-line"></div>
-      <span className="page-title">Gallery Photos</span>
+      <span className="page-title">{translations[getTranslationStr('pages.gallery_page.title', activeLanguage)]}</span>
       {(canDisplayPhotos && (
         <div className="gallery-pictures">
           {allPhotos.map((photo) => (
@@ -23,7 +25,7 @@ const GalleryScreen = () => {
             />
           ))}
         </div>
-      )) || <p className="no-section-content">No available photos.</p>}
+      )) || <p className="no-section-content">{translations[getTranslationStr('pages.common.no_items', activeLanguage)]}</p>}
     </div>
   );
 };

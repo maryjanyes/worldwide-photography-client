@@ -15,6 +15,10 @@ const signError = payload => ({
   payload,
 })
 
+export const resetSignError = () => ({
+  type: "[AUTH] RESET_AUTH_ERROR",
+})
+
 const sign = async (data, dispatch, is_auth) => {
   const response = await AuthService[(is_auth && "auth") || "register"](data);
   if (response.isSuccess && response.data?.message !== "Password do not match.") {
@@ -23,7 +27,7 @@ const sign = async (data, dispatch, is_auth) => {
     }
     dispatch(signSuccess(is_auth, response.data?.user));
   } else {
-    dispatch(signError(response.data?.message));
+    setTimeout(() => dispatch(signError(response?.message)), 1000);
   }
 };
 
@@ -47,7 +51,7 @@ export const checkExistedAccountAndSignIn = () => {
   const userData = localStorage.getItem("UserData");
   return {
     type: "[AUTH] TRY_FIND_ACCOUNT",
-    payload: (userData && JSON.parse(userData)) || null,
+    payload: (!!userData && JSON.parse(userData)) || null,
   };
 };
 
@@ -57,4 +61,4 @@ export const logOut = () => ({
 
 export default {
   logOut,
-};
+}

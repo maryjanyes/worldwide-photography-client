@@ -8,9 +8,11 @@ const UploadInput = ({
   inputStyle,
   inputID,
   photoUrl,
+  fileName,
 }) => {
   return (
     <div style={containerStyle} className="input-uploader">
+      {fileName && <p className="input-uploader__selected">Selected image <br />{fileName}</p>}
       <img src={photoUrl} className="input-uploader__file" />
       <div className="input-uploader__field">
         <input

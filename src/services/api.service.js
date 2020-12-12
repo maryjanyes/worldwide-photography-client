@@ -38,20 +38,20 @@ export class ApiService {
     });
   }
 
-  insertBlob(formData, contestName) {
+  insertContestImage(formData, contestName) {
     return new Promise(res => {
       return fetch(
-        `${this.BACKEND_FILES_ENDPOINT}/uploadContestPhoto/${contestName}`,
+        `${this.BACKEND_FILES_ENDPOINT}/uploadImage/contestSubmittions/${contestName}`,
         {
           body: formData,
           method: "POST",
           mode: "cors",
         }
       )
-        .then((response) => {
+        .then(response => {
           response.json().then((data) => res(data));
         })
-        .catch((err) => res(err));
+        .catch(err => res(err));
     });
   }
 

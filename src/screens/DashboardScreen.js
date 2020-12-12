@@ -30,9 +30,10 @@ const DashboardScreen = (props) => {
 
   return (
     <div className="page page-dashboard">
-      <ContestCategoriesNav />
+      {/** <ContestCategoriesNav /> **/}
+      <div className="snow-gif"></div>
       <div className="page-dashboard__container">
-        <img src={Logo} className="site-logo" />
+        {/** <img src={Logo} className="site-logo" /> **/}
         <div className="page-dashboard__container_top">
           <div>
             <p>WorldwidePhotography</p>

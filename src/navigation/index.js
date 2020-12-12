@@ -39,10 +39,6 @@ function AppNavigation() {
           <Route path="/gallery" component={GalleryScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
           {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
-          {/** <Route
-            path="/contest-categories/:category_id"
-            component={ContestCategoryScreen}
-          /> **/}
           <Route
             path="*"
             render={() => (

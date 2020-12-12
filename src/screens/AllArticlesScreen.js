@@ -1,10 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import { getTranslationStr } from 'utils/data.util';
+
 function UsefullArticlesScreen({ history }) {
-  const { allArticles, siteUsers } = useSelector(({ users, articles }) => ({
+  const { allArticles, siteUsers, translations, activeLanguage } = useSelector(({ users, articles, ui }) => ({
     ...articles,
     ...users,
+    ...ui,
   }));
 
   const canDisplayArticles = allArticles.length > 0;
@@ -18,14 +21,14 @@ function UsefullArticlesScreen({ history }) {
   return (
     <div className="page page-articles">
       <div className="top-line"></div>
-      <span className="page-title">All Articles</span>
-      {(/* canDisplayArticles */ false && (
+      <span className="page-title">{translations[getTranslationStr('pages.articles_page.title', activeLanguage)]}</span>
+      {(canDisplayArticles && (
         <div className="articles-line">
           {allArticles.map(withAuthors).map((one) => (
             <ArticlePreview {...one} key={one.name} history={history} />
           ))}
         </div>
-      )) || <p className="no-section-content">No available articles.</p>}
+      )) || <p className="no-section-content">{translations[getTranslationStr('pages.common.no_items', activeLanguage)]}</p>}
     </div>
   );
 }
