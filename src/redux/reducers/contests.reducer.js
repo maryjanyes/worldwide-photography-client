@@ -18,6 +18,12 @@ export default function ContestsReducer(
         ...state,
         contests: payload,
       };
+    case "[CONTESTS] SET_CONTESTS_SUBMITTIONS_SUCCESS": {
+      return {
+        ...state,
+        contestSubmittions: payload,
+      };
+    }
     case "[CONTESTS] UPDATE_SUBMITTION_PHOTO":
       return {
         ...state,

@@ -6,7 +6,7 @@ import GalleryPhoto from "components/modules/gallery/GalleryPhoto";
 import { getTranslationStr } from 'utils/data.util';
 
 const GalleryScreen = () => {
-  const { allPhotos, photoImpressions, translations, activeLanguage } = useSelector(({ photos, ui }) => ({ ...photos, ...ui }));
+  const { allPhotos, translations, activeLanguage } = useSelector(({ photos, ui }) => ({ ...photos, ...ui }));
 
   const canDisplayPhotos = allPhotos.length > 0;
 
@@ -16,11 +16,10 @@ const GalleryScreen = () => {
       <span className="page-title">{translations[getTranslationStr('pages.gallery_page.title', activeLanguage)]}</span>
       {(canDisplayPhotos && (
         <div className="gallery-pictures">
-          {allPhotos.map((photo) => (
+          {allPhotos.map(photo => (
             <GalleryPhoto
               {...photo}
-              adjustedWidth="32%"
-              impressions={photoImpressions}
+              adjustedWidth="32.5%"
               key={photo.photo_id}
             />
           ))}

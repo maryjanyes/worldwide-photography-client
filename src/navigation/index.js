@@ -13,6 +13,7 @@ import {
   AllContestsScreen,
   ProfileScreen,
   ArticleDetailsScreen,
+  GalleryPhotoScreen,
 } from "screens";
 
 import TopBarNavigation from "components/common/TopBar";
@@ -37,6 +38,7 @@ function AppNavigation() {
           <Route path="/articles" component={AllArticlesScreen} />
           <Route path="/articles/:article_id" component={ArticleDetailsScreen} />
           <Route path="/gallery" component={GalleryScreen} />
+          <Route path="/all-photos/:photo_id" component={GalleryPhotoScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
           {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
           <Route

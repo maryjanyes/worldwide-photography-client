@@ -2,9 +2,12 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import ContestsService from "services/contests.service";
+import PhotosService from "services/photos.service";
 import { apiService } from "services/api.service";
-import { setRecentSubmittionSuccess } from "reducers/actions/contests.actions";
-import { buildDropdownOptions, getTranslationStr } from "utils/data.util";
+import { setRecentSubmittionSuccess, setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
+import { setPhotosSuccess } from "reducers/actions/photos.actions";
+import { buildDropdownOptions, getTranslationStr, isDataValid } from "utils/data.util";
 import { signIn } from "reducers/actions/auth.actions";
 
 import CommonSelectDropdown from "components/common/CommonSelectDropdown";
@@ -49,6 +52,18 @@ const ApplyContestForm = ({
     return categoriesData;
   }, [contestCategories]);
 
+  const refreshSubmittionsData = async () => {
+    const submittionsData = await ContestsService.getSubmittionsForContest(parseInt(contestID, 10));
+    if (isDataValid(submittionsData)) {
+      dispatch(setContestsSubmittionsSuccess(submittionsData.data));
+    }
+    PhotosService.getPhotos().then((photosData) => {
+      if (isDataValid(photosData)) {
+        dispatch(setPhotosSuccess(photosData.data));
+      }
+    });
+  };
+
   const submitContestForm = async () => {
     if (image) {
       const fileData = new FormData();
@@ -84,6 +99,7 @@ const ApplyContestForm = ({
           dispatch(setRecentSubmittionSuccess());
           setIsSubmittionPending(true);
           close();
+          setTimeout(() => refreshSubmittionsData(), 1000);
         }
       }
     }

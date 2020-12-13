@@ -14,14 +14,17 @@ const TopBarUserItems = () => {
   const [opened, setOpened] = useState(false);
 
   const toggleMenu = () => setOpened(!opened);
-  const navigate = (to) => history.push(to);
+  const navigate = to => history.push(to);
 
   const menuItems = ApiService.getMenuItems();
   const userItems = menuItems.filter(item => item.onlyLoggedIn ? isLoggedIn : true);
 
   const doAction = item => {
     dispatch(authActions[item.action]())
-    toggleMenu()
+    toggleMenu();
+    if (item.action === 'logOut') {
+      history.push('/');
+    }
   }
 
   const doNavigate = item => {

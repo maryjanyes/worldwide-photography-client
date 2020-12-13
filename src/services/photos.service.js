@@ -9,8 +9,11 @@ export class PhotosService extends ApiService {
     return await this.fetchJSONData("images/categories");
   }
 
-  async thumbUpPhoto(imageId) {
-    return await this.insertData(`vote/${imageId}`);
+  async voteImageOrSubmittion(photoId, submittionId) {
+    if (!submittionId) {
+      return await this.insertData({}, `photos/vote/${photoId}`);
+    }
+    return await this.insertData({}, `contests/submittions/vote/${submittionId}/${photoId}`);
   }
 }
 

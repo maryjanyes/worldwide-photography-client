@@ -18,6 +18,8 @@ import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 import contestsService, { ContestsService } from "services/contests.service";
 import { setUploadedImage } from "reducers/actions/contests.actions";
+import { setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
+
 import {
   getTimeToContestEnd,
   getJudleByID,
@@ -34,16 +36,15 @@ import baselineFaceIconSource from '../../assets/icons/baseline_face_black_18dp.
 import baselineCurrencyIconSource from '../../assets/icons/baseline_local_offer_black_18dp.png';
 
 function ContestScreen() {
-  const [contestSubmittions, setContestSubmittions] = useState([]);
   const { contest_id } = useParams();
-  const { contests, activeLanguage, translations } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
+  const { contests, activeLanguage, translations, contestSubmittions } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const selectedContest = useMemo(() => contests.find((c) => c.contest_id == contest_id));
+  const dispatch = useDispatch();
+
   const requestSubmittions = async () => {
-    const submittionsData = await contestsService.getSubmittionsForContest(
-      contest_id
-    );
+    const submittionsData = await contestsService.getSubmittionsForContest(parseInt(contest_id, 10));
     if (isDataValid(submittionsData)) {
-      setContestSubmittions(submittionsData.data)
+      dispatch(setContestsSubmittionsSuccess(submittionsData.data));
     }
   };
 
@@ -58,6 +59,7 @@ function ContestScreen() {
         <ContestDetailsInfo
           selectedContest={selectedContest}
           contestSubmittions={contestSubmittions}
+          refresh={requestSubmittions}
           generalBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.general_info', activeLanguage)]}
           resultsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.results_info', activeLanguage)]}
           newsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.news_info', activeLanguage)]}
@@ -124,6 +126,7 @@ function ResultsComponent({ selectedContest, title }) {
 function ContestDetailsInfo({
   selectedContest,
   contestSubmittions,
+  refresh,
   generalBlockTitle,
   resultsBlockTitle,
   newsBlockTitle,
@@ -193,9 +196,9 @@ function ContestDetailsInfo({
             </div>
           </div>
         </div>
-        <div className="contest-details-bottom all-contest-entries">
+        <div className="contest-details-info__card-bottom all-contest-entries">
           <h3 className="all-contest-entries__title">{translations[getTranslationStr('common.all_contest_entries', activeLanguage)]}</h3>
-          <ContestSubmittions submittions={contestSubmittions} />
+          <ContestSubmittions submittions={contestSubmittions} refresh={refresh} />
         </div>
       </div>
     </div>
@@ -219,7 +222,7 @@ function SubmitPhotoArea({ contestID, contestName }) {
     openModal();
   };
 
-  const closeSubmittionModal = () => {
+  const closeSubmittionModal = afterSubmit => {
     location.href = location.href.replace('#submitPhoto', '');
     closeModal();
   }

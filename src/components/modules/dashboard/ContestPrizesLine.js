@@ -26,8 +26,10 @@ const ContestPrizesLine = ({ history }) => {
 };
 
 const PrizeItem = WithLanguageProps(({ title, amount, is_money, photo_path, navigate, contest_id }) => {
+  const getContestPage = () => navigate(contest_id);
+
   return (
-    <div className="prize-item">
+    <div className="prize-item" key={contest_id}>
       <div className="prize-item__heading">
         <span className="prize-name">{title}</span>
         <div className="prize-icon"></div>
@@ -35,7 +37,7 @@ const PrizeItem = WithLanguageProps(({ title, amount, is_money, photo_path, navi
       <img
         className="prize-item__image"
         src={pathToAsset(photo_path, "baseline_emoji_events_black_18dp.png")}
-        onClick={() => navigate(contest_id)}
+        onClick={getContestPage}
       />{is_money && <span className="prize-item-amount">{amount}$</span>}
     </div>
   );

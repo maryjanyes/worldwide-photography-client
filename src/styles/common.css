@@ -89,6 +89,26 @@ li.top-bar-user__items_item > button:hover {
   position: relative;
 }
 
+.page-dashboard__container_bottom {
+  margin-top: 5vh;
+}
+
+.contest-submittion__photo-actions {
+  margin-top: -1vh;
+}
+
+.gallery-photo__full-screen {
+  max-height: 500px;
+  width: 80%;
+  object-fit: scale-down;
+}
+
+.gallery-photo__full-screen > img {
+  width: 100%;
+  object-fit: scale-down;
+  max-height: 500px;
+}
+
 .owl-slider-item {
   width: 100%;
   display: none;
@@ -112,7 +132,8 @@ li.top-bar-user__items_item > button:hover {
 
 .page-gallery > .page-title,
 .page-articles > .page-title,
-.page-all-contests > .page-title {
+.page-all-contests > .page-title,
+.page-gallery-photo > .page-title {
   font-size: 36px;
   font-weight: 800;
 }
@@ -528,7 +549,7 @@ li.nav-header__base_menu__item {
 }
 
 .page-profile {
-  padding: 1vh 2vh;
+  margin-top: -8vh;
 }
 
 .page-profile-update-form {
@@ -729,6 +750,12 @@ li.nav-header__base_menu__item {
 .contest-details-info__card-top {
   display: flex;
   justify-content: space-between;
+  width: 80%;
+}
+
+.contest-details-info__card-bottom {
+  width: 90%;
+  padding-right: 10vh;
 }
 
 .contest-details-contest-avatar {
@@ -742,7 +769,7 @@ li.nav-header__base_menu__item {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  width: 80%;
+  width: 100%;
   min-height: 45vh;
   top: 2vh;
 }
@@ -829,9 +856,11 @@ li.nav-header__base_menu__item {
 }
 
 .gallery-pictures > .gallery-picture {
-  margin: 2.5%;
+  margin: 2vh 0.5vh;
+  padding-top: 2vh;
   transition: 0.5s filter;
   cursor: pointer;
+  text-align: center;
 }
 
 .gallery-pictures > .gallery-picture > img {
@@ -883,8 +912,9 @@ li.nav-header__base_menu__item {
   margin-top: 5vh;
 }
 
-.all-contest-entries > span {
+.all-contest-entries__title {
   font-size: 22px;
+  text-transform: uppercase;
   font-weight: 600;
 }
 
@@ -1067,7 +1097,7 @@ li.nav-header__base_menu__item {
 
 .upload-input-container__next {
   display: flex;
-  width: 60%;
+  width: 100%;
   justify-content: space-around;
   margin: 2vh auto;
 }
@@ -1082,12 +1112,14 @@ li.nav-header__base_menu__item {
 }
 
 .input-uploader__selected {
-  color: #ffffff;
-  background-color: #833c00;
-  font-size: 18px;
-  font-weight: 800;
+  color: #833c00;
+  font-size: 12px;
+  text-transform: uppercase;
   padding: 0.5vh;
-  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #833c00;
+  width: 40%;
+  overflow: hidden;
   text-align: left;
   position: absolute;
   left: 0;
@@ -1097,7 +1129,7 @@ li.nav-header__base_menu__item {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 2.5em;
+  padding: 4vh 0;
 }
 
 .contest-submittions .contest-photo > img {
@@ -1109,15 +1141,34 @@ li.nav-header__base_menu__item {
   position: relative;
   width: 33%;
   max-height: 300px;
-  padding-bottom: 2em;
+  margin: 5vh 0;
   display: flex;
   cursor: pointer;
 }
 
-.contest-submittions .contest-submittion > img {
-  max-width: 100%;
+.contest-submittion__photo {
+  display: flex;
+  width: 100%;
+}
+
+.contest-submittion__photo > img {
+  width: 80%;
   max-height: 100%;
+  object-fit: scale-down;
   margin: auto;
+  margin-top: 6.5vh;
+  transition: 0.6s transform;
+}
+
+.contest-submittion__photo > img:hover {
+  transform: scaleX(1.2);
+}
+
+.contest-submittion__photo-info {
+  position: absolute;
+  font-size: 15px;
+  margin-left: 2vh;
+  color: #616161;
 }
 
 .contest-submittions .contest-submittion .common-icon {
@@ -1166,7 +1217,7 @@ li.nav-header__base_menu__item {
   font-size: 12px;
 }
 
-.upload-input-container {
+.input-uploader {
   background: url(/assets/images/burger_cute.png) repeat-x center;
   background-size: 50%;
 }
@@ -1347,10 +1398,6 @@ li.nav-header__base_menu__item {
   margin-top: 2vh;
   display: flex;
   flex-direction: column;
-}
-
-.contest-submittions__no-items {
-  padding: 2vh 0;
 }
 
 .contest-info-container__items
