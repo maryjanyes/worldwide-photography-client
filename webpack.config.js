@@ -12,11 +12,12 @@ module.exports = {
     filename: "bundle.js",
   },
   devServer: {
+    // app PORT.
     port: 3001,
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
-    https: true,
+    // https: true,
   },
   resolve: {
     alias: {
