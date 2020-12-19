@@ -51,7 +51,7 @@ export const checkExistedAccountAndSignIn = () => {
   const userData = localStorage.getItem("UserData");
   return {
     type: "[AUTH] TRY_FIND_ACCOUNT",
-    payload: (!!userData && JSON.parse(userData)) || null,
+    payload: (!!userData && userData !== 'undefined' && JSON.parse(userData)) || null,
   };
 };
 

@@ -4,9 +4,13 @@ const ContestSubmittionInfo = ({ author, votes }) => {
     return (
         <div className="contest-submittion__photo-info">
             {author && <p className="contest-submittion__author-name">
-            Photo author {author?.first_name || author?.email}
+                <span>Photo author</span>
+                <span>{author?.first_name || author?.email}</span>
             </p>}
-            <p className="contest-submittion__votes-count">Votes count {votes}</p>
+            <p className="contest-submittion__votes-count">
+                <span>Votes count</span>
+                <span>{votes}</span>
+            </p>
         </div>
     )
 }

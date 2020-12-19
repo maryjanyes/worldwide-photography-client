@@ -1,8 +1,9 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
+const fullCommandPath = process.env.npm_package_scripts_dev;
 
-const env = require("dotenv").config();
+const env = require("dotenv").config(fullCommandPath.indexOf('development') === -1 && { path: './prod.env' }).parsed;
 
 module.exports = {
   entry: "./src/index.js",
@@ -13,7 +14,7 @@ module.exports = {
   },
   devServer: {
     // app PORT.
-    port: 3001,
+    port: 8081,
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
@@ -39,10 +40,11 @@ module.exports = {
       "window.jQuery": "jquery",
     }),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(env.MODE),
-      "process.env.BACKEND_URL": JSON.stringify(env.BACKEND_URL),
-      'process.env.BACKEND_FILES_URL': JSON.stringify(env.BACKEND_FILES_URL),
-      "process.env.BACKEND_VERSION": JSON.stringify(env.BACKEND_VERSION),
+      PRODUCTION: JSON.stringify(true),
+      NODE_ENV: JSON.stringify(env.BACKEND_VERSION),
+      BACKEND_URL: JSON.stringify(env.BACKEND_URL),
+      BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
+      BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
     }),
     new HtmlWebpackPlugin({
       title: 'WorldwidePhotography',

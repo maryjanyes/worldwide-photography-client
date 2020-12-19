@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 
 import TopBarSignItems from "./TopBarSignItems";
 import TopBarUserItems from "./TopBarUserItems";
@@ -13,13 +13,14 @@ import { getTranslationStr } from "utils/data.util";
 import Logo from '../../../assets/images/logo.png';
 
 const TopBarComponent = () => {
+  const [displayTopLogo] = useState(true)
   const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
 
   return (
     <React.Fragment>
-      {/** <Link to='/'>
+      {displayTopLogo && <Link to='/'>
         <img src={Logo} className="site-logo" />
-      </Link> **/}
+      </Link>}
       <nav className="nav-header__links">
       <div className="nav-header-left__links">
         <ul className="nav-header__base_menu">

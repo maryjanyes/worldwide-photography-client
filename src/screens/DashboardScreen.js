@@ -17,7 +17,7 @@ const DashboardScreen = (props) => {
   const { activeLanguage, translations } = useSelector(({ ui }) => ui);
 
   useEffect(() => {
-    const isBottom = props.history.location.search === '?bottom-info=true';
+    const isBottom = props.history.location.search === '?bottom=true';
     if (isBottom && bottomRef?.current) {
       setIsBottomSelected(true);
       setTimeout(() => {
@@ -33,7 +33,6 @@ const DashboardScreen = (props) => {
       {/** <ContestCategoriesNav /> **/}
       <div className="snow-gif"></div>
       <div className="page-dashboard__container">
-        {/** <img src={Logo} className="site-logo" /> **/}
         <div className="page-dashboard__container_top">
           <div>
             <p>WorldwidePhotography</p>
@@ -48,7 +47,7 @@ const DashboardScreen = (props) => {
             <div className="page-dashboard__image" />
           </div>
         </div>
-        {!isBottomSectionSelected && <NextSectionJumper history={props.history} selectHash="bottom-info" />}
+        {!isBottomSectionSelected && <NextSectionJumper history={props.history} selectHash="bottom" />}
         {isBottomSectionSelected && <div className="page-dashboard__container_bottom">
           <ContestItems history={props.history} />
           <ContestPrizesLine history={props.history} />

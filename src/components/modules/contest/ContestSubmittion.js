@@ -33,7 +33,7 @@ const ContestSubmittion = ({
   }, [allPhotos]);
 
   const navigatePhotoPage = () => {
-    history.push(`/all-photos/${contests_submittion_id}`);
+    history.push(`/gallery/all/${contests_submittion_id}`);
   };
 
   const likePhoto = async () => {

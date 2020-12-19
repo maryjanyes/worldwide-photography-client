@@ -14,9 +14,9 @@ const ContestItem = WithLanguageProps(
     };
   
     const getContestStatus = () => {
-      const atProgress = isTimePassed(started_at);
+      const started = isTimePassed(started_at);
       return (
-        (atProgress && (
+        (started && (
           <div className="contest-status happens-now">
             {translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)]}
           </div>

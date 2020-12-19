@@ -24,6 +24,11 @@ button.btn-submit-photo {
   padding: 5vh 2vh;
 }
 
+button:disabled {
+  background-color: darkgray !important;
+  cursor: wait;
+}
+
 .btn-tab-item,
 .btn-submit-photo,
 .btn-apply-photo {
@@ -39,6 +44,7 @@ button.btn-submit-photo {
   font-weight: 600;
   cursor: pointer;
   border: none;
+  color: #ffffff;
 }
 
 .btn-tab-item:hover,

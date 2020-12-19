@@ -55,11 +55,11 @@ button {
 li.top-bar-user__items_item {
   right: 0;
   transform: rotateZ(0);
-  margin: 0 0.5vh;
+  margin: 0 0.65vh;
 }
 
 li.top-bar-user__items_item > button {
-  padding: 2vh;
+  padding: 1.5vh;
   color: #833c00;
   font-weight: 600;
 }
@@ -99,8 +99,10 @@ li.top-bar-user__items_item > button:hover {
 
 .gallery-photo__full-screen {
   max-height: 500px;
-  width: 80%;
+  width: 90%;
   object-fit: scale-down;
+  margin-top: 10vh;
+  padding-bottom: 10vh;
 }
 
 .gallery-photo__full-screen > img {
@@ -150,9 +152,8 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .all-contests__category-name {
-  font-size: 18px;
+  font-size: 20px;
   padding: 2vh 0;
-  letter-spacing: 1px;
 }
 
 .contest-details > .contest-details-image {
@@ -167,6 +168,7 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-item__card_body {
   padding: 2vh 0;
+  min-height: 100px;
 }
 
 .contest-item__card_body > .contest-name {
@@ -180,7 +182,7 @@ li.top-bar-user__items_item > button:hover {
   padding: 2vh 5vh;
   font-size: 16px;
   font-weight: 100;
-  color: #ff6600;
+  color: #707070;
   text-align: justify;
 }
 
@@ -353,7 +355,7 @@ li.top-bar-user__items_item > button:hover {
 
 li.nav-header__base_menu__item {
   min-width: 155px;
-  margin: 56px 0;
+  margin: 6.2vh 0;
   right: 0 !important;
 }
 
@@ -362,7 +364,7 @@ li.nav-header__base_menu__item {
 .top-bar-sign__items_item > a {
   color: #833c00 !important;
   font-weight: 600;
-  padding: 2vh;
+  padding: 1.6vh;
   display: block;
 }
 
@@ -605,6 +607,12 @@ li.nav-header__base_menu__item {
   font-weight: 800;
 }
 
+.contest-submittion__author-name > span:nth-child(1),
+.contest-submittion__votes-count > span:nth-child(1) {
+  color: #000000;
+  margin-right: 10px;
+}
+
 .prize-contest-name {
   display: flex;
   flex-direction: column;
@@ -633,11 +641,11 @@ li.nav-header__base_menu__item {
 }
 
 .site-logo {
-  width: 145px;
-  height: 102px;
+  width: 100px;
+  height: 60px;
   position: absolute;
   left: 25vh;
-  top: 15vh;
+  top: 5vh;
   cursor: pointer;
   z-index: 10;
 }
@@ -856,11 +864,14 @@ li.nav-header__base_menu__item {
 }
 
 .gallery-pictures > .gallery-picture {
-  margin: 2vh 0.5vh;
-  padding-top: 2vh;
-  transition: 0.5s filter;
+  margin: 1vh;
+  padding: 4vh 0;
   cursor: pointer;
   text-align: center;
+  box-shadow: 2px 1px 1px #6eaabd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .gallery-pictures > .gallery-picture > img {
@@ -870,8 +881,7 @@ li.nav-header__base_menu__item {
 }
 
 .gallery-picture:hover {
-  filter: opacity(0.9);
-  box-shadow: 0.05vh 0.05vh 0.05vh #000000;
+  filter: opacity(0.8);
 }
 
 .gallery-photo-impressions {
@@ -1153,21 +1163,21 @@ li.nav-header__base_menu__item {
 
 .contest-submittion__photo > img {
   width: 80%;
-  max-height: 100%;
+  height: 100%;
   object-fit: scale-down;
   margin: auto;
-  margin-top: 6.5vh;
+  padding-top: 6.5vh;
   transition: 0.6s transform;
+  box-shadow: 2px 1px 1px #6eaabd;
 }
 
 .contest-submittion__photo > img:hover {
-  transform: scaleX(1.2);
+  transform: rotateY(-20deg);
 }
 
 .contest-submittion__photo-info {
   position: absolute;
   font-size: 15px;
-  margin-left: 2vh;
   color: #616161;
 }
 
@@ -1206,8 +1216,7 @@ li.nav-header__base_menu__item {
 
 .gallery-pictures .gallery-picture > img:hover {
   transform: rotateY(-20deg);
-  -webkit-transition: transform 2s;
-  transition: transform 2s;
+  transition: transform 0.6s;
 }
 
 .uploaded-image-name {
@@ -1351,6 +1360,7 @@ li.nav-header__base_menu__item {
 .notification-message {
   font-size: 16px;
   padding: 4vh;
+  color: #616161;
 }
 
 .notification-message.warning-message {
@@ -1359,6 +1369,10 @@ li.nav-header__base_menu__item {
 
 .notification-message.success-message {
   background-color: #79d325;
+}
+
+.notification-message.error-message {
+  background-color: red;
 }
 
 .input-uploader {

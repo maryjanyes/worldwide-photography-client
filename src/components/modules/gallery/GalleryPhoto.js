@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 
-import ContestSubmittionInfo from "components/modules/contest/ContestSubmittionInfo";
 import CommonMessage from "components/common/CommonMessage";
 
-import photosService from "services/photos.service";
 import { getPhotoUrlFromPhotoObject, pathToPhoto } from "utils/data.util";
 
 const GalleryPhoto = ({
@@ -12,27 +11,20 @@ const GalleryPhoto = ({
   ...photo
 }) => {
   const [cursorActive, setCursorActive] = useState(false);
-  const [showLikeMessage, setShowLikeMessage] = useState(false);
+  const history = useHistory();
+  const photoPath = useMemo(() => pathToPhoto(getPhotoUrlFromPhotoObject(photo)), [photo]);
+
   const toggleCursor = state => {
     setCursorActive(state);
   };
 
-  const photoPath = pathToPhoto(getPhotoUrlFromPhotoObject(photo));
-
-  const likePhoto = async () => {
-    try {
-      const voteResponse = await(await photosService.voteImageOrSubmittion(null, photo_id));
-      if (voteResponse.isSuccess) {
-        setShowLikeMessage(true);
-      }
-    } catch(err) {
-
-    }
+  const getPhotoPage = () => {
+    history.push(`/gallery/all/${photo.photo_submittion_id || photo.photo_id}`);
   };
 
   return (
     <div
-      onClick={likePhoto}
+      onClick={getPhotoPage}
       className="gallery-picture"
       key={photo.photo_id}
       style={{ width: adjustedWidth }}
@@ -40,10 +32,7 @@ const GalleryPhoto = ({
       onMouseOut={() => toggleCursor(false)}
     >
       <img src={photoPath} className="gallery-picture__photo" />
-      <div className="gallery-picture__details">
-        {/** cursorActive && <ContestSubmittionInfo author={author} votes={photo.votes} /> **/}
-      </div>
-      {showLikeMessage && <CommonMessage text="Submittion success" theme="success-message" />}
+      {/** showLikeMessage && <CommonMessage text="Submittion success" theme="success-message" /> **/}
     </div>
   );
 };

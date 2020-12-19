@@ -34,7 +34,7 @@ function msToTime(duration) {
   return hours + ":" + minutes + ":" + seconds;
 }
 
-export const getTimeToContestEnd = (endedAt) => {
+export const getTimeToEnd = endedAt => {
   const now = new Date();
   const isoDateOfEnd = new Date(endedAt);
   let daysCount = 0;

@@ -7,9 +7,8 @@ import { appLangs } from "services/app-configs.service";
 
 export class ApiService {
   constructor() {
-    const { BACKEND_URL, BACKEND_FILES_URL } = process.env || {};
-    this.BACKEND_ENDPOINT = BACKEND_URL || "http://139.28.36.219:8080";
-    this.BACKEND_FILES_ENDPOINT = BACKEND_FILES_URL || "http://139.28.36.219:8081";
+    this.BACKEND_ENDPOINT = `${BACKEND_URL}:${BACKEND_PORT}`;
+    this.BACKEND_FILES_ENDPOINT = `${BACKEND_URL}:${BACKEND_FILE_SERVER_PORT}`;
     this.CLIENT_ENDPOINT = `${location.protocol}//${location.host}`;
     this.postHeaders = new Headers({
       "Content-Type": "application/json",
