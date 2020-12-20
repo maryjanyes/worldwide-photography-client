@@ -1,0 +1,10 @@
+name: test-workflow
+on: [push]
+runs-on: ubuntu-latest
+jobs:
+  echo:
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Echo Hello World
+        run: echo "Hello World"
