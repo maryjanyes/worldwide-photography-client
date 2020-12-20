@@ -7,6 +7,7 @@ jobs:
     name: Test app before pushing
     runs-on: ubuntu-latest
     steps:
+      - name: Test..
       uses: [actions/checkout@v2, actions/setup-node@v1]
       run: npm run test
   deploy:
@@ -14,4 +15,5 @@ jobs:
     description: Pull code from repo on server and restart Docker container
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy..
       uses: appleboy/ssh-action@v0.1.2
