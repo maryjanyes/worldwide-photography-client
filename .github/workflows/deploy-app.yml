@@ -4,18 +4,18 @@ on:
     branches: [master, develop]
 jobs:
   test:
+    name: Test app before pushing
     runs-on: ubuntu-latest
     steps:
-      name: Test app before pushing
       uses: actions/checkout@v2
       uses: actions/setup-node@v1
       run: npm run test
   deploy:
+    name: Deploy app to server
+    description: Pull code from repo on server and restart Docker container
     runs-on: ubuntu-latest
     steps:
-      name: Deploy app to server
       uses: appleboy/ssh-action@v0.1.2
-      description: Pull code from repo on server and restart Docker container
       with:
         host: ${{secrets.SSH_HOST}}
         username: ${{secrets.SSH_USERNAME}}
