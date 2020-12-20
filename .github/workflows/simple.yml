@@ -1,8 +1,10 @@
 name: test-workflow
-on: [push]
-runs-on: ubuntu-latest
+on:
+  push:
+    branches: [master, develop]
 jobs:
   echo:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
