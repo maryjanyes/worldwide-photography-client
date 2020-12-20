@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Test
-      uses: [actions/checkout@v2, actions/setup-node@v1]
+      uses: actions/checkout@v2
+      uses: actions/setup-node@v1
       run: npm run test
   deploy:
     name: Deploy app to server
@@ -17,3 +18,18 @@ jobs:
     steps:
     - name: Deploy
       uses: appleboy/ssh-action@v0.1.2
+      with:
+        host: ${{secrets.SSH_HOST}}
+        username: ${{secrets.SSH_USERNAME}}
+        password: ${{secrets.SSH_PASSWORD}}
+        script: |
+          cd apps/photography
+          ls -a
+          cd worldwide-photography-client
+          npm -v
+          git pull origin $(git rev-parse --abbrev-ref HEAD)
+          npm install
+          docker build -t worldwide-photography-client:0.1 .
+          docker run --publish 8081:8081 --detach --name wphoto-client worldwide-photography-client:0.1
+          echo 'Deploy complete'
+
