@@ -20,7 +20,9 @@ const initialFormState = {
 const ProfileScreen = () => {
   const { userData, isLoggedIn, translations, activeLanguage, allPhotos } = useSelector((
     { auth, ui, photos }) => ({ ...auth, ...ui, ...photos }));
-
+  // todo Remove it
+  const canDisplay = false;
+  
   const [myPhotos, setMyPhotos] = useState([]);
   const [myPhotoUrl, setMyPhotoUrl] = useState(pathToPhoto(userData?.avatar_path, null, true));
   const [values] = useState(userData || initialFormState);
@@ -37,7 +39,7 @@ const ProfileScreen = () => {
     console.log(values)
   };
 
-  return isLoggedIn && (
+  return isLoggedIn && canDisplay && (
     <div className="page page-profile">
       <h1>{translations[getTranslationStr('pages.profile_page.title', activeLanguage)]}</h1>
       <Formik initialValues={values}>
@@ -107,7 +109,9 @@ const ProfileScreen = () => {
         {myPhotos.map(photo => <GalleryPhoto {...photo} />)}
       </div>
     </div>
-  );
+  ) || (<div className="page page-profile">
+         <p>Page at progress.</p>
+       </div>)
 };
 
 export default ProfileScreen;

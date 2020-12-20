@@ -21,12 +21,13 @@ import { setUploadedImage } from "reducers/actions/contests.actions";
 import { setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
 
 import {
-  getTimeToContestEnd,
+  getTimeToEnd,
   getJudleByID,
   getUserByID,
   concatNameParts,
   isDataValid,
   getTranslationStr,
+  isTimePassed,
 } from "utils/data.util";
 import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
 
@@ -100,15 +101,13 @@ function GeneralInfoComponent({ title, name, description }) {
 }
 
 function ResultsComponent({ selectedContest, title }) {
-  const { name, is_ended, winner_id } = selectedContest;
+  const { is_ended, winner_id } = selectedContest;
 
   const displayContestResults = () => {
     const winner = getUserByID(winner_id);
     return (
       <div className="contest-results">
-        <span>
-          Congrats the winner of Contest {name} is {winner?.name}.
-        </span>
+        <span>Congrats the winner of Contest {winner?.name}.</span>
       </div>
     );
   };
@@ -117,7 +116,7 @@ function ResultsComponent({ selectedContest, title }) {
     <div className="results-info">
       <h2>{title}</h2>
       {(is_ended && displayContestResults()) || (
-        <p>Contest at progress.</p>
+        <p>Contest at progress or do not started yet.</p>
       )}
     </div>
   );
@@ -132,7 +131,8 @@ function ContestDetailsInfo({
   newsBlockTitle,
 }) {
   const { siteJudles, translations, activeLanguage } = useSelector(({ users, ui }) => ({ ...users, ...ui }));
-  const daysToEntry = getTimeToContestEnd(selectedContest.ended_at);
+  const isContestStarted = isTimePassed(selectedContest.started_at)
+  const daysToEntry = getTimeToEnd(selectedContest.ended_at);
   const tabsData = ContestsService.getContestDetailsTemplate(
     WithLanguageProps(GeneralInfoComponent, ['name', 'description']),
     WithLanguageProps(ResultsComponent, ['name', 'description']),
@@ -160,7 +160,7 @@ function ContestDetailsInfo({
                   source={daysIconSource}
                   size={25}
                 />
-                <p>{daysToEntry} days left to enter contest</p>
+                {isContestStarted && <p>{daysToEntry} days left for submit photo</p> || <p>Contest not started yet.</p>}
               </div>
               <div className="contest-stroke-info__item">
                 <IconComponent
@@ -175,24 +175,20 @@ function ContestDetailsInfo({
                   size={25}
                 />
                 <p>
-                  Contest judle <br />
-                  <b>{concatNameParts(contestJudle)}</b>
+                  Contest judle <b>{concatNameParts(contestJudle)}</b>
                 </p>
               </div>
               <div className="contest-stroke-info__item">
-              <IconComponent
+                <IconComponent
                   source={baselineCurrencyIconSource}
                   size={25}
                 />
                 <p>
-                  {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)]} <br />
+                  {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)] + '\n'}
                   {selectedContest.enter_fee}$
                 </p>
               </div>
-              <SubmitPhotoArea
-                contestID={selectedContest.contest_id}
-                contestName={selectedContest.name}
-              />
+              <SubmitPhotoArea contest={{ ...selectedContest, isContestStarted }} />
             </div>
           </div>
         </div>
@@ -205,7 +201,7 @@ function ContestDetailsInfo({
   );
 }
 
-function SubmitPhotoArea({ contestID, contestName }) {
+function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted } }) {
   const dispatch = useDispatch();
   const { uploadedImage, activeLanguage, translations, lastUploadedImage } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
@@ -222,14 +218,14 @@ function SubmitPhotoArea({ contestID, contestName }) {
     openModal();
   };
 
-  const closeSubmittionModal = afterSubmit => {
+  const closeSubmittionModal = () => {
     location.href = location.href.replace('#submitPhoto', '');
     closeModal();
   }
 
   return (
     <React.Fragment>
-      <button ref={ref} className="btn btn-submit-photo" onClick={openSubmittionModal}>
+      <button ref={ref} className="btn btn-submit-photo" onClick={openSubmittionModal} disabled={!isContestStarted}>
         {translations[getTranslationStr('common.apply_photo', activeLanguage)]}
       </button>
       {isOpen && (
@@ -241,8 +237,8 @@ function SubmitPhotoArea({ contestID, contestName }) {
             <ApplyContestForm
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
-              contestID={contestID}
-              contestName={contestName}
+              contestID={contest_id}
+              contestName={name}
               close={closeSubmittionModal}
             >
               <div className="upload-input-container__next">

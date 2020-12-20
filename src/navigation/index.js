@@ -37,8 +37,8 @@ function AppNavigation() {
           <Route path="/judle-classes" component={JudleClassesScreen} />
           <Route path="/articles" component={AllArticlesScreen} />
           <Route path="/articles/:article_id" component={ArticleDetailsScreen} />
-          <Route path="/gallery" component={GalleryScreen} />
-          <Route path="/all-photos/:photo_id" component={GalleryPhotoScreen} />
+          <Route path="/gallery" exact={true} component={GalleryScreen} />
+          <Route path="/gallery/all/:photo_id" component={GalleryPhotoScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
           {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
           <Route

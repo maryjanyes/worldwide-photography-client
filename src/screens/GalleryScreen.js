@@ -8,18 +8,16 @@ import { getTranslationStr } from 'utils/data.util';
 const GalleryScreen = () => {
   const { allPhotos, translations, activeLanguage } = useSelector(({ photos, ui }) => ({ ...photos, ...ui }));
 
-  const canDisplayPhotos = allPhotos.length > 0;
-
   return (
     <div className="page page-gallery">
       <div className="top-line"></div>
       <span className="page-title">{translations[getTranslationStr('pages.gallery_page.title', activeLanguage)]}</span>
-      {(canDisplayPhotos && (
+      {(allPhotos.length > 0 && (
         <div className="gallery-pictures">
           {allPhotos.map(photo => (
             <GalleryPhoto
               {...photo}
-              adjustedWidth="32.5%"
+              adjustedWidth="31.5%"
               key={photo.photo_id}
             />
           ))}

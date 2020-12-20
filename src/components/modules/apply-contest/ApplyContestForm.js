@@ -27,7 +27,8 @@ const ApplyContestForm = ({
     contestCategories,
     recentSubmittionSuccess,
     activeLanguage,
-    translations
+    translations,
+    errorOnAuth
   } = useSelector(({ auth, contests, ui }) => ({
     ...auth,
     ...contests,
@@ -151,6 +152,7 @@ const ApplyContestForm = ({
             name="linkToFacebook"
             placeholder="Link to Facebook"
             onChange={onChange}
+            autoComplete="linkToFacebook"
           />
         </div>
         <div className="form-field apply-contest-form-field">
@@ -160,6 +162,7 @@ const ApplyContestForm = ({
             name="linkToInstagram"
             placeholder="Link to Instagram"
             onChange={onChange}
+            autoComplete="linkToInstagram"
           />
         </div>
         <div className="form-field apply-contest-form-field">
@@ -232,6 +235,7 @@ const ApplyContestForm = ({
           <button onClick={trySignIn} className="btn-apply-photo" type="button">
             {translations[getTranslationStr("common.button_actions.sign_in", activeLanguage)]}
           </button>
+          {errorOnAuth && <CommonMessage text={errorOnAuth} theme="error-message" />}
         </div>
       </div>
     );

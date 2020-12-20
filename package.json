@@ -6,9 +6,10 @@
   "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "build": "webpack --mode production",
-    "start": "node ./server.js"
+    "dev": "webpack-dev-server --config ./webpack/webpack-dev.config.js",
+    "build": "webpack --config ./webpack/webpack-prod.config.js",
+    "start": "node ./server.js",
+    "test": "echo 'Test passed'"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -40,6 +41,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.2"
   }
 }

@@ -47,6 +47,10 @@
   padding-top: 5vh;
 }
 
+.page-profile {
+  margin-top: 10vh;
+}
+
 .page-profile > .page-profile__form > form {
   max-width: 72%;
   margin: auto;
