@@ -27,7 +27,7 @@ button {
 .top-search {
   display: flex;
   flex-direction: row-reverse;
-  margin: 5vh 15vh;
+  margin: 5vh 2vh 5vh 0;
 }
 
 .top-search__input {
@@ -35,6 +35,8 @@ button {
   margin: 0.25vh 0 0 1vh;
   font-size: 18px;
   outline: none;
+  font-weight: 800;
+  color: #000000;
 }
 
 .top-search__input:hover {
@@ -94,7 +96,8 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .contest-submittion__photo-actions {
-  margin-top: -1vh;
+  width: 10%;
+  margin-right: 5%;
 }
 
 .gallery-photo__full-screen {
@@ -153,7 +156,20 @@ li.top-bar-user__items_item > button:hover {
 
 .all-contests__category-name {
   font-size: 20px;
-  padding: 2vh 0;
+  padding: 2vh;
+  width: 90%;
+  background-color: #000000;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.site-logo-wrapper {
+  position: absolute;
+  left: 25vh;
+  top: 5vh;
+  width: 100px;
+  height: 60px;
+  display: block;
 }
 
 .contest-details > .contest-details-image {
@@ -168,7 +184,11 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-item__card_body {
   padding: 2vh 0;
-  min-height: 100px;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .contest-item__card_body > .contest-name {
@@ -326,10 +346,9 @@ li.top-bar-user__items_item > button:hover {
 .top-bar-user__items_item,
 .top-bar-sign__items_item {
   position: relative;
-  right: 2.5vh;
-  width: 136px;
+  min-width: 120px;
   transform: rotateZ(90deg);
-  margin: 50px 0;
+  margin: 55px 0;
   padding: 0;
   text-align: center;
   box-shadow: 0 3px 6px #707070;
@@ -342,10 +361,9 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .top-bar-sign__items_item {
-  right: 0;
   transform: rotateZ(0);
   width: auto !important;
-  margin: auto;
+  margin: auto 5px;
 }
 
 .top-bar-sign__items_item:hover > a,
@@ -353,16 +371,10 @@ li.top-bar-user__items_item > button:hover {
   color: #ffffff !important;
 }
 
-li.nav-header__base_menu__item {
-  min-width: 155px;
-  margin: 6.2vh 0;
-  right: 0 !important;
-}
-
 .nav-header__base_menu__item > a,
 .top-bar-user__items_item > a,
 .top-bar-sign__items_item > a {
-  color: #833c00 !important;
+  color: #616161 !important;
   font-weight: 600;
   padding: 1.6vh;
   display: block;
@@ -374,10 +386,18 @@ li.nav-header__base_menu__item {
   background-color: #833c00;
 }
 
+.top-bar-user {
+  margin-left: 10vh;
+}
+
 .nav-header-right__links {
   display: flex;
   justify-content: flex-end;
   padding-right: 1.2vh;
+}
+
+.site-image {
+  pointer-events: none;
 }
 
 .page-profile-form {
@@ -550,10 +570,6 @@ li.nav-header__base_menu__item {
   margin: 1vh 2vh;
 }
 
-.page-profile {
-  margin-top: -8vh;
-}
-
 .page-profile-update-form {
   max-width: 50%;
 }
@@ -578,33 +594,32 @@ li.nav-header__base_menu__item {
 .article-preview {
   display: flex;
   flex-direction: column;
-  margin-left: 5em;
-  padding: 2.8em;
   width: 30%;
   cursor: pointer;
 }
 
-.article-preview:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  width: 400px;
-  height: 100%;
-  opacity: 0.2;
-  background-image: url(/assets/images/pane1.png);
+.article-preview__content {
+  padding: 2vh;
 }
 
-.article-preview .addition-info {
+.article-preview__addition-info {
   margin-top: 2vh;
   display: flex;
   flex-direction: column;
   font-size: 12px;
 }
 
-.article-preview .title {
+.article-preview__title,
+.article-preview__description {
   font-size: 20px;
   font-weight: 800;
+}
+
+.article-preview__avatar {
+  max-height: 300px;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 .contest-submittion__author-name > span:nth-child(1),
@@ -644,8 +659,6 @@ li.nav-header__base_menu__item {
   width: 100px;
   height: 60px;
   position: absolute;
-  left: 25vh;
-  top: 5vh;
   cursor: pointer;
   z-index: 10;
 }
@@ -864,20 +877,21 @@ li.nav-header__base_menu__item {
 }
 
 .gallery-pictures > .gallery-picture {
-  margin: 1vh;
   padding: 4vh 0;
   cursor: pointer;
   text-align: center;
-  box-shadow: 2px 1px 1px #6eaabd;
+  box-shadow: 2px 1px 1px #707070;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s filter;
 }
 
 .gallery-pictures > .gallery-picture > img {
   width: auto;
   max-height: 250px;
   object-fit: contain;
+  max-width: 90%;
 }
 
 .gallery-picture:hover {
@@ -904,7 +918,7 @@ li.nav-header__base_menu__item {
 }
 
 .contest-details-info__additions {
-  width: 50%;
+  width: 55%;
   margin-left: 2vh;
 }
 
@@ -1076,9 +1090,9 @@ li.nav-header__base_menu__item {
 
 .language-switcher__active {
   text-align: center;
-  margin-top: 2vh;
+  margin-top: 20px;
   transition: 0.5s background-color;
-  color: #833c00;
+  color: #616161;
   font-weight: 800;
   font-size: 18px;
 }
@@ -1100,7 +1114,7 @@ li.nav-header__base_menu__item {
   width: 100%;
   height: 42px;
   font-size: 16px;
-  box-shadow: 2px 1px 1px 1px #6eaabd;
+  box-shadow: 2px 1px 1px 1px #707070;
   transition: 0.5s background-color;
   border: none;
 }
@@ -1137,7 +1151,7 @@ li.nav-header__base_menu__item {
 
 .contest-submittions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   padding: 4vh 0;
 }
@@ -1168,7 +1182,7 @@ li.nav-header__base_menu__item {
   margin: auto;
   padding-top: 6.5vh;
   transition: 0.6s transform;
-  box-shadow: 2px 1px 1px #6eaabd;
+  box-shadow: 2px 1px 1px #707070;
 }
 
 .contest-submittion__photo > img:hover {
@@ -1177,8 +1191,9 @@ li.nav-header__base_menu__item {
 
 .contest-submittion__photo-info {
   position: absolute;
-  font-size: 15px;
+  font-size: 12px;
   color: #616161;
+  max-width: 80%;
 }
 
 .contest-submittions .contest-submittion .common-icon {
@@ -1211,7 +1226,7 @@ li.nav-header__base_menu__item {
 }
 
 .contest-stroke-info__item > p {
-  margin-left: 2vh;
+  margin: 0.5vh 1vh;
 }
 
 .gallery-pictures .gallery-picture > img:hover {
@@ -1342,7 +1357,7 @@ li.nav-header__base_menu__item {
   text-align: center;
   margin: auto;
   cursor: pointer;
-  border: 1px solid #833c00;
+  border: 2px solid #833c00;
   transition: 0.8s background-color;
   font-weight: 600;
   opacity: 0.8;

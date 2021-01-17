@@ -1,10 +1,10 @@
-name: deploy-app
+name: deploy-client-app
 on:
   push:
     branches: [master, develop]
 jobs:
   test:
-    name: Test app before pushing
+    name: Test WorldwidePhotography client app before pushing
     runs-on: ubuntu-latest
     steps:
     - name: Test
@@ -12,7 +12,7 @@ jobs:
       uses: actions/setup-node@v1
       run: npm run test
   deploy:
-    name: Deploy app to server
+    name: Deploy WorldwidePhotography client app to server
     description: Pull code from repo on server and restart Docker container
     runs-on: ubuntu-latest
     steps:

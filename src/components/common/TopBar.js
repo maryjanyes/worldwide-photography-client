@@ -18,8 +18,8 @@ const TopBarComponent = () => {
 
   return (
     <React.Fragment>
-      {displayTopLogo && <Link to='/'>
-        <img src={Logo} className="site-logo" />
+      {displayTopLogo && <Link to='/' className='site-logo-wrapper'>
+        <img src={Logo} className="site-logo site-image" />
       </Link>}
       <nav className="nav-header__links">
       <div className="nav-header-left__links">

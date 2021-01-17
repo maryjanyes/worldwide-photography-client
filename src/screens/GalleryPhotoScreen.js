@@ -24,7 +24,7 @@ const GalleryPhotoScreen = () => {
         <div className="page page-gallery-photo">
             <p className="page-title">Gallery photo</p>
             <div className="gallery-photo__full-screen">
-                <img src={photoPath} alt={photo?.description} />
+                <img src={photoPath} alt={photo?.description} className="site-image" />
                 {(photo?.author && photo?.votes) && <div className="gallery-photo__photo-author">
                     <SubmittionInfo author={photo?.author_id} votes={photo?.votes} />
                 </div>}

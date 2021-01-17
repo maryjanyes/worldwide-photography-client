@@ -214,10 +214,7 @@ button:disabled {
   transition: 0.6s background-color;
 }
 
-.icon-full-screen:hover {
-  background-color: #ff7c0f;
-}
-
+.icon-full-screen:hover,
 .icon-vote:hover {
-  background-color: #833c00;
+  background-color: #ff7c0f;
 }

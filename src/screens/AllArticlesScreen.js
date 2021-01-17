@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { getTranslationStr } from 'utils/data.util';
+import { getTranslationStr, pathToPhoto } from 'utils/data.util';
 
 function UsefullArticlesScreen({ history }) {
   const { allArticles, siteUsers, translations, activeLanguage } = useSelector(({ users, articles, ui }) => ({
@@ -40,18 +40,24 @@ function ArticlePreview({
   description,
   article_id,
   history,
+  avatar_path,
 }) {
   const goToArticle = () => {
     history.push(`/articles/${article_id}`);
   };
 
+  const photoPath = useMemo(() => pathToPhoto(avatar_path, [avatar_path]));
+
   return (
     <div className="article-preview" onClick={goToArticle}>
-      <span className="title">{title}</span>
-      <span className="description">{description}</span>
-      <div className="addition-info">
-        <span className="datetime">Posted at {created_at}</span>
-        <abbr className="author">Author {author && author.email}</abbr>
+      <img src={photoPath} className="article-preview__avatar" />
+      <div className="article-preview__content">
+        <span className="article-preview__title">{title}</span>
+        <span className="article-preview__description">{description}</span>
+        <div className="article-preview__addition-info">
+          <span className="datetime">Posted at {created_at}</span>
+          <abbr className="author">Author {author && author.email}</abbr>
+        </div>
       </div>
     </div>
   );

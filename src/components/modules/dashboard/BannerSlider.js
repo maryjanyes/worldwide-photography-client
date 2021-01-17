@@ -13,7 +13,7 @@ const BannerSliderItem = WithLanguageProps(({ name, images = [], isSelected }) =
           <p className="owl-slider-item-text">{name}</p>
           <div className="owl-slider-images">
             {images.map(({ src }, imageID) => (
-              <img src={src} key={imageID} />
+              <img src={src} key={imageID} className="site-image" />
             ))}
           </div>
         </button>

@@ -7,7 +7,7 @@ import { pathToPhoto } from "utils/data.util";
 const ContestDetails = ({ photo_path, name, pressItem, contest_id, hideContestName }) => {
   return (
     <div className="category-contest" onClick={() => pressItem(contest_id)}>
-      <img className="contest-image" src={pathToPhoto(photo_path)} />
+      <img className="contest-image site-image" src={pathToPhoto(photo_path)} />
       {!hideContestName && <p className="contest-name">{name}</p>}
     </div>
   );

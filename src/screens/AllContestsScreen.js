@@ -9,7 +9,7 @@ import { getTranslationStr } from 'utils/data.util';
 const CategoryContests = WithLanguageProps(({ name, contest_category_id, contests, selectContest }) => {
   return contests.length > 0 && (
     <div className="all-contests__category" key={name}>
-      <span className="all-contests__category-name">{name}</span>
+      <p className="all-contests__category-name">{name}</p>
       <div className="all-contests__category-contests">
         {contests.map(contest => (
           <ContestDetails

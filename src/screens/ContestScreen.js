@@ -167,7 +167,7 @@ function ContestDetailsInfo({
                   source={insertPhotoIconSource}
                   size={25}
                 />
-                <p>{contestSubmittions.length?.toString()} photos entered</p>
+                <p>{contestSubmittions.length?.toString()} {translations[getTranslationStr('common.photos_entered', activeLanguage)]}</p>
               </div>
               <div className="contest-stroke-info__item">
                 <IconComponent

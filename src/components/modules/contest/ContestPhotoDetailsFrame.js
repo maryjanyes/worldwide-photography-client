@@ -9,7 +9,7 @@ const ContestPhotoDetailsFrame = ({ photo, author }) => {
 
   return (
     <div className="photo-details-frame">
-      <img src={photoSrc} className="photo-detail-popup-image" />
+      <img src={photoSrc} className="photo-detail-popup-image site-image" />
     </div>
   );
 };

@@ -35,7 +35,7 @@ const PrizeItem = WithLanguageProps(({ title, amount, is_money, photo_path, navi
         <div className="prize-icon"></div>
       </div>
       <img
-        className="prize-item__image"
+        className="prize-item__image site-image"
         src={pathToAsset(photo_path, "baseline_emoji_events_black_18dp.png")}
         onClick={getContestPage}
       />{is_money && <span className="prize-item-amount">{amount}$</span>}

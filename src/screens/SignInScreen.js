@@ -73,7 +73,7 @@ function SignInUsing({ signIn }) {
         <div className="sign-in__judles-container">
           <div className="sign-in__judles-judle">
             <img
-              className="judle-avatar judle-1"
+              className="judle-avatar judle-1 site-image"
               // src={Judle1_avatar}
             />
             <span>
@@ -82,7 +82,7 @@ function SignInUsing({ signIn }) {
           </div>
           <div className="sign-in__judles-judle">
             <img
-              className="judle-avatar judle-2"
+              className="judle-avatar judle-2 site-image"
               // src={Judle2_avatar}
             />
             <span>(с) тут слоган Насті</span>

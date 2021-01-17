@@ -40,8 +40,6 @@ const ContestSubmittion = ({
     try {
       const voteResponse = await(await photosService.voteImageOrSubmittion(contests_submittion_id, photo_id)).json();
       if (voteResponse.isSuccess) {
-        // todo
-        // setShowLikeMessage(true);
         refresh();
       }
     } catch(err) { }
@@ -50,7 +48,7 @@ const ContestSubmittion = ({
   return (
     <div className="contest-submittion" key={photo_id}>
       <div className="contest-submittion__photo">
-        <img src={photoPath} className="contest-submittion__photo-image" />
+        <img src={photoPath} className="contest-submittion__photo-image site-image" />
         <div className="contest-submittion__photo-actions">
           <IconComponent
             source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}

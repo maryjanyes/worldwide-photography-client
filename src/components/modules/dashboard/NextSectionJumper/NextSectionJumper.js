@@ -9,7 +9,7 @@ const NextSectionJumper = ({ history, selectHash }) => {
 
     return (
         <div className="next-section-jumper" onClick={press}>
-            <img src={IconDownBlack} className="next-section-jumper__image" />
+            <img src={IconDownBlack} className="next-section-jumper__image site-image" />
         </div>
     );
 }

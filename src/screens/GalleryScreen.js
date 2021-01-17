@@ -17,7 +17,7 @@ const GalleryScreen = () => {
           {allPhotos.map(photo => (
             <GalleryPhoto
               {...photo}
-              adjustedWidth="31.5%"
+              adjustedWidth="33%"
               key={photo.photo_id}
             />
           ))}

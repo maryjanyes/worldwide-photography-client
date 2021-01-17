@@ -112,6 +112,11 @@
 }
 
 .page-dashboard__image {
+  position: absolute;
+  pointer-events: none;
+  right: 10%;
+  top: 25%;
+  z-index: -1;
   min-height: 400px;
   width: 50vh;
   transform: rotateZ(-15deg);

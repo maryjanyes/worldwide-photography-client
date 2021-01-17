@@ -1,0 +1,73 @@
+@media all and (max-width: 800px) {
+  /** common **/
+  .page:not(.page-dashboard) {
+    padding-left: 100px !important;
+  }
+  .nav-header__base_menu {
+    max-width: 75px;
+    align-items: center;
+  }
+  .top-bar-sign__items {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .nav-header__base_menu__item > a,
+  .top-bar-user__items_item > a,
+  .top-bar-sign__items_item > a {
+    font-size: 12px;
+  }
+  .site-logo-wrapper {
+    left: 10vh;
+  }
+  .language-switcher {
+    margin-top: 0 !important;
+    position: relative;
+    top: 1.6vh;
+  }
+  button.btn-submit-photo {
+    padding: 2%;
+  }
+  .contest-details-info__card-top {
+    flex-direction: column;
+  }
+  .contest-details-info__additions {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .sign-in__judles-container {
+    max-width: 80%;
+    flex-direction: row;
+  }
+  .contest-submittion {
+    min-width: 100%;
+  }
+  .contest-stroke-info__item {
+    margin: 0;
+  }
+  .btn-tab-item,
+  .btn-submit-photo,
+  .btn-apply-photo {
+    padding: 1vh;
+  }
+  .gallery-picture {
+    min-width: 50%;
+  }
+  .page-dashboard__container_top {
+    padding-left: 15vh;
+  }
+  .contest-submittion__photo > img {
+    width: 68%;
+  }
+  /** pages **/
+  .page-sign {
+    flex-direction: column;
+  }
+  .page-sign .sign-in-using {
+    width: 100%;
+    text-align: center;
+  }
+  .page-sign .sign-in__judles {
+    min-width: 100%;
+  }
+}

@@ -11,16 +11,16 @@ module.exports = mode => {
     entry: "./src/index.js",
     output: {
       path: path.join(__dirname, "./dist"),
-      publicPath: "/",
+      publicPath: "./",
       filename: "bundle.js",
     },
     devServer: {
-      // app PORT.
-      port: 8081,
+      port: env.APP_PORT || 8081,
       contentBase: "./",
       publicPath: "./dist/",
       historyApiFallback: true,
-      // https: true,
+      hot: true,
+      inline: true,
     },
     resolve: {
       alias: {

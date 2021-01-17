@@ -10,6 +10,7 @@ import "./styles/fonts.css";
 import "./styles/controls.css";
 import "./styles/justify.css";
 import "./styles/screens.css";
+import "./styles/adaptive.css";
 
 class App extends React.Component {
   constructor(props) {

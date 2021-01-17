@@ -20,7 +20,6 @@ const initialFormState = {
 const ProfileScreen = () => {
   const { userData, isLoggedIn, translations, activeLanguage, allPhotos } = useSelector((
     { auth, ui, photos }) => ({ ...auth, ...ui, ...photos }));
-  // todo Remove it
   const canDisplay = false;
   
   const [myPhotos, setMyPhotos] = useState([]);
@@ -35,15 +34,14 @@ const ProfileScreen = () => {
   }, [allPhotos, userData]);
 
   const submitForm = ({ }, values) => {
-    // todo
-    console.log(values)
+    // TODO Submit form.
   };
 
   return isLoggedIn && canDisplay && (
     <div className="page page-profile">
       <h1>{translations[getTranslationStr('pages.profile_page.title', activeLanguage)]}</h1>
       <Formik initialValues={values}>
-      {({ handleSubmit, getFieldProps, handleChange, isSubmitting }) => (
+      {({ getFieldProps, handleChange, isSubmitting }) => (
         <form className="page-profile-form">
           <div className="form-field">
             <label>{translations[getTranslationStr("forms.common.username", activeLanguage)]}</label>
@@ -110,7 +108,7 @@ const ProfileScreen = () => {
       </div>
     </div>
   ) || (<div className="page page-profile">
-         <p>Page at progress.</p>
+         <span></span>
        </div>)
 };
 

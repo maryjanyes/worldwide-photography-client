@@ -3,12 +3,9 @@ import { useSelector } from "react-redux";
 
 import ContestItems from "components/modules/dashboard/ContestItems";
 import ContestPrizesLine from "components/modules/dashboard/ContestPrizesLine";
-import ContestCategoriesNav from "components/modules/dashboard/ContestCategoriesNav";
 import NextSectionJumper from "components/modules/dashboard/NextSectionJumper/NextSectionJumper";
 
 import { getTranslationStr } from "utils/data.util";
-
-import Logo from '../../assets/images/logo.png';
 
 const DashboardScreen = (props) => {
   const bottomRef = useRef(null);
@@ -34,7 +31,7 @@ const DashboardScreen = (props) => {
       <div className="snow-gif"></div>
       <div className="page-dashboard__container">
         <div className="page-dashboard__container_top">
-          <div>
+          <div className="page-dashboard__container_top-info">
             <p>WorldwidePhotography</p>
             <p>{translations[getTranslationStr('common.site_description', activeLanguage)]}</p>
             <button
@@ -43,9 +40,7 @@ const DashboardScreen = (props) => {
               dangerouslySetInnerHTML={{ __html: translations[getTranslationStr('common.join_us_btn', activeLanguage)] }}
             />
           </div>
-          <div>
-            <div className="page-dashboard__image" />
-          </div>
+          <div className="page-dashboard__image" />
         </div>
         {!isBottomSectionSelected && <NextSectionJumper history={props.history} selectHash="bottom" />}
         {isBottomSectionSelected && <div className="page-dashboard__container_bottom">
