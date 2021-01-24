@@ -32,8 +32,8 @@ button:disabled {
 .btn-tab-item,
 .btn-submit-photo,
 .btn-apply-photo {
-  min-width: 160px;
-  padding: 2vh;
+  min-width: 120px;
+  padding: 1.5vh;
   margin: 1vh;
   border-radius: 15px;
   transition: 0.6s background-color;

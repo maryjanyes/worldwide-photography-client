@@ -18,7 +18,7 @@ const GalleryScreen = () => {
             <GalleryPhoto
               {...photo}
               adjustedWidth="33%"
-              key={photo.photo_id}
+              key={photo.photo_submittion_id}
             />
           ))}
         </div>

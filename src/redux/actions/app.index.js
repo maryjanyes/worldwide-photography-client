@@ -13,7 +13,7 @@ import {
 } from "./contests.actions";
 
 import { setTranslations, setAppLanguage } from "./ui.actions";
-import { setPhotosSuccess } from "./photos.actions";
+import { setPhotosSuccess, setPhotosSubmittionsSuccess } from "./photos.actions";
 import { setJudlesSuccess, setUsersSuccess } from "./users.actions";
 import { checkExistedAccountAndSignIn } from "./auth.actions";
 import { setArticlesSuccess } from "./articles.actions";
@@ -34,9 +34,9 @@ export const initAppData = (dispatch) => {
       dispatch(setContestsCategoriesSuccess(contestsCategories.data));
     }
   });
-  PhotosService.getPhotos().then((photosData) => {
-    if (isDataValid(photosData)) {
-      dispatch(setPhotosSuccess(photosData.data));
+  PhotosService.getPhotosSubmittions().then((photosSubmittionsData) => {
+    if (isDataValid(photosSubmittionsData)) {
+      dispatch(setPhotosSubmittionsSuccess(photosSubmittionsData.data));
     }
   });
   UsersService.getJudles().then((judlesData) => {

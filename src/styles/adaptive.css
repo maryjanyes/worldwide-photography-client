@@ -51,7 +51,8 @@
     padding: 1vh;
   }
   .gallery-picture {
-    min-width: 50%;
+    min-width: 100%;
+    margin: 2vh 0;
   }
   .page-dashboard__container_top {
     padding-left: 15vh;
@@ -60,6 +61,12 @@
     width: 68%;
   }
   /** pages **/
+  .page-articles .article-preview {
+    min-width: 90%;
+  }
+  .page-articles .article-preview .article-preview__avatar {
+    max-width: auto;
+  }
   .page-sign {
     flex-direction: column;
   }
@@ -69,5 +76,14 @@
   }
   .page-sign .sign-in__judles {
     min-width: 100%;
+  }
+  .all-contests__category {
+    flex: 100%;
+  }
+  .all-contests__category-name {
+    width: 100%;
+  }
+  .all-contests .category-contest {
+    margin: 1vh auto;
   }
 }

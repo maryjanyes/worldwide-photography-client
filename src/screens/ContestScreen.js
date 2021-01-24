@@ -132,7 +132,7 @@ function ContestDetailsInfo({
 }) {
   const { siteJudles, translations, activeLanguage } = useSelector(({ users, ui }) => ({ ...users, ...ui }));
   const isContestStarted = isTimePassed(selectedContest.started_at)
-  const daysToEntry = getTimeToEnd(selectedContest.ended_at);
+  const daysToEntryContest = getTimeToEnd(selectedContest.ended_at);
   const tabsData = ContestsService.getContestDetailsTemplate(
     WithLanguageProps(GeneralInfoComponent, ['name', 'description']),
     WithLanguageProps(ResultsComponent, ['name', 'description']),
@@ -160,7 +160,11 @@ function ContestDetailsInfo({
                   source={daysIconSource}
                   size={25}
                 />
-                {isContestStarted && <p>{daysToEntry} days left for submit photo</p> || <p>Contest not started yet.</p>}
+                {isContestStarted && (
+                  daysToEntryContest === 0 ?
+                    <p>contest already ended but not archived so you can still see it.</p> :
+                    <p>{daysToEntryContest} days left for submit photo</p>
+                ) || <p>Contest not started yet.</p>}
               </div>
               <div className="contest-stroke-info__item">
                 <IconComponent
@@ -188,7 +192,7 @@ function ContestDetailsInfo({
                   {selectedContest.enter_fee}$
                 </p>
               </div>
-              <SubmitPhotoArea contest={{ ...selectedContest, isContestStarted }} />
+              <SubmitPhotoArea contest={{ ...selectedContest, isContestStarted, daysToEntryContest }} />
             </div>
           </div>
         </div>
@@ -201,7 +205,7 @@ function ContestDetailsInfo({
   );
 }
 
-function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted } }) {
+function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted, daysToEntryContest } }) {
   const dispatch = useDispatch();
   const { uploadedImage, activeLanguage, translations, lastUploadedImage } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
   const { ref, isOpen, openModal, closeModal, Modal } = useModal();
@@ -225,7 +229,7 @@ function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted } }) {
 
   return (
     <React.Fragment>
-      <button ref={ref} className="btn btn-submit-photo" onClick={openSubmittionModal} disabled={!isContestStarted}>
+      <button ref={ref} className="btn btn-submit-photo" onClick={openSubmittionModal} disabled={!isContestStarted || daysToEntryContest === 0}>
         {translations[getTranslationStr('common.apply_photo', activeLanguage)]}
       </button>
       {isOpen && (
