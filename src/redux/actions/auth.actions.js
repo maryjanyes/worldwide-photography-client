@@ -22,9 +22,7 @@ export const resetSignError = () => ({
 const sign = async (data, dispatch, is_auth) => {
   const response = await AuthService[(is_auth && "auth") || "register"](data);
   if (response.isSuccess && response.data?.message !== "Password do not match.") {
-    if (is_auth) {
-      dispatch(handleAuthToken(response.data?.token));
-    }
+    dispatch(handleAuthToken(response.data?.token.token_value));
     dispatch(signSuccess(is_auth, response.data?.user));
   } else {
     setTimeout(() => dispatch(signError(response?.message)), 1000);
@@ -55,9 +53,12 @@ export const checkExistedAccountAndSignIn = () => {
   };
 };
 
-export const logOut = () => ({
-  type: "[AUTH] LOG_OUT",
-});
+export const logOut = () => {
+  AuthService.logOut();
+  return {
+    type: "[AUTH] LOG_OUT",
+  };
+};
 
 export default {
   logOut,

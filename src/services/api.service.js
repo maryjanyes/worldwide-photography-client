@@ -15,6 +15,14 @@ export class ApiService {
     });
   }
 
+  addAuthToken(headers) {
+    const sessionToken = localStorage.getItem('SessionToken');
+    if (sessionToken) {
+      headers.append('Authorization', `Bearer ${sessionToken}`);
+    }
+    return headers;
+  }
+
   async fetchJSONData(entryPath) {
     const url = `${this.BACKEND_ENDPOINT}/${entryPath}`;
     const response = await fetch(url, {
@@ -32,6 +40,14 @@ export class ApiService {
     return fetch(`${this.BACKEND_ENDPOINT}/${entryPath}`, {
       body: JSON.stringify(payload),
       headers,
+      method: "POST",
+      mode: "cors",
+    });
+  }
+
+  signOut() {
+    return fetch(`${this.BACKEND_ENDPOINT}/users/logOut`, {
+      headers: this.addAuthToken(this.postHeaders),
       method: "POST",
       mode: "cors",
     });
