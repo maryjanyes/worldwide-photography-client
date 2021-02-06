@@ -25,6 +25,9 @@ export default function AuthReducer(state = initialState, { type, payload }) {
         isLoggedIn: true,
       };
     }
+    case "[AUTH] SET_AUTH_TOKEN": {
+      localStorage.setItem("SessionToken", payload);
+    }
     case "[AUTH] AUTH_ERROR": {
       return {
         ...state,
@@ -48,10 +51,12 @@ export default function AuthReducer(state = initialState, { type, payload }) {
     }
     case "[AUTH] LOG_OUT": {
       localStorage.removeItem("UserData");
+      localStorage.removeItem("SessionToken");
       return {
         ...state,
         userData: null,
         isLoggedIn: false,
+        errorOnAuth: null,
       };
     }
     default:

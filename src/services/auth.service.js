@@ -17,6 +17,12 @@ class AuthService extends ApiService {
     const responsePayload = response.json();
     return responsePayload;
   }
+
+  async logOut() {
+    const response = await this.signOut();
+    const responsePayload = response.json();
+    return responsePayload;
+  }
 }
 
 export default new AuthService();
