@@ -4,9 +4,9 @@ const path = require("path");
 const fullCommandPath = process.env.npm_package_scripts_dev;
 
 const env = require("dotenv").config(fullCommandPath.indexOf('development') === -1 && { path: './prod.env' }).parsed;
-
 const bundleName = 'bundle.js';
 
+// TODO
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -15,12 +15,10 @@ module.exports = {
     filename: bundleName,
   },
   devServer: {
-    // app PORT.
     port: 8081,
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
-    // https: true,
   },
   resolve: {
     alias: {
