@@ -5,12 +5,14 @@ const fullCommandPath = process.env.npm_package_scripts_dev;
 
 const env = require("dotenv").config(fullCommandPath.indexOf('development') === -1 && { path: './prod.env' }).parsed;
 
+const bundleName = 'bundle.js';
+
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.join(__dirname, "./dist"),
     publicPath: "/",
-    filename: "bundle.js",
+    filename: bundleName,
   },
   devServer: {
     // app PORT.
@@ -47,10 +49,22 @@ module.exports = {
       BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
     }),
     new HtmlWebpackPlugin({
-      // title: 'WorldwidePhotography',
-      filename: './index.html',
-      // favicon: 'assets/images/logo.png',
-    }),
+      templateContent:
+        `
+        <!DOCTYPE html>
+        <html>
+            <head>
+              <title>WorldwidePhotography.com</title>
+              <link rel="icon" href="assets/images/logo.png" />
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+            </head>
+            <body>
+              <div id="root"></div>
+              <script src="./${bundleName}"></script>
+            </body>
+        </html>
+        `,
+      }),
   ],
   module: {
     rules: [

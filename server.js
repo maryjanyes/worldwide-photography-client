@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 
 server.listen(process.env.APP_PORT, () => {
-  console.log("WorldwidePhotography client_app is up and running.");
+  console.log("WorldwidePhotography client app live.");
   app.use(express.static("./dist"));
 });
 
