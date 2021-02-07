@@ -5,6 +5,8 @@ import rightMenuItemLinks from "mocks/right-menu-item-links";
 
 import { appLangs } from "services/app-configs.service";
 
+console.log(BACKEND_URL + BACKEND_PORT)
+
 export class ApiService {
   constructor() {
     this.BACKEND_ENDPOINT = `${BACKEND_URL}:${BACKEND_PORT}`;

@@ -1,12 +1,10 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
-const fullCommandPath = process.env.npm_package_scripts_dev;
 
-const env = require("dotenv").config(fullCommandPath.indexOf('development') === -1 && { path: './prod.env' }).parsed;
+const env = require("dotenv");
 const bundleName = 'bundle.js';
 
-// TODO
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -41,7 +39,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
-      NODE_ENV: JSON.stringify(env.BACKEND_VERSION),
+      BACKEND_VERSION: JSON.stringify(env.BACKEND_VERSION),
       BACKEND_URL: JSON.stringify(env.BACKEND_URL),
       BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
       BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
@@ -53,7 +51,7 @@ module.exports = {
         <html>
             <head>
               <title>WorldwidePhotography.com</title>
-              <link rel="icon" href="assets/images/logo.png" />
+              <link rel="icon" href="favicon.ico" />
               <meta name="viewport" content="width=device-width, initial-scale=1">
             </head>
             <body>

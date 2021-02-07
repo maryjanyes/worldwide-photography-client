@@ -2,11 +2,11 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 
-module.exports = mode => {
-  const env = require("dotenv")
-    .config(mode === 'production' && { path:'./prod.env' }).parsed;
-  console.log('ENV variables', env);
+const env = require("dotenv")
+  .config({ path:'./prod.env' })
+  .parsed;
 
+module.exports = () => {
   return {
     entry: "./src/index.js",
     output: {
@@ -43,15 +43,26 @@ module.exports = mode => {
       }),
       new webpack.DefinePlugin({
         PRODUCTION: JSON.stringify(true),
-        NODE_ENV: JSON.stringify(env.BACKEND_VERSION),
+        BACKEND_VERSION: JSON.stringify(env.BACKEND_VERSION),
         BACKEND_URL: JSON.stringify(env.BACKEND_URL),
         BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
         BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
       }),
       new HtmlWebpackPlugin({
-        title: 'WorldwidePhotography',
-        templateContent: '<div id="root"></div>',
-        favicon: 'assets/images/logo.png',
+        templateContent: `
+        <!DOCTYPE html>
+        <html>
+            <head>
+              <title>WorldwidePhotography.com | Photo contests</title>
+              <link rel="icon" href="favicon.ico" />
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+            </head>
+            <body>
+              <div id="root"></div>
+              <script src="./bundle.js"></script>
+            </body>
+        </html>
+        `,
       }),
     ],
     module: {
