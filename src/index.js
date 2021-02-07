@@ -26,4 +26,5 @@ class App extends React.Component {
   }
 }
 
+// Test comment for CI.
 ReactDOM.render(<App />, document.getElementById("root"));
