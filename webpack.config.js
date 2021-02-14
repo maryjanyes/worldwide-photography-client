@@ -5,6 +5,8 @@ const path = require("path");
 const env = require("dotenv");
 const bundleName = 'bundle.js';
 
+console.log(Object.keys(env))
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -40,9 +42,9 @@ module.exports = {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true),
       BACKEND_VERSION: JSON.stringify(env.BACKEND_VERSION),
-      BACKEND_URL: JSON.stringify(env.BACKEND_URL),
-      BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
-      BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
+      BACKEND_URL: JSON.stringify('http://localhost'),
+      BACKEND_PORT: JSON.stringify('8080'),
+      BACKEND_FILE_SERVER_PORT: JSON.stringify('8082'),
     }),
     new HtmlWebpackPlugin({
       templateContent:

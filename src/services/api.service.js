@@ -5,11 +5,11 @@ import rightMenuItemLinks from "mocks/right-menu-item-links";
 
 import { appLangs } from "services/app-configs.service";
 
-console.log(BACKEND_URL + BACKEND_PORT)
+console.log(BACKEND_URL, BACKEND_PORT, 'The backend url')
 
 export class ApiService {
   constructor() {
-    this.BACKEND_ENDPOINT = `${BACKEND_URL}:${BACKEND_PORT}`;
+    this.BACKEND_ENDPOINT = `${BACKEND_URL || 'localhost'}:${BACKEND_PORT}`;
     this.BACKEND_FILES_ENDPOINT = `${BACKEND_URL}:${BACKEND_FILE_SERVER_PORT}`;
     this.CLIENT_ENDPOINT = `${location.protocol}//${location.host}`;
     this.postHeaders = new Headers({
