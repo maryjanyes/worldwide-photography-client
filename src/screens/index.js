@@ -10,3 +10,4 @@ export { default as PrivacyAndConditionsScreen } from "./PrivacyAndConditionsScr
 export { default as ProfileScreen } from "./ProfileScreen";
 export { default as ArticleDetailsScreen } from "./ArticleDetailsScreen";
 export { default as GalleryPhotoScreen } from './GalleryPhotoScreen';
+export { default as AboutUsPageScreen } from './AboutUsPageScreen';

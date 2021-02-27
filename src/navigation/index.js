@@ -14,6 +14,7 @@ import {
   ProfileScreen,
   ArticleDetailsScreen,
   GalleryPhotoScreen,
+  AboutUsPageScreen,
 } from "screens";
 
 import TopBarNavigation from "components/common/TopBar";
@@ -41,6 +42,7 @@ function AppNavigation() {
           <Route path="/gallery/all/:photo_id" component={GalleryPhotoScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
           {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
+          <Route path="/about-us" component={AboutUsPageScreen} />
           <Route
             path="*"
             render={() => (

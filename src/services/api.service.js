@@ -80,6 +80,10 @@ export class ApiService {
     });
   }
 
+  getAboutUsPage(language = 'en') {
+    return `${this.BACKEND_ENDPOINT}/static/templates/about.html?lang=${language}`;
+  }
+
   async getAppTranslations() {
     const response = await fetch(`${this.BACKEND_ENDPOINT}/translations`);
     return await response.json();

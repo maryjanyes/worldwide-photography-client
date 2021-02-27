@@ -11,7 +11,7 @@ module.exports = () => {
     entry: "./src/index.js",
     output: {
       path: path.join(__dirname, "./dist"),
-      publicPath: "./",
+      publicPath: "/",
       filename: "bundle.js",
     },
     devServer: {

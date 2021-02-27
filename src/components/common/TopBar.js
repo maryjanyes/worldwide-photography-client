@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Link, useHistory } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import TopBarSignItems from "./TopBarSignItems";
 import TopBarUserItems from "./TopBarUserItems";
