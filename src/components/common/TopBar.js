@@ -15,6 +15,7 @@ import Logo from '../../../assets/images/logo.png';
 const TopBarComponent = () => {
   const [displayTopLogo] = useState(true)
   const { isLoggedIn, translations, activeLanguage } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
+  const menuItems = ApiService.getNavLinks();
 
   return (
     <React.Fragment>
@@ -24,7 +25,7 @@ const TopBarComponent = () => {
       <nav className="nav-header__links">
       <div className="nav-header-left__links">
         <ul className="nav-header__base_menu">
-          {ApiService.getNavLinks().map(link =>
+          {menuItems.map(link =>
             !link.disabled && (
               <li key={link.link} className="nav-header__base_menu__item">
                 <NavLink
@@ -32,7 +33,7 @@ const TopBarComponent = () => {
                   key={link.name}
                   to={link.link}
                   activeClassName="active"
-                >{translations[getTranslationStr(link.i18n, activeLanguage)]}</NavLink>
+                >{translations[getTranslationStr(link.i18n, activeLanguage)] || link.i18n}</NavLink>
               </li>
             )
           )}

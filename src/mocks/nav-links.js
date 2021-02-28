@@ -11,6 +11,10 @@ const navlinks = [
     link: "/all-contests",
     i18n: "nav_links.contests",
   },
+  {
+    link: "/about-us",
+    i18n: "nav_links.about_us",
+  },
 ];
 
 export default navlinks;
