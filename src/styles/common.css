@@ -74,8 +74,8 @@ li.top-bar-user__items_item > button:hover {
 .top-bar-user__items {
   display: flex;
   border-radius: 40px;
-  border: 1px solid #707070;
-  box-shadow: 0 3px 6px #707070;
+  border: 1px solid rgba(239, 239, 239, 0.479);
+  box-shadow: 0 3px 6px #efefef;
   padding: 1vh 4vh;
   margin: 2vh 0 2.5vh 0 !important;
   max-height: 80px;
@@ -338,9 +338,9 @@ li.top-bar-user__items_item > button:hover {
   display: flex;
   flex-direction: column;
   border-radius: 40px;
-  border: 1px solid #707070;
-  box-shadow: 0 3px 6px #707070;
-  padding: 6vh 0 2vh 0;
+  border: 1px solid #efefef;
+  box-shadow: 0 3px 6px #efefef;
+  padding: 4vh 2.5vh;
   background-color: #ffffff;
 }
 
@@ -349,11 +349,11 @@ li.top-bar-user__items_item > button:hover {
 .top-bar-sign__items_item {
   position: relative;
   min-width: 120px;
-  transform: rotateZ(90deg);
-  margin: 55px 0;
+  /* transform: rotateZ(90deg); */
+  margin: 1vh 0;
   padding: 0;
   text-align: center;
-  box-shadow: 0 3px 6px #707070;
+  box-shadow: 0 3px 6px #efefef;
   cursor: pointer;
   transition: 0.8s background-color;
 }
@@ -364,8 +364,7 @@ li.top-bar-user__items_item > button:hover {
 
 .top-bar-sign__items_item {
   transform: rotateZ(0);
-  width: auto !important;
-  margin: auto 5px;
+  margin: auto 1vh;
 }
 
 .top-bar-sign__items_item:hover > a,
