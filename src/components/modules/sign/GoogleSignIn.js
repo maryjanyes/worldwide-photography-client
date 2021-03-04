@@ -14,6 +14,7 @@ const GoogleSignIn = () => {
 
     return loadError && <span className='google-script__load-error'>{loadError.slice(0, 18)}</span> || (<GoogleLogin
         clientId={outerServicesSettings.GOOGLE_CLIENT_APP_ID}
+        // todo Place translation.
         buttonText="LOGIN WITH GOOGLE"
         onSuccess={onLoginWithGoogle}
         onFailure={onLoginWithGoogle}
