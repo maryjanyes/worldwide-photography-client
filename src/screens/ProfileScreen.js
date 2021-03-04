@@ -108,7 +108,7 @@ const ProfileScreen = () => {
       </div>
     </div>
   ) || (<div className="page page-profile">
-         <span></span>
+         <span>Page at progress.</span>
        </div>)
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import appConfigsService, { appLangs } from "services/app-configs.service";
+import { appConfigsService, appLangs } from "services/app-configs.service";
 
 const LanguageSwitcher = ({ active }) => {
   const [isSelect, setIsSelect] = useState(false)

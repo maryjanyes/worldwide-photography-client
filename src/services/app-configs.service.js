@@ -21,4 +21,4 @@ class AppConfigsService {
   }
 }
 
-export default new AppConfigsService();
+export const appConfigsService = new AppConfigsService();

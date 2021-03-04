@@ -1,18 +1,25 @@
-import React from 'react'
-import GoogleLogin from 'react-google-login'
+import React, { useState } from 'react';
+import GoogleLogin from 'react-google-login';
+
+import outerServicesSettings from 'configs/outer-services.settings';
 
 const GoogleSignIn = () => {
-    const onLoginWithGoogle = data => {
-        console.log(data);
+    const [loadError, setLoadError] = useState(null);
+
+    const onLoginWithGoogle = data => { };
+
+    const onScriptLoadFailure = reason => {
+        setLoadError(reason.details);
     };
 
-    return <GoogleLogin
-        clientId="worldwidephotography"
+    return loadError && <span className='google-script__load-error'>{loadError.slice(0, 18)}</span> || (<GoogleLogin
+        clientId={outerServicesSettings.GOOGLE_CLIENT_APP_ID}
         buttonText="LOGIN WITH GOOGLE"
         onSuccess={onLoginWithGoogle}
         onFailure={onLoginWithGoogle}
-        // cookiePolicy={'single_host_origin'}
-    />;
+        onScriptLoadFailure={onScriptLoadFailure}
+        cookiePolicy='single_host_origin'
+    />);
 };
 
 export default GoogleSignIn;

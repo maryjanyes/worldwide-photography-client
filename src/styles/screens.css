@@ -44,11 +44,14 @@
 
 .page.page-sign {
   padding-left: 0 !important;
-  padding-top: 5vh;
+  padding-top: 15vh;
 }
 
-.page-profile {
-  margin-top: 10vh;
+.page-profile,
+.page-articles,
+.page-all-contests,
+.page-gallery {
+  margin-top: 15vh;
 }
 
 .page-profile > .page-profile__form > form {

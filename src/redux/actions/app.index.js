@@ -3,7 +3,8 @@ import PhotosService from "services/photos.service";
 import UsersService from "services/users.service";
 import ArticlesService from "services/articles.service";
 import { apiService } from "services/api.service";
-import appConfigsService from "services/app-configs.service";
+import { appConfigsService } from "services/app-configs.service";
+
 import { isDataValid } from "utils/data.util";
 
 import {
@@ -13,10 +14,13 @@ import {
 } from "./contests.actions";
 
 import { setTranslations, setAppLanguage } from "./ui.actions";
-import { setPhotosSuccess, setPhotosSubmittionsSuccess } from "./photos.actions";
+import { setPhotosSubmittionsSuccess } from "./photos.actions";
 import { setJudlesSuccess, setUsersSuccess } from "./users.actions";
-import { checkExistedAccountAndSignIn } from "./auth.actions";
 import { setArticlesSuccess } from "./articles.actions";
+import { checkExistedAccountAndSignIn } from "./auth.actions";
+
+import enTranslations from 'mocks/translations/en';
+import uaTranslations from 'mocks/translations/ua';
 
 export const initAppData = (dispatch) => {
   ContestsService.getContets().then((contestsResponse) => {
@@ -60,6 +64,12 @@ export const initAppData = (dispatch) => {
       return acc;
     }, {})
     if (newTranslationData) {
+      Object.keys(uaTranslations).forEach(_key => {
+        newTranslationData[`${_key}.ua`] = uaTranslations[_key];
+      });
+      Object.keys(enTranslations).forEach(_key => {
+        newTranslationData[`${_key}.en`] = enTranslations[_key];
+      });
       dispatch(setTranslations(newTranslationData));
     }
   });

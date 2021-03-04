@@ -15,6 +15,7 @@ module.exports = () => {
       filename: "bundle.js",
     },
     devServer: {
+      https: true,
       port: env.APP_PORT || 8081,
       contentBase: "./",
       publicPath: "./dist/",
@@ -33,6 +34,7 @@ module.exports = () => {
         styles: path.resolve(__dirname, "./src/styles"),
         types: path.resolve(__dirname, "./src/types"),
         mocks: path.resolve(__dirname, "./src/mocks"),
+        configs: path.resolve(__dirname, "./src/configs"),
       },
     },
     plugins: [
