@@ -1,17 +1,19 @@
 name: deploy-client-app
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
 jobs:
   test:
-    name: Test
+    name: Test app
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Test app
         run: |
-          echo %TODO Tests passed%
+          npm install --silent
+          npm run test
   deploy:
-    name: Deploy
+    name: Deploy app
     runs-on: ubuntu-latest
     steps:
       - name: Deploy app
@@ -27,4 +29,4 @@ jobs:
             docker build -t worldwide-photography-client:0.1 .
             random_tag_name=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1)
             docker run --publish 8081:8081 --detach --name ${random_tag_name} worldwide-photography-client:0.1
-            echo 'Deploy of client app complete'
+            echo 'Deploy of client app complete.'

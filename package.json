@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --config webpack-prod.config.js",
     "start": "node ./server.js",
-    "test": "echo 'Test passed'"
+    "test": "echo 'Tests passed'"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
