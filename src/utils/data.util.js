@@ -68,7 +68,7 @@ export const pathToAsset = (path = "simple.png") =>
 
 export const getOneFromData = (itemCollection, itemID, itemKey) => {
   if (itemCollection) {
-    return itemCollection.find(c => c[itemKey] === itemID);
+    return itemCollection && itemCollection.find(c => c[itemKey] === itemID);
   }
 };
 

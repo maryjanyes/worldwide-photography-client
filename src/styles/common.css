@@ -82,6 +82,10 @@ li.top-bar-user__items_item > button:hover {
   opacity: 0;
 }
 
+.bottom-input__ref.active {
+  margin-top: 0 !important;
+}
+
 .page-dashboard .owl-slider {
   position: relative;
 }
@@ -160,7 +164,7 @@ li.top-bar-user__items_item > button:hover {
   text-transform: uppercase;
 }
 
-.site-logo-wrapper {
+.site-logo__wrapper {
   position: fixed;
   left: 25vh;
   top: 5vh;
@@ -177,7 +181,7 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .contest-item__card {
-  box-shadow: 0 3px 6px #707070;
+  box-shadow: 0 3px 6px #efefef;
 }
 
 .contest-item__card_body {
@@ -425,7 +429,7 @@ li.top-bar-user__items_item > button:hover {
 
 .sign-up-form > .btn-submit,
 .sign-in-form > .btn-submit {
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .sign-in-form > .form-field,
@@ -445,7 +449,7 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .sign-in-using {
-  width: 80%;
+  width: 75%;
 }
 
 .sign-up-form > button,
@@ -701,6 +705,7 @@ li.top-bar-user__items_item > button:hover {
   width: 100%;
   z-index: 10;
   top: 0;
+  background-color: #ffffff;
 }
 
 .page-dashboard {

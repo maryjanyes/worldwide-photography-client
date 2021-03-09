@@ -47,7 +47,7 @@ const DashboardScreen = (props) => {
           <ContestItems history={props.history} />
           <ContestPrizesLine history={props.history} />
         </div>}
-        <input ref={bottomRef} className="bottom-input__ref" />
+        <input ref={bottomRef} className={`bottom-input__ref${isBottomSectionSelected && ' active' || ''}`} />
       </div>
     </div>
   );

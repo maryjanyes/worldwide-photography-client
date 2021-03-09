@@ -3,17 +3,6 @@
   cursor: pointer;
 }
 
-.btn-simple {
-  width: 168px;
-  height: 48px;
-  background-color: #833c00;
-  border-radius: 20px;
-  font-weight: 800;
-  font-size: 16px;
-  color: #ff7c0f;
-  transition: 0.6s background-color;
-}
-
 button.btn-submit-photo {
   padding-top: 4%;
   padding-bottom: 4%;
@@ -62,6 +51,10 @@ button:disabled {
   color: #ffffff;
 }
 
+.btn-simple {
+  font-weight: 600;
+}
+
 .btn-simple.btn-explore-contest {
   text-transform: uppercase;
   color: #ffffff;
@@ -72,7 +65,8 @@ button:disabled {
   color: #ff7c0f;
 }
 
-.btn-submit {
+.btn-submit,
+.btn-simple {
   transition: 0.5s background-color;
   min-width: 140px;
   margin: auto;
@@ -84,7 +78,8 @@ button:disabled {
   background-color: #ff7c0f;
 }
 
-.btn-submit:hover {
+.btn-submit:hover,
+.btn-simple:hover {
   background-color: #833c00;
 }
 
@@ -142,7 +137,7 @@ button:disabled {
 }
 
 .btn-link:hover {
-  color: #833c00;
+  color: #ffffff !important;
 }
 
 .common-checkbox__input {
@@ -191,7 +186,7 @@ button:disabled {
 .common-select-btn .icon-common {
   transform: rotateZ(180deg);
   position: relative;
-  bottom: 0.45vh;
+  bottom: 0.5vh;
 }
 
 .common-select-btn.active .icon-common {

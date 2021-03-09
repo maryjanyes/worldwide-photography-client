@@ -29,7 +29,7 @@ const PrizeItem = WithLanguageProps(({ title, amount, is_money, photo_path, navi
   const getContestPage = () => navigate(contest_id);
 
   return (
-    <div className="prize-item" key={contest_id}>
+    <div className="prize-item" key={'some'}>
       <div className="prize-item__heading">
         <span className="prize-name">{title}</span>
         <div className="prize-icon"></div>
