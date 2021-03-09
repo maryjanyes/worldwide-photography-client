@@ -27,6 +27,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "short-uuid": "^4.1.0",
     "use-react-modal": "0.0.9"
   },
   "devDependencies": {

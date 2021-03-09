@@ -4,9 +4,10 @@ require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
+const port = process.env.APP_PORT || 8081;
 
-server.listen(process.env.APP_PORT, () => {
-  console.log("WorldwidePhotography client app live.");
+server.listen(port, () => {
+  console.log("Client app live on", port);
   app.use(express.static("./dist"));
 });
 

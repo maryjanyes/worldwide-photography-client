@@ -56,7 +56,7 @@ export class ApiService {
   insertContestImage(formData, contestName) {
     return new Promise(res => {
       return fetch(
-        `${this.BACKEND_FILES_ENDPOINT}/uploadImage/contestSubmittions/${contestName}`,
+        `${this.BACKEND_FILES_ENDPOINT}?photo_type=contestSubmittions&subdir_name=${contestName}`,
         {
           body: formData,
           method: "POST",

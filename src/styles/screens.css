@@ -40,11 +40,12 @@
 }
 .page:not(.page-dashboard) {
   padding-left: 25vh;
+  margin-top: 20vh;
 }
 
 .page.page-sign {
   padding-left: 0 !important;
-  padding-top: 15vh;
+  padding-top: 10vh;
 }
 
 .page-profile,
@@ -98,7 +99,7 @@
 .page-dashboard__container_top .join-btn {
   max-width: 370px;
   border-radius: 28px;
-  background-color: transparent;
+  background-color: #ffffff;
   text-align: left;
   padding: 1.5vh 4vh;
   box-shadow: 5px 5px 5px #ffbb83;
@@ -111,7 +112,7 @@
 
 .page-dashboard__container_top .join-btn:hover {
   background-color: #ff7c0f;
-  color: white;
+  color: #ffffff;
 }
 
 .page-dashboard__image {

@@ -171,17 +171,21 @@ function ContestDetailsInfo({
                   source={insertPhotoIconSource}
                   size={25}
                 />
-                <p>{contestSubmittions.length?.toString()} {translations[getTranslationStr('common.photos_entered', activeLanguage)]}</p>
+                <p>
+                  {translations[getTranslationStr('common.photos_entered_placeholder', activeLanguage)] || 'common.photos_entered_placeholder'}
+                  {' ' + contestSubmittions.length?.toString()} {translations[getTranslationStr('common.photos_entered', activeLanguage)]}
+                </p>
               </div>
-              <div className="contest-stroke-info__item">
+              {contestJudle && <div className="contest-stroke-info__item">
                 <IconComponent
                   source={baselineFaceIconSource}
                   size={25}
                 />
                 <p>
-                  Contest judle <b>{concatNameParts(contestJudle)}</b>
+                  {translations[getTranslationStr('common.photo_judle_placeholder', activeLanguage)] || 'common.photo_judle_placeholder'}
+                  <b>{concatNameParts(contestJudle)}</b>
                 </p>
-              </div>
+              </div>}
               <div className="contest-stroke-info__item">
                 <IconComponent
                   source={baselineCurrencyIconSource}

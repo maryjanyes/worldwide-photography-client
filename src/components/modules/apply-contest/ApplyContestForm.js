@@ -85,7 +85,7 @@ const ApplyContestForm = ({
         };
         const photoResponse = await(await apiService.insertData(
           photoData,
-          "images/submittion"
+          "images/submittions"
         )).json();
         const submittionID = photoResponse.generatedMaps[0]?.photo_submittion_details_id;
         const contestData = {
