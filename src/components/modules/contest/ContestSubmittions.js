@@ -2,7 +2,7 @@ import React from "react";
 
 import ContestSubmittion from "./ContestSubmittion";
 
-const ContestSubmittions = ({ submittions, refresh }) => {
+const ContestSubmittions = ({ submittions, refreshSubmittions }) => {
   return (
     <React.Fragment>
       <div className="contest-submittions">
@@ -11,7 +11,7 @@ const ContestSubmittions = ({ submittions, refresh }) => {
             <ContestSubmittion
               {...s}
               key={s.photo_id}
-              refresh={refresh}
+              refreshSubmittions={refreshSubmittions}
             />
           ))) || <p className="contest-submittions__no-items">No Submittions for contest.</p>}
       </div>

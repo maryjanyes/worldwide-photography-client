@@ -18,7 +18,7 @@ const initialFormState = {
 };
 
 const ProfileScreen = () => {
-  const { userData, isLoggedIn, translations, activeLanguage, allPhotos } = useSelector((
+  const { userData, isLoggedIn, translations, activeLanguage, photoSubmittions } = useSelector((
     { auth, ui, photos }) => ({ ...auth, ...ui, ...photos }));
   const canDisplay = false;
   
@@ -27,11 +27,11 @@ const ProfileScreen = () => {
   const [values] = useState(userData || initialFormState);
 
   useEffect(() => {
-    const userPhotos = getPhotosForAccount(allPhotos, userData?.user_id);
+    const userPhotos = getPhotosForAccount(photoSubmittions, userData?.user_id);
     if (userPhotos && userPhotos.length > 0) {
       setMyPhotos(userPhotos);
     }
-  }, [allPhotos, userData]);
+  }, [photoSubmittions, userData]);
 
   const submitForm = ({ }, values) => {
     // TODO Submit form.

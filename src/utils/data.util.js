@@ -60,7 +60,7 @@ export const pathToPhoto = (path, defaultPath = "simple.png", excludePrefix = fa
   if (!path || path === "photo_path") {
     return `${apiService.CLIENT_ENDPOINT}/assets/images/${defaultPath}`;
   }
-  return `${apiService.BACKEND_ENDPOINT}/images/${excludePrefix ? path.replace('/', '') : path}`;
+  return `${apiService.BACKEND_ENDPOINT}/photos/${excludePrefix ? path.replace('/', '') : path}`;
 };
 
 export const pathToAsset = (path = "simple.png") =>

@@ -1,7 +1,10 @@
+import outerServicesSettings from 'configs/outer-services.settings';
+
 const initialState = {
   isLoggedIn: false,
   userData: null,
   errorOnAuth: null,
+  currencyCode: outerServicesSettings.DEFAULT_CURRENCY_CODE,
 };
 
 export default function AuthReducer(state = initialState, { type, payload }) {

@@ -102,11 +102,14 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .gallery-photo__full-screen {
-  max-height: 500px;
+  /* max-height: 500px; */
   width: 90%;
   object-fit: scale-down;
-  margin-top: 10vh;
-  padding-bottom: 10vh;
+  margin: 5vh 0 0;
+}
+
+.gallery-photo__photo-info {
+  margin-top: 2vh;
 }
 
 .gallery-photo__full-screen > img {
@@ -376,7 +379,9 @@ li.top-bar-user__items_item > button:hover {
 .top-bar-sign__items_item > a {
   color: #616161 !important;
   font-weight: 600;
-  padding: 1.6vh;
+  padding: 1.5vh;
+  font-size: 12px;
+  text-transform: uppercase;
   display: block;
 }
 
@@ -886,7 +891,8 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .gallery-pictures > .gallery-picture {
-  padding: 4vh 0;
+  padding: 2vh 0;
+  margin: 0 0.35vh;
   cursor: pointer;
   text-align: center;
   box-shadow: 2px 1px 1px #707070;
@@ -1328,8 +1334,7 @@ li.top-bar-user__items_item > button:hover {
 
 .apply-contest-get-sign-up a {
   font-weight: 600;
-  font-size: 18px;
-  color: #833c00;
+  font-size: 12px;
   margin-left: 5px;
 }
 
