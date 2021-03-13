@@ -3,22 +3,22 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { pathToPhoto, getPhotoUrlFromPhotoObject } from "utils/data.util";
-
-import SubmittionInfo from 'components/modules/contest/ContestSubmittionInfo';
+import useAuthors from "components/hooks/useAuthors.hook";
+import ContestSubmittionInfo from "components/modules/contest/ContestSubmittionInfo";
 
 const GalleryPhotoScreen = () => {
     const { photo_id } = useParams();
-    const { allPhotos, contestSubmittions } = useSelector(({ photos, contests }) => ({ ...photos, ...contests }));
+    const { photoSubmittions } = useSelector(({ photos }) => photos);
+    const { author } = useAuthors(photo?.author_id);
     const [photo, setPhoto] = useState(null);
 
     const photoPath = useMemo(() => {
-        if (allPhotos && allPhotos.length > 0) {
-            const photo = allPhotos.find((photo => photo.photo_submittion_id == photo_id));
-            const submittion = contestSubmittions.find((sub => sub.contests_submittion_id == photo_id))
-            setPhoto({ ...photo, ...submittion});
+        if (photoSubmittions?.length) {
+            const photo = photoSubmittions.find((photo => photo.photo_submittion_id == photo_id));
+            setPhoto(photo);
             return pathToPhoto(getPhotoUrlFromPhotoObject(photo));
         }
-    }, [allPhotos.length, contestSubmittions.length]);
+    }, [photoSubmittions]);
     
     return (
         <div className="page page-gallery-photo">
@@ -26,7 +26,7 @@ const GalleryPhotoScreen = () => {
             <div className="gallery-photo__full-screen">
                 <img src={photoPath} alt={photo?.description} className="site-image" />
                 <div className="gallery-photo__photo-info">
-                    <SubmittionInfo {...photo} />
+                    <ContestSubmittionInfo {...photo} author={author} />
                 </div>
             </div>
         </div>

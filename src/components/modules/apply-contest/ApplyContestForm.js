@@ -6,7 +6,7 @@ import ContestsService from "services/contests.service";
 import PhotosService from "services/photos.service";
 import { apiService } from "services/api.service";
 import { setRecentSubmittionSuccess, setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
-import { setPhotosSuccess } from "reducers/actions/photos.actions";
+import { setPhotosSubmittionsSuccess } from "reducers/actions/photos.actions";
 import { buildDropdownOptions, getTranslationStr, isDataValid } from "utils/data.util";
 import { signIn } from "reducers/actions/auth.actions";
 
@@ -58,11 +58,10 @@ const ApplyContestForm = ({
     if (isDataValid(submittionsData)) {
       dispatch(setContestsSubmittionsSuccess(submittionsData.data));
     }
-    PhotosService.getPhotos().then((photosData) => {
-      if (isDataValid(photosData)) {
-        dispatch(setPhotosSuccess(photosData.data));
-      }
-    });
+    const photosSubmittionsData = await PhotosService.getPhotosSubmittions();
+    if (isDataValid(photosSubmittionsData)) {
+      dispatch(setPhotosSubmittionsSuccess(photosSubmittionsData.data));
+    }
   };
 
   const submitContestForm = async () => {
@@ -85,7 +84,7 @@ const ApplyContestForm = ({
         };
         const photoResponse = await(await apiService.insertData(
           photoData,
-          "images/submittions"
+          "photos/submittions"
         )).json();
         const submittionID = photoResponse.generatedMaps[0]?.photo_submittion_details_id;
         const contestData = {
