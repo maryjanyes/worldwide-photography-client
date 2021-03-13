@@ -5,8 +5,6 @@ const path = require("path");
 const env = require("dotenv");
 const bundleName = 'bundle.js';
 
-console.log(Object.keys(env))
-
 module.exports = {
   entry: "./src/index.js",
   output: {
