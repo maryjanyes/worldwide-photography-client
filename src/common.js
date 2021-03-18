@@ -14,7 +14,7 @@ const AppContainer = () => {
   }, []);
 
   return (
-    <div className="app-wrapper" id="app-wrapper">
+    <div className="app-wrapper" id="appWrapper">
       <AppNavigation />
       <Footer />
     </div>

@@ -6,7 +6,9 @@ import outerServicesSettings from 'configs/outer-services.settings';
 const GoogleSignIn = () => {
     const [loadError, setLoadError] = useState(null);
 
-    const onLoginWithGoogle = data => { };
+    const onLoginWithGoogle = data => {
+        console.log(data, 'On auth result');
+    };
 
     const onScriptLoadFailure = reason => {
         setLoadError(reason.details);
@@ -14,12 +16,11 @@ const GoogleSignIn = () => {
 
     return loadError && <span className='google-script__load-error'>{loadError.slice(0, 18)}</span> || (<GoogleLogin
         clientId={outerServicesSettings.GOOGLE_CLIENT_APP_ID}
-        // todo Place translation.
         buttonText="LOGIN WITH GOOGLE"
         onSuccess={onLoginWithGoogle}
         onFailure={onLoginWithGoogle}
         onScriptLoadFailure={onScriptLoadFailure}
-        cookiePolicy='single_host_origin'
+        // cookiePolicy='single_host_origin'
     />);
 };
 
