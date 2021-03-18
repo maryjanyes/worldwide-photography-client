@@ -1,6 +1,15 @@
 @media all and (max-width: 800px) {
-  .page:not(.page-dashboard) {
-    padding-left: 100px !important;
+  /** todo **/
+  .all-contest-entries {
+    display: none;
+  }
+  .nav-header-left__links,
+  .sign-in__judles {
+    display: none;
+  }
+  .sign-up-form,
+  .sign-in-form {
+    width: 85%;
   }
   .nav-header__base_menu {
     max-width: 75px;
@@ -54,7 +63,7 @@
     margin: 2vh 0;
   }
   .page-dashboard__container_top {
-    padding-left: 15vh;
+    padding-left: 5vh;
   }
   .contest-submittion__photo > img {
     width: 68%;
@@ -72,6 +81,7 @@
   .page-sign .sign-in-using {
     width: 100%;
     text-align: center;
+    flex-direction: column;
   }
   .page-sign .sign-in__judles {
     min-width: 100%;
@@ -108,8 +118,8 @@
   .sign-in__judles {
     margin-left: 10vh;
   }
-  .sign-in-form__container .sign-in__title,
-  .sign-in-using .sign-in__title {
+  .sign-in__title,
+  .sign-up__title {
     font-size: 28px;
   }
   .contest-details-info__card-top {
@@ -148,7 +158,9 @@
     width: 50%;
   }
   .page:not(.page-dashboard) {
-    margin-top: 25vh;
+    margin-top: 15vh;
+    padding-bottom: 15vh;
+    padding: 5vh;
   }
   .top-bar-sign__items {
     margin: 0 !important;

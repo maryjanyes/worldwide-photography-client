@@ -557,7 +557,7 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .prize-name {
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 1px;
   font-weight: 600;
   max-width: 68%;
@@ -568,6 +568,7 @@ li.top-bar-user__items_item > button:hover {
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
+  margin-left: 10px;
   background-size: 100%;
 }
 
