@@ -20,8 +20,6 @@ module.exports = () => {
       contentBase: "./",
       publicPath: "./dist/",
       historyApiFallback: true,
-      hot: true,
-      inline: true,
     },
     resolve: {
       alias: {
@@ -56,7 +54,7 @@ module.exports = () => {
         <html>
             <head>
               <title>WorldwidePhotography.com | Photo contests</title>
-              <link rel="icon" href="favicon.ico" />
+              <link rel="icon" href="assets/images/logo.png" />
               <meta name="viewport" content="width=device-width, initial-scale=1">
             </head>
             <body>
