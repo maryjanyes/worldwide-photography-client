@@ -2,7 +2,7 @@ import React from "react";
 
 const Foo = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <ul className="footer-links">
         <li>
           <a>wf@gmail.com</a>
@@ -14,7 +14,7 @@ const Foo = () => {
           <a>Contests</a>
         </li>
       </ul>
-    </div>
+    </footer>
   );
 };
 

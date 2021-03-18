@@ -22,29 +22,31 @@ const TopBarComponent = () => {
       {displayTopLogo && <Link to='/' className='site-logo__wrapper'>
         <img src={Logo} className="site-logo site-image" />
       </Link>}
-      <nav className="nav-header__links">
-      <div className="nav-header-left__links">
-        <ul className="nav-header__base_menu">
-          {menuItems.map(link =>
-            !link.disabled && (
-              <li key={link.link} className="nav-header__base_menu__item">
-                <NavLink
-                  isActive={match => !!match}
-                  key={link.name}
-                  to={link.link}
-                  activeClassName="active"
-                >{translations[getTranslationStr(link.i18n, activeLanguage)] || link.i18n}</NavLink>
-              </li>
-            )
-          )}
-          <LanguageSwitcher active={activeLanguage} />
-        </ul>
-      </div>
-      <div className="nav-header-right__links">
-        <TopBarSearch />
-        {isLoggedIn ? <TopBarUserItems /> : <TopBarSignItems />}
-      </div>
-    </nav>
+      <header>
+        <nav className="nav-header__links">
+          <div className="nav-header-left__links">
+            <ul className="nav-header__base_menu">
+              {menuItems.map(link =>
+                !link.disabled && (
+                  <li key={link.link} className="nav-header__base_menu__item">
+                    <NavLink
+                      isActive={match => !!match}
+                      key={link.name}
+                      to={link.link}
+                      activeClassName="active"
+                    >{translations[getTranslationStr(link.i18n, activeLanguage)] || link.i18n}</NavLink>
+                  </li>
+                )
+              )}
+              <LanguageSwitcher active={activeLanguage} />
+            </ul>
+          </div>
+          <div className="nav-header-right__links">
+            <TopBarSearch />
+            {isLoggedIn ? <TopBarUserItems /> : <TopBarSignItems />}
+          </div>
+        </nav>
+      </header>
     </React.Fragment>
   );
 };
