@@ -6,6 +6,21 @@ const env = require("dotenv")
   .config({ path:'./prod.env' })
   .parsed;
 
+const htmlTemplate = `
+  <!DOCTYPE html>
+  <html>
+      <head>
+        <title>WorldwidePhotography.com | Photo contests</title>
+        <link rel="icon" href="assets/images/logo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div id="root"></div>
+        <script src="./bundle.js"></script>
+      </body>
+  </html>
+  `
+
 module.exports = () => {
   return {
     entry: "./src/index.js",
@@ -49,20 +64,7 @@ module.exports = () => {
         BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
       }),
       new HtmlWebpackPlugin({
-        templateContent: `
-        <!DOCTYPE html>
-        <html>
-            <head>
-              <title>WorldwidePhotography.com | Photo contests</title>
-              <link rel="icon" href="assets/images/logo.png" />
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-            </head>
-            <body>
-              <div id="root"></div>
-              <script src="./bundle.js"></script>
-            </body>
-        </html>
-        `,
+        templateContent: htmlTemplate,
       }),
     ],
     module: {

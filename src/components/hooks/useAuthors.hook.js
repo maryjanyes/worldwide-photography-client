@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-const useAuthors = authorID => {
+const useAuthors = (authorID) => {
     const { siteUsers } = useSelector(({ users }) => users);
-    const [author, setAuthor] = useState(null)
+    const [author, setAuthor] = useState(null);
 
     useEffect(() => {
-        if (siteUsers?.length > 0) {
+        if (siteUsers?.length) {
             setAuthor(siteUsers.find(user => user.user_id === authorID));
         }
-    }, [siteUsers])
+    }, [siteUsers, authorID]);
 
-    return { author }
+    return { author };
 }
 
 export default useAuthors;

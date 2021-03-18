@@ -6,7 +6,7 @@ const AboutAsPageScreen = () => {
 
     useEffect(() => {
         document.querySelector('.app-wrapper').className = '';
-        return () => document.querySelector('#app-wrapper').className = 'app-wrapper';
+        return () => document.querySelector('#appWrapper').className = 'app-wrapper';
     }, [])
 
     return (
