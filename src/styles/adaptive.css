@@ -1,6 +1,21 @@
 @media all and (max-width: 800px) {
-  .page:not(.page-dashboard) {
-    padding-left: 100px !important;
+  /** todo **/
+  .all-contest-entries {
+    display: none;
+  }
+  .page-dashboard {
+    padding: 5vh 0;
+  }
+  .top-search {
+    margin-top: 15vh;
+  }
+  .nav-header-left__links,
+  .sign-in__judles {
+    display: none;
+  }
+  .sign-up-form,
+  .sign-in-form {
+    width: 85%;
   }
   .nav-header__base_menu {
     max-width: 75px;
