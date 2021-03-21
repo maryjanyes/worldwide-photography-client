@@ -1,4 +1,7 @@
 @media all and (max-width: 800px) {
+  .nav-header__links {
+    min-height: 92px;
+  }
   .all-contest-entries {
     display: none;
   }
@@ -35,18 +38,17 @@
   .language-switcher {
     margin-top: 0 !important;
     position: relative;
-    top: 1.6vh;
+    top: 1.5vh;
   }
   button.btn-submit-photo {
-    padding: 2%;
+    padding: 2vh;
+    margin-top: 5vh;
   }
   .contest-details-info__card-top {
     flex-direction: column;
   }
   .contest-details-info__additions {
     width: 100%;
-    margin-left: 0;
-    margin-top: 20px;
   }
   .sign-in__judles-container {
     max-width: 80%;
@@ -65,13 +67,16 @@
   }
   .gallery-picture {
     min-width: 100%;
-    margin: 2vh 0;
+    margin: 2vh 0 !important;
   }
   .page-dashboard__container_top {
     padding-left: 5vh;
   }
   .contest-submittion__photo > img {
     width: 68%;
+  }
+  .category-contest {
+    max-width: 100%;
   }
   /** pages **/
   .page-articles .article-preview {
@@ -82,6 +87,7 @@
   }
   .page-sign {
     flex-direction: column;
+    margin-top: 15vh !important;
   }
   .page-sign .sign-in-using {
     width: 100%;

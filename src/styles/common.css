@@ -807,7 +807,7 @@ li.top-bar-user__items_item > button:hover {
   background-color: #ffffff;
   width: 100%;
   min-height: 45vh;
-  top: 2vh;
+  padding-bottom: 10vh;
 }
 
 /** judle videos **/
@@ -1179,20 +1179,30 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-submittions .contest-submittion {
   position: relative;
-  width: 33%;
-  max-height: 300px;
-  margin: 5vh 0.5vh;
+  width: 50%;
+  /** max-height: 300px; **/
+  margin: 5vh 0;
   display: flex;
   cursor: pointer;
+}
+
+.contest-submittion__votes {
+  position: relative;
+  bottom: 32px;
+  left: 32px;
+  font-size: 12px;
+  font-weight: 800;
+  color: red;
 }
 
 .contest-submittion__photo {
   display: flex;
   width: 100%;
+  max-height: 250px;
 }
 
 .contest-submittion__photo > img {
-  width: 76%;
+  width: 75%;
   height: 100%;
   object-fit: scale-down;
   margin: auto;
@@ -1367,7 +1377,8 @@ li.top-bar-user__items_item > button:hover {
   text-transform: uppercase;
 }
 
-.footer .footer-links__link__level2 > a {
+.footer .footer-links__link__level2 > a,
+.footer .footer-links__link__level2 > p {
   color: #ffffff;
   margin-top: 2px;
 }
@@ -1400,9 +1411,11 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .notification-message {
-  font-size: 16px;
-  padding: 4vh;
-  color: #616161;
+  font-size: 12px;
+  padding: 1vh;
+  margin: 0.5vh;
+  text-align: start;
+  color: #ffffff;
 }
 
 .notification-message.warning-message {

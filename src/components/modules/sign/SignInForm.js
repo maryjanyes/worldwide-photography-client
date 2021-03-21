@@ -4,6 +4,7 @@ import { Formik } from "formik";
 
 import { signIn } from "reducers/actions/auth.actions";
 import { getTranslationStr } from 'utils/data.util';
+import formsState from "mocks/forms/initial-state";
 
 import CommonMessage from "components/common/CommonMessage";
 
@@ -15,10 +16,8 @@ const SignInForm = ({ backToSignUpMode, history }) => {
       ...ui,
     })
   );
-  const [values] = useState({
-    emailOrUsername: "",
-    password: "",
-  });
+  const [values] = useState(formsState.signInFields);
+
   const submitForm = (values, { setSubmitting }) => {
     dispatch(signIn(values, dispatch));
     setSubmitting(false);

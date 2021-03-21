@@ -1,9 +1,15 @@
-import React from 'react';
-import FacebookLogin from 'react-facebook-login';
+import React from "react";
+import { useDispatch } from "react-redux";
+import FacebookLogin from "react-facebook-login";
+
+import { signUp } from "reducers/actions/auth.actions";
 
 const FacebookSignIn = () => {
+    const dispatch = useDispatch();
+
     const onLoginWithFacebook = data => {
-        console.log(data, 'On auth with facebook result');
+        data.from_facebook = true;
+        // dispatch(signUp(data, dispatch));
     };
 
     return <FacebookLogin

@@ -44,7 +44,7 @@ const ContestSubmittion = ({
   };
 
   return (
-    <div className="contet-submittion" key={photo_id}>
+    <div className="contest-submittion" key={photo_id}>
       <div className="contest-submittion__photo">
         {photoPath && <img src={photoPath} className="contest-submittion__photo-image site-image" />}
         <div className="contest-submittion__photo-actions">
@@ -64,9 +64,9 @@ const ContestSubmittion = ({
             alt="Open submittion on full screen WorldwidePhotography"
             superClass="icon-vote"
           />
+          <span className="contest-submittion__votes">{votes}</span>
         </div>
       </div>
-      <ContestSubmittionInfo author={author} votes={votes} />
     </div>
   );
 };

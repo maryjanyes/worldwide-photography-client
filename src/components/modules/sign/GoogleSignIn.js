@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import GoogleLogin from 'react-google-login';
+import { useSelector } from "react-redux";
+import GoogleLogin from "react-google-login";
+
+import { getTranslationStr } from 'utils/data.util';
 
 import outerServicesSettings from 'configs/outer-services.settings';
 
 const GoogleSignIn = () => {
+    const { translations, activeLanguage } = useSelector(({ ui }) => ui);
     const [loadError, setLoadError] = useState(null);
 
     const onLoginWithGoogle = data => {
@@ -14,13 +18,13 @@ const GoogleSignIn = () => {
         setLoadError(reason.details);
     };
 
-    return loadError && <span className='google-script__load-error'>{loadError.slice(0, 18)}</span> || (<GoogleLogin
+    return loadError && <span className="google-script__load-error">{loadError.slice(0, 18)}</span> || (<GoogleLogin
         clientId={outerServicesSettings.GOOGLE_CLIENT_APP_ID}
-        buttonText="LOGIN WITH GOOGLE"
+        buttonText={translations[getTranslationStr("common.sign_methods.google_placeholder", activeLanguage)]}
         onSuccess={onLoginWithGoogle}
         onFailure={onLoginWithGoogle}
         onScriptLoadFailure={onScriptLoadFailure}
-        // cookiePolicy='single_host_origin'
+        cookiePolicy="single_host_origin"
     />);
 };
 
