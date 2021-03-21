@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
 
-import { pathToPhoto } from 'utils/data.util';
+import { pathToPhoto, getDateString, getTranslationStr } from "utils/data.util";
 
 const ArticlePreviewItem = ({
     title,
@@ -11,6 +12,8 @@ const ArticlePreviewItem = ({
     history,
     avatar_path,
   }) => {
+    const { activeLanguage, translations } = useSelector(({ ui }) => ui);
+  
     const goToArticle = () => {
       history.push(`/articles/${article_id}`);
     };
@@ -24,8 +27,14 @@ const ArticlePreviewItem = ({
           <span className="article-preview__title">{title}</span>
           <span className="article-preview__description">{description}</span>
           <div className="article-preview__addition-info">
-            {created_at && <span className="datetime">Posted at {created_at}</span>}
-            <span className="author">Author {author && author.email}</span>
+            <div className="article-preview__addition-info__block">
+              <span className="datetime">{translations[getTranslationStr("common.article_preview.article_date_placeholder", activeLanguage)]}</span>
+              <span>{getDateString(created_at)}</span>
+            </div>
+            <div className="article-preview__addition-info__block">
+              <span>{translations[getTranslationStr("common.photo_author", activeLanguage)]}</span>
+              <span>{author?.email}</span>
+            </div>
           </div>
         </div>
       </div>

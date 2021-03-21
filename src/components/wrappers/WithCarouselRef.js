@@ -15,7 +15,7 @@ const WithCarouselRef = ({ children, containerClass = "", speed, hasLoop }) => {
   }, [ref]);
 
   return (
-    <OwlCarousel className={containerClass} nav center={true} loop={hasLoop} margin={10} ref={ref} responsive={{ 0: {
+    <OwlCarousel className={containerClass} nav loop={hasLoop} margin={10} ref={ref} responsive={{ 0: {
       items: 1,
     }, 780: {
       items: 2,

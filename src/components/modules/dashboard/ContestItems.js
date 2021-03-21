@@ -4,21 +4,26 @@ import { useSelector } from "react-redux";
 import WithCarouselRef from "components/wrappers/WithCarouselRef";
 import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
-import { isTimePassed, pathToPhoto, getTranslationStr } from "utils/data.util";
+import { isTimePassed, getTimeToEnd, pathToPhoto, getTranslationStr } from "utils/data.util";
 
 const ContestItem = WithLanguageProps(
-  ({ name, description, contest_id, started_at, explore, photo_path }) => {
+  ({ name, description, contest_id, started_at, ended_at, explore, photo_path }) => {
     const { translations, activeLanguage } = useSelector(({ ui }) => ui);
     const contestAvatarStyle = {
       backgroundImage: `url(${pathToPhoto(photo_path)}`,
     };
   
     const getContestStatus = () => {
-      const started = isTimePassed(started_at);
+      const isContestStarted = isTimePassed(started_at);
+      const daysToEnterContest = getTimeToEnd(ended_at);
+
       return (
-        (started && (
+        (isContestStarted && (
           <div className="contest-status happens-now">
-            {translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)]}
+            {daysToEnterContest > 0 ?
+            translations[getTranslationStr('contest_statuses.happens_now', activeLanguage)] :
+            translations[getTranslationStr('common.contest_ended', activeLanguage)]
+          }
           </div>
         )) ||
         (
@@ -52,7 +57,7 @@ const ContestItems = ({ history, contestsData }) => {
   const [contestItems, setContestItems] = useState([]);
   const { contests } = useSelector(({ contests }) => contests);
 
-  const exploreContest = (contest_id) => {
+  const viewContest = contest_id => {
     history.push(`/contest/${contest_id}`);
   };
 
@@ -72,7 +77,7 @@ const ContestItems = ({ history, contestsData }) => {
             <div key={contest.contest_id}>
               <ContestItem
                 {...contest}
-                explore={exploreContest}
+                explore={viewContest}
                 key={contest.contest_id}
               />
             </div>

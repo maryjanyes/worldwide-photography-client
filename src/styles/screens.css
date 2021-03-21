@@ -38,9 +38,20 @@
   font-weight: 600;
   letter-spacing: 1px;
 }
+
+.contest-submittion__info-block {
+  line-height: 32px;
+  font-size: 16px;
+  border-top: 1px solid #000000;
+}
+
 .page:not(.page-dashboard) {
   padding-left: 25vh;
   margin-top: 20vh;
+}
+
+.page.page-gallery-photo {
+  padding-bottom: 10vh;
 }
 
 .page.page-sign {

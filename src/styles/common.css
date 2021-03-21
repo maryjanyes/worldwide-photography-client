@@ -605,7 +605,7 @@ li.top-bar-user__items_item > button:hover {
   width: 50%;
   cursor: pointer;
   min-height: 280px;
-  margin: 2vh auto;
+  margin: 2vh 0;
 }
 
 .article-preview__addition-info {
@@ -630,7 +630,8 @@ li.top-bar-user__items_item > button:hover {
 }
 
 .contest-submittion__author-name > span:nth-child(1),
-.contest-submittion__votes-count > span:nth-child(1) {
+.contest-submittion__votes-count > span:nth-child(1),
+.contest-submittion__comment > span:nth-child(1) {
   color: #000000;
   margin-right: 10px;
 }
@@ -1215,9 +1216,10 @@ li.top-bar-user__items_item > button:hover {
   transform: rotateY(-20deg);
 }
 
-.contest-submittion__photo-info {
+.contest-submittion__photo-info,
+.article-preview__addition-info {
   position: absolute;
-  font-size: 12px;
+  font-size: 15px;
   color: #616161;
   max-width: 80%;
 }
@@ -1412,10 +1414,11 @@ li.top-bar-user__items_item > button:hover {
 
 .notification-message {
   font-size: 12px;
-  padding: 1vh;
+  font-weight: 800;
+  color: #000000;
+  padding: 1.5vh;
   margin: 0.5vh;
   text-align: start;
-  color: #ffffff;
 }
 
 .notification-message.warning-message {
