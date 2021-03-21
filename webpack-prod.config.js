@@ -1,25 +1,11 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
+const htmlTemplate = require('./html-template');
 
-const env = require("dotenv")
-  .config({ path:'./prod.env' })
-  .parsed;
+const env = require("dotenv").config({ path:'./prod.env' }).parsed;
 
-const htmlTemplate = `
-  <!DOCTYPE html>
-  <html>
-      <head>
-        <title>WorldwidePhotography.com | Photo contests</title>
-        <link rel="icon" href="assets/images/logo.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      </head>
-      <body>
-        <div id="root"></div>
-        <script src="./bundle.js"></script>
-      </body>
-  </html>
-  `
+console.log('ENVIRONMENT KEYS', Object.keys(env));
 
 module.exports = () => {
   return {
@@ -64,7 +50,7 @@ module.exports = () => {
         BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
       }),
       new HtmlWebpackPlugin({
-        templateContent: htmlTemplate,
+        templateContent: htmlTemplate(),
       }),
     ],
     module: {

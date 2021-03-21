@@ -940,6 +940,7 @@ li.top-bar-user__items_item > button:hover {
 
 .top-line {
   padding: 2vh 0;
+  margin-bottom: 5vh;
   background-color: #ff7c0f;
 }
 
@@ -1347,7 +1348,6 @@ li.top-bar-user__items_item > button:hover {
 .footer {
   position: fixed;
   bottom: 0;
-  height: 52px;
   background-color: #616161;
   width: 100%;
   z-index: 10;
@@ -1357,6 +1357,19 @@ li.top-bar-user__items_item > button:hover {
   display: flex;
   justify-content: space-around;
   padding: 2vh 0;
+  font-size: 12px;
+}
+
+.footer .footer-links__links__level2_title {
+  color: #000000;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.footer .footer-links__link__level2 > a {
+  color: #ffffff;
+  margin-top: 2px;
 }
 
 .footer .footer-links > li > a {

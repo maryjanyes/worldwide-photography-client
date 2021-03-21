@@ -1,5 +1,4 @@
 @media all and (max-width: 800px) {
-  /** todo **/
   .all-contest-entries {
     display: none;
   }
@@ -7,7 +6,7 @@
     padding: 5vh 0;
   }
   .top-search {
-    margin-top: 15vh;
+    display: none;
   }
   .nav-header-left__links,
   .sign-in__judles {
@@ -15,7 +14,7 @@
   }
   .sign-up-form,
   .sign-in-form {
-    width: 85%;
+    width: 95%;
   }
   .nav-header__base_menu {
     max-width: 75px;
@@ -163,8 +162,14 @@
   .gallery-pictures > .gallery-picture > img {
     width: 50%;
   }
+  .page-not-found {
+    margin-top: 30vh;
+    padding: 0 10vh;
+  }
+  .page-not-found > p {
+    font-size: 30px;
+  }
   .page:not(.page-dashboard) {
-    margin-top: 15vh;
     padding-bottom: 15vh;
     padding: 5vh;
   }

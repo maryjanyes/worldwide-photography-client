@@ -1,11 +1,13 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
+const htmlTemplate = require("./html-template");
 
-const env = require("dotenv");
-const bundleName = 'bundle.js';
+const bundleName = './bundle.js';
 
-console.log('ENVIRONMENT KEYS', Object.keys(env))
+const env = require("dotenv").config().parsed;
+
+console.log('ENVIRONMENT KEYS', Object.keys(env));
 
 module.exports = {
   entry: "./src/index.js",
@@ -49,22 +51,8 @@ module.exports = {
       BACKEND_FILE_SERVER_PORT: JSON.stringify('8082'),
     }),
     new HtmlWebpackPlugin({
-      templateContent:
-        `
-        <!DOCTYPE html>
-        <html>
-            <head>
-              <title>WorldwidePhotography.com</title>
-              <link rel="icon" href="favicon.ico" />
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-            </head>
-            <body>
-              <div id="root"></div>
-              <script src="./${bundleName}"></script>
-            </body>
-        </html>
-        `,
-      }),
+      templateContent: htmlTemplate(),
+    }),
   ],
   module: {
     rules: [

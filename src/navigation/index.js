@@ -18,6 +18,7 @@ import {
 } from "screens";
 
 import TopBarNavigation from "components/common/TopBar";
+import Footer from "components/common/Footer";
 
 function AppNavigation() {
   const { isLoggedIn } = useSelector(({ auth }) => auth);
@@ -52,6 +53,7 @@ function AppNavigation() {
             )}
           />
         </Switch>
+        <Footer />
       </Router>
     </React.Fragment>
   );
