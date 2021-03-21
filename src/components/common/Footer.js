@@ -17,7 +17,10 @@ const Foo = () => {
               <p className="footer-links__links__level2_title">{translations[getTranslationStr(_link.title, activeLanguage)]}</p>
               <ul className="footer-links__links__level2">
                 {_link.blocks.map(__link => <li className="footer-links__link__level2" key={__link.text}>
-                  <Link to={__link.to}>{__link.isPlaceholder && translations[getTranslationStr(__link.text, activeLanguage)] || __link.text}</Link>
+                  {__link.to ?
+                    <Link to={__link.to}>{__link.isPlaceholder && translations[getTranslationStr(__link.text, activeLanguage)] || __link.text}</Link> :
+                    <p>{__link.isPlaceholder && translations[getTranslationStr(__link.text, activeLanguage)] || __link.text}</p>
+                  }
                 </li>)}
               </ul>
             </li>

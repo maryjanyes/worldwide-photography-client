@@ -47,49 +47,33 @@ function SignInScreen({ history }) {
 }
 
 function SignInUsing({ signIn }) {
-  const { translations, activeLanguage } = useSelector(({ ui }) => ui);
+  const { translations, activeLanguage, siteJudles } = useSelector(({ ui, users }) => ({ ...ui, ...users }));
+
   return (
     <div className="sign-in-using">
       <div className="sign-in-using__container">
         <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.sign_in_using', activeLanguage)]}</p>
         <div className="sign-in-using__selectors">
-          {/** <button
-            onClick={() => signIn(signInVariant.facebook)}
-            className="btn-link sign-in-selector facebook"
-          >
-            Facebook
-          </button>
-          <button
-            onClick={() => signIn(signInVariant.google)}
-            className="btn-link sign-in-selector google"
-          >
-            Google
-          </button> **/}
           <FacebookSignIn />
-          <GoogleSignIn />
+          {/** <GoogleSignIn /> **/}
         </div>
       </div>
       <div className="sign-in__judles">
         <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.project_judles', activeLanguage)]}</p>
         <div className="sign-in__judles-container">
-          <span>Judle 1</span>
-          {/** <div className="sign-in__judles-judle">
-            <img
-              className="judle-avatar judle-1 site-image"
-              // src={Judle1_avatar}
-            />
-            <span>
-              (с) могу уместить всю свою жизньв рюкзаки уехать в неизвестность
-            </span>
-          </div>
-          <div className="sign-in__judles-judle">
-            <img
-              className="judle-avatar judle-2 site-image"
-              // src={Judle2_avatar}
-            />
-            <span>(с) тут слоган Насті</span>
-          </div> **/}
-          <span>Judle 2</span>
+          {siteJudles.length && siteJudles.map(_judle => {
+            return (
+              <div className="sign-in__judles-judle">
+                  <img
+                    className="judle-avatar judle-1 site-image"
+                    src={_judle.avatar_url}
+                  />
+                  <span>
+                    (с) {_judle.slogan}
+                  </span>
+              </div>
+            )
+          }) || <p>Waiting for the first judle coming!</p>}
         </div>
       </div>
     </div>
