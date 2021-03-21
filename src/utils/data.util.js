@@ -1,4 +1,8 @@
+import moment from "moment";
+
 import { apiService } from "services/api.service";
+
+import defaultImages from "mocks/default-images";
 
 export const getAnnouncements = (announcements, contestID) =>
   announcements.filter(({ contest_id }) => contest_id === contestID);
@@ -56,14 +60,17 @@ export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
   photoObject.link_to_instagram ||
   photoObject.link_to_facebook;
 
-export const pathToPhoto = (path, defaultPath = "simple.png", excludePrefix = false) => {
+export const pathToPhoto = (path, defaultPath = "common-image.png", excludePrefix = false, imageType) => {
+  if (imageType === defaultImages.contest) {
+    defaultPath = "default_avatar.jpg";
+  }
   if (!path || path === "photo_path") {
     return `${apiService.CLIENT_ENDPOINT}/assets/images/${defaultPath}`;
   }
   return `${apiService.BACKEND_ENDPOINT}/photos/${excludePrefix ? path.replace('/', '') : path}`;
 };
 
-export const pathToAsset = (path = "simple.png") =>
+export const pathToAsset = path =>
   `${apiService.CLIENT_ENDPOINT}/assets/icons/${path}`;
 
 export const getOneFromData = (itemCollection, itemID, itemKey) => {
@@ -82,4 +89,8 @@ export const isDataValid = (response) => response.isSuccess;
 
 export const getTranslationStr = (prefix, code) => {
   return `${prefix}.${code.toLowerCase()}`;
+};
+
+export const getDateString = (date, formatting = "DD/MM/YYYY") => {
+  return moment(date).format(formatting);
 };

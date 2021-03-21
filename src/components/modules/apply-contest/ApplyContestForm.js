@@ -173,12 +173,12 @@ const ApplyContestForm = ({
           />
         </div>
         <div className="form-field apply-contest-form-field">
-          <label>Message for peoples who like your photo</label>
+          <label>{getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)}</label>
           <input
             className="common-input"
-            placeholder="Message for followers"
+            placeholder={getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)}
             onChange={onChange}
-            name="singature_for_followers"
+            name="signature_for_followers"
           />
         </div>
         <div className="upload-input-container">{children}</div>
@@ -189,7 +189,7 @@ const ApplyContestForm = ({
             type="button"
             disabled={!isLoggedIn || !isFormValid()}
           >
-            Submit
+            {getTranslationStr("common.button_actions.submit", activeLanguage)}
           </button>
         </div>
       </div>

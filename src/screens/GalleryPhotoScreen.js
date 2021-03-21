@@ -9,13 +9,14 @@ import ContestSubmittionInfo from "components/modules/contest/ContestSubmittionI
 const GalleryPhotoScreen = () => {
     const { photo_id } = useParams();
     const { photoSubmittions } = useSelector(({ photos }) => photos);
-    const { author } = useAuthors(photo?.author_id);
-    const [photo, setPhoto] = useState(null);
+    const { author, setPhotoForHook } = useAuthors();
+    const [photo, setPhoto ] = useState(null);
 
     const photoPath = useMemo(() => {
         if (photoSubmittions?.length) {
             const photo = photoSubmittions.find((photo => photo.photo_submittion_id == photo_id));
             setPhoto(photo);
+            setPhotoForHook(photo);
             return pathToPhoto(getPhotoUrlFromPhotoObject(photo));
         }
     }, [photoSubmittions]);

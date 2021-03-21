@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-const useAuthors = (authorID) => {
+const useAuthors = () => {
     const { siteUsers } = useSelector(({ users }) => users);
     const [author, setAuthor] = useState(null);
+    const [photo, setPhotoForHook] = useState(null);
 
     useEffect(() => {
-        if (siteUsers?.length) {
-            setAuthor(siteUsers.find(user => user.user_id === authorID));
+        if (siteUsers?.length && photo) {
+            setAuthor(siteUsers.find(user => user.user_id === photo.author_id));
         }
-    }, [siteUsers, authorID]);
+    }, [siteUsers, photo]);
 
-    return { author };
+    return { author, setPhotoForHook };
 }
 
 export default useAuthors;
