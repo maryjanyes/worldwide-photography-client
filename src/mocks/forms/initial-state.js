@@ -1,5 +1,5 @@
 const signUpFields = {
-    userName: "",
+    full_name: "",
     email: "",
     password: "",
     repeatPassword: "",

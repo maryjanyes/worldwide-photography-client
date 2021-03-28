@@ -55,7 +55,7 @@ function SignInUsing({ signIn }) {
         <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.sign_in_using', activeLanguage)]}</p>
         <div className="sign-in-using__selectors">
           <FacebookSignIn />
-          {/** <GoogleSignIn /> **/}
+          <GoogleSignIn />
         </div>
       </div>
       <div className="sign-in__judles">

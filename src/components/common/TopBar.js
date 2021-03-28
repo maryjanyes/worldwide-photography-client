@@ -22,7 +22,7 @@ const TopBarComponent = () => {
       {displayTopLogo && <Link to='/' className='site-logo__wrapper'>
         <img src={Logo} className="site-logo site-image" />
       </Link>}
-      <header>
+      <header className="header">
         <nav className="nav-header__links">
           <div className="nav-header-left__links">
             <ul className="nav-header__base_menu">

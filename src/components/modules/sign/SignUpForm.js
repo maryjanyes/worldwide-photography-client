@@ -34,8 +34,8 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
       errors.email = translations[getTranslationStr("common.forms_validation.email", activeLanguage)];
     }
 
-    if (!values.userName.length) {
-      errors.userName = translations[getTranslationStr("common.forms_validation.required", activeLanguage)];
+    if (!values.full_name.length) {
+      errors.full_name = translations[getTranslationStr("common.forms_validation.required", activeLanguage)];
     }
 
     if (values.password.length === 0 || values.repeatPassword.length === 0) {
@@ -79,9 +79,9 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
                 id="user_name"
                 placeholder={translations[getTranslationStr("forms.common.first_name", activeLanguage)]}
                 onBlur={handleBlur}
-                {...getFieldProps("userName")}
+                {...getFieldProps("full_name")}
               />
-              {errors.userName && <CommonMessage theme="error-message" text={errors.userName} />}
+              {errors.full_name && <CommonMessage theme="error-message" text={errors.full_name} />}
             </div>
             <div className="form-field">
               <input

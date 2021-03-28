@@ -719,8 +719,8 @@ li.top-bar-user__items_item > button:hover {
   background-color: #ffffff;
 }
 
-.page-dashboard {
-  padding: 8vh 4vh 2vh;
+.page {
+  padding: 2vh 4vh 8vh;
 }
 
 .page-sign {
@@ -729,6 +729,7 @@ li.top-bar-user__items_item > button:hover {
   width: 90%;
   margin: auto;
   padding-left: 10vh;
+  padding-bottom: 10vh;
 }
 
 .page-sign .btn-link {

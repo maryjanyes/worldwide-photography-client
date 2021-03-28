@@ -176,8 +176,8 @@
     font-size: 30px;
   }
   .page:not(.page-dashboard) {
-    padding-bottom: 15vh;
     padding: 5vh;
+    margin-bottom: 15vh;
   }
   .top-bar-sign__items {
     margin: 0 !important;
