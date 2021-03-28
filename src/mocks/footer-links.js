@@ -5,7 +5,8 @@ const footerLinks = [{
         isPlaceholder: false,
     }, {
         text: "common.footer_links.blocks.send_chat_message",
-        isPlaceholder: true,
+        isTapAction: true,
+        onTapActionName: 'sendChatMessage',
     }],
 }, {
     title: "common.footer_links.site_links_placeholder",

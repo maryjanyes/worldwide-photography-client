@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import IconComponent from "components/common/CommonIcon";
-import ContestSubmittionInfo from "components/modules/contest/ContestSubmittionInfo";
 
 import PhotosService from "services/photos.service";
 import { apiService } from "services/api.service";

@@ -1391,9 +1391,17 @@ li.top-bar-user__items_item > button:hover {
   text-transform: uppercase;
 }
 
+.footer-links__link__level2 {
+  margin: 0.5vh 0;
+}
+
+.footer-links__link_icon {
+  max-width: 26px;
+}
+
 .next-section-jumper {
   width: 150px;
-  padding: 1.5vh 0;
+  padding: 1vh 0 1.5vh 0;
   text-align: center;
   margin: auto;
   cursor: pointer;
@@ -1500,4 +1508,41 @@ li.top-bar-user__items_item > button:hover {
   text-transform: uppercase;
   margin-left: 10px;
   color: red;
+}
+
+.chat-view-modal {
+  position: absolute;
+  top: 80% !important;
+  left: 10% !important;
+  height: 250px;
+  padding: 2vh;
+  background-color: white;
+  box-shadow: 1px 2px 2px 2px #707070;
+}
+
+.chat-view-modal .close-modal-btn {
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.chat-messages__message {
+  margin: 1.5vh 0;
+}
+
+.chat-messages__message.admin-message > span {
+  color: red;
+}
+
+.chat-send-area > input {
+  padding: 1vh;
+  border: 1px solid #616161;
+}
+
+.sorry-view {
+  padding: 2vh 0.5vh;
+}
+
+.sorry-text {
+  color: red;
+  font-size: 16px;
 }
