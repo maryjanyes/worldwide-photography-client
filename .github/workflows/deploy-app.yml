@@ -28,5 +28,5 @@ jobs:
             git pull origin master
             docker build -t worldwide-photography-client:0.1 .
             random_tag_name=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1)
-            docker run --publish 8081:8081 --detach --name ${random_tag_name} worldwide-photography-client:0.1
+            docker run --publish 8080:8080 --detach --name ${random_tag_name} worldwide-photography-client:0.1
             echo 'Deploy of client app complete.'
