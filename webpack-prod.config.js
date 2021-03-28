@@ -17,7 +17,7 @@ module.exports = () => {
     },
     devServer: {
       https: true,
-      port: env.APP_PORT || 8081,
+      port: env.APP_PORT || 8080,
       contentBase: "./",
       publicPath: "./dist/",
       historyApiFallback: true,

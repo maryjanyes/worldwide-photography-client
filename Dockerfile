@@ -7,5 +7,5 @@ RUN rm -rf dist
 RUN npm install --silent
 COPY . /photo_client
 RUN npm run build
-EXPOSE 8081
+EXPOSE 8080
 CMD ["npm", "start"]

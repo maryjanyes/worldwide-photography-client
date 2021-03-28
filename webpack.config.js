@@ -18,7 +18,7 @@ module.exports = {
   },
   devServer: {
     https: true,
-    port: 8081,
+    port: 8080,
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
@@ -47,8 +47,8 @@ module.exports = {
       PRODUCTION: JSON.stringify(true),
       BACKEND_VERSION: JSON.stringify(env.BACKEND_VERSION),
       BACKEND_URL: JSON.stringify('http://localhost'),
-      BACKEND_PORT: JSON.stringify('8079'),
-      BACKEND_FILE_SERVER_PORT: JSON.stringify('8082'),
+      BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
+      BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
     }),
     new HtmlWebpackPlugin({
       templateContent: htmlTemplate(),

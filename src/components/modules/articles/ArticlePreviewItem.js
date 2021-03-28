@@ -27,13 +27,13 @@ const ArticlePreviewItem = ({
           <span className="article-preview__title">{title}</span>
           <span className="article-preview__description">{description}</span>
           <div className="article-preview__addition-info">
-            <div className="article-preview__addition-info__block">
-              <span className="datetime">{translations[getTranslationStr("common.article_preview.article_date_placeholder", activeLanguage)]}</span>
+            <div className="article-preview__addition-info-block">
+              <span>{translations[getTranslationStr("common.article_preview.article_date_placeholder", activeLanguage)]}</span>
               <span>{getDateString(created_at)}</span>
             </div>
-            <div className="article-preview__addition-info__block">
+            <div className="article-preview__addition-info-block">
               <span>{translations[getTranslationStr("common.photo_author", activeLanguage)]}</span>
-              <span>{author?.email}</span>
+              <span>{author?.full_name}</span>
             </div>
           </div>
         </div>

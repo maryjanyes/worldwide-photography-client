@@ -12,6 +12,7 @@ function ArticlesScreen({ history }) {
   }));
 
   const canDisplayArticles = allArticles.length > 0;
+
   const withAuthors = article => {
     article.author = siteUsers.find(
       user => user.user_id === article.author_id
