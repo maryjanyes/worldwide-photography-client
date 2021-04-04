@@ -44,7 +44,6 @@ module.exports = {
       "window.jQuery": "jquery",
     }),
     new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(true),
       BACKEND_VERSION: JSON.stringify(env.BACKEND_VERSION),
       BACKEND_URL: JSON.stringify('http://localhost'),
       BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
