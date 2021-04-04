@@ -23,7 +23,7 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           password: ${{secrets.SSH_PASSWORD}}
           script: |
-            ./stop-docker-container-by-port.sh 8081
+            ./stop-docker-container-by-port.sh 8080
             cd apps/photography/worldwide-photography-client
             git pull origin master
             docker build -t worldwide-photography-client:0.1 .
