@@ -554,13 +554,14 @@ li.top-bar-user__items_item > button:hover {
 
 .prize-item__heading {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .prize-name {
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 600;
-  max-width: 68%;
 }
 
 .prize-icon {
@@ -568,7 +569,7 @@ li.top-bar-user__items_item > button:hover {
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
-  margin-left: 10px;
+  margin-top: 10px;
   background-size: 100%;
 }
 
@@ -1194,9 +1195,9 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-submittion__votes {
   position: relative;
-  bottom: 32px;
-  left: 32px;
-  font-size: 12px;
+  bottom: 28px;
+  left: 20px;
+  font-size: 18px;
   font-weight: 800;
   color: red;
 }
@@ -1556,4 +1557,18 @@ li.top-bar-user__items_item > button:hover {
 .sorry-text {
   color: red;
   font-size: 16px;
+}
+
+.social-sharing__content {
+  display: flex;
+  margin-top: 10px;
+}
+
+.social-sharing__content > .social-sharing__block {
+  margin: 0 10px;
+}
+
+.submit-contest-modal .fa-chevron-down {
+  margin-top: 8px;
+  margin-left: 5px;
 }

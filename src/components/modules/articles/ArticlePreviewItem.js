@@ -18,13 +18,13 @@ const ArticlePreviewItem = ({
       history.push(`/articles/${article_id}`);
     };
   
-    const photoPath = useMemo(() => pathToPhoto(avatar_path, [avatar_path]));
-  
+    const photoPath = useMemo(() => pathToPhoto(avatar_path), [avatar_path]);
+
     return (
       <div className="article-preview" onClick={goToArticle}>
         <img src={photoPath} className="article-preview__avatar" />
         <div className="article-preview__content">
-          <span className="article-preview__title">{title}</span>
+          <span className="article-preview__title">{translations[getTranslationStr(title, activeLanguage)] || '--Title--'}</span>
           <span className="article-preview__description">{description}</span>
           <div className="article-preview__addition-info">
             <div className="article-preview__addition-info-block">
@@ -33,7 +33,7 @@ const ArticlePreviewItem = ({
             </div>
             <div className="article-preview__addition-info-block">
               <span>{translations[getTranslationStr("common.photo_author", activeLanguage)]}</span>
-              <span>{author?.full_name}</span>
+              <span>{author?.full_name} ({author?.email})</span>
             </div>
           </div>
         </div>

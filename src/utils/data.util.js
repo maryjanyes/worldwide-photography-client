@@ -60,7 +60,7 @@ export const getPhotoUrlFromPhotoObject = (photoObject = {}) =>
   photoObject.link_to_instagram ||
   photoObject.link_to_facebook;
 
-export const pathToPhoto = (path, defaultPath = "common-image.png", excludePrefix = false, imageType) => {
+export const pathToPhoto = (path, defaultPath = "fugi.jpg", excludePrefix = false, imageType) => {
   if (imageType === defaultImages.contest) {
     defaultPath = "default_avatar.jpg";
   }

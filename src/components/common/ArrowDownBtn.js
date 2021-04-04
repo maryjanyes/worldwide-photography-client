@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import IconComponent from "components/common/CommonIcon";
 
-const ArrowDownBtn = ({ onPress, iconSrc, label, opened }) => {
+const ArrowDownBtn = ({ onPress, label, opened }) => {
   return (
     <button
       onClick={onPress}
@@ -10,7 +10,7 @@ const ArrowDownBtn = ({ onPress, iconSrc, label, opened }) => {
       className={`${(opened && "active") || ""} common-select-btn`}
     >
       <label className="common-label">{label}</label>
-      <IconComponent source={iconSrc} />
+      <IconComponent source="fa-chevron-down" />
     </button>
   );
 };

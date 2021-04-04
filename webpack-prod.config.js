@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const path = require("path");
 const htmlTemplate = require('./html-template');
 
@@ -10,6 +11,11 @@ console.log('ENVIRONMENT KEYS', Object.keys(env));
 module.exports = () => {
   return {
     entry: "./src/index.js",
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserWebpackPlugin()]
+    },
+    devtool: 'source-map',
     output: {
       path: path.join(__dirname, "./dist"),
       publicPath: "/",

@@ -29,11 +29,6 @@ import {
 } from "utils/data.util";
 import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
 
-import daysIconSource from '../../assets/icons/baseline_query_builder_black_18dp.png';
-import insertPhotoIconSource from '../../assets/icons/baseline_insert_photo_black_18dp.png';
-import baselineFaceIconSource from '../../assets/icons/baseline_face_black_18dp.png';
-import baselineCurrencyIconSource from '../../assets/icons/baseline_local_offer_black_18dp.png';
-
 function ContestScreen() {
   const { contest_id } = useParams();
   const { contests, activeLanguage, translations, contestSubmittions } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
@@ -63,7 +58,7 @@ function ContestScreen() {
           resultsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.results_info', activeLanguage)]}
           newsBlockTitle={translations[getTranslationStr('pages.contest_details.tabs.news_info', activeLanguage)]}
         />
-        <SocialSharing />
+        <SocialSharing fb={true} google={true} />
       </div>
     )) || <span>No contest selected.</span>
   );
@@ -155,8 +150,9 @@ function ContestDetailsInfo({
             <div className="contest-stroke-info">
               <div className="contest-stroke-info__item">
                 <IconComponent
-                  source={daysIconSource}
+                  source="fa-chevron-down"
                   size={25}
+                  containerStyle={{ marginTop: '5px' }}
                 />
                 {isContestStarted && (
                   daysToEnterContest === 0 ?
@@ -172,8 +168,9 @@ function ContestDetailsInfo({
               </div>
               <div className="contest-stroke-info__item">
                 <IconComponent
-                  source={insertPhotoIconSource}
+                  source="fa-chevron-down"
                   size={25}
+                  containerStyle={{ marginTop: '5px' }}
                 />
                 <p>
                   {translations[getTranslationStr('common.photos_entered_placeholder', activeLanguage)] || 'common.photos_entered_placeholder'}
@@ -182,8 +179,9 @@ function ContestDetailsInfo({
               </div>
               {contestJudle && <div className="contest-stroke-info__item">
                 <IconComponent
-                  source={baselineFaceIconSource}
+                  source="fa-chevron-down"
                   size={25}
+                  containerStyle={{ marginTop: '5px' }}
                 />
                 <p>
                   {translations[getTranslationStr('common.photo_judle_placeholder', activeLanguage)] || 'common.photo_judle_placeholder'}
@@ -192,8 +190,9 @@ function ContestDetailsInfo({
               </div>}
               <div className="contest-stroke-info__item">
                 <IconComponent
-                  source={baselineCurrencyIconSource}
+                  source="fa-chevron-down"
                   size={25}
+                  containerStyle={{ marginTop: '5px' }}
                 />
                 <p>
                   {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)] + '\n'}

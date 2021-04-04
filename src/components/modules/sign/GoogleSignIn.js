@@ -24,7 +24,6 @@ const GoogleSignIn = () => {
         onSuccess={onLoginWithGoogle}
         onFailure={onLoginWithGoogle}
         onScriptLoadFailure={onScriptLoadFailure}
-        cookiePolicy="single_host_origin"
     />);
 };
 

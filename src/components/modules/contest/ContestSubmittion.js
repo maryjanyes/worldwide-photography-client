@@ -48,20 +48,18 @@ const ContestSubmittion = ({
         {photoPath && <img src={photoPath} className="contest-submittion__photo-image site-image" />}
         <div className="contest-submittion__photo-actions">
           <IconComponent
-            source={`${apiService.CLIENT_ENDPOINT}/assets/icons/baseline_aspect_ratio_black_18dp.png`}
+            source="fa-compress"
             size={26}
             description="Open full screen!"
-            alt="Open submittion on full screen WorldwidePhotography"
-            superClass="icon-full-screen"
+            containerStyle={{ margin: '10px 0' }}
             onClick={navigatePhotoPage}
           />
           <IconComponent
-            source={`${apiService.CLIENT_ENDPOINT}/assets/icons/favorite-icon.png`}
+            source="fa-thumbs-up"
             size={26}
             onClick={likePhoto}
             description="Vote submittion!"
-            alt="Open submittion on full screen WorldwidePhotography"
-            superClass="icon-vote"
+            containerStyle={{ margin: '10px 0' }}
           />
           <span className="contest-submittion__votes">{votes}</span>
         </div>

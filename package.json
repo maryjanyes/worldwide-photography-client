@@ -42,6 +42,7 @@
     "file-loader": "latest",
     "html-webpack-plugin": "^4.5.0",
     "style-loader": "latest",
+    "terser-webpack-plugin": "^4.2.3",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",

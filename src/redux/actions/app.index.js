@@ -73,7 +73,7 @@ export const initAppData = (dispatch) => {
       dispatch(setTranslations(newTranslationData));
     }
   });
-  const type = "[APP] INIT_DATA";
+  const type = "[COMMON] INIT_APP_DATA";
   dispatch(checkExistedAccountAndSignIn());
   dispatch(setAppLanguage(appConfigsService.activeLang));
   return {

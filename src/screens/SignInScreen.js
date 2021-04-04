@@ -7,8 +7,6 @@ import SignUpForm from "components/modules/sign/SignUpForm";
 import FacebookSignIn from "components/modules/sign/FacebookSignIn";
 import GoogleSignIn from "components/modules/sign/GoogleSignIn";
 
-// import signInVariant from "types/signInVariant";
-
 function SignInScreen({ history }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
@@ -20,9 +18,6 @@ function SignInScreen({ history }) {
         setIsSignUpMode(true);
       }
     });
-  }, [history.pathname]);
-
-  useEffect(() => {
     if (history.location.pathname === "/sign-up") {
       setIsSignUpMode(true);
     }
@@ -55,7 +50,7 @@ function SignInUsing({ signIn }) {
         <p className="sign-in__title">{translations[getTranslationStr('sign_items.sign_up.sign_in_using', activeLanguage)]}</p>
         <div className="sign-in-using__selectors">
           <FacebookSignIn />
-          <GoogleSignIn />
+          {/** <GoogleSignIn /> **/}
         </div>
       </div>
       <div className="sign-in__judles">

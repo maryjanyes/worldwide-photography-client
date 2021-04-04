@@ -49,6 +49,7 @@ module.exports = {
       BACKEND_URL: JSON.stringify('http://localhost'),
       BACKEND_PORT: JSON.stringify(env.BACKEND_PORT),
       BACKEND_FILE_SERVER_PORT: JSON.stringify(env.BACKEND_FILE_SERVER_PORT),
+      MODE: JSON.stringify('development'),
     }),
     new HtmlWebpackPlugin({
       templateContent: htmlTemplate(),
