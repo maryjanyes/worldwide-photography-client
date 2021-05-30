@@ -43,3 +43,10 @@ export const setSubmittionSuccess = (payload) => ({
 export const resetSubmittionSuccess = () => ({
   type: "[CONTESTS] RESET_SUBMITTION_SUCCESS",
 });
+
+export const setContestAnnouncementsType = Symbol("SET_CONTEST_ANNOUNCEMENTS");
+
+export const setContestAnnouncements = payload => ({
+  type: setContestAnnouncementsType,
+  payload,
+});

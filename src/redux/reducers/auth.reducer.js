@@ -1,5 +1,7 @@
 import outerServicesSettings from 'configs/outer-services.settings';
 
+import { resetErrorOnAuthType } from '../actions/auth.actions';
+
 const initialState = {
   isLoggedIn: false,
   userData: null,
@@ -17,8 +19,11 @@ export default function AuthReducer(state = initialState, { type, payload }) {
         isLoggedIn: true,
       };
     }
-    case "[AUTH] RESET_AUTH_ERROR": {
-      return { ...state, errorOnAuth: null } 
+    case resetErrorOnAuthType: {
+      return {
+        ...state,
+        errorOnAuth: null,
+      };
     }
     case "[AUTH] REGISTER_SUCCESS": {
       localStorage.setItem("UserData", JSON.stringify(payload));

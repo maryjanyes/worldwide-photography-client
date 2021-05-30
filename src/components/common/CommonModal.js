@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ModalComponent = ({ style, children, closeModal }) => {
+const ModalComponent = ({ style, children, closeModal, modalRef }) => {
     return (
         <React.Fragment>
-            <button onClick={closeModal} className="close-modal-btn"></button>
-            <div style={style}>
+            <button onClick={closeModal} className="close-modal-btn" ref={modalRef}></button>
+            <div style={style} className="modal-content">
                 {children}
             </div>
         </React.Fragment>

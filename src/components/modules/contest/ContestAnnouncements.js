@@ -1,28 +1,37 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { getAnnouncements } from "utils/data.util";
+import { getTranslationStr } from "../../../utils/data.util";
 
-const ContestAnnouncements = ({ contestID }) => {
-  const { allArticles } = useSelector(({ articles }) => articles);
-  const announcements = getAnnouncements(allArticles, contestID);
-  const canDisplayAnnouncements = announcements.length > 0;
+const ContestAnnouncements = () => {
+  const { contestAnnouncements, activeLanguage, translations } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
 
-  return (
+  return contestAnnouncements.length && (
     <div className="contest-announcements">
-      {(canDisplayAnnouncements &&
-        announcements.map((announcement) => (
-          <ContestAnnouncement {...announcement} key={announcement.title} />
-        ))) || <p>No announcements for this contest.</p>}
+      {contestAnnouncements.map(item => (
+        <ContestAnnouncement
+          {...item}
+          lang={activeLanguage}
+          key={item.title}
+        />
+      ))}
     </div>
-  );
+  ) || <p>{translations[getTranslationStr("common.messages.no_announcements", activeLanguage)]}</p>
 };
 
-const ContestAnnouncement = ({ title, text }) => {
+const ContestAnnouncement = ({ created_at, content, lang }) => {
+  const getContent = () => {
+    return lang === 'EN' ?
+      content[0] : content[1];
+  };
+
+  const announceContent = getContent();
+
   return (
-    <div className="contest-announcement">
-      <span className="contest-announcement__title">{title}</span>
-      <span className="contest-announcement__content">{text}</span>
+    <div className="contest-announcement" key={announceContent.title}>
+      <p className="contest-announcement__title">{announceContent.title}</p>
+      <p className="contest-announcement__content">{announceContent.content}</p>
+      <p className="contest-announcement__timestamp">{created_at}</p>
     </div>
   );
 };

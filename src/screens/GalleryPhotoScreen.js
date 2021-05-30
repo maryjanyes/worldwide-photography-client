@@ -3,14 +3,16 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { pathToPhoto, getPhotoUrlFromPhotoObject } from "utils/data.util";
+import { getTranslationStr } from 'utils/data.util';
+
 import useAuthors from "components/hooks/useAuthors.hook";
 import ContestSubmittionInfo from "components/modules/contest/ContestSubmittionInfo";
 
 const GalleryPhotoScreen = () => {
     const { photo_id } = useParams();
-    const { photoSubmittions } = useSelector(({ photos }) => photos);
+    const { photoSubmittions, translations, activeLanguage } = useSelector(({ photos, ui }) => ({ ...photos, ...ui }));
     const { author, setPhotoForHook } = useAuthors();
-    const [photo, setPhoto ] = useState(null);
+    const [photo, setPhoto] = useState(null);
 
     const photoPath = useMemo(() => {
         if (photoSubmittions?.length) {
@@ -19,11 +21,11 @@ const GalleryPhotoScreen = () => {
             setPhotoForHook(photo);
             return pathToPhoto(getPhotoUrlFromPhotoObject(photo));
         }
-    }, [photoSubmittions]);
+    }, [photoSubmittions?.length]);
     
     return (
         <div className="page page-gallery-photo">
-            <p className="page-title">Gallery photo</p>
+            <p className="page-title">{translations[getTranslationStr("pages.gallery_details_page.title", activeLanguage)]}</p>
             <div className="gallery-photo__full-screen">
                 <img src={photoPath} alt={photo?.description} className="site-image" />
                 <div className="gallery-photo__photo-info">

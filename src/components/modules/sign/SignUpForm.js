@@ -20,25 +20,28 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
       values.photographer_level = (values.isPro && "Pro") || "Beginner";
       delete values.repeatPassword;
       delete values.isPro;
-      dispatch(resetSignError());
       dispatch(signUp(values, dispatch));
     }
+
     setSubmitting(false);
   };
 
   const validateForm = values => {
+    dispatch(resetSignError());
+  
     const errors = {};
+
     if (!values.email) {
       errors.email = translations[getTranslationStr("common.forms_validation.required", activeLanguage)];
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
       errors.email = translations[getTranslationStr("common.forms_validation.email", activeLanguage)];
     }
 
-    if (!values.full_name.length) {
+    if (!values.full_name?.length) {
       errors.full_name = translations[getTranslationStr("common.forms_validation.required", activeLanguage)];
     }
 
-    if (values.password.length === 0 || values.repeatPassword.length === 0) {
+    if (values.password?.length === 0 || values.repeatPassword?.length === 0) {
       errors.password = translations[getTranslationStr("common.forms_validation.required", activeLanguage)];
     } else if (values.password !== values.repeatPassword) {
       errors.password = translations[getTranslationStr("common.forms_validation.passwords_do_not_matched", activeLanguage)];
@@ -59,12 +62,12 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
       <Formik
         initialValues={values}
         validate={validateForm}
+        validateOnChange={false}
         onSubmit={submitForm}
       >
         {({
           handleBlur,
           handleSubmit,
-          isSubmitting,
           getFieldProps,
           setFieldValue,
           values,
@@ -127,20 +130,23 @@ const SignUpForm = ({ switchToSignInMode, history }) => {
             />
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={Object.keys(errors)?.length}
               className="btn btn-submit"
             >
               {translations[getTranslationStr("common.button_actions.submit", activeLanguage)]}
             </button>
+            {errorOnAuth && (
+              <CommonMessage
+                text={translations[getTranslationStr(errorOnAuth, activeLanguage)]}
+                theme="error-message"
+              />
+            )}
             <div className="sign-up-link">
-              <span>
-                {translations[getTranslationStr("common.forms.sign_up.get_sign_in", activeLanguage)]}
-                <button className="btn-link" onClick={switchToSignInMode}>
-                  {translations[getTranslationStr('common.button_actions.sign_in', activeLanguage)]}
-                </button>
-              </span>
+              <span>{translations[getTranslationStr("common.forms.sign_up.get_sign_in", activeLanguage)]}</span>
+              <button className="btn-link" onClick={switchToSignInMode}>
+                {translations[getTranslationStr('common.button_actions.sign_in', activeLanguage)]}
+              </button>
             </div>
-            {errorOnAuth && <CommonMessage text={errorOnAuth} theme="error-message" />}
           </form>
         )}
       </Formik>

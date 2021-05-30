@@ -28,7 +28,6 @@ const DashboardScreen = (props) => {
   return (
     <div className="page page-dashboard">
       {/** <ContestCategoriesNav /> **/}
-      <div className="snow-gif"></div>
       <div className="page-dashboard__container">
         <div className="page-dashboard__container_top">
           <div className="page-dashboard__container_top-info">

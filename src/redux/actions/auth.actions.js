@@ -16,7 +16,7 @@ const signError = payload => ({
 })
 
 export const resetSignError = () => ({
-  type: "[AUTH] RESET_AUTH_ERROR",
+  type: resetErrorOnAuthType,
 })
 
 const sign = async (data, dispatch, is_auth) => {
@@ -60,6 +60,24 @@ export const logOut = () => {
   };
 };
 
-export default {
-  logOut,
-}
+export const facebookSignIn = async (userData, dispatch) => {
+  const existedUser = await AuthService.findUserByEmail(userData.email);
+
+  if (!!existedUser) {
+    dispatch(signSuccess(true, existedUser));
+  } else {
+    const userFacebookData = {
+      email: userData.email,
+      username: userData.email,
+      graph_domain: userData.graphDomain,
+      avatar_path: userData.picture?.data.url,
+      full_name: userData.name,
+    };
+
+    signUp(userFacebookData, dispatch);
+  }
+};
+
+export const resetErrorOnAuthType = Symbol('RESET_ERROR_ON_AUTH');
+
+export default { logOut };

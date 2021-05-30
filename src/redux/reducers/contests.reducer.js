@@ -1,9 +1,12 @@
+import { setContestAnnouncementsType } from "../actions/contests.actions";
+
 const initialState = {
   contests: [],
   contestCategories: [],
   contestImages: [],
   contestJudles: [],
   contestPrizes: [],
+  contestAnnouncements: [],
   contestSubmittions: [],
   lastUploadedImage: null,
 };
@@ -51,6 +54,12 @@ export default function ContestsReducer(
       return {
         ...state,
         recentSubmittionSuccess: true,
+      };
+    }
+    case setContestAnnouncementsType: {
+      return {
+        ...state,
+        contestAnnouncements: payload,
       };
     }
     default: {

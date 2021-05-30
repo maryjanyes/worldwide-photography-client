@@ -54,9 +54,19 @@
   padding-bottom: 10vh;
 }
 
-.page.page-sign {
-  padding-left: 0 !important;
-  padding-top: 10vh;
+.page {
+  padding: 2vh 4vh 8vh;
+}
+
+.page-sign {
+  padding: 5vh 0 10vh 0;
+  padding-left: 5vh !important;
+  display: flex;
+  justify-content: space-around;
+}
+
+.page-sign .btn-link {
+  font-weight: 800;
 }
 
 .page-profile,

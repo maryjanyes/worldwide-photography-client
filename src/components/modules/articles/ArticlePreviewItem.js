@@ -15,7 +15,7 @@ const ArticlePreviewItem = ({
     const { activeLanguage, translations } = useSelector(({ ui }) => ui);
   
     const goToArticle = () => {
-      history.push(`/articles/${article_id}`);
+      history.push(`/articles/all/${article_id}`);
     };
   
     const photoPath = useMemo(() => pathToPhoto(avatar_path), [avatar_path]);

@@ -1,7 +1,8 @@
 name: deploy-client-app
 on:
   push:
-    branches: [master, develop]
+    branches: []
+    # branches: [master, develop]
 jobs:
   test:
     name: Test app

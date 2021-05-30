@@ -25,6 +25,7 @@ button {
 }
 
 .top-search {
+  position: relative;
   display: flex;
   flex-direction: row-reverse;
   margin: 5vh 2vh 5vh 0;
@@ -435,6 +436,7 @@ li.top-bar-user__items_item > button:hover {
 .sign-up-form > .btn-submit,
 .sign-in-form > .btn-submit {
   font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .sign-in-form > .form-field,
@@ -599,6 +601,19 @@ li.top-bar-user__items_item > button:hover {
   padding: 1vh 2vh;
 }
 
+.search-results {
+  position: absolute;
+  left: 0;
+  top: 8vh;
+}
+
+.search-results > .search-results__item {
+  padding: 1.5vh 2vh;
+  box-shadow: 1px 0.5px 0.5px 1px #9c9c9c;
+  text-transform: lowercase;
+  background-color: #ffffff;
+}
+
 .article-preview {
   position: relative;
   display: flex;
@@ -720,23 +735,6 @@ li.top-bar-user__items_item > button:hover {
   background-color: #ffffff;
 }
 
-.page {
-  padding: 2vh 4vh 8vh;
-}
-
-.page-sign {
-  display: flex;
-  justify-content: space-around;
-  width: 90%;
-  margin: auto;
-  padding-left: 10vh;
-  padding-bottom: 10vh;
-}
-
-.page-sign .btn-link {
-  font-weight: 800;
-}
-
 .sign-in-selector {
   font-weight: 800;
   font-size: 18px;
@@ -777,6 +775,17 @@ li.top-bar-user__items_item > button:hover {
 
 .sign-in__judles-judle > span {
   margin-left: 10px;
+}
+
+.modal-content {
+  position: relative;
+  width: 180px;
+}
+
+.chat-send-area {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .judle-avatar {
@@ -1024,6 +1033,7 @@ li.top-bar-user__items_item > button:hover {
   top: 40px;
   left: 40px;
   cursor: pointer;
+  z-index: 10;
   transition: 0.5s background-color;
 }
 
@@ -1037,6 +1047,10 @@ li.top-bar-user__items_item > button:hover {
   text-align: center;
   padding-top: 2%;
   background-color: #fffff0;
+}
+
+.submit-contest-modal .modal-content {
+  width: auto;
 }
 
 .submit-contest-modal .submit-photo-form {
@@ -1195,11 +1209,10 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-submittion__votes {
   position: relative;
-  bottom: 28px;
-  left: 20px;
-  font-size: 18px;
+  bottom: 30px;
+  left: 25px;
+  font-size: 20px;
   font-weight: 800;
-  color: red;
 }
 
 .contest-submittion__photo {
@@ -1430,6 +1443,7 @@ li.top-bar-user__items_item > button:hover {
 .next-section-jumper__image {
   position: relative;
   top: 5px;
+  width: 28px;
 }
 
 .notification-message {
@@ -1494,8 +1508,10 @@ li.top-bar-user__items_item > button:hover {
 
 .contest-info-container__items
   > .contest-info-container__items-item
-  > span:nth-child(2) {
-  margin-top: 1vh;
+  > span:nth-child(2),
+.contest-announcement > .contest-announcement__content,
+.contest-announcement > .contest-announcement__timestamp {
+  margin-top: 10px;
   text-align: justify;
 }
 

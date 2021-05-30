@@ -6,6 +6,7 @@ import authReducer from "./auth.reducer";
 import photosReducer from "./photos.reducer";
 import articlesReducer from "./articles.reducer";
 import uiReducer from "./ui.reducer";
+import chatReducer from "./chat.reducer";
 
 export default combineReducers({
   users: usersReducer,
@@ -14,4 +15,5 @@ export default combineReducers({
   photos: photosReducer,
   articles: articlesReducer,
   ui: uiReducer,
+  chat: chatReducer,
 });

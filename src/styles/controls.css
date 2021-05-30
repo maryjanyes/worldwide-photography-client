@@ -51,19 +51,10 @@ button:disabled {
   color: #ffffff;
 }
 
-.btn-simple {
-  font-weight: 600;
-}
-
 .btn-simple.btn-explore-contest {
   text-transform: uppercase;
   color: #ffffff;
   font-weight: 100;
-}
-
-.btn-simple:hover {
-  background-color: #833c00;
-  color: #ff7c0f;
 }
 
 .btn-submit,
@@ -73,7 +64,7 @@ button:disabled {
   margin: auto;
   padding: 1.5vh 1vh;
   border-radius: 16px;
-  font-size: 18px;
+  font-size: 14px;
   text-transform: uppercase;
   color: #ffffff;
   background-color: #ff7c0f;
@@ -82,15 +73,13 @@ button:disabled {
 .btn-submit:hover,
 .btn-simple:hover {
   background-color: #833c00;
+  color: #ff7c0f;
 }
 
 .common-input {
   border: none;
-  padding: 0 1vh;
-}
-
-.common-input.common-input-search {
-  text-transform: uppercase;
+  padding: 0 2.5vh;
+  min-width: 32vh;
 }
 
 .form-field.common-checkbox__field {

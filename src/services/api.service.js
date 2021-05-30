@@ -99,6 +99,11 @@ export class ApiService {
     return rightMenuItemLinks;
   }
 
+  async search(textQuery, language = 'en') {
+    const response = await this.fetchJSONData(`search/${textQuery}/${language}`);
+    return response;
+  }
+
   getAboutUsPage(language = 'en') {
     return `${this.BACKEND_FILES_ENDPOINT}/templates/about.html?lang=${language}`;
   }

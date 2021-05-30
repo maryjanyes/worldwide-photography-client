@@ -1,6 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const SocialSharing = ({ fb, google, /** etc */ }) => {
+import { getTranslationStr } from "../../utils/data.util";
+
+const SocialSharing = ({ fb, google, shareEntityName = 'share_contest' }) => {
+    const { translations, activeLanguage } = useSelector(({ ui }) => ui);
+
     let sharingBlocks = [];
 
     if (fb) {
@@ -21,7 +26,7 @@ const SocialSharing = ({ fb, google, /** etc */ }) => {
 
     return (
         <React.Fragment>
-            <p>Share content</p>
+            <p>{translations[getTranslationStr(`common.widgets.sharing.${shareEntityName}`, activeLanguage)]}</p>
             <div className="social-sharing__content">
                {sharingBlocks}
             </div>

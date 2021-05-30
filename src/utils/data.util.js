@@ -19,7 +19,7 @@ export const buildDropdownOptions = (items, language, translations) => {
 };
 
 export const getUserByID = (users, userID) => {
-  !!users && users.find(({ user_id }) => user_id === userID)
+  return (users || []).find(({ user_id }) => user_id === userID);
 }
 
 export const getJudleByID = (judles, judleID) =>

@@ -8,20 +8,26 @@ class AuthService extends ApiService {
   async auth(data) {
     data.email = data.emailOrUsername || data.email;
     const response = await this.insertData(data, "users/auth");
-    const responsePayload = response.json();
-    return responsePayload;
+    return response.json();
   }
 
   async register(data) {
     const response = await this.insertData(data, "users/register");
-    const responsePayload = response.json();
-    return responsePayload;
+    return response.json();
   }
 
   async logOut() {
-    const response = await this.signOut();
-    const responsePayload = response.json();
-    return responsePayload;
+    try {
+      const response = await this.signOut();
+      return response.json();
+    } catch(err) {
+      console.log('Cant logout:', err);
+    }
+  }
+
+  async findUserByEmail(email) {
+    const response = await this.fetchJSONData(`users/find-by-email/${email}`);
+    return response?.data?.user;
   }
 }
 

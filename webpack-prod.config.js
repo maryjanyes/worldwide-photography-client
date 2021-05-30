@@ -3,10 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const path = require("path");
 const htmlTemplate = require('./html-template');
+const logger = require('./logger');
 
 const env = require("dotenv").config({ path:'./prod.env' }).parsed;
 
-console.log('ENVIRONMENT KEYS', Object.keys(env));
+logger.logSome('ENVIRONMENT KEYS', env);
 
 module.exports = () => {
   return {
@@ -23,7 +24,7 @@ module.exports = () => {
     },
     devServer: {
       https: true,
-      port: env.APP_PORT || 8080,
+      port: env.APP_PORT,
       contentBase: "./",
       publicPath: "./dist/",
       historyApiFallback: true,
