@@ -8,9 +8,9 @@ import formsState from "mocks/forms/initial-state";
 
 import CommonMessage from "components/common/CommonMessage";
 
-const SignInForm = ({ backToSignUpMode, history }) => {
+const SignInForm = ({ backToSignUpMode }) => {
   const dispatch = useDispatch();
-  const { isLoggedIn, translations, activeLanguage, errorOnAuth } = useSelector(
+  const { translations, activeLanguage, errorOnAuth } = useSelector(
     ({ auth, ui }) => ({
       ...auth,
       ...ui,
@@ -23,18 +23,31 @@ const SignInForm = ({ backToSignUpMode, history }) => {
     setSubmitting(false);
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      history.push("/profile-settings");
+  const validateForm = values => {
+    const errors = {};
+
+    if (!values.emailOrUsername?.length) {
+      errors.email = 'Required';
     }
-  }, [isLoggedIn]);
+
+    if (!values.password?.length) {
+      errors.password = 'Required';
+    }
+
+    return errors;
+  };
 
   return (
     <div className="sign-in-form__container">
       <h1 className="sign-in__title">{translations[getTranslationStr('sign_items.sign_in.title', activeLanguage)]}</h1>
-      <Formik initialValues={values} onSubmit={submitForm}>
-        {({ handleBlur, handleSubmit, getFieldProps, isSubmitting }) => (
-          <form onSubmit={handleSubmit} className="sign-in-form">
+      <Formik
+        initialValues={values}
+        onSubmit={submitForm}
+        validate={validateForm}
+        validateOnChange={false}
+      >
+        {({ handleBlur, handleSubmit, getFieldProps, errors }) => (
+          <form onSubmit={handleSubmit} className="sign-in-form" noValidate>
             <div className="form-field">
               <input
                 className="common-input"
@@ -45,6 +58,7 @@ const SignInForm = ({ backToSignUpMode, history }) => {
                 onBlur={handleBlur}
                 {...getFieldProps("emailOrUsername")}
               />
+              {errors.email && <CommonMessage text={errors.email} theme="error-message" />}
             </div>
             <div className="form-field">
               <input
@@ -57,10 +71,11 @@ const SignInForm = ({ backToSignUpMode, history }) => {
                 onBlur={handleBlur}
                 {...getFieldProps("password")}
               />
+              {errors.password && <CommonMessage text={errors.password} theme="error-message" />}
             </div>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={Object.keys(errors)?.length}
               className="btn btn-submit"
             >
               {translations[getTranslationStr("common.button_actions.submit", activeLanguage)]}

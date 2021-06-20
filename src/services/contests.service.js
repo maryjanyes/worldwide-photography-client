@@ -5,7 +5,14 @@ export class ContestsService extends ApiService {
     GeneralInfoComponent,
     ResultsComponent,
     AnnouncementsComponent,
-    { selectedContest, generalBlockTitle, resultsBlockTitle, newsBlockTitle }
+    {
+      selectedContest,
+      generalBlockTitle,
+      resultsBlockTitle,
+      newsBlockTitle,
+      resultsNotStartedYet,
+      resultsWinner,
+    }
   ) {
     return [
       {
@@ -16,7 +23,7 @@ export class ContestsService extends ApiService {
       {
         name: 'pages.contest_details.tabs.results',
         Comp: ResultsComponent,
-        props: { selectedContest, title: resultsBlockTitle },
+        props: { selectedContest, title: resultsBlockTitle, resultsNotStartedYet, resultsWinner },
       },
       {
         name: 'pages.contest_details.tabs.news',
@@ -44,6 +51,10 @@ export class ContestsService extends ApiService {
 
   async getSubmittionsForContest(contestID) {
     return await this.fetchJSONData(`contests/submittions/${contestID}`);
+  }
+
+  async getContestAnnouncements(contestID) {
+    return await this.fetchJSONData(`contests/announcements/${contestID}`);
   }
 }
 

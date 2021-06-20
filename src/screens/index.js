@@ -9,5 +9,5 @@ export { default as GalleryScreen } from "./GalleryScreen";
 export { default as PrivacyAndConditionsScreen } from "./PrivacyAndConditionsScreen";
 export { default as ProfileScreen } from "./ProfileScreen";
 export { default as ArticleDetailsScreen } from "./ArticleDetailsScreen";
-export { default as GalleryPhotoScreen } from './GalleryPhotoScreen';
+export { default as GalleryDetailsScreen } from './GalleryPhotoScreen';
 export { default as AboutUsPageScreen } from './AboutUsPageScreen';

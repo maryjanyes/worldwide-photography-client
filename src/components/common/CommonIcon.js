@@ -7,7 +7,7 @@ const IconComponent = ({
   onMouseOut,
   onClick,
   containerStyle,
-  size,
+  // size,
 }) => {
   return (
     <div
@@ -16,6 +16,7 @@ const IconComponent = ({
       onMouseMove={onMouseMove}
       onMouseOut={onMouseOut}
       onClick={onClick}
+      className="icon-container"
     >
       <i className={`fa ${source}`} />
     </div>

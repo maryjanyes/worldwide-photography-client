@@ -66,7 +66,7 @@ function AllContestScreen({ history }) {
                   {...category}
                   history={history}
                   key={category.contest_category_id}
-                  selectContest={(contest_id) => history.push(`/contest/${contest_id}`)}
+                  selectContest={(contest_id) => history.push(`/contests/all/${contest_id}`)}
                   toggleCategoryVisibility={toggleCategoryVisibility}
                   visible={contestsByCategoriesVisibility[category_id]}
                 />

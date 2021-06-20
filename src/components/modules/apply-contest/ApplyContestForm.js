@@ -173,10 +173,10 @@ const ApplyContestForm = ({
           />
         </div>
         <div className="form-field apply-contest-form-field">
-          <label>{getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)}</label>
+          <label>{translations[getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)]}</label>
           <input
             className="common-input"
-            placeholder={getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)}
+            placeholder={translations[getTranslationStr("common.forms.apply_contest.followers_message", activeLanguage)]}
             onChange={onChange}
             name="signature_for_followers"
           />
@@ -189,7 +189,7 @@ const ApplyContestForm = ({
             type="button"
             disabled={!isLoggedIn || !isFormValid()}
           >
-            {getTranslationStr("common.button_actions.submit", activeLanguage)}
+            {translations[getTranslationStr("common.button_actions.submit", activeLanguage)]}
           </button>
         </div>
       </div>
@@ -200,7 +200,7 @@ const ApplyContestForm = ({
     return (
       <div className="sign-up-details">
         <CommonMessage
-          text="You must be logged in before start to submit photos."
+          text={translations[getTranslationStr('apply_contest_form.not_logged_in_warning', activeLanguage)]}
           theme="warning-message"
         />
         <div className="form-field apply-contest-form-field">

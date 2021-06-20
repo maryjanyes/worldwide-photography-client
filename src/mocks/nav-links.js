@@ -8,7 +8,7 @@ const navlinks = [
     i18n: "nav_links.articles",
   },
   {
-    link: "/all-contests",
+    link: "/contests",
     i18n: "nav_links.contests",
   },
   {

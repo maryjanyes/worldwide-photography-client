@@ -15,7 +15,7 @@ import SocialSharing from "components/common/SocialSharing";
 import WithLanguageProps from "components/wrappers/WithLanguageProps";
 
 import contestsService, { ContestsService } from "services/contests.service";
-import { setUploadedImage } from "reducers/actions/contests.actions";
+import { setUploadedImage, setContestAnnouncements } from "reducers/actions/contests.actions";
 import { setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
 
 import {
@@ -26,24 +26,44 @@ import {
   isDataValid,
   getTranslationStr,
   isTimePassed,
+  convertContestCurrency,
 } from "utils/data.util";
-import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
+import { inputStyle, containerStyle } from "./style";
 
 function ContestScreen() {
   const { contest_id } = useParams();
-  const { contests, activeLanguage, translations, contestSubmittions } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
+  const {
+    contests,
+    activeLanguage,
+    translations,
+    currencyCode,
+    contestSubmittions,
+    contestAnnouncements,
+  } = useSelector(({ contests, ui, auth }) => ({ ...contests, ...ui, ...auth }));
   const selectedContest = useMemo(() => contests.find((c) => c.contest_id == contest_id));
   const dispatch = useDispatch();
 
-  const requestSubmittions = async () => {
-    const submittionsData = await contestsService.getSubmittionsForContest(parseInt(contest_id, 10));
+  const requestSubmittions = async contestID => {
+    const submittionsData = await contestsService.getSubmittionsForContest(contestID);
+
     if (isDataValid(submittionsData)) {
       dispatch(setContestsSubmittionsSuccess(submittionsData.data));
     }
   };
 
+  const requestAnnouncements = async contestID => {
+    const announcementsByContest = await contestsService.getContestAnnouncements(contestID);
+
+    if (isDataValid(announcementsByContest)) {
+      dispatch(setContestAnnouncements(announcementsByContest.data));
+    }
+  }
+
   useEffect(() => {
-    requestSubmittions();
+    const contestID = parseFloat(contest_id);
+  
+    requestSubmittions(contestID);
+    requestAnnouncements(contestID);
   }, []);
 
   return (
@@ -51,6 +71,7 @@ function ContestScreen() {
       <div className="page page-contest-details">
         <ContestDetails {...selectedContest} />
         <ContestDetailsInfo
+          currencyCode={currencyCode}
           selectedContest={selectedContest}
           contestSubmittions={contestSubmittions}
           refresh={requestSubmittions}
@@ -60,7 +81,7 @@ function ContestScreen() {
         />
         <SocialSharing fb={true} google={true} />
       </div>
-    )) || <span>No contest selected.</span>
+    )) || <React.Fragment />
   );
 }
 
@@ -93,23 +114,26 @@ function GeneralInfoComponent({ title, name, description }) {
   );
 }
 
-function ResultsComponent({ selectedContest, title }) {
+function ResultsComponent({ selectedContest, title, resultsNotStartedYet, resultsWinner }) {
+  const { siteUsers } = useSelector(({ users }) => users);
+
   const { is_ended, winner_id } = selectedContest;
 
   const displayContestResults = () => {
-    const winner = getUserByID(winner_id);
-    return (
+    const winner = getUserByID(siteUsers, winner_id);
+  
+    return winner ? (
       <div className="contest-results">
-        <span>Congrats the winner of Contest {winner?.name}.</span>
+        <span>{resultsWinner} <b>{winner.email}</b></span> <i class="fas fa-glass-cheers"></i>
       </div>
-    );
+    ) : <React.Fragment />;
   };
 
   return (
     <div className="results-info">
       <h2>{title}</h2>
       {(is_ended && displayContestResults()) || (
-        <p>Contest at progress or do not started yet.</p>
+        <p>{resultsNotStartedYet}</p>
       )}
     </div>
   );
@@ -122,17 +146,37 @@ function ContestDetailsInfo({
   generalBlockTitle,
   resultsBlockTitle,
   newsBlockTitle,
+  currencyCode,
 }) {
+  const [enterEmount, setEnterAmount] = useState(0);
+
   const { siteJudles, translations, activeLanguage } = useSelector(({ users, ui }) => ({ ...users, ...ui }));
   const isContestStarted = isTimePassed(selectedContest.started_at)
   const daysToEnterContest = getTimeToEnd(selectedContest.ended_at);
+  const _props = {
+    selectedContest,
+    generalBlockTitle,
+    resultsBlockTitle,
+    newsBlockTitle,
+    resultsNotStartedYet: translations[getTranslationStr('contests.common.not_started_yet', activeLanguage)],
+    resultsWinner: translations[getTranslationStr('contests.common.the_winner', activeLanguage)],
+  };
+
   const tabsData = ContestsService.getContestDetailsTemplate(
     WithLanguageProps(GeneralInfoComponent, ['name', 'description']),
     WithLanguageProps(ResultsComponent, ['name', 'description']),
     AnnouncementsComponent,
-    { selectedContest, generalBlockTitle, resultsBlockTitle, newsBlockTitle }
+    _props,
   );
   const contestJudle = getJudleByID(siteJudles, selectedContest.judle_id);
+
+  useEffect(() => {
+    convertContestCurrency(
+      selectedContest.enter_fee,
+      selectedContest.enter_fee_currency_type,
+      currencyCode,
+    ).then(amount => setEnterAmount(amount));
+  }, []);
 
   return (
     <div className="contest-details-info">
@@ -143,18 +187,18 @@ function ContestDetailsInfo({
               <TabItems tabsData={tabsData} keyName="name" activeItemID={0} />
             </div>
             <div className="link-to-other-contests">
-              <Link to="/all-contests">{translations[getTranslationStr('common.other_contests', activeLanguage)]}</Link>
+              <Link to="/contests">{translations[getTranslationStr('common.other_contests', activeLanguage)]}</Link>
             </div>
           </div>
           <div className="contest-details-info__additions">
             <div className="contest-stroke-info">
               <div className="contest-stroke-info__item">
                 <IconComponent
-                  source="fa-chevron-down"
+                  source="far fa-clock"
                   size={25}
                   containerStyle={{ marginTop: '5px' }}
                 />
-                {isContestStarted && (
+                {isContestStarted ? (
                   daysToEnterContest === 0 ?
                     <p>
                       {translations[getTranslationStr('common.contest_ended', activeLanguage)]}
@@ -162,13 +206,15 @@ function ContestDetailsInfo({
                     <p>
                       {translations[getTranslationStr('common.days_to_enter_contest', activeLanguage)]} <b>{daysToEnterContest}</b>
                     </p>
-                ) || <p>{
-                  translations[getTranslationStr('common.contest_not_started', activeLanguage)]
-                }</p>}
+                ) : (
+                  <p>
+                    {translations[getTranslationStr('common.contest_not_started', activeLanguage)]}
+                  </p>
+                )}
               </div>
               <div className="contest-stroke-info__item">
                 <IconComponent
-                  source="fa-chevron-down"
+                  source="far fa-file-image"
                   size={25}
                   containerStyle={{ marginTop: '5px' }}
                 />
@@ -179,7 +225,7 @@ function ContestDetailsInfo({
               </div>
               {contestJudle && <div className="contest-stroke-info__item">
                 <IconComponent
-                  source="fa-chevron-down"
+                  source="far fa-file-image"
                   size={25}
                   containerStyle={{ marginTop: '5px' }}
                 />
@@ -188,17 +234,17 @@ function ContestDetailsInfo({
                   <b>{concatNameParts(contestJudle)}</b>
                 </p>
               </div>}
-              <div className="contest-stroke-info__item">
+              {!(isContestStarted && daysToEnterContest === 0) && <div className="contest-stroke-info__item">
                 <IconComponent
-                  source="fa-chevron-down"
+                  source="fas fa-money-bill-wave"
                   size={25}
                   containerStyle={{ marginTop: '5px' }}
                 />
                 <p>
                   {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)] + '\n'}
-                  <b>{selectedContest.enter_fee}$</b>
+                  <b>{selectedContest.enter_fee}{enterEmount}</b>
                 </p>
-              </div>
+              </div>}
               <SubmitPhotoArea contest={{ ...selectedContest, isContestStarted, daysToEnterContest }} />
             </div>
           </div>
@@ -240,11 +286,8 @@ function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted, daysTo
         {translations[getTranslationStr('common.apply_photo', activeLanguage)]}
       </button>
       {isOpen && (
-        <Modal className="submit-contest-modal">
-          <ModalComponent
-            style={submitContestModalStyle}
-            closeModal={closeSubmittionModal}
-          >
+        <Modal className="modal-submit-contest">
+          <ModalComponent closeModal={closeSubmittionModal}>
             <ApplyContestForm
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}
@@ -253,7 +296,7 @@ function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted, daysTo
               close={closeSubmittionModal}
             >
               <div className="upload-input-container__next">
-                <span>Choose photo</span>
+                <span>{translations[getTranslationStr("common.widgets.choose_photo", activeLanguage)]}</span>
                 <UploadInput
                   onChangePhotoUrl={onChangePhotoUrl}
                   inputStyle={inputStyle}

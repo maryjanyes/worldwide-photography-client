@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -12,9 +12,24 @@ const TopBarUserItems = () => {
   const history = useHistory();
   const { isLoggedIn, translations } = useSelector(({ auth, ui }) => ({ ...auth, ...ui }));
   const [opened, setOpened] = useState(false);
+  const topBarRef = React.useRef(null);
 
   const toggleMenu = () => setOpened(!opened);
   const navigate = to => history.push(to);
+
+  useEffect(() => {
+    let outsideRef = document.querySelector('body');
+
+    if (opened) {
+      outsideRef.addEventListener('click', e => {
+        const clickedIncludes = topBarRef.current?.contains(e.target);
+
+        if (!clickedIncludes) {
+          setOpened(false);
+        }
+      });
+    }
+  }, [opened]);
 
   const menuItems = ApiService.getMenuItems();
   const userItems = menuItems.filter(item => item.onlyLoggedIn ? isLoggedIn : true);
@@ -33,7 +48,7 @@ const TopBarUserItems = () => {
   }
 
   return (
-    <div className="top-bar-user">
+    <div className="top-bar-user" ref={topBarRef}>
       <button className="menu-icon icon-btn" onClick={toggleMenu} />
       {opened && (
         <ul className="top-bar-user__items">

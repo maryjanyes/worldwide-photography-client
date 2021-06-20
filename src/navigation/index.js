@@ -1,19 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import {
   DashboardScreen,
   ContestScreen,
   SignInScreen,
-  JudleClassesScreen,
+  // JudleClassesScreen,
   AllArticlesScreen,
   GalleryScreen,
   PrivacyAndConditionsScreen,
   AllContestsScreen,
   ProfileScreen,
   ArticleDetailsScreen,
-  GalleryPhotoScreen,
+  GalleryDetailsScreen,
   AboutUsPageScreen,
 } from "screens";
 
@@ -22,28 +22,30 @@ import Footer from "components/common/Footer";
 
 function AppNavigation() {
   const { isLoggedIn } = useSelector(({ auth }) => auth);
+
   return (
     <React.Fragment>
       <Router>
         <TopBarNavigation />
         <Switch>
           <Route path="/" component={DashboardScreen} exact />
-          <Route path="/contest/:contest_id" component={ContestScreen} />
-          <Route path="/all-contests" component={AllContestsScreen}></Route>
-          <Route
-            path="/articles/:article_id"
-            component={ArticleDetailsScreen}
-          />
-          <Route path="/sign-in" component={SignInScreen} />
-          <Route path="/sign-up" component={SignInScreen} />
-          <Route path="/judle-classes" component={JudleClassesScreen} />
+          <Route path="/contests/all/:contest_id" component={ContestScreen} />
+          <Route path="/contests" component={AllContestsScreen} />
           <Route path="/articles" component={AllArticlesScreen} />
-          <Route path="/articles/:article_id" component={ArticleDetailsScreen} />
+          <Route path="/articles/all/:article_id" component={ArticleDetailsScreen} />
           <Route path="/gallery" exact={true} component={GalleryScreen} />
-          <Route path="/gallery/all/:photo_id" component={GalleryPhotoScreen} />
+          <Route path="/gallery/all/:photo_id" component={GalleryDetailsScreen} />
           <Route path="/privacy-and-conditions" component={PrivacyAndConditionsScreen} />
-          {isLoggedIn && <Route path="/profile-settings" component={ProfileScreen} />}
           <Route path="/about-us" component={AboutUsPageScreen} />
+          {isLoggedIn ? (<React.Fragment>
+              <Route path="/profile-settings" component={ProfileScreen} />
+              <Route path="/sign-in" render={() => <Redirect to="/gallery" />} />
+            </React.Fragment>) : (
+            <React.Fragment>
+              <Route path="/sign-in" component={SignInScreen} />
+              <Route path="/sign-up" component={SignInScreen} />
+            </React.Fragment>
+          )}
           <Route
             path="*"
             render={() => (

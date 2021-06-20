@@ -35,7 +35,7 @@ const Foo = () => {
   return (
     <React.Fragment>
       {isChatModalOpen && <ChatModal className="chat-view-modal">
-        <ChatView close={closeChatModal} />
+        <ChatView close={closeChatModal} ref={chatModalRef} />
       </ChatModal>}
       <footer className="footer">
         <ul className="footer-links">

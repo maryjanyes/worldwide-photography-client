@@ -17,7 +17,7 @@ const ContestSubmittionInfo = ({ author, votes, description }) => {
                 <span>{votes}</span>
             </p>
             <p className="contest-submittion__comment contest-submittion__info-block">
-                <span>Author commented</span>
+                <span>{translations[getTranslationStr('common.photo_comment', activeLanguage)]}</span>
                 <span>{description}</span>
             </p>
         </div>

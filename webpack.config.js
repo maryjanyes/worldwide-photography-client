@@ -1,13 +1,14 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
+const logger = require('./logger');
 const htmlTemplate = require("./html-template");
 
 const bundleName = './bundle.js';
 
 const env = require("dotenv").config().parsed;
 
-console.log('ENVIRONMENT KEYS', Object.keys(env));
+logger.logSome('ENVIRONMENT KEYS', env);
 
 module.exports = {
   entry: "./src/index.js",
@@ -18,7 +19,7 @@ module.exports = {
   },
   devServer: {
     https: true,
-    port: 8080,
+    port: env.APP_PORT,
     contentBase: "./",
     publicPath: "/dist/",
     historyApiFallback: true,
