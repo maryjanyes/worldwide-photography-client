@@ -4,6 +4,7 @@ import categoriesLinks from "mocks/contest-categories-links";
 import rightMenuItemLinks from "mocks/right-menu-item-links";
 
 import { appLangs } from "services/app-configs.service";
+import { apiConfigs } from "../configs/api.configs";
 
 export class ApiService {
   constructor() {
@@ -102,6 +103,10 @@ export class ApiService {
   async search(textQuery, language = 'en') {
     const response = await this.fetchJSONData(`search/${textQuery}/${language}`);
     return response;
+  }
+
+  async convertCurrency(from, to) {
+    return fetch(`https://${apiConfigs.currencyConverterAPIEndpoint}/api/v7/convert?q=${from}_${to}&compact=ultra&apiKey=${apiConfigs.currencyConverterAPIKey}`);
   }
 
   getAboutUsPage(language = 'en') {

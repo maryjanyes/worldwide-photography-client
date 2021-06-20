@@ -94,3 +94,13 @@ export const getTranslationStr = (prefix, code) => {
 export const getDateString = (date, formatting = "DD/MM/YYYY") => {
   return moment(date).format(formatting);
 };
+
+export const convertContestCurrency = async (amount, currencyType, userCurrencyType) => {
+  if (currencyType === userCurrencyType) {
+    return `${amount} ${currencyType}`;
+  } else {
+   const convertedCurrencyRate = await (await apiService.convertCurrency(userCurrencyType, currencyType)).json();
+
+   return `${Math.round(amount / convertedCurrencyRate[`${userCurrencyType}_${currencyType}`])},00 ${userCurrencyType}`;
+  }
+};

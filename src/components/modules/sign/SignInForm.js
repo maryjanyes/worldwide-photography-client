@@ -8,9 +8,9 @@ import formsState from "mocks/forms/initial-state";
 
 import CommonMessage from "components/common/CommonMessage";
 
-const SignInForm = ({ backToSignUpMode, history }) => {
+const SignInForm = ({ backToSignUpMode }) => {
   const dispatch = useDispatch();
-  const { isLoggedIn, translations, activeLanguage, errorOnAuth } = useSelector(
+  const { translations, activeLanguage, errorOnAuth } = useSelector(
     ({ auth, ui }) => ({
       ...auth,
       ...ui,
@@ -22,12 +22,6 @@ const SignInForm = ({ backToSignUpMode, history }) => {
     dispatch(signIn(values, dispatch));
     setSubmitting(false);
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      history.push("/profile-settings");
-    }
-  }, [isLoggedIn]);
 
   const validateForm = values => {
     const errors = {};
@@ -53,7 +47,7 @@ const SignInForm = ({ backToSignUpMode, history }) => {
         validateOnChange={false}
       >
         {({ handleBlur, handleSubmit, getFieldProps, errors }) => (
-          <form onSubmit={handleSubmit} className="sign-in-form">
+          <form onSubmit={handleSubmit} className="sign-in-form" noValidate>
             <div className="form-field">
               <input
                 className="common-input"

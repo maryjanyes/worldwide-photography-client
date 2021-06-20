@@ -18,8 +18,6 @@ import contestsService, { ContestsService } from "services/contests.service";
 import { setUploadedImage, setContestAnnouncements } from "reducers/actions/contests.actions";
 import { setContestsSubmittionsSuccess } from "reducers/actions/contests.actions";
 
-import outerServicesSettings from "../configs/outer-services.settings";
-
 import {
   getTimeToEnd,
   getJudleByID,
@@ -28,8 +26,9 @@ import {
   isDataValid,
   getTranslationStr,
   isTimePassed,
+  convertContestCurrency,
 } from "utils/data.util";
-import { inputStyle, submitContestModalStyle, containerStyle } from "./style";
+import { inputStyle, containerStyle } from "./style";
 
 function ContestScreen() {
   const { contest_id } = useParams();
@@ -37,9 +36,10 @@ function ContestScreen() {
     contests,
     activeLanguage,
     translations,
+    currencyCode,
     contestSubmittions,
     contestAnnouncements,
-  } = useSelector(({ contests, ui }) => ({ ...contests, ...ui }));
+  } = useSelector(({ contests, ui, auth }) => ({ ...contests, ...ui, ...auth }));
   const selectedContest = useMemo(() => contests.find((c) => c.contest_id == contest_id));
   const dispatch = useDispatch();
 
@@ -71,6 +71,7 @@ function ContestScreen() {
       <div className="page page-contest-details">
         <ContestDetails {...selectedContest} />
         <ContestDetailsInfo
+          currencyCode={currencyCode}
           selectedContest={selectedContest}
           contestSubmittions={contestSubmittions}
           refresh={requestSubmittions}
@@ -145,7 +146,10 @@ function ContestDetailsInfo({
   generalBlockTitle,
   resultsBlockTitle,
   newsBlockTitle,
+  currencyCode,
 }) {
+  const [enterEmount, setEnterAmount] = useState(0);
+
   const { siteJudles, translations, activeLanguage } = useSelector(({ users, ui }) => ({ ...users, ...ui }));
   const isContestStarted = isTimePassed(selectedContest.started_at)
   const daysToEnterContest = getTimeToEnd(selectedContest.ended_at);
@@ -165,6 +169,14 @@ function ContestDetailsInfo({
     _props,
   );
   const contestJudle = getJudleByID(siteJudles, selectedContest.judle_id);
+
+  useEffect(() => {
+    convertContestCurrency(
+      selectedContest.enter_fee,
+      selectedContest.enter_fee_currency_type,
+      currencyCode,
+    ).then(amount => setEnterAmount(amount));
+  }, []);
 
   return (
     <div className="contest-details-info">
@@ -230,7 +242,7 @@ function ContestDetailsInfo({
                 />
                 <p>
                   {translations[getTranslationStr('pages.contest_details.tabs.general.enter_fee', activeLanguage)] + '\n'}
-                  <b>{selectedContest.enter_fee}{outerServicesSettings.DEFAULT_CURRENCY_SIGN}</b>
+                  <b>{selectedContest.enter_fee}{enterEmount}</b>
                 </p>
               </div>}
               <SubmitPhotoArea contest={{ ...selectedContest, isContestStarted, daysToEnterContest }} />
@@ -274,11 +286,8 @@ function SubmitPhotoArea({ contest: { contest_id, name, isContestStarted, daysTo
         {translations[getTranslationStr('common.apply_photo', activeLanguage)]}
       </button>
       {isOpen && (
-        <Modal className="submit-contest-modal">
-          <ModalComponent
-            style={submitContestModalStyle}
-            closeModal={closeSubmittionModal}
-          >
+        <Modal className="modal-submit-contest">
+          <ModalComponent closeModal={closeSubmittionModal}>
             <ApplyContestForm
               isPhotoUploaded={!!uploadedImage}
               image={contestImage}

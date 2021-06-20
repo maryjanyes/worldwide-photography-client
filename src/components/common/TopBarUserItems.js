@@ -22,7 +22,7 @@ const TopBarUserItems = () => {
 
     if (opened) {
       outsideRef.addEventListener('click', e => {
-        const clickedIncludes = topBarRef.current.contains(e.target);
+        const clickedIncludes = topBarRef.current?.contains(e.target);
 
         if (!clickedIncludes) {
           setOpened(false);

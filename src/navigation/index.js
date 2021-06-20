@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import {
   DashboardScreen,
@@ -39,6 +39,7 @@ function AppNavigation() {
           <Route path="/about-us" component={AboutUsPageScreen} />
           {isLoggedIn ? (<React.Fragment>
               <Route path="/profile-settings" component={ProfileScreen} />
+              <Route path="/sign-in" render={() => <Redirect to="/gallery" />} />
             </React.Fragment>) : (
             <React.Fragment>
               <Route path="/sign-in" component={SignInScreen} />

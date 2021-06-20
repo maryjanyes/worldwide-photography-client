@@ -45,13 +45,14 @@
   border-top: 1px solid #000000;
 }
 
-.page:not(.page-dashboard) {
+.page:not(.page-dashboard, .page-gallery-photo) {
   padding-left: 25vh;
   margin-top: 20vh;
 }
 
 .page.page-gallery-photo {
-  padding-bottom: 10vh;
+  padding-bottom: 20vh;
+  margin-top: 20vh;
 }
 
 .page {
@@ -151,6 +152,6 @@
   background-color: white;
 }
 
-.gallery-photo__photo-info .contest-submittion__photo-info {
+.gallery-photo__photo-info {
   position: relative;
 }
